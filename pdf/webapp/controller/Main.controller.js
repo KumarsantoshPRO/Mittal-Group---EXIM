@@ -75,7 +75,7 @@ sap.ui.define([
     getHeaderForm: function (modelData) {
       var modulePath = $.sap.getModulePath("zgm.pro.exim.pdfprint.pdf", "/image/");
       modulePath = modulePath + "logo.jpg";
-      return "<h1 style='text-align:center'> Mittal Coins <br/> <h2 style='text-align:center'>Unnamed Road, Pithampur Industrial Area, Khandwa, Madhya Pradesh 454774 </h2> <Img  src=" + modulePath + " style='margin-left:60rem' width='100px' height='80px'/></h1>" + 
+      return "<h1 style='text-align:center'> Mittal Coins <Img  src=" + modulePath + " style='margin-left:60rem' width='100px' height='80px'/> <br/> <h2 style='text-align:center'>Unnamed Road, Pithampur Industrial Area, Khandwa, Madhya Pradesh 454774 </h2> </h1>" + 
         " </div> <hr/><div>" +
         "<div style=float:left>" +
         "<p>Document Number        : " + modelData.scName + "</p>" +
