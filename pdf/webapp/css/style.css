@@ -1,1 +1,11 @@
 /* Enter your custom styles here */
+
+.size1 {
+	font-size : 1.5rem;
+}
+
+@media (max-width:599px) {
+	.size1 {
+		font-size : 1rem;
+	}
+}

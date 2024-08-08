@@ -12,187 +12,101 @@
         <pages>
             <Page title="{i18n>title}">
                 <content>
-                    <IconTabBar class="sapUiSizeCompact">
-                        <items>
-                            <IconTabFilter text="Header Information">
-                                <Panel
-                                    class="sapUiSizeCompact"
-                                    expandable="true"
-                                    expanded="true"
-                                    width="100%"
-                                    height="auto"
-                                >
-                                    <headerToolbar>
-                                        <Toolbar>
-                                            <Text text="Header Details" />
-                                            <ToolbarSpacer />
-                                            <SearchField width="40%" />
-                                            <Button
-                                                icon="sap-icon://refresh"
-                                                type="Accept"
-                                            />
-                                        </Toolbar>
-                                    </headerToolbar>
-                                    <content>
-                                        <f:SimpleForm
-                                            editable="true"
-                                            layout="ResponsiveGridLayout"
-                                            labelSpanXL="4"
-                                            labelSpanL="4"
-                                            labelSpanM="4"
-                                            labelSpanS="12"
-                                            adjustLabelSpan="false"
-                                            emptySpanXL="0"
-                                            emptySpanL="3"
-                                            emptySpanM="0"
-                                            emptySpanS="0"
-                                            columnsXL="2"
-                                            columnsL="2"
-                                            columnsM="1"
-                                            singleContainerFullSize="false"
-                                        >
-                                            <f:content>
-                                                <core:Title />
-                                                <Label text="School Name" />
-                                                <Input
-                                                    enabled="false"
-                                                    value="{genericAlias>/scName}"
-                                                />
-                                                <Label text="Owner Name" />
-                                                <Input
-                                                    enabled="false"
-                                                    value="{genericAlias>/ownName}"
-                                                />
-                                                <Label text="Owner E-mail" />
-                                                <Input
-                                                    enabled="false"
-                                                    value="{genericAlias>/ownMail}"
-                                                />
-                                                <core:Title />
-                                                <Label
-                                                    text="Owner Mobile No."
-                                                />
-                                                <Input
-                                                    enabled="false"
-                                                    value="{genericAlias>/ownMobile}"
-                                                />
-                                                <Label text="Owner Staus" />
-                                                <Input
-                                                    enabled="false"
-                                                    value="{genericAlias>/ownStatus}"
-                                                />
-                                                <Label text="Scholl Address" />
-                                                <TextArea
-                                                    rows="3"
-                                                    enabled="false"
-                                                    value="{genericAlias>/scaddress}"
-                                                />
-                                            </f:content>
-                                        </f:SimpleForm>
-                                    </content>
-                                </Panel>
-                                <Table items="{genericAlias>/studentDetails}">
-                                    <columns>
-                                        <Column>
-                                            <Text text="Sudent Id" />
-                                        </Column>
-                                        <Column demandPopin="true">
-                                            <Text text="Student Name" />
-                                        </Column>
-                                        <Column demandPopin="true">
-                                            <Text text="Student Mobile No." />
-                                        </Column>
-                                        <Column demandPopin="true">
-                                            <Text text="Student Email-ID" />
-                                        </Column>
-                                        <Column demandPopin="true">
-                                            <Text text="Student Standard" />
-                                        </Column>
-                                    </columns>
-                                    <ColumnListItem>
-                                        <cells>
-                                            <ObjectStatus
-                                                text="{genericAlias>stuId}"
-                                                state="Success"
-                                            />
-                                            <Text
-                                                text="{genericAlias>stuName}"
-                                            />
-                                            <Text
-                                                text="{genericAlias>stuMobNo}"
-                                            />
-                                            <Text
-                                                text="{genericAlias>stuEmail}"
-                                            />
-                                            <Text
-                                                text="{genericAlias>stuStand}"
-                                            />
-                                        </cells>
-                                    </ColumnListItem>
-                                </Table>
-                            </IconTabFilter>
-                            <IconTabFilter text="Branch Information">
-                                <Table items="{genericAlias>/branchDetails}">
-                                    <headerToolbar>
-                                        <Toolbar>
-                                            <ToolbarSpacer />
-                                            <SearchField width="40%" />
-                                            <Button
-                                                icon="sap-icon://refresh"
-                                                type="Accept"
-                                            />
-                                        </Toolbar>
-                                    </headerToolbar>
-                                    <columns>
-                                        <Column>
-                                            <Text text="Branch Code" />
-                                        </Column>
-                                        <Column>
-                                            <Text
-                                                text="Branch Principal Name"
-                                            />
-                                        </Column>
-                                        <Column
-                                            minScreenWidth="Tablet"
-                                            demandPopin="true"
-                                        >
-                                            <Text text="Location" />
-                                        </Column>
-                                        <Column
-                                            minScreenWidth="Tablet"
-                                            demandPopin="true"
-                                        >
-                                            <Text text="Email-Id" />
-                                        </Column>
-                                        <Column
-                                            minScreenWidth="Tablet"
-                                            demandPopin="true"
-                                        >
-                                            <Text text="Telephone No." />
-                                        </Column>
-                                    </columns>
-                                    <ColumnListItem>
-                                        <cells>
-                                            <ObjectStatus
-                                                text="{genericAlias>BRCode}"
-                                                state="Success"
-                                            />
-                                            <Text
-                                                text="{genericAlias>BRPRName}"
-                                            />
-                                            <Text
-                                                text="{genericAlias>Location}"
-                                            />
-                                            <Text text="{genericAlias>Email}" />
-                                            <Text
-                                                text="{genericAlias>TelephoneNo}"
-                                            />
-                                        </cells>
-                                    </ColumnListItem>
-                                </Table>
-                            </IconTabFilter>
-                        </items>
-                    </IconTabBar>
+                    <Panel
+                        class="sapUiSizeCompact"
+                        expandable="true"
+                        expanded="true"
+                        width="100%"
+                        height="auto"
+                    >
+                        <headerToolbar>
+                            <Toolbar>
+                                <Text text="Header Details" />
+                                <ToolbarSpacer />
+                                <!-- <SearchField width="40%" />
+                                <Button
+                                    icon="sap-icon://refresh"
+                                    type="Accept"
+                                /> -->
+                            </Toolbar>
+                        </headerToolbar>
+                        <content>
+                            <f:SimpleForm
+                                editable="true"
+                                layout="ResponsiveGridLayout"
+                                adjustLabelSpan="true"
+                                singleContainerFullSize="true"
+                            >
+                                <f:content>
+                                  
+                                    <Label text="Document Number" />
+                                    <Input value="" />
+                                    <Input value="" />
+
+                                    <Label text="Date" />
+                                    <DatePicker value="" />
+                                    <DatePicker value="" />
+
+                                    <Label text="Company Name" />
+                                    <Input value="" />
+                                    <Input value="" />
+
+                                    <Label text="Fiscal Year" />
+                                    <Input value="" />
+                                    <Input value="" />
+
+                                    <Label text="Document Type" />
+                                    <Input value="" />
+                                    <Input value="" />
+
+                                    <Label />
+                                    <Button
+                                        text="Show Details"
+                                        press="onShowDetails"
+                                    />
+                                    <Button
+                                        text="Clear"
+                                        press="onClearDetails"
+                                        type="Attention"
+                                    />
+                                </f:content>
+                            </f:SimpleForm>
+                        </content>
+                    </Panel>
+                    <Table
+                        items="{genericAlias>/studentDetails}"
+                        mode="MultiSelect"
+                    >
+                        <columns>
+                            <Column>
+                                <Text text="Document No." />
+                            </Column>
+                            <Column demandPopin="true">
+                                <Text text="Company Name" />
+                            </Column>
+                            <Column demandPopin="true">
+                                <Text text="Company Code" />
+                            </Column>
+                            <Column demandPopin="true">
+                                <Text text="Year" />
+                            </Column>
+                            <Column demandPopin="true">
+                                <Text text="Amount" />
+                            </Column>
+                        </columns>
+                        <ColumnListItem>
+                            <cells>
+                                <ObjectStatus
+                                    text="{genericAlias>stuId}"
+                                    state="Success"
+                                />
+                                <Text text="{genericAlias>stuName}" />
+                                <Text text="{genericAlias>stuMobNo}" />
+                                <Text text="{genericAlias>stuEmail}" />
+                                <Text text="{genericAlias>stuStand}" />
+                            </cells>
+                        </ColumnListItem>
+                    </Table>
                 </content>
                 <footer>
                     <Toolbar class="sapUiSizeCompact">
