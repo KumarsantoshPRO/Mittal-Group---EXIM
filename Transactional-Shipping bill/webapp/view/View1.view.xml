@@ -1,0 +1,66 @@
+<mvc:View controllerName="zmg.pro.exim.transactionalshippingbill.exim.controller.View1"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form"
+    xmlns="sap.m">
+    <Page id="page" title="{i18n>title}">
+        <content>
+           <VBox alignContent="Center" id="vbox1"  class="sapUiLargeMarginBeginEnd ">
+           <FlexBox id="flexbox1">
+            <f:SimpleForm id="Header1" class="sapUiSmallMarginTop" layout="ColumnLayout" columnsM="3" columnsL="3" columnsXL="4">
+            <f:content>
+               <Label id="_IDGenLabel1" text="Shipping Bill no. " class="bold-label"/>
+               <Input id="_IDGenText1" value=""  width="40%"/>
+               <Label id="_IDGenLabel2" text="Shipping Bill Status" class="bold-label"/>
+               <!-- <Text id="_IDGenText2" text="" /> -->
+            <Select maxWidth="40%" forceSelection="true" id="_IDGenText2" change="">
+                <core:Item id="item1" key="final" text="Final"/>
+			    <core:Item id="item2" key="provisional" text="Provisional"/>
+		    </Select>
+               <Label id="_IDGenLabel3" text="Invoice document" class="bold-label"/>
+               <Input id="_IDGenText3"  showSuggestion="true" showValueHelp="true" value="" />
+                <Label id="_IDGenLabel4" text="Internal System Date " class="bold-label"/>
+               <Text id="_IDGenText4" text="" />
+               <Label id="_IDGenLabel5" text="Shipping Bill Date " class="bold-label"/>
+               <Text id="_IDGenText5" text="" />
+               <Label id="_IDGenLabel6" text="Country of BL" class="bold-label" />
+				   <Text id="_IDGenText6"/>
+                <Label id="_IDGenLabel7" text="State of Origin" class="bold-label"/>
+                <Text text="" id="_IDGenText7"/>
+                <Label id="_IDGenLabel8" text="Port of Loading " class="bold-label"/>
+                <Text text="" id="_IDGenText8"/>
+                <Label id="_IDGenLabel9" text="Destination Country " class="bold-label"/>
+                <Text text="" id="_IDGenText9"/>
+                <Label id="_IDGenLabel10" text="ICD - PORT CODE" class="bold-label"/>
+                <Text text="" id="_IDGenText10"/>
+                <Label id="_IDGenLabel11" text="Foreign Currency " class="bold-label"/>
+                <Text text="" id="_IDGenText11"/>
+                <Label id="_IDGenLabel12" text="CHA" class="bold-label"/>
+                <Text text="" id="_IDGenText12"/>
+                <Label id="_IDGenLabel13" text="FOB Value (INR)" class="bold-label"/>
+                <Text text="" id="_IDGenText13"/>
+                <Label id="_IDGenLabel14" text="Customer" class="bold-label"/>
+                <Text text="" id="_IDGenText14"/>
+                 <Label id="_IDGenLabel15" text="FOB Value (FC)" class="bold-label"/>
+                <Text text="" id="_IDGenText15"/>
+                <Label id="_IDGenLabel16" text="Let Export Date" class="bold-label"/>
+                <Text text="" id="_IDGenText16"/>
+                <Label id="_IDGenLabel17" text="Exchange Rate" class="bold-label"/>
+                <Text text="" id="_IDGenText17"/>
+                <Label id="_IDGenLabel18" text="Schemes" class="bold-label"/>
+                <Text text="" id="_IDGenText18"/>
+                <Label id="_IDGenLabel19" text="RODTEP" class="bold-label"/>
+                <Text text="" id="_IDGenText19"/>
+                <Label id="_IDGenLabel20" text="EPCG" class="bold-label"/>
+                <Text text="" id="_IDGenText20"/>
+                <Label id="_IDGenLabel21" text="Container no." class="bold-label"/>
+                <Text text="" id="_IDGenText21"/>
+                <Label id="_IDGenLabel22" text="Letter of Credit" class="bold-label"/>
+                <Text text="" id="_IDGenText22"/>
+
+               </f:content>
+         </f:SimpleForm>
+         </FlexBox>
+           </VBox>
+
+        </content>
+    </Page>
+</mvc:View>
