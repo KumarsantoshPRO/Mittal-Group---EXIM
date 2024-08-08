@@ -1,0 +1,70 @@
+<core:FragmentDefinition xmlns:commons="sap.suite.ui.commons"
+        height="100%"
+        xmlns="sap.m"
+        xmlns:core="sap.ui.core"
+        xmlns:mvc="sap.ui.core.mvc"
+        xmlns:l="sap.ui.layout"
+        xmlns:u="sap.ui.unified">
+        <Dialog id="_IDGenDialog1" title="Licenses Sub-Screen" resizable="true" draggable="true" icon="sap-icon://provision" titleAlignment="Center">
+
+         <Table id="t2" items="" class="">
+         <headerToolbar>
+                        <Toolbar id="_IDGenToolbar11">
+                            <Title id="_IDGenTitle11" text="Licenses Sub-Screen" />
+                            <ToolbarSpacer id="_IDGenToolbarSpacer1"/>
+                        </Toolbar>
+                    </headerToolbar>
+           <columns>
+           <Column id="TableColumn1" hAlign="Center" width="10rem" >
+               <Text id="TBItem" text="Item" />
+            </Column>
+            <Column id="TableColumn2" hAlign="Center" width="10rem">
+               <Text id="TBMaterial" text="Material" />
+            </Column>
+            <Column id="TableColumn3" hAlign="Center" width="10rem">
+               <Text id="TBLicences" text="Licences" />
+            </Column>
+            <Column id="TableColumn4" hAlign="Center" width="10rem">
+               <Text id="TBLicencesType" text="Licences Type" />
+            </Column>
+             <Column id="TableColumn5" hAlign="Center" width="10rem">
+               <Text id="TBQuantity" text="Quantity" />
+            </Column>
+             <Column id="TableColumn6" hAlign="Center" width="10rem">
+               <Text id="TBValue" text="Value" />
+            </Column>
+            <Column id="TableColumn7" hAlign="Center" width="10rem">
+               <Text id="TBLogic" text="Logic" />
+            </Column>
+           </columns>
+           <items>
+                       <ColumnListItem id="_IDGenColumnListItem1" vAlign="Middle">
+                       <cells>
+                       <!-- <Input id="ItemValue"/>
+                       <Input id="MateiralValue"/>
+                       <Input id="LicencesValue"/>
+                       <Input id="LicencesTypeValue"/>
+                       <Input id="QuantityValue"/>
+                       <Input id="Value"/>
+                       <Input id="Logic"/> -->
+                       <Input/>
+                       <Input/>
+                       <Input/>
+                       <Input/>
+                       <Input/>
+                       <Input/>
+                       <Input/>
+
+
+                       </cells>
+                       </ColumnListItem>
+
+           </items>
+           </Table>
+        <endButton>
+            <Button id="_IDGenButton2"  text="Close" press="availResourceClose"/>
+        </endButton>
+ 
+    </Dialog>
+   
+</core:FragmentDefinition>
