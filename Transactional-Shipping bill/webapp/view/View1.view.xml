@@ -3,20 +3,21 @@
     xmlns="sap.m">
     <Page id="page" title="{i18n>title}">
         <content>
-           <VBox alignContent="Center" id="vbox1"  class="sapUiLargeMarginBeginEnd ">
+           <VBox alignContent="Center" id="vbox1"  class="">
            <FlexBox id="flexbox1">
-            <f:SimpleForm id="HeaderDetails" class="sapUiSmallMarginTop" layout="ColumnLayout" columnsM="3" columnsL="3" columnsXL="3">
+            <f:SimpleForm id="HeaderDetails" class="" layout="ColumnLayout" columnsM="2" columnsL="2" columnsXL="2">
             <f:content>
                <Label id="ShippingBillno" text="Shipping Bill no. " class="bold-label"/>
                <Input id="ShippingBillno_Value" value="" width="60%"/>
-               <Label id="ShippingBillStatus" text="Shipping Bill Status" class="bold-label"/>
-              
-            <Select maxWidth="60%" forceSelection="true" id="ShippingBillStatusValue" change="">
-                <core:Item id="item1" key="final" text="Final"/>
-			    <core:Item id="item2" key="provisional" text="Provisional"/>
-		    </Select>
-               <Label id="InvoiceDoc" text="Invoice document" class="bold-label"/>
+
+                <Label id="InvoiceDoc" text="Invoice document" class="bold-label"/>
                <Input id="InvoiceDocValue" width="60%" showSuggestion="true" showValueHelp="true" value="" />
+               <Label id="cha" text="CHA" class="bold-label"/>
+                 <Select maxWidth="60%" forceSelection="true" id="chaValue" change="">
+                <core:Item id="itemCHA1" key="1" text="a"/>
+			    <core:Item id="itemCHA2" key="2" text="b"/>
+		    </Select>
+              
                 <Label id="InternalSystemDate" text="Internal System Date " class="bold-label"/>
                <DatePicker id="InternalSystemDateValue" value="" editable="true" width="60%"/>
                <Label id="ShippingBillDate" text="Shipping Bill Date " class="bold-label"/>
@@ -33,11 +34,13 @@
                 <Input value="" id="ICDPortCodeValue" width="60%"/>
                 <Label id="ForeignCurrency" text="Foreign Currency " class="bold-label"/>
                 <Input value="" width="60%" id="ForeignCurrencyValue"/>
-                <Label id="cha" text="CHA" class="bold-label"/>
-                 <Select maxWidth="60%" forceSelection="true" id="chaValue" change="">
-                <core:Item id="itemCHA1" key="1" text="a"/>
-			    <core:Item id="itemCHA2" key="2" text="b"/>
+                <Label id="ShippingBillStatus" text="Shipping Bill Status" class="bold-label"/>
+              
+            <Select maxWidth="60%" forceSelection="true" id="ShippingBillStatusValue" change="">
+                <core:Item id="item1" key="final" text="Final"/>
+			    <core:Item id="item2" key="provisional" text="Provisional"/>
 		    </Select>
+                
                 <Label id="FOBV" text="FOB Value (INR)" class="bold-label"/>
                 <Input value="" width="60%" id="FOBVValue"/>
                 <Label id="Customer" text="Customer" class="bold-label"/>

@@ -104,7 +104,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller"], function (Controller) {
 
       fullHtml += headertable2;
       // window.open(URL, name, specs, replace)
-      var wind = window.open("", "prntExample");
+      var wind = window.open("", "  ");
       wind.document.write(fullHtml);
       setTimeout(function () {
         wind.print();
