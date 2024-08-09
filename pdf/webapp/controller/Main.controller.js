@@ -1,13 +1,13 @@
-sap.ui.define([
-  "sap/ui/core/mvc/Controller"
-], function (Controller) {
+sap.ui.define(["sap/ui/core/mvc/Controller"], function (Controller) {
   "use strict";
   return Controller.extend("zgm.pro.exim.pdfprint.pdf.controller.S1", {
     onInit: function () {
       // JSON model....
-      var json = new sap.ui.model.json.JSONModel($.sap.getModulePath("zgm.pro.exim.pdfprint.pdf", "/model/Data.json"));
+      var json = new sap.ui.model.json.JSONModel(
+        $.sap.getModulePath("zgm.pro.exim.pdfprint.pdf", "/model/Data.json")
+      );
       // Setting model to view....
-      this.getView().setModel(json, 'genericAlias');
+      this.getView().setModel(json, "genericAlias");
       //Alias Name = genericAlias....
     },
 
@@ -19,7 +19,8 @@ sap.ui.define([
       var header = this.getHeaderForm(modelData);
       fullHtml += header;
       //Making student table....
-      var headertable1 = "<table  border='1' style='margin-top:150px;width: 1000px;' align='center'>" +
+      var headertable1 =
+        "<table  border='1' style='margin-top:150px;width: 1000px;' align='center'>" +
         "<caption style='color:green;font-weight: bold;font-size: large;'>Student Details</caption>" +
         "<tr><th style='color:green'>Document Number</th>" +
         "<th style='color:green'>Company Name</th>" +
@@ -27,22 +28,29 @@ sap.ui.define([
         "<th style='color:green'>Year</th>" +
         "<th style='color:green'>Amount</th></tr>";
       //Adding row dynamically to student table....
-      for (var i = 0; i < modelData.studentDetails.length; i++) {
-        headertable1 += "<tr>" +
-          "<td> " + modelData.studentDetails[i].stuId + "</td>" +
-          "<td>  " + modelData.studentDetails[i].stuName + "  </td>" +
-
-
-          "<td>  " + modelData.studentDetails[i].stuMobNo + "  </td>" +
-          "<td>  " + modelData.studentDetails[i].stuEmail + "  </td>" +
-          "<td>  " + modelData.studentDetails[i].stuStand + "  </td>" +
+      for (var i = 0; i < modelData.items.length; i++) {
+        headertable1 +=
+          "<tr>" +
+          "<td> " +
+          modelData.items[i].documentNumber +
+          "</td>" +
+          "<td>  " +
+          modelData.items[i].companyCode +
+          "  </td>" +
+          "<td>  " +
+          modelData.items[i].year +
+          "  </td>" +
+          "<td>  " +
+          modelData.items[i].amount +
+          "  </td>" +
           "</tr>";
       }
       headertable1 += "</table>";
       // fullHtml += headertable1;
       // Making branch table....
-      var headertable2 = "<table  border='1' style='margin-top:50px;width: 1000px;' align='center'>" +
-        "<caption style='color:green;font-weight: bold;font-size: large;'>Branch Details</caption>" +
+      var headertable2 =
+        "<table  border='1' style='margin-top:50px;width: 1000px;' align='center'>" +
+        "<caption style='color:green;font-weight: bold;font-size: large;'>Details</caption>" +
         "<tr><th style='color:green'>Item</th>" +
         "<th style='color:green'>Item Text</th>" +
         "<th style='color:green'>Account</th>" +
@@ -51,16 +59,49 @@ sap.ui.define([
         "<th style='color:green'>Currency</th>" +
         "<th style='color:green'>Clearing Doc</th></tr>";
       //Adding row dynamically to branch table....
-      for (var j = 0; j < modelData.branchDetails.length; j++) {
-        headertable2 += "<tr>" +
-          "<td> " + modelData.branchDetails[j].BRCode + "</td>" +
-          "<td>  " + modelData.branchDetails[j].BRPRName + "  </td>" +
-          "<td>  " + modelData.branchDetails[j].Location + "  </td>" +
-          "<td>  " + modelData.branchDetails[j].Email + "  </td>" +
-          "<td>  " + modelData.branchDetails[j].TelephoneNo + "  </td>" +
+      for (var j = 0; j < modelData.details.length; j++) {
+        headertable2 +=
+          "<tr>" +
+          "<td> " +
+          modelData.details[j].Item +
+          "</td>" +
+          "<td>  " +
+          modelData.details[j].ItemText +
+          "  </td>" +
+          "<td>  " +
+          modelData.details[j].Account +
+          "  </td>" +
+          "<td>  " +
+          modelData.details[j].Description +
+          "  </td>" +
+          "<td>  " +
+          modelData.details[j].Amount +
+          "  </td>" +
+          "<td>  " +
+          modelData.details[j].Currency +
+          "  </td>" +
+          "<td>  " +
+          modelData.details[j].ClearingDoc +
+          "  </td>" +
           "</tr>";
       }
       headertable2 += "</table>";
+
+      var signature =
+        "<div style='position: absolute; width: 900px; height: 800px;'>" +
+        "<p style='position: absolute; bottom: 6px; left: 0px; background-color: black'>" +
+        "Receiver's Signature" +
+        "<br/><br/><br/>Prepared By" +
+        "<br/><br/><br/>Checked By " +
+        "</p>" +
+        "<p style='position: absolute; bottom: 6px; right: 0px; background-color: black'>" +
+        "Authorized Signature" +
+        "<br/><br/><br/>Verified By " +
+        "</p>" +
+        "</div>";
+
+      headertable2 += signature;
+
       fullHtml += headertable2;
       // window.open(URL, name, specs, replace)
       var wind = window.open("", "prntExample");
@@ -71,22 +112,42 @@ sap.ui.define([
       }, 1000);
     },
 
-    //Returing header data(Called method).... 
+    //Returing header data(Called method)....
     getHeaderForm: function (modelData) {
-      var modulePath = $.sap.getModulePath("zgm.pro.exim.pdfprint.pdf", "/image/");
+      var modulePath = $.sap.getModulePath(
+        "zgm.pro.exim.pdfprint.pdf",
+        "/image/"
+      );
       modulePath = modulePath + "logo.jpg";
-      return "<h1 style='text-align:center'> Mittal Coins <Img  src=" + modulePath + " style='margin-left:60rem' width='100px' height='80px'/> <br/> <h2 style='text-align:center'>Unnamed Road, Pithampur Industrial Area, Khandwa, Madhya Pradesh 454774 </h2> </h1>" + 
+      return (
+        "<span style='display: flex; justify-content: center'>Mittal Coins</span>" +
+        "<span style='display: flex; justify-content: center'>Addess</span>" +
+        "<Img  src=" +
+        modulePath +
+        " style='margin-left:60rem' width='100px' height='80px'/> " +
         " </div> <hr/><div>" +
         "<div style=float:left>" +
-        "<p>Document Number        : " + modelData.scName + "</p>" +
-        "<p>Document Date        : " + modelData.ownName + "</p>" +
-
-        "<p>Currency     : " + modelData.ownMail + "</p>" +
+        "<p>Document Number        : " +
+        modelData.documentNumber +
+        "</p>" +
+        "<p>Document Date        : " +
+        modelData.documentDate +
+        "</p>" +
+        "<p>Currency     : " +
+        modelData.currency +
+        "</p>" +
         "</div><div style=float:right>" +
-        "<p>Fiscal Year    : " + modelData.ownMobile + "</p>" +
-        "<p>Period      : " + modelData.ownStatus + "</p>" +
-        "<p>Company Code    : " + modelData.scaddress + "</p>" +
-        "</div></div>";
-    }
+        "<p>Fiscal Year    : " +
+        modelData.fiscalYear +
+        "</p>" +
+        "<p>Period      : " +
+        modelData.period +
+        "</p>" +
+        "<p>Company Code    : " +
+        modelData.companyCode +
+        "</p>" +
+        "</div></div>"
+      );
+    },
   });
 });

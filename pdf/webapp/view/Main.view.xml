@@ -74,16 +74,14 @@
                         </content>
                     </Panel>
                     <Table
-                        items="{genericAlias>/studentDetails}"
+                        items="{genericAlias>/items}"
                         mode="MultiSelect"
                     >
                         <columns>
                             <Column>
                                 <Text text="Document No." />
                             </Column>
-                            <Column demandPopin="true">
-                                <Text text="Company Name" />
-                            </Column>
+                          
                             <Column demandPopin="true">
                                 <Text text="Company Code" />
                             </Column>
@@ -97,13 +95,13 @@
                         <ColumnListItem>
                             <cells>
                                 <ObjectStatus
-                                    text="{genericAlias>stuId}"
+                                    text="{genericAlias>documentNumber}"
                                     state="Success"
                                 />
-                                <Text text="{genericAlias>stuName}" />
-                                <Text text="{genericAlias>stuMobNo}" />
-                                <Text text="{genericAlias>stuEmail}" />
-                                <Text text="{genericAlias>stuStand}" />
+                                <Text text="{genericAlias>companyCode}" />
+                                <Text text="{genericAlias>year}" />
+                                <Text text="{genericAlias>amount}" />
+                              
                             </cells>
                         </ColumnListItem>
                     </Table>
@@ -117,10 +115,7 @@
                             type="Accept"
                             press="handlePrint"
                         />
-                        <Button
-                            text="Verify"
-                            type="Accept"
-                        />
+                      
                     </Toolbar>
                 </footer>
             </Page>
