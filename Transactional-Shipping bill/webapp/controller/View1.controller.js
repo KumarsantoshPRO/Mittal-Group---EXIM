@@ -17,7 +17,7 @@ function (Controller,Fragment) {
             }
             this._oFragmentavail.open();
         },
-        availResourceClose: function () {
+        onBack: function () {
             this._oFragmentavail.close();
           }
     });

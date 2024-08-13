@@ -40,20 +40,20 @@
            <items>
                        <ColumnListItem id="_IDGenColumnListItem1" vAlign="Middle">
                        <cells>
-                       <!-- <Input id="ItemValue"/>
+                       <Input id="ItemValue"/>
                        <Input id="MateiralValue"/>
                        <Input id="LicencesValue"/>
                        <Input id="LicencesTypeValue"/>
                        <Input id="QuantityValue"/>
                        <Input id="Value"/>
-                       <Input id="Logic"/> -->
+                       <Input id="Logic"/>
+                       <!-- <Input/>
                        <Input/>
                        <Input/>
                        <Input/>
                        <Input/>
                        <Input/>
-                       <Input/>
-                       <Input/>
+                       <Input/> -->
 
 
                        </cells>

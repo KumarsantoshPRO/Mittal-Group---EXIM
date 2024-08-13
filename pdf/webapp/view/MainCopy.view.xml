@@ -1,0 +1,124 @@
+<mvc:View
+    controllerName="zgm.pro.exim.pdfprint.pdf.controller.Main"
+    xmlns:html="http://www.w3.org/1999/xhtml"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns="sap.m"
+    xmlns:l="sap.ui.layout"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:core="sap.ui.core"
+>
+    <App id="idAppControl">
+        <pages>
+            <Page title="{i18n>title}">
+                <content>
+                    <Panel
+                        class="sapUiSizeCompact"
+                        expandable="true"
+                        expanded="true"
+                        width="100%"
+                        height="auto"
+                    >
+                        <headerToolbar>
+                            <Toolbar>
+                                <Text text="Header Details" />
+                                <ToolbarSpacer />
+                                <!-- <SearchField width="40%" />
+                                <Button
+                                    icon="sap-icon://refresh"
+                                    type="Accept"
+                                /> -->
+                            </Toolbar>
+                        </headerToolbar>
+                        <content>
+                            <f:SimpleForm
+                                editable="true"
+                                layout="ResponsiveGridLayout"
+                                adjustLabelSpan="true"
+                                singleContainerFullSize="true"
+                            >
+                                <f:content>
+                                  
+                                    <Label text="Document Number" />
+                                    <Input value="" />
+                                    <Input value="" />
+
+                                    <Label text="Date" />
+                                    <DatePicker value="" />
+                                    <DatePicker value="" />
+
+                                    <Label text="Company Name" />
+                                    <Input value="" />
+                                    <Input value="" />
+
+                                    <Label text="Fiscal Year" />
+                                    <Input value="" />
+                                    <Input value="" />
+
+                                    <Label text="Document Type" />
+                                    <Input value="" />
+                                    <Input value="" />
+
+                                    <Label />
+                                    <Button
+                                        text="Show Details"
+                                        press="onShowDetails"
+                                    />
+                                    <Button
+                                        text="Clear"
+                                        press="onClearDetails"
+                                        type="Attention"
+                                    />
+                                </f:content>
+                            </f:SimpleForm>
+                        </content>
+                    </Panel>
+                    <Table
+                        items="{genericAlias>/items}"
+                        mode="MultiSelect"
+                    >
+                        <columns>
+                            <Column>
+                                <Text text="Document No." />
+                            </Column>
+                          
+                            <Column demandPopin="true">
+                                <Text text="Company Code" />
+                            </Column>
+                            <Column demandPopin="true">
+                                <Text text="Year" />
+                            </Column>
+                            <Column demandPopin="true">
+                                <Text text="Amount" />
+                            </Column>
+                        </columns>
+                        <ColumnListItem>
+                            <cells>
+                                <ObjectStatus
+                                    text="{genericAlias>documentNumber}"
+                                    state="Success"
+                                />
+                                <Text text="{genericAlias>companyCode}" />
+                                <Text text="{genericAlias>year}" />
+                                <Text text="{genericAlias>amount}" />
+                              
+                            </cells>
+                        </ColumnListItem>
+                    </Table>
+                </content>
+                <footer>
+                    <Toolbar class="sapUiSizeCompact">
+                        <ToolbarSpacer />
+                        <Button
+                            icon="sap-icon://print"
+                            text="Print"
+                            type="Accept"
+                            press="handlePrint"
+                        />
+                      
+                    </Toolbar>
+                </footer>
+            </Page>
+        </pages>
+    </App>
+</mvc:View>

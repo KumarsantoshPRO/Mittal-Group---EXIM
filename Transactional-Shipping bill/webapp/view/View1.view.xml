@@ -1,135 +1,138 @@
 <mvc:View controllerName="zmg.pro.exim.transactionalshippingbill.exim.controller.View1"
     xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form"
-    xmlns="sap.m">
-    <Page id="page" title="{i18n>title}">
-        <content>
-           <VBox alignContent="Center" id="vbox1"  class="">
-           <FlexBox id="flexbox1">
-            <f:SimpleForm id="HeaderDetails" class="" layout="ColumnLayout" columnsM="2" columnsL="2" columnsXL="2">
-            <f:content>
-               <Label id="ShippingBillno" text="Shipping Bill no. " class="bold-label"/>
-               <Input id="ShippingBillno_Value" value="" width="60%"/>
+    xmlns="sap.m" xmlns:uxap="sap.uxap">
+    
+    <uxap:ObjectPageLayout id="ObjectPageLayout" upperCaseAnchorBar="false" showHeaderContent="true" enableLazyLoading="true">
+        	<!-- <ObjectPageLayout id="ObjectPageLayout" upperCaseAnchorBar="false"> -->
+		<uxap:headerTitle>
+			<uxap:ObjectPageHeader id="_IDGenObjectPageHeader1" objectTitle="SHIPPING BILL SCREEN">
+			</uxap:ObjectPageHeader>
+		</uxap:headerTitle>
+        <!-- <uxap:ObjectPageHeader id="ObjectPageHeader" title="{i18n>title}" /> -->
 
-                <Label id="InvoiceDoc" text="Invoice document" class="bold-label"/>
-               <Input id="InvoiceDocValue" width="60%" showSuggestion="true" showValueHelp="true" value="" />
-               <Label id="cha" text="CHA" class="bold-label"/>
-                 <Select maxWidth="60%" forceSelection="true" id="chaValue" change="">
-                <core:Item id="itemCHA1" key="1" text="a"/>
-			    <core:Item id="itemCHA2" key="2" text="b"/>
-		    </Select>
-              
-                <Label id="InternalSystemDate" text="Internal System Date " class="bold-label"/>
-               <DatePicker id="InternalSystemDateValue" value="" editable="true" width="60%"/>
-               <Label id="ShippingBillDate" text="Shipping Bill Date " class="bold-label"/>
-               <DatePicker id="ShippingBillDateValue" value="" width="60%" />
-               <Label id="CountryofBL" text="Country of BL" class="bold-label" />
-			   <Input id="CountryofBLValue" width="60%"/>
-               <Label id="StateofOrigin" text="State of Origin" class="bold-label"/>
-              <Input value="" id="StateofOriginValue" width="60%"/>
-                <Label id="PortOfLoading" text="Port of Loading " class="bold-label"/>
-                <Input value="" id="PortOfLoadingValue" width="60%" />
-                <Label id="DestinationCountry" text="Destination Country" class="bold-label"/>
-                <Input value="" id="DestinationCountryValue" width="60%"/>
-                <Label id="ICDPortCode" text="ICD - PORT CODE" class="bold-label"/>
-                <Input value="" id="ICDPortCodeValue" width="60%"/>
-                <Label id="ForeignCurrency" text="Foreign Currency " class="bold-label"/>
-                <Input value="" width="60%" id="ForeignCurrencyValue"/>
-                <Label id="ShippingBillStatus" text="Shipping Bill Status" class="bold-label"/>
-              
-            <Select maxWidth="60%" forceSelection="true" id="ShippingBillStatusValue" change="">
-                <core:Item id="item1" key="final" text="Final"/>
-			    <core:Item id="item2" key="provisional" text="Provisional"/>
-		    </Select>
-                
-                <Label id="FOBV" text="FOB Value (INR)" class="bold-label"/>
-                <Input value="" width="60%" id="FOBVValue"/>
-                <Label id="Customer" text="Customer" class="bold-label"/>
-                <Input value="" id="CustomerValue" width="60%"/>
-                 <Label id="FOBV_FC" text="FOB Value (FC)" class="bold-label"/>
-                <Input value="" width="60%" id="FOBV_FCValue"/>
-                <Label id="LetExportDate" text="Let Export Date" class="bold-label"/>
-                <DatePicker value="" id="LetExportDateValue" width="60%"/>
-                <Label id="ExchangeRate" text="Exchange Rate" class="bold-label"/>
-                <Input value="" id="ExchangeRateValue" width="60%"/>
-                <Label id="Schemes" text="Schemes" class="bold-label"/>
-                
-            <Select maxWidth="60%" forceSelection="true" id="SchemesValue" change="">
-                <core:Item id="itemSchemes1" key="adl" text="ADL"/>
-			    <core:Item id="itemSchemes2" key="dbr" text="DBR"/>
-                <core:Item id="itemSchemes3" key="air" text="AIR"/>
-			    <core:Item id="itemSchemes4" key="no" text="No schemes"/>
-                
-		    </Select>
-                <Label id="RODTEP" text="RODTEP" class="bold-label"/>
-                <!-- <Text text="" id="_IDGenText19"/> -->
-                <Select id ="RODTEPValue" maxWidth="60%" forceSelection="true" change="">
-                <core:Item id="itemRODTEP1" key="yes" text="Yes"/>
-			    <core:Item id="itemRODTEP2" key="no" text="No"/>
-                </Select>
-                <Label id="EPCG" text="EPCG" class="bold-label"/>
-                <!-- <Text text="" id="_IDGenText20"/> -->
-                <Select id ="EPCGValue" maxWidth="60%" forceSelection="true" change="">
-                <core:Item id="itemEPCG1" key="yes" text="Yes"/>
-			    <core:Item id="itemEPCG2" key="no" text="No"/>
-                </Select>
-                <Label id="ContainerNo" text="Container no." class="bold-label"/>
-                <Input value="" id="ContainerNoValue" width="60%"/>
-                <Label id="LetterofCredit" text="Letter of Credit" class="bold-label"/>
-                <Input value="" showValueHelp="true" id="LetterofCreditValue" width="60%"/>
+        <uxap:ObjectPageSection id="HeaderDetailsSection" title="Header Details">
+            <uxap:ObjectPageSubSection id="HeaderDetailsSubSection" title="Header Details">
+                <VBox alignContent="Center" id="vbox1" class="">
+                    <f:SimpleForm id="HeaderDetails" class="" layout="ColumnLayout" columnsM="2" columnsL="2" columnsXL="2">
+                        <f:content>
+                            <Label id="ShippingBillno" text="Shipping Bill no." class="bold-label"/>
+                            <Input id="ShippingBillno_Value" value="" width="60%"/>
+                            <Label id="InvoiceDoc" text="Invoice document" class="bold-label"/>
+                            <Input id="InvoiceDocValue" width="60%" showSuggestion="true" showValueHelp="true" value=""/>
+                            <Label id="cha" text="CHA" class="bold-label"/>
+                            <Select maxWidth="60%" forceSelection="true" id="chaValue">
+                                <core:Item id="itemCHA1" key="1" text="a"/>
+                                <core:Item id="itemCHA2" key="2" text="b"/>
+                            </Select>
+                            <Label id="InternalSystemDate" text="Internal System Date" class="bold-label"/>
+                            <DatePicker id="InternalSystemDateValue" value="" editable="true" width="60%"/>
+                            <Label id="ShippingBillDate" text="Shipping Bill Date" class="bold-label"/>
+                            <DatePicker id="ShippingBillDateValue" value="" width="60%"/>
+                            <Label id="CountryofBL" text="Country of BL" class="bold-label"/>
+                            <Input id="CountryofBLValue" width="60%"/>
+                            <Label id="StateofOrigin" text="State of Origin" class="bold-label"/>
+                            <Input value="" id="StateofOriginValue" width="60%"/>
+                            <Label id="PortOfLoading" text="Port of Loading" class="bold-label"/>
+                            <Input value="" id="PortOfLoadingValue" width="60%"/>
+                            <Label id="DestinationCountry" text="Destination Country" class="bold-label"/>
+                            <Input value="" id="DestinationCountryValue" width="60%"/>
+                            <Label id="ICDPortCode" text="ICD - PORT CODE" class="bold-label"/>
+                            <Input value="" id="ICDPortCodeValue" width="60%"/>
+                            <Label id="ForeignCurrency" text="Foreign Currency" class="bold-label"/>
+                            <Input value="" width="60%" id="ForeignCurrencyValue"/>
+                            <Label id="ShippingBillStatus" text="Shipping Bill Status" class="bold-label"/>
+                            <Select maxWidth="60%" forceSelection="true" id="ShippingBillStatusValue">
+                                <core:Item id="item1" key="final" text="Final"/>
+                                <core:Item id="item2" key="provisional" text="Provisional"/>
+                            </Select>
+                            <Label id="FOBV" text="FOB Value (INR)" class="bold-label"/>
+                            <Input value="" width="60%" id="FOBVValue"/>
+                            <Label id="Customer" text="Customer" class="bold-label"/>
+                            <Input value="" id="CustomerValue" width="60%"/>
+                            <Label id="FOBV_FC" text="FOB Value (FC)" class="bold-label"/>
+                            <Input value="" width="60%" id="FOBV_FCValue"/>
+                            <Label id="LetExportDate" text="Let Export Date" class="bold-label"/>
+                            <DatePicker value="" id="LetExportDateValue" width="60%"/>
+                            <Label id="ExchangeRate" text="Exchange Rate" class="bold-label"/>
+                            <Input value="" id="ExchangeRateValue" width="60%"/>
+                            <Label id="Schemes" text="Schemes" class="bold-label"/>
+                            <Select maxWidth="60%" forceSelection="true" id="SchemesValue">
+                                <core:Item id="itemSchemes1" key="adl" text="ADL"/>
+                                <core:Item id="itemSchemes2" key="dbr" text="DBR"/>
+                                <core:Item id="itemSchemes3" key="air" text="AIR"/>
+                                <core:Item id="itemSchemes4" key="no" text="No schemes"/>
+                            </Select>
+                            <Label id="RODTEP" text="RODTEP" class="bold-label"/>
+                            <Select id="RODTEPValue" maxWidth="60%" forceSelection="true">
+                                <core:Item id="itemRODTEP1" key="yes" text="Yes"/>
+                                <core:Item id="itemRODTEP2" key="no" text="No"/>
+                            </Select>
+                            <Label id="EPCG" text="EPCG" class="bold-label"/>
+                            <Select id="EPCGValue" maxWidth="60%" forceSelection="true">
+                                <core:Item id="itemEPCG1" key="yes" text="Yes"/>
+                                <core:Item id="itemEPCG2" key="no" text="No"/>
+                            </Select>
+                            <Label id="ContainerNo" text="Container no." class="bold-label"/>
+                            <Input value="" id="ContainerNoValue" width="60%"/>
+                            <Label id="LetterofCredit" text="Letter of Credit" class="bold-label"/>
+                            <Input value="" showValueHelp="true" id="LetterofCreditValue" width="60%"/>
+                        </f:content>
+                    </f:SimpleForm>
+                </VBox>
+            </uxap:ObjectPageSubSection>
+        </uxap:ObjectPageSection>
 
-               </f:content>
-         </f:SimpleForm>
-         </FlexBox>
-         <!-- <FlexBox id="flexbox2"> -->
-    <ScrollContainer id="_IDGenScrollContainer1" width="100%" height="auto" horizontal="true">
-        <Table id="t1" items="" class="">
-         <headerToolbar>
-                        <Toolbar id="_IDGenToolbar1">
-                            <Title id="_IDGenTitle1" text="Assignment Details" />
-                            <ToolbarSpacer id="_IDGenToolbarSpacer1"/>
-                        </Toolbar>
-                    </headerToolbar>
-           <columns>
-            <Column id="TableColumn1" hAlign="Center" width="10rem" >
-               <Text id="TBItem" text="Item" />
-            </Column>
-            <Column id="TableColumn2" hAlign="Center" width="10rem">
-               <Text id="TBMaterial" text="Material" />
-            </Column>
-            <Column id="TableColumn3" hAlign="Center" width="10rem" minScreenWidth="Tablet" demandPopin="true" >
-               <Text id="TBItemDescription" text="Item Description" />
-            </Column>
-            <Column id="TableColumn4" hAlign="Center" width="10rem" minScreenWidth="Tablet" demandPopin="true" >
-               <Text id="TBInvoiceQTY" text="Invoice Qty" />
-            </Column>
-            <Column id="TableColumn5" hAlign="Center" width="10rem" minScreenWidth="Tablet" demandPopin="true" >
-               <Text id="TBUOM" text="UOM" />
-            </Column>
-            <Column id="TableColumn6" hAlign="Center" width="10rem" minScreenWidth="Tablet" demandPopin="true" >
-               <Text id="TBInvoiceValue" text="Invoice Value" />
-            </Column>
-            <Column id="TableColumn7" hAlign="Center" width="10rem" minScreenWidth="Tablet" demandPopin="true" >
-               <Text id="TBCommission" text="Commission" />
-            </Column>
-            <Column id="TableColumn8" hAlign="Center" width="10rem" minScreenWidth="Tablet" demandPopin="true" >
-               <Text id="TBInsurance" text="Insurance" />
-            </Column>
-            <Column id="TableColumn9" hAlign="Center" width="10rem" minScreenWidth="Tablet" demandPopin="true" >
-               <Text id="TBFreight" text="Freight" />
-            </Column>
-            <Column id="TableColumn10" hAlign="Center" width="10rem" minScreenWidth="Tablet" demandPopin="true" >
-               <Text id="TBFOBValue" text="FOB Value" />
-            </Column>
-            <Column id="TableColumn11" hAlign="Center" width="10rem" minScreenWidth="Tablet" demandPopin="true" >
-               <Text id="TBFOBCurrency" text="FOB Currency" />
-            </Column>
-             <Column id="TableColumn12" hAlign="Center"  width="10rem" minScreenWidth="Tablet" demandPopin="true" >
-               <Text id="TBFOBValue1" text="FOB Value" />
-            </Column>
-            <Column id="TableColumn13" hAlign="Center" width="10rem" minScreenWidth="Tablet" demandPopin="true" >
-               <Text id="TBFOBValueFC" text="FOB Value FC" />
-            </Column>
-             <Column id="TableColumn14" hAlign="Center"  width="10rem" minScreenWidth="Tablet" demandPopin="true" >
+        <uxap:ObjectPageSection id="AssignmentDetailsSection" title="Item Details ">
+            <uxap:ObjectPageSubSection id="AssignmentDetailsSubSection" title="Item Details ">
+                <ScrollContainer id="_IDGenScrollContainer1" width="100%" height="auto" horizontal="true">
+                    <Table id="t1" items="" class="">
+                        <headerToolbar>
+                            <Toolbar id="_IDGenToolbar1">
+                                <Title id="_IDGenTitle1" text="Assignment Details"/>
+                                <ToolbarSpacer id="_IDGenToolbarSpacer1"/>
+                            </Toolbar>
+                        </headerToolbar>
+                        <columns>
+                            <Column id="TableColumn1" hAlign="Center" width="10rem">
+                                <Text id="TBItem" text="Item"/>
+                            </Column>
+                            <Column id="TableColumn2" hAlign="Center" width="10rem">
+                                <Text id="TBMaterial" text="Material"/>
+                            </Column>
+                            <Column id="TableColumn3" hAlign="Center" width="10rem" minScreenWidth="Tablet" demandPopin="true">
+                                <Text id="TBItemDescription" text="Item Description"/>
+                            </Column>
+                            <Column id="TableColumn4" hAlign="Center" width="10rem" minScreenWidth="Tablet" demandPopin="true">
+                                <Text id="TBInvoiceQTY" text="Invoice Qty"/>
+                            </Column>
+                            <Column id="TableColumn5" hAlign="Center" width="10rem" minScreenWidth="Tablet" demandPopin="true">
+                                <Text id="TBUOM" text="UOM"/>
+                            </Column>
+                            <Column id="TableColumn6" hAlign="Center" width="10rem" minScreenWidth="Tablet" demandPopin="true">
+                                <Text id="TBInvoiceValue" text="Invoice Value"/>
+                            </Column>
+                            <Column id="TableColumn7" hAlign="Center" width="10rem" minScreenWidth="Tablet" demandPopin="true">
+                                <Text id="TBCommission" text="Commission"/>
+                            </Column>
+                            <Column id="TableColumn8" hAlign="Center" width="10rem" minScreenWidth="Tablet" demandPopin="true">
+                                <Text id="TBInsurance" text="Insurance"/>
+                            </Column>
+                            <Column id="TableColumn9" hAlign="Center" width="10rem" minScreenWidth="Tablet" demandPopin="true">
+                                <Text id="TBFreight" text="Freight"/>
+                            </Column>
+                            <Column id="TableColumn10" hAlign="Center" width="10rem" minScreenWidth="Tablet" demandPopin="true">
+                                <Text id="TBFOBValue" text="FOB Value"/>
+                            </Column>
+                            <Column id="TableColumn11" hAlign="Center" width="10rem" minScreenWidth="Tablet" demandPopin="true">
+                                <Text id="TBFOBCurrency" text="FOB Currency"/>
+                            </Column>
+                            <Column id="TableColumn12" hAlign="Center" width="10rem" minScreenWidth="Tablet" demandPopin="true">
+                                <Text id="TBNoofPackages" text="No. of Packages"/>
+                            </Column>
+                            <Column id="TableColumn13" hAlign="Center" width="10rem" minScreenWidth="Tablet" demandPopin="true">
+                                <Text id="TBMarksNo" text="Marks No"/>
+                            </Column>
+                             <Column id="TableColumn14" hAlign="Center"  width="10rem" minScreenWidth="Tablet" demandPopin="true" >
                <Text id="TBLicences" text="Licences" />
             </Column>
             <Column id="TableColumn15" hAlign="Center" width="10rem" minScreenWidth="Tablet" demandPopin="true" >
@@ -141,8 +144,9 @@
             <Column id="TableColumn17" hAlign="Center" width="10rem" minScreenWidth="Tablet" demandPopin="true" >
                <Text id="TBRodtepCurrency" text="Rodtep currency" />
             </Column>
-         </columns>
-         <items>
+                        </columns>
+
+                          <items>
             <ColumnListItem id="_IDGenColumnListItem1" vAlign="Middle">
                <cells>
                <Input id="ItemValue" value=""/>
@@ -173,13 +177,9 @@
                </cells>
             </ColumnListItem>
          </items>
-        </Table>
-
-         </ScrollContainer>          
-
-         <!-- </FlexBox> -->
-           </VBox>
-
-        </content>
-    </Page>
+                    </Table>
+                </ScrollContainer>
+            </uxap:ObjectPageSubSection>
+        </uxap:ObjectPageSection>
+    </uxap:ObjectPageLayout>
 </mvc:View>

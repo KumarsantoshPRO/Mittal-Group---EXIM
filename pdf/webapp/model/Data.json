@@ -9,14 +9,49 @@
     {
       "documentNumber": "1500000017",
       "companyCode": "1000",
-      "year": "1111111111",
-      "amount": "5979769"
+      "year": "2024",
+      "amount": "56, 908"
     },
     {
       "documentNumber": "1500000018",
       "companyCode": "1001",
-      "year": "2222222222",
-      "amount": "89879879"
+      "year": "2023",
+      "amount": "85, 889"
+    },
+    {
+      "documentNumber": "1500000019",
+      "companyCode": "1002",
+      "year": "2023",
+      "amount": "1,00,898"
+    },
+    {
+      "documentNumber": "1500000020",
+      "companyCode": "1003",
+      "year": "2023",
+      "amount": "24,85, 889"
+    }, {
+      "documentNumber": "1500000021",
+      "companyCode": "1004",
+      "year": "2021",
+      "amount": "01,90, 540"
+    },
+    {
+      "documentNumber": "1500000022",
+      "companyCode": "1005",
+      "year": "2019",
+      "amount": "01,85, 889"
+    },
+    {
+      "documentNumber": "1500000023",
+      "companyCode": "1006",
+      "year": "2023",
+      "amount": "1,90,898"
+    },
+    {
+      "documentNumber": "1500000024",
+      "companyCode": "1004",
+      "year": "2023",
+      "amount": "14,85, 889"
     }
   ],
   "details": [
