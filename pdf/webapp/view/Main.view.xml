@@ -9,20 +9,24 @@
     xmlns:svm="sap.ui.comp.smartvariants"
     xmlns:l="sap.ui.layout"
     xmlns:form="sap.ui.layout.form"
+    xmlns:tcm="sap.m.table.columnmenu"
 >
     <f:DynamicPage
         showFooter="false"
         fitContent="true"
+        headerExpanded="true"
+        
     >
         <f:title>
-            <f:DynamicPageTitle>
+            <f:DynamicPageTitle stateChange="onDPTStateChange">
                 <f:heading>
-                    <Title text="Filter Bar" />
+                    <Title text="Filter Bar" textAlign="Center" titleStyle="H3"/>
                 </f:heading>
                 <f:actions>
                     <Button
                         id="idBtnDPTFilterGo"
                         text="Search"
+                       
                         press="onShowDetails"
                         type="Emphasized"
                         icon="sap-icon://search"
@@ -30,6 +34,7 @@
                     <Button
                         id="idBtnDPTFilterClear"
                         text="Clear"
+                          
                         press="onClearDetails"
                         type="Attention"
                         icon="sap-icon://clear-filter"
@@ -44,8 +49,9 @@
                     <form:SimpleForm
                         editable="true"
                         layout="ColumnLayout"
-                        adjustLabelSpan="true"
-                        singleContainerFullSize="true"
+                       columnsL="3"
+                       columnsM="3"
+                       columnsXL="3"
                     >
                         <form:content>
                             <Label text="Document Number" />
@@ -56,7 +62,6 @@
                                 autocomplete="true"
                                 placeholder="Document Number"
                             />
-
                             <Label text="Company Name" />
                             <Input
                                 value=""
@@ -65,7 +70,6 @@
                                 autocomplete="true"
                                 placeholder="Company Name"
                             />
-
                             <Label text="Document Type" />
                             <Input
                                 value=""
@@ -74,14 +78,12 @@
                                 autocomplete="true"
                                 placeholder="Document Type"
                             />
-
                             <Label text="Fiscal Year" />
                             <DatePicker
                                 displayFormat="yyyy"
                                 valueFormat="yyyy"
                                 placeholder="Fiscal Year"
                             />
-
                             <Label text="Date" />
                             <DateRangeSelection
                                 value=""
@@ -95,10 +97,9 @@
 
         <f:content>
             <Table
+                id="idTableDocumentDetails"
                 items="{genericAlias>/items}"
-                mode="MultiSelect"
                 sticky="ColumnHeaders,HeaderToolbar"
-                inset="false"
                 growing="true"
             >
                 <headerToolbar>
@@ -106,6 +107,11 @@
                         <Title
                             text="Document List"
                             level="H2"
+                        />
+                        <Button
+                            tooltip="Mutiselect"
+                            icon="sap-icon://multiselect-none"
+                            press="handleMultiSelectButtonPressed"
                         />
                         <Button
                             tooltip="Sort"
@@ -122,15 +128,18 @@
                             icon="sap-icon://group-2"
                             press="handleGroupButtonPressed"
                         />
-
                         <ToolbarSpacer />
                         <Button
+                            id="idBtnShowDocItems"
+                            visible="false"
                             text="Show Document items"
                             press="onShowDocumentItems"
                             type="Emphasized"
                             icon="sap-icon://popup-window"
                         />
                         <Button
+                            id="idBtnClearSelection"
+                            visible="false"
                             text="Clear Selections"
                             press="onClearSelection"
                             type="Attention"
@@ -138,11 +147,10 @@
                         />
                     </OverflowToolbar>
                 </headerToolbar>
-                <columns>
-                    <Column>
+                <columns >
+                    <Column >
                         <Text text="Document No." />
                     </Column>
-
                     <Column demandPopin="true">
                         <Text text="Company" />
                     </Column>
@@ -153,7 +161,10 @@
                         <Text text="Amount" />
                     </Column>
                 </columns>
-                <ColumnListItem>
+                <ColumnListItem
+                    type="Navigation"
+                    press="onShowDocumentItems"
+                >
                     <cells>
                         <ObjectStatus
                             text="{genericAlias>documentNumber}"
