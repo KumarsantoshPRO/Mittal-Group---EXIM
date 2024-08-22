@@ -1,0 +1,31 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+>
+    <ViewSettingsDialog confirm="handleFilterDialogConfirm">
+        <filterItems>
+            <ViewSettingsFilterItem
+                text="Document No"
+                key="DocumentNo"
+                items="{/ZCDS_RT_JV_PRINT}"
+            >
+                <items>
+                    <ViewSettingsItem
+                        text="{AccountingDocument}"
+                        key="{AccountingDocument}"
+                    />
+                </items>
+            </ViewSettingsFilterItem>
+            <ViewSettingsFilterItem
+                text="Fiscal Year"
+                key="FiscalYear"
+                multiSelect="true"
+                items="{path: '/ZCDS_RT_JV_PRINT'}"
+            >
+                <items>
+                    <ViewSettingsItem text="{FiscalYear}" />
+                </items>
+            </ViewSettingsFilterItem>
+        </filterItems>
+    </ViewSettingsDialog>
+</core:FragmentDefinition>

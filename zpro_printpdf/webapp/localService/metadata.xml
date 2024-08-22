@@ -1,0 +1,1137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+    <edmx:Reference Uri="https://my411037-api.s4hana.cloud.sap/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_AGGREGATION',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="Org.OData.Aggregation.V1" Alias="Aggregation"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://my411037-api.s4hana.cloud.sap/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_ANALYTICS',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.Analytics.v1" Alias="Analytics"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://my411037-api.s4hana.cloud.sap/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_CAPABILITIES',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="Org.OData.Capabilities.V1" Alias="Capabilities"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://my411037-api.s4hana.cloud.sap/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_CODELIST',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.CodeList.v1" Alias="SAP__CodeList"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://my411037-api.s4hana.cloud.sap/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMON',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.Common.v1" Alias="Common"/>
+        <edmx:Include Namespace="com.sap.vocabularies.Common.v1" Alias="SAP__common"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://my411037-api.s4hana.cloud.sap/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMUNICATION',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.Communication.v1" Alias="Communication"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://my411037-api.s4hana.cloud.sap/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_CORE',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="Org.OData.Core.V1" Alias="SAP__core"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://my411037-api.s4hana.cloud.sap/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_MEASURES',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="Org.OData.Measures.V1" Alias="Measures"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://my411037-api.s4hana.cloud.sap/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_ODM',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.ODM.v1" Alias="SAP__ODM"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://my411037-api.s4hana.cloud.sap/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_PDF',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.PDF.v1" Alias="SAP__PDF"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://my411037-api.s4hana.cloud.sap/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_PERSONALDATA',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.PersonalData.v1" Alias="PersonalData"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://my411037-api.s4hana.cloud.sap/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_UI',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.UI.v1" Alias="UI"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://my411037-api.s4hana.cloud.sap/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_VALIDATION',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="Org.OData.Validation.V1" Alias="Validation"/>
+    </edmx:Reference>
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema Namespace="cds_zi_sd_jv_print" xml:lang="en" sap:schema-version="1" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+            <EntityType Name="I_AcctgServiceDocumentItemVHType" sap:label="Service Document Item ID Value Help" sap:value-list="true" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="ServiceDocumentType"/>
+                    <PropertyRef Name="ServiceDocument"/>
+                    <PropertyRef Name="ServiceDocumentItem"/>
+                </Key>
+                <Property Name="ServiceDocumentType" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="UpperCase" sap:label="Service Doc. Type" sap:quickinfo="Service Document Type"/>
+                <Property Name="ServiceDocument" Type="Edm.String" Nullable="false" MaxLength="10" sap:display-format="UpperCase" sap:label="Service Document" sap:quickinfo="Service Document ID"/>
+                <Property Name="ServiceDocumentItem" Type="Edm.String" Nullable="false" MaxLength="6" sap:display-format="NonNegative" sap:label="Service Doc. Item" sap:quickinfo="Service Document Item ID"/>
+                <Property Name="CompanyCode" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Company Code"/>
+                <Property Name="ProfitCenter" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Profit Center"/>
+                <Property Name="ServiceDocumentTypeName" Type="Edm.String" MaxLength="40" sap:label="Description"/>
+                <Property Name="ServiceDocumentDescription" Type="Edm.String" MaxLength="40" sap:label="Srv Document Desc." sap:quickinfo="Service Document Description"/>
+                <Property Name="ServiceDocItemCategory" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Item Category"/>
+                <Property Name="ServiceDocItemCategoryName" Type="Edm.String" MaxLength="40" sap:label="Item Category Description" sap:quickinfo="Service Document Item Category Description"/>
+                <Property Name="ServiceDocumentItemDescription" Type="Edm.String" MaxLength="40" sap:label="Srv Doc Item Desc." sap:quickinfo="Service Document Item Description"/>
+                <Property Name="OriginallyRequestedProduct" Type="Edm.String" MaxLength="54" sap:display-format="UpperCase" sap:label="Product Name" sap:quickinfo="Product Name Entered"/>
+                <Property Name="ProductName" Type="Edm.String" MaxLength="40" sap:label="Product Description"/>
+                <Property Name="PostingDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Service Doc Date" sap:quickinfo="Service Document Date"/>
+            </EntityType>
+            <EntityType Name="I_AcctgServiceDocumentTypeVHType" sap:label="Service Document Type Value Help" sap:value-list="true" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="ServiceDocumentType"/>
+                </Key>
+                <Property Name="ServiceDocumentType" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="UpperCase" sap:text="ServiceDocumentTypeName" sap:label="Service Doc. Type" sap:quickinfo="Service Document Type"/>
+                <Property Name="ServiceDocumentTypeName" Type="Edm.String" MaxLength="40" sap:label="Description"/>
+            </EntityType>
+            <EntityType Name="I_AcctgServiceDocumentVHType" sap:label="Service Document ID Value Help" sap:value-list="true" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="ServiceDocument"/>
+                    <PropertyRef Name="ServiceDocumentType"/>
+                </Key>
+                <Property Name="ServiceDocument" Type="Edm.String" Nullable="false" MaxLength="10" sap:display-format="UpperCase" sap:label="Service Document" sap:quickinfo="Service Document ID"/>
+                <Property Name="ServiceDocumentType" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="UpperCase" sap:label="Service Doc. Type" sap:quickinfo="Service Document Type"/>
+                <Property Name="ServiceDocumentDescription" Type="Edm.String" MaxLength="40" sap:label="Srv Document Desc." sap:quickinfo="Service Document Description"/>
+                <Property Name="ServiceDocumentTypeName" Type="Edm.String" MaxLength="40" sap:label="Description"/>
+                <Property Name="CompanyCode" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Company Code"/>
+                <Property Name="ProfitCenter" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Profit Center"/>
+            </EntityType>
+            <EntityType Name="ZCDS_RT_JV_PRINTType" sap:label="JV Print" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="CompanyCode"/>
+                    <PropertyRef Name="AccountingDocument"/>
+                    <PropertyRef Name="FiscalYear"/>
+                    <PropertyRef Name="AccountingDocumentItem"/>
+                </Key>
+                <Property Name="Jv_print_ac" Type="Edm.Boolean" sap:label="Dyn. Action Control" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CompanyCode" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="UpperCase" sap:label="Company Code"/>
+                <Property Name="AccountingDocument" Type="Edm.String" Nullable="false" MaxLength="10" sap:display-format="UpperCase" sap:label="Journal Entry" sap:updatable="false"/>
+                <Property Name="FiscalYear" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="NonNegative" sap:label="Fiscal Year"/>
+                <Property Name="AccountingDocumentItem" Type="Edm.String" Nullable="false" MaxLength="3" sap:display-format="NonNegative" sap:label="Posting View Item" sap:quickinfo="Journal Entry Posting View Item"/>
+                <Property Name="AccountingDocumentItemType" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Line Item ID" sap:quickinfo="Identification of the Line Item"/>
+                <Property Name="ClearingDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Clearing Date"/>
+                <Property Name="ClearingCreationDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Clrg Creation Date" sap:quickinfo="Clearing Creation Date"/>
+                <Property Name="ClearingJournalEntryFiscalYear" Type="Edm.String" MaxLength="4" sap:display-format="NonNegative" sap:label="Fiscal Year of Clearing Journal Entry"/>
+                <Property Name="ClearingDocFiscalYear" Type="Edm.String" MaxLength="4" sap:display-format="NonNegative" sap:label="Fiscal Year of Clearing JE (Depr.)" sap:quickinfo="Fiscal Year of Clearing Journal Entry (Deprecated)"/>
+                <Property Name="ClearingJournalEntry" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Clearing Journal Entry"/>
+                <Property Name="ClearingAccountingDocument" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Clearing Journal Entry (Deprecated)"/>
+                <Property Name="FinancialAccountType" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Account Type"/>
+                <Property Name="SpecialGLCode" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Special G/L" sap:quickinfo="Special G/L Indicator"/>
+                <Property Name="SpecialGLTransactionType" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Sp. G/L Trans.Type" sap:quickinfo="Special G/L Transaction Type"/>
+                <Property Name="DebitCreditCode" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Debit/Credit Code"/>
+                <Property Name="BusinessArea" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Business Area"/>
+                <Property Name="PartnerBusinessArea" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Partner Bus. Area" sap:quickinfo="Partner Business Area"/>
+                <Property Name="TaxCode" Type="Edm.String" MaxLength="2" sap:display-format="UpperCase" sap:label="Tax Code" sap:quickinfo="Tax on Sales/Purchases Code"/>
+                <Property Name="TaxCountry" Type="Edm.String" MaxLength="3" sap:display-format="UpperCase" sap:label="Tax Ctry/Reg." sap:quickinfo="Tax Reporting Country/Region"/>
+                <Property Name="TaxRateValidityStartDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Tax Rate Validity Start Date"/>
+                <Property Name="WithholdingTaxCode" Type="Edm.String" MaxLength="2" sap:display-format="UpperCase" sap:label="Withholding Tax Code"/>
+                <Property Name="TaxType" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Tax Type"/>
+                <Property Name="TaxItemGroup" Type="Edm.String" MaxLength="3" sap:display-format="NonNegative" sap:label="Group" sap:quickinfo="Group Indicator for Tax Line Items"/>
+                <Property Name="TransactionTypeDetermination" Type="Edm.String" MaxLength="3" sap:display-format="UpperCase" sap:label="Transaction Key"/>
+                <Property Name="ValueDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Value Date"/>
+                <Property Name="AssignmentReference" Type="Edm.String" MaxLength="18" sap:label="Assignment Reference"/>
+                <Property Name="DocumentItemText" Type="Edm.String" MaxLength="50" sap:label="Item Text"/>
+                <Property Name="InterestCalculationBlockReason" Type="Edm.String" MaxLength="2" sap:display-format="UpperCase" sap:label="Interest Calculation Block Reason"/>
+                <Property Name="PartnerCompany" Type="Edm.String" MaxLength="6" sap:display-format="UpperCase" sap:label="Trading Partner" sap:quickinfo="Company ID of Trading Partner"/>
+                <Property Name="FinancialTransactionType" Type="Edm.String" MaxLength="3" sap:display-format="UpperCase" sap:label="Financial Transaction Type"/>
+                <Property Name="CorporateGroupAccount" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Corporate Group Account"/>
+                <Property Name="PlanningLevel" Type="Edm.String" MaxLength="2" sap:display-format="UpperCase" sap:label="Planning Level"/>
+                <Property Name="ControllingArea" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Controlling Area"/>
+                <Property Name="CostCenter" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Cost Center"/>
+                <Property Name="OrderID" Type="Edm.String" MaxLength="12" sap:display-format="UpperCase" sap:label="Order ID"/>
+                <Property Name="BillingDocument" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Billing Document"/>
+                <Property Name="SalesDocument" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Sales Document"/>
+                <Property Name="SalesDocumentItem" Type="Edm.String" MaxLength="6" sap:display-format="NonNegative" sap:label="Sales Document Item"/>
+                <Property Name="ScheduleLine" Type="Edm.String" MaxLength="4" sap:display-format="NonNegative" sap:label="Schedule Line"/>
+                <Property Name="ServiceDocumentType" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Service Doc. Type" sap:quickinfo="Service Document Type" sap:value-list="standard"/>
+                <Property Name="ServiceDocument" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Service Document" sap:quickinfo="Service Document ID" sap:value-list="standard"/>
+                <Property Name="ServiceDocumentItem" Type="Edm.String" MaxLength="6" sap:display-format="NonNegative" sap:label="Service Doc. Item" sap:quickinfo="Service Document Item ID" sap:value-list="standard"/>
+                <Property Name="MasterFixedAsset" Type="Edm.String" MaxLength="12" sap:display-format="UpperCase" sap:label="Fixed Asset"/>
+                <Property Name="FixedAsset" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Asset Subnumber"/>
+                <Property Name="AssetTransactionType" Type="Edm.String" MaxLength="3" sap:display-format="UpperCase" sap:label="Ast Transaction Type" sap:quickinfo="Asset Transaction Type"/>
+                <Property Name="AssetValueDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Asset Value Date"/>
+                <Property Name="PersonnelNumber" Type="Edm.String" MaxLength="8" sap:display-format="NonNegative" sap:label="Personnel Number"/>
+                <Property Name="IsSalesRelated" Type="Edm.Boolean" sap:label="Is Sales Related"/>
+                <Property Name="LineItemDisplayIsEnabled" Type="Edm.Boolean" sap:label="Line Item Display Enabled" sap:quickinfo="Indicator: Can Line Items Be Displayed by Account?"/>
+                <Property Name="IsOpenItemManaged" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Open Item Management" sap:quickinfo="Managed on an Open Item Basis"/>
+                <Property Name="AddressAndBankIsSetManually" Type="Edm.Boolean" sap:label="Address and Bank is Set Manually" sap:quickinfo="Address and Bank Data is Set Manually"/>
+                <Property Name="DownPaymentIsNetProcedure" Type="Edm.Boolean" sap:label="Indicator: Down Payment in Net Procedure?" sap:heading=""/>
+                <Property Name="IsNotCashDiscountLiable" Type="Edm.Boolean" sap:label="Is Not Cash Discount Liable"/>
+                <Property Name="SuplrInvcIsCapitalGoodsRelated" Type="Edm.Boolean" sap:label="Suppl. Invoice Is Capital Goods Related" sap:quickinfo="Supplier Invoice Is Capital Goods Related"/>
+                <Property Name="IsAutomaticallyCreated" Type="Edm.Boolean" sap:label="Is Automatically Created"/>
+                <Property Name="IsUsedInPaymentTransaction" Type="Edm.Boolean" sap:label="Is Used In Payment Transaction"/>
+                <Property Name="OperationalGLAccount" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Operational G/L Acct" sap:quickinfo="Operational General Ledger Account"/>
+                <Property Name="GLAccount" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="G/L Account"/>
+                <Property Name="Customer" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Customer" sap:quickinfo="Customer Number"/>
+                <Property Name="Supplier" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Supplier"/>
+                <Property Name="BranchAccount" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Branch Account"/>
+                <Property Name="IsBalanceSheetAccount" Type="Edm.Boolean" sap:label="Is Balance Sheet Account"/>
+                <Property Name="ProfitLossAccountType" Type="Edm.String" MaxLength="2" sap:display-format="UpperCase" sap:label="Profit Loss Account Type"/>
+                <Property Name="SpecialGLAccountAssignment" Type="Edm.String" MaxLength="18" sap:label="Special G/L Assignmt" sap:quickinfo="Assignment Number for Special G/L Accounts"/>
+                <Property Name="DueCalculationBaseDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Due Calculation Base Date"/>
+                <Property Name="PaymentTerms" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Payment Terms" sap:quickinfo="Terms of Payment Key"/>
+                <Property Name="CashDiscount1Days" Type="Edm.Decimal" Precision="3" Scale="0" sap:label="Cash Discount Days 1"/>
+                <Property Name="CashDiscount2Days" Type="Edm.Decimal" Precision="3" Scale="0" sap:label="Cash Discount Days 2"/>
+                <Property Name="NetPaymentDays" Type="Edm.Decimal" Precision="3" Scale="0" sap:label="Days Net" sap:quickinfo="Net Payment Terms Period"/>
+                <Property Name="CashDiscount1Percent" Type="Edm.Decimal" Precision="5" Scale="3" sap:label="Disc. Percent 1" sap:quickinfo="Cash Discount Percentage 1"/>
+                <Property Name="CashDiscount2Percent" Type="Edm.Decimal" Precision="5" Scale="3" sap:label="Disc. Percent 2" sap:quickinfo="Cash Discount Percentage 2"/>
+                <Property Name="PaymentMethod" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Payment Method"/>
+                <Property Name="PaymentBlockingReason" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Payment Blocking Reason"/>
+                <Property Name="FixedCashDiscount" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Fixed Cash Discount"/>
+                <Property Name="HouseBank" Type="Edm.String" MaxLength="5" sap:display-format="UpperCase" sap:label="House Bank" sap:quickinfo="House Bank Key"/>
+                <Property Name="BPBankAccountInternalID" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="BP Bank Account" sap:quickinfo="Business Partner Bank Account Internal ID"/>
+                <Property Name="TaxDistributionCode1" Type="Edm.String" MaxLength="2" sap:display-format="UpperCase" sap:label="Tax Distr. Code 1" sap:quickinfo="Tax Code 1 for Distribution"/>
+                <Property Name="TaxDistributionCode2" Type="Edm.String" MaxLength="2" sap:display-format="UpperCase" sap:label="Tax Distr. Code 2" sap:quickinfo="Tax Code 2 for Distribution"/>
+                <Property Name="TaxDistributionCode3" Type="Edm.String" MaxLength="2" sap:display-format="UpperCase" sap:label="Tax Distr. Code 3" sap:quickinfo="Tax Code 3 for Distribution"/>
+                <Property Name="InvoiceReference" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Invoice Reference"/>
+                <Property Name="InvoiceReferenceFiscalYear" Type="Edm.String" MaxLength="4" sap:display-format="NonNegative" sap:label="Invoice Reference Fiscal Year"/>
+                <Property Name="InvoiceItemReference" Type="Edm.String" MaxLength="3" sap:display-format="NonNegative" sap:label="Invoice Item Reference"/>
+                <Property Name="FollowOnDocumentType" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Follow-On Doc.Type" sap:quickinfo="Follow-On Document Type"/>
+                <Property Name="AcctgDocItmCustomsTariffNumber" Type="Edm.String" MaxLength="8" sap:display-format="UpperCase" sap:label="Acc. Document Item Customs Tariff Number" sap:quickinfo="Accounting Document Item Customs Tariff Number"/>
+                <Property Name="AcctgDocItmCstmsClearanceDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Acc. Doc. Item Customs Clearance Date" sap:quickinfo="Accounting Document Item Customs Clearance Date"/>
+                <Property Name="StateCentralBankPaymentReason" Type="Edm.String" MaxLength="3" sap:display-format="UpperCase" sap:label="SCB Indicator" sap:quickinfo="State Central Bank Indicator"/>
+                <Property Name="SupplyingCountry" Type="Edm.String" MaxLength="3" sap:display-format="UpperCase" sap:label="Supplying Ctry/Reg." sap:quickinfo="Supplying Country/Region"/>
+                <Property Name="RecrrgSuplrInvcIsSrvcInvoice" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Rec. Supplier Invoice Is Service Invoice" sap:quickinfo="Recurring Supplier Invoice Is Service Invoice"/>
+                <Property Name="InvoiceList" Type="Edm.String" MaxLength="8" sap:display-format="NonNegative" sap:label="Invoice List"/>
+                <Property Name="BillOfExchangeUsageDocument" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Bill of Exchange Usage Document"/>
+                <Property Name="BillOfExchangeUsage" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Bill/Exchange Usage" sap:quickinfo="Bill of Exchange Usage Type"/>
+                <Property Name="DunningKey" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Dunning Key"/>
+                <Property Name="DunningBlockingReason" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Dunning Blocking Reason"/>
+                <Property Name="LastDunningDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Last Dunned" sap:quickinfo="Date of Last Dunning Notice"/>
+                <Property Name="DunningLevel" Type="Edm.String" MaxLength="1" sap:display-format="NonNegative" sap:label="Dunning Level"/>
+                <Property Name="DunningArea" Type="Edm.String" MaxLength="2" sap:display-format="UpperCase" sap:label="Dunning Area"/>
+                <Property Name="PaytSlipWthRefSubscriber" Type="Edm.String" MaxLength="11" sap:display-format="UpperCase" sap:label="ISR Subscriber Number"/>
+                <Property Name="PaytSlipWthRefReference" Type="Edm.String" MaxLength="27" sap:display-format="UpperCase" sap:label="ISR Reference Number"/>
+                <Property Name="PaytSlipWthRefCheckDigit" Type="Edm.String" MaxLength="2" sap:display-format="UpperCase" sap:label="ISR Check Digit"/>
+                <Property Name="WithholdingTaxCertificate" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="WHT Certificate" sap:quickinfo="Withholding Tax Certificate"/>
+                <Property Name="Material" Type="Edm.String" MaxLength="18" sap:display-format="UpperCase" sap:label="Material" sap:quickinfo="Material Number"/>
+                <Property Name="Product" Type="Edm.String" MaxLength="18" sap:display-format="UpperCase" sap:label="Product" sap:quickinfo="Product Number"/>
+                <Property Name="Plant" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Plant"/>
+                <Property Name="PurchasingDocument" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Purchasing Document"/>
+                <Property Name="PurchasingDocumentItem" Type="Edm.String" MaxLength="5" sap:display-format="NonNegative" sap:label="Purchasing Doc. Item" sap:quickinfo="Purchasing Document Item"/>
+                <Property Name="AccountAssignmentNumber" Type="Edm.String" MaxLength="2" sap:display-format="NonNegative" sap:label="Account Assgmt No." sap:quickinfo="Sequential Number of Account Assignment"/>
+                <Property Name="IsCompletelyDelivered" Type="Edm.Boolean" sap:label="Is completely delivered"/>
+                <Property Name="MaterialPriceControl" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Material Price Control" sap:quickinfo="Material Price Control Indicator"/>
+                <Property Name="ValuationArea" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Valuation Area"/>
+                <Property Name="InventoryValuationType" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Valuation Type"/>
+                <Property Name="VATRegistration" Type="Edm.String" MaxLength="20" sap:display-format="UpperCase" sap:label="VAT Registration"/>
+                <Property Name="DelivOfGoodsDestCountry" Type="Edm.String" MaxLength="3" sap:display-format="UpperCase" sap:label="C/R of Destination" sap:quickinfo="Country/Region of Destination for Delivery of Goods"/>
+                <Property Name="DelivOfGoodsOriginCountry" Type="Edm.String" MaxLength="3" sap:display-format="UpperCase" sap:label="Delivery Of Goods Origin Country/Region"/>
+                <Property Name="PaymentDifferenceReason" Type="Edm.String" MaxLength="3" sap:display-format="UpperCase" sap:label="Payment Difference Reason"/>
+                <Property Name="ProfitCenter" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Profit Center"/>
+                <Property Name="JointVenture" Type="Edm.String" MaxLength="6" sap:display-format="UpperCase" sap:label="Joint Venture"/>
+                <Property Name="JointVentureCostRecoveryCode" Type="Edm.String" MaxLength="2" sap:display-format="UpperCase" sap:label="Recovery Indicator"/>
+                <Property Name="JointVentureEquityGroup" Type="Edm.String" MaxLength="3" sap:display-format="UpperCase" sap:label="Joint Venture Equity Group"/>
+                <Property Name="JointVenturePartner" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Joint Venture Partner"/>
+                <Property Name="TreasuryContractType" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Treasury Contract Type"/>
+                <Property Name="AssetContract" Type="Edm.String" MaxLength="13" sap:display-format="UpperCase" sap:label="Asset Contract"/>
+                <Property Name="CashFlowType" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Flow Type"/>
+                <Property Name="TaxJurisdiction" Type="Edm.String" MaxLength="15" sap:display-format="UpperCase" sap:label="Tax Jurisdiction"/>
+                <Property Name="REInternalFinNumber" Type="Edm.String" MaxLength="8" sap:display-format="UpperCase" sap:label="Real Estate Key" sap:quickinfo="Internal Key of Real Estate Object (FI)"/>
+                <Property Name="SettlementReferenceDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Reference Date" sap:quickinfo="Reference Date for Settlement"/>
+                <Property Name="CommitmentItemShortID" Type="Edm.String" MaxLength="14" sap:display-format="UpperCase" sap:label="Commitment Item Short ID" sap:quickinfo="Commitment Item ShortID"/>
+                <Property Name="CostObject" Type="Edm.String" MaxLength="12" sap:display-format="UpperCase" sap:label="Cost Object"/>
+                <Property Name="ProjectNetwork" Type="Edm.String" MaxLength="12" sap:display-format="UpperCase" sap:label="Network" sap:quickinfo="Network Number for Account Assignment"/>
+                <Property Name="OrderInternalBillOfOperations" Type="Edm.String" MaxLength="10" sap:display-format="NonNegative" sap:label="Order Internal Bill of Operations" sap:quickinfo="Order Internal Bill of Operations ID"/>
+                <Property Name="OrderIntBillOfOperationsItem" Type="Edm.String" MaxLength="8" sap:display-format="NonNegative" sap:label="Order Internal Bill of Operations Item"/>
+                <Property Name="WBSElementInternalID" Type="Edm.String" MaxLength="8" sap:display-format="NonNegative" sap:label="WBS Element Internal ID"/>
+                <Property Name="ProfitabilitySegment" Type="Edm.String" MaxLength="10" sap:display-format="NonNegative" sap:label="Profitability Segment (Deprecated)" sap:quickinfo="Deprecated: Profitability Segment"/>
+                <Property Name="ProfitabilitySegment_2" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Profitability Segment"/>
+                <Property Name="JointVentureBillingType" Type="Edm.String" MaxLength="2" sap:display-format="UpperCase" sap:label="Joint Venture Billing Type"/>
+                <Property Name="JointVentureEquityType" Type="Edm.String" MaxLength="3" sap:display-format="UpperCase" sap:label="Joint Venture Equity Type"/>
+                <Property Name="IsEUTriangularDeal" Type="Edm.Boolean" sap:label="Is EU Triangular Deal"/>
+                <Property Name="CostOriginGroup" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Origin Group" sap:quickinfo="Origin Group as Subdivision of Cost Element"/>
+                <Property Name="CompanyCodeCurrencyDetnMethod" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Co Crcy Detn Meth" sap:quickinfo="Company Code Currency Determination Method"/>
+                <Property Name="ClearingIsReversed" Type="Edm.Boolean" sap:label="Clearing Is Reversed"/>
+                <Property Name="PaymentMethodSupplement" Type="Edm.String" MaxLength="2" sap:display-format="UpperCase" sap:label="Payt Method Suplmnt" sap:quickinfo="Payment Method Supplement"/>
+                <Property Name="AlternativeGLAccount" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Altern. G/L Account" sap:quickinfo="Alternative G/L Account Number In Company Code"/>
+                <Property Name="FundsCenter" Type="Edm.String" MaxLength="16" sap:display-format="UpperCase" sap:label="Funds Center" sap:quickinfo="Funds Management Center"/>
+                <Property Name="Fund" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Fund"/>
+                <Property Name="TaxCompanyCode" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Tax Company Code"/>
+                <Property Name="PartnerProfitCenter" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Partner Profit Center"/>
+                <Property Name="Reference1IDByBusinessPartner" Type="Edm.String" MaxLength="12" sap:display-format="UpperCase" sap:label="Reference 1 ID By Business Partner" sap:quickinfo="ID of Reference 1 by Business Partner"/>
+                <Property Name="Reference2IDByBusinessPartner" Type="Edm.String" MaxLength="12" sap:display-format="UpperCase" sap:label="Reference 2 ID By Business Partner" sap:quickinfo="ID of Reference 2 by Business Partner"/>
+                <Property Name="EarmarkedFundsDocument" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Earmarked Funds" sap:quickinfo="Document Number for Earmarked Funds"/>
+                <Property Name="EarmarkedFundsDocumentItem" Type="Edm.String" MaxLength="3" sap:display-format="NonNegative" sap:label="Document Item" sap:quickinfo="Earmarked Funds: Document Item"/>
+                <Property Name="IsNegativePosting" Type="Edm.Boolean" sap:label="Is Negative Posting"/>
+                <Property Name="PaymentCardItem" Type="Edm.String" MaxLength="3" sap:display-format="NonNegative" sap:label="Payment Card Item"/>
+                <Property Name="PaymentCardPaymentSettlement" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Payment Card Payment Settlement"/>
+                <Property Name="CreditControlArea" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Credit Control Area"/>
+                <Property Name="AlternativePayeePayer" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Alternative Payee/Payer"/>
+                <Property Name="Reference3IDByBusinessPartner" Type="Edm.String" MaxLength="20" sap:display-format="UpperCase" sap:label="Reference 3 ID By Business Partner" sap:quickinfo="ID of Reference 3 by Business Partner"/>
+                <Property Name="DataExchangeInstruction1" Type="Edm.String" MaxLength="2" sap:display-format="NonNegative" sap:label="Data Exchange Instruction 1"/>
+                <Property Name="DataExchangeInstruction2" Type="Edm.String" MaxLength="2" sap:display-format="NonNegative" sap:label="Data Exchange Instruction 2"/>
+                <Property Name="DataExchangeInstruction3" Type="Edm.String" MaxLength="2" sap:display-format="NonNegative" sap:label="Data Exchange Instruction 3"/>
+                <Property Name="DataExchangeInstruction4" Type="Edm.String" MaxLength="2" sap:display-format="NonNegative" sap:label="Data Exchange Instruction 4"/>
+                <Property Name="Region" Type="Edm.String" MaxLength="3" sap:display-format="UpperCase" sap:label="Region" sap:quickinfo="Region (State, Province, County)"/>
+                <Property Name="HasPaymentOrder" Type="Edm.Boolean" sap:label="Payment Sent" sap:quickinfo="Indicator: Payment Order Exists for this Item"/>
+                <Property Name="PaymentReference" Type="Edm.String" MaxLength="30" sap:display-format="UpperCase" sap:label="Payment Reference"/>
+                <Property Name="TaxDeterminationDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Tx Determination Dte" sap:quickinfo="Date for Determination of Tax Rates"/>
+                <Property Name="ClearingItem" Type="Edm.Decimal" Precision="5" Scale="0" sap:label="Clearing Item"/>
+                <Property Name="BusinessPlace" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Business Place"/>
+                <Property Name="TaxSection" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Tax Section"/>
+                <Property Name="CostCtrActivityType" Type="Edm.String" MaxLength="6" sap:display-format="UpperCase" sap:label="Activity Type"/>
+                <Property Name="AccountsReceivableIsPledged" Type="Edm.String" MaxLength="2" sap:display-format="UpperCase" sap:label="Accounts Receivable Is Pledged"/>
+                <Property Name="AcctsReceivablePledgingCode" Type="Edm.String" MaxLength="2" sap:display-format="UpperCase" sap:label="Accounts Receivable Pledging Code"/>
+                <Property Name="BusinessProcess" Type="Edm.String" MaxLength="12" sap:display-format="UpperCase" sap:label="Business Process"/>
+                <Property Name="GrantID" Type="Edm.String" MaxLength="20" sap:display-format="UpperCase" sap:label="Grant"/>
+                <Property Name="FunctionalArea" Type="Edm.String" MaxLength="16" sap:display-format="UpperCase" sap:label="Functional Area"/>
+                <Property Name="CustomerIsInExecution" Type="Edm.Boolean" sap:label="Customer Is In Execution"/>
+                <Property Name="FundedProgram" Type="Edm.String" MaxLength="24" sap:display-format="UpperCase" sap:label="Funded Program"/>
+                <Property Name="InvcItmIsExcldFrmPromptPaytAct" Type="Edm.Boolean" sap:label="Invoice Item Is Excluded From PPA" sap:quickinfo="Invoice Item Is Excluded From Prompt Payment Act"/>
+                <Property Name="LedgerGLLineItem" Type="Edm.String" MaxLength="6" sap:display-format="UpperCase" sap:label="Journal Entry Item" sap:quickinfo="General Ledger Journal Entry Line Item"/>
+                <Property Name="Segment" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Segment" sap:quickinfo="Segment for Segmental Reporting"/>
+                <Property Name="PartnerSegment" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Partner Segment" sap:quickinfo="Partner Segment for Segmental Reporting"/>
+                <Property Name="PartnerFunctionalArea" Type="Edm.String" MaxLength="16" sap:display-format="UpperCase" sap:label="Partner Func. Area" sap:quickinfo="Partner Functional Area"/>
+                <Property Name="HouseBankAccount" Type="Edm.String" MaxLength="5" sap:display-format="UpperCase" sap:label="House Bank Account"/>
+                <Property Name="CostElement" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Cost Element"/>
+                <Property Name="ClearingIsLedgerGroupSpecific" Type="Edm.Boolean" sap:label="Clearing Is Ledger Group Specific"/>
+                <Property Name="TaxItemAcctgDocItemRef" Type="Edm.String" MaxLength="6" sap:display-format="NonNegative" sap:label="Tax doc. item number" sap:quickinfo="Tax document item number"/>
+                <Property Name="PaymentServiceProvider" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Payt Srvc Provider" sap:quickinfo="Payment Service Provider"/>
+                <Property Name="PaymentRefByPaytSrvcProvider" Type="Edm.String" MaxLength="35" sap:label="Reference by PSP" sap:quickinfo="Payment Reference by Payment Service Provider"/>
+                <Property Name="SEPAMandate" Type="Edm.String" MaxLength="35" sap:display-format="UpperCase" sap:label="SEPA Mandate" sap:quickinfo="Unique Reference to Mandate for each Payee"/>
+                <Property Name="ReferenceDocumentType" Type="Edm.String" MaxLength="5" sap:display-format="UpperCase" sap:label="Reference Document Type"/>
+                <Property Name="OriginalReferenceDocument" Type="Edm.String" MaxLength="20" sap:display-format="UpperCase" sap:label="Original Reference Document"/>
+                <Property Name="ReferenceDocumentLogicalSystem" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Ref. Doc. Lgcl Syst." sap:quickinfo="Logical System of Reference Document"/>
+                <Property Name="AccountingDocumentItemRef" Type="Edm.String" MaxLength="10" sap:display-format="NonNegative" sap:label="Journal Entry Line Item Reference"/>
+                <Property Name="FiscalPeriod" Type="Edm.String" MaxLength="3" sap:display-format="NonNegative" sap:label="Fiscal Period"/>
+                <Property Name="AccountingDocumentCategory" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Journal Entry Category"/>
+                <Property Name="PostingDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Posting Date"/>
+                <Property Name="DocumentDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Journal Entry Date"/>
+                <Property Name="AccountingDocumentType" Type="Edm.String" MaxLength="2" sap:display-format="UpperCase" sap:label="Journal Entry Type"/>
+                <Property Name="NetDueDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Net Due Date" sap:quickinfo="Due Date for Net Payment"/>
+                <Property Name="CashDiscount1DueDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Cash Disc 1 Due Date" sap:quickinfo="Due Date for Cash Discount 1"/>
+                <Property Name="CashDiscount2DueDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Cash Disc 2 Due Date" sap:quickinfo="Cash Discount 2 Due Date"/>
+                <Property Name="OffsettingAccount" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Offsetting Account"/>
+                <Property Name="OffsettingAccountType" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Offset Acct Type" sap:quickinfo="Offsetting Account Type"/>
+                <Property Name="OffsettingChartOfAccounts" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Offsetting Chart of Accounts"/>
+                <Property Name="PartnerFund" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Partner Fund"/>
+                <Property Name="PartnerGrant" Type="Edm.String" MaxLength="20" sap:display-format="UpperCase" sap:label="Partner Grant"/>
+                <Property Name="BudgetPeriod" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Budget Period"/>
+                <Property Name="PartnerBudgetPeriod" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Par. Budget Per." sap:quickinfo="FM: Partner Budget Period"/>
+                <Property Name="BranchCode" Type="Edm.String" MaxLength="5" sap:display-format="UpperCase" sap:label="Branch Code"/>
+                <Property Name="BillingPeriodOfPerfStartDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Billing Period of Performance Start Date"/>
+                <Property Name="BillingPeriodOfPerfEndDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Billing Period of Performance End Date"/>
+                <Property Name="JointVentureProductionDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Joint Venture Production Date"/>
+                <Property Name="OplAcctgDocItmCntrySpcfcRef1" Type="Edm.String" MaxLength="50" sap:label="Country/Region Specific Reference 1" sap:quickinfo="Country/Region Specific Reference 1 on line item"/>
+                <Property Name="PaymentReason" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Payment Reason"/>
+                <Property Name="CashLedgerCompanyCode" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Cash Origin CoCode" sap:quickinfo="Cash Origin Company Code"/>
+                <Property Name="CashLedgerAccount" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Cash Origin Account"/>
+                <Property Name="PubSecBudgetAccountCoCode" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Company Code for Budget Account" sap:quickinfo="Budget Account Company Code"/>
+                <Property Name="PubSecBudgetAccount" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Budget Account"/>
+                <Property Name="FinancialServicesProductGroup" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Financial Services Product Group"/>
+                <Property Name="FinancialServicesBranch" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Financial Services Branch"/>
+                <Property Name="FinancialDataSource" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Financial Data Source"/>
+                <Property Name="CustomerGroup" Type="Edm.String" MaxLength="2" sap:display-format="UpperCase" sap:label="Customer Group"/>
+                <Property Name="CustomerSupplierCountry" Type="Edm.String" MaxLength="3" sap:display-format="UpperCase" sap:label="Customer or Supplier Country/Region"/>
+                <Property Name="CustomerSupplierIndustry" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Customer Supplier Industry"/>
+                <Property Name="CompanyCodeCurrency" Type="Edm.String" MaxLength="5" sap:display-format="UpperCase" sap:label="Company Code Currency" sap:semantics="currency-code"/>
+                <Property Name="AmountInCompanyCodeCurrency" Type="Edm.Decimal" Precision="23" Scale="3" sap:unit="CompanyCodeCurrency" sap:variable-scale="true" sap:label="Amount in Company Code Currency"/>
+                <Property Name="FunctionalCurrency" Type="Edm.String" MaxLength="5" sap:display-format="UpperCase" sap:label="Functional Currency" sap:semantics="currency-code"/>
+                <Property Name="AmountInFunctionalCurrency" Type="Edm.Decimal" Precision="23" Scale="3" sap:unit="FunctionalCurrency" sap:variable-scale="true" sap:label="Amount in Functional Currency"/>
+                <Property Name="TaxAmountInCoCodeCrcy" Type="Edm.Decimal" Precision="23" Scale="3" sap:unit="CompanyCodeCurrency" sap:variable-scale="true" sap:label="Tax Amount in Company Code Currency" sap:quickinfo="Signed Tax Amount in Company Code Currency"/>
+                <Property Name="TaxBaseAmountInCoCodeCrcy" Type="Edm.Decimal" Precision="23" Scale="3" sap:unit="CompanyCodeCurrency" sap:variable-scale="true" sap:label="TxBaseAmt CoCodeCrcy" sap:quickinfo="Tax Base Amount in Company Code Currency"/>
+                <Property Name="ValuationDiffAmtInCoCodeCrcy" Type="Edm.Decimal" Precision="23" Scale="3" sap:unit="CompanyCodeCurrency" sap:variable-scale="true" sap:label="Valuation Difference Amount In CC Crcy" sap:quickinfo="Valuation Difference Amount In Company Code Currency"/>
+                <Property Name="CashDiscountAmtInCoCodeCrcy" Type="Edm.Decimal" Precision="23" Scale="3" sap:unit="CompanyCodeCurrency" sap:variable-scale="true" sap:label="CashD Amt in CC Crcy" sap:quickinfo="Cash Discount Amount in Company Code Currency"/>
+                <Property Name="TaxBrkdwnAmount1InCoCodeCrcy" Type="Edm.Decimal" Precision="23" Scale="3" sap:unit="CompanyCodeCurrency" sap:variable-scale="true" sap:label="Tax Breakdown Amnt in CoCode Crcy (1)" sap:quickinfo="Tax Breakdown Amount in Company Code Currency (1)"/>
+                <Property Name="TaxBrkdwnAmount2InCoCodeCrcy" Type="Edm.Decimal" Precision="23" Scale="3" sap:unit="CompanyCodeCurrency" sap:variable-scale="true" sap:label="Tax Breakdown Amnt in CoCode Crcy (2)" sap:quickinfo="Tax Breakdown Amount in Company Code Currency (2)"/>
+                <Property Name="TaxBrkdwnAmount3InCoCodeCrcy" Type="Edm.Decimal" Precision="23" Scale="3" sap:unit="CompanyCodeCurrency" sap:variable-scale="true" sap:label="Tax Breakdown Amnt in CoCode Crcy (3)" sap:quickinfo="Tax Breakdown Amount in Company Code Currency (3)"/>
+                <Property Name="NonDcblTaxAmountInCoCodeCrcy" Type="Edm.Decimal" Precision="23" Scale="3" sap:unit="CompanyCodeCurrency" sap:variable-scale="true" sap:label="Non Deductible Tax Amount In CoCode Crcy" sap:quickinfo="Non Deductible Tax Amount In Company Code Currency"/>
+                <Property Name="InvoiceAmtInCoCodeCrcy" Type="Edm.Decimal" Precision="23" Scale="3" sap:unit="CompanyCodeCurrency" sap:variable-scale="true" sap:label="Invc.Amt CoCode Crcy" sap:quickinfo="Invoice Amount in Company Code Currency"/>
+                <Property Name="TransactionCurrency" Type="Edm.String" MaxLength="5" sap:display-format="UpperCase" sap:label="Transaction Currency" sap:semantics="currency-code"/>
+                <Property Name="AmountInTransactionCurrency" Type="Edm.Decimal" Precision="23" Scale="3" sap:unit="TransactionCurrency" sap:variable-scale="true" sap:label="Amount in Transaction Currency"/>
+                <Property Name="OriginalTaxBaseAmount" Type="Edm.Decimal" Precision="23" Scale="3" sap:unit="TransactionCurrency" sap:variable-scale="true" sap:label="Origl Tax Base Amt" sap:quickinfo="Original Tax Base Amount in Transaction Currency"/>
+                <Property Name="TaxAmount" Type="Edm.Decimal" Precision="23" Scale="3" sap:unit="TransactionCurrency" sap:variable-scale="true" sap:label="Tax Amount" sap:quickinfo="Tax Amount in Transaction Currency"/>
+                <Property Name="TaxBaseAmountInTransCrcy" Type="Edm.Decimal" Precision="23" Scale="3" sap:unit="TransactionCurrency" sap:variable-scale="true" sap:label="Tx Bse Amt TransCrcy" sap:quickinfo="Tax Base Amount in Transaction Currency"/>
+                <Property Name="WithholdingTaxBaseAmount" Type="Edm.Decimal" Precision="23" Scale="3" sap:unit="TransactionCurrency" sap:variable-scale="true" sap:label="Withholding T.B. Amt" sap:quickinfo="Withholding Tax Base Amount"/>
+                <Property Name="PlannedAmtInTransactionCrcy" Type="Edm.Decimal" Precision="23" Scale="3" sap:unit="TransactionCurrency" sap:variable-scale="true" sap:label="Plnd Amt Trans. Crcy" sap:quickinfo="Planned Amount in Transaction Currency"/>
+                <Property Name="CashDiscountBaseAmount" Type="Edm.Decimal" Precision="23" Scale="3" sap:unit="TransactionCurrency" sap:variable-scale="true" sap:label="Cash Dscnt Base Amt" sap:quickinfo="Cash Discount Base Amount"/>
+                <Property Name="CashDiscountAmount" Type="Edm.Decimal" Precision="23" Scale="3" sap:unit="TransactionCurrency" sap:variable-scale="true" sap:label="Cash Discount Amount"/>
+                <Property Name="NetPaymentAmount" Type="Edm.Decimal" Precision="23" Scale="3" sap:unit="TransactionCurrency" sap:variable-scale="true" sap:label="Net Payment Amount"/>
+                <Property Name="TaxBrkdwnAmount1InTransCrcy" Type="Edm.Decimal" Precision="23" Scale="3" sap:unit="TransactionCurrency" sap:variable-scale="true" sap:label="Tax Breakdwn Amnt in Trnsaction Crcy (1)" sap:quickinfo="Tax Breakdown Amount in Transaction Currency (1)"/>
+                <Property Name="TaxBrkdwnAmount2InTransCrcy" Type="Edm.Decimal" Precision="23" Scale="3" sap:unit="TransactionCurrency" sap:variable-scale="true" sap:label="Tax Breakdwn Amnt in Trnsaction Crcy (2)" sap:quickinfo="Tax Breakdown Amount in Transaction Currency (2)"/>
+                <Property Name="TaxBrkdwnAmount3InTransCrcy" Type="Edm.Decimal" Precision="23" Scale="3" sap:unit="TransactionCurrency" sap:variable-scale="true" sap:label="Tax Breakdwn Amnt in Trnsaction Crcy (3)" sap:quickinfo="Tax Breakdown Amount in Transaction Currency (3)"/>
+                <Property Name="WithholdingTaxAmount" Type="Edm.Decimal" Precision="23" Scale="3" sap:unit="TransactionCurrency" sap:variable-scale="true" sap:label="Withholding Tax Amt" sap:quickinfo="Withholding Tax Amount"/>
+                <Property Name="WithholdingTaxExemptionAmt" Type="Edm.Decimal" Precision="23" Scale="3" sap:unit="TransactionCurrency" sap:variable-scale="true" sap:label="Withholding T-E Amt" sap:quickinfo="Withholding Tax-Exemption Amount"/>
+                <Property Name="NonDcblTaxAmountInTransCrcy" Type="Edm.Decimal" Precision="23" Scale="3" sap:unit="TransactionCurrency" sap:variable-scale="true" sap:label="Non Deductible Tax Amount In Trans. Crcy" sap:quickinfo="Non Deductible Tax Amount In Transaction Currency"/>
+                <Property Name="InvoiceAmountInFrgnCurrency" Type="Edm.Decimal" Precision="23" Scale="3" sap:unit="TransactionCurrency" sap:variable-scale="true" sap:label="Invc. Amt Frgn Crcy" sap:quickinfo="Invoice Amount in Foreign Currency"/>
+                <Property Name="BalanceTransactionCurrency" Type="Edm.String" MaxLength="5" sap:display-format="UpperCase" sap:label="Balance Transaction Currency" sap:semantics="currency-code"/>
+                <Property Name="AmountInBalanceTransacCrcy" Type="Edm.Decimal" Precision="23" Scale="3" sap:unit="BalanceTransactionCurrency" sap:variable-scale="true" sap:label="Amount in Balance Transaction Currency"/>
+                <Property Name="AdditionalCurrency1" Type="Edm.String" MaxLength="5" sap:display-format="UpperCase" sap:label="Additional Crcy 1" sap:quickinfo="Additional Currency 1" sap:semantics="currency-code"/>
+                <Property Name="ValuationDiffAmtInAddlCrcy1" Type="Edm.Decimal" Precision="23" Scale="3" sap:unit="AdditionalCurrency1" sap:variable-scale="true" sap:label="Val. Diff. AddlCrcy1" sap:quickinfo="Valuation Difference Amount in Additional Currency 1"/>
+                <Property Name="AmountInAdditionalCurrency1" Type="Edm.Decimal" Precision="23" Scale="3" sap:unit="AdditionalCurrency1" sap:variable-scale="true" sap:label="Amount in Additional Currency 1"/>
+                <Property Name="TaxAmountInAdditionalCurrency1" Type="Edm.Decimal" Precision="23" Scale="3" sap:unit="AdditionalCurrency1" sap:variable-scale="true" sap:label="Tax Amount in Additional Currency1"/>
+                <Property Name="AdditionalCurrency2" Type="Edm.String" MaxLength="5" sap:display-format="UpperCase" sap:label="Additional Crcy 2" sap:quickinfo="Additional Currency 2" sap:semantics="currency-code"/>
+                <Property Name="AmountInAdditionalCurrency2" Type="Edm.Decimal" Precision="23" Scale="3" sap:unit="AdditionalCurrency2" sap:variable-scale="true" sap:label="Amount in Additional Currency 2"/>
+                <Property Name="TaxAmountInAdditionalCurrency2" Type="Edm.Decimal" Precision="23" Scale="3" sap:unit="AdditionalCurrency2" sap:variable-scale="true" sap:label="Tax Amount in Additional Currency2"/>
+                <Property Name="ValuationDiffAmtInAddlCrcy2" Type="Edm.Decimal" Precision="23" Scale="3" sap:unit="AdditionalCurrency2" sap:variable-scale="true" sap:label="Val. Diff. AddlCrcy2" sap:quickinfo="Valuation Difference Amount in Additional Currency 2"/>
+                <Property Name="PaymentCurrency" Type="Edm.String" MaxLength="5" sap:display-format="UpperCase" sap:label="Autom. Payt. Crcy." sap:quickinfo="Currency for Automatic Payment" sap:semantics="currency-code"/>
+                <Property Name="AmountInPaymentCurrency" Type="Edm.Decimal" Precision="23" Scale="3" sap:unit="PaymentCurrency" sap:variable-scale="true" sap:label="Amount in Payment Currency"/>
+                <Property Name="CreditControlAreaCurrency" Type="Edm.String" MaxLength="5" sap:display-format="UpperCase" sap:label="Credit Control Area Currency" sap:semantics="currency-code"/>
+                <Property Name="HedgedAmount" Type="Edm.Decimal" Precision="23" Scale="3" sap:unit="CreditControlAreaCurrency" sap:variable-scale="true" sap:label="Hedged Amount" sap:quickinfo="Credit Management: Hedged Amount"/>
+                <Property Name="BaseUnit" Type="Edm.String" MaxLength="3" sap:label="Base Unit of Measure" sap:semantics="unit-of-measure"/>
+                <Property Name="Quantity" Type="Edm.Decimal" Precision="23" Scale="3" sap:unit="BaseUnit" sap:label="Quantity"/>
+                <Property Name="GoodsMovementEntryUnit" Type="Edm.String" MaxLength="3" sap:label="Unit of Entry" sap:quickinfo="Unit of entry" sap:semantics="unit-of-measure"/>
+                <Property Name="QuantityInEntryUnit" Type="Edm.Decimal" Precision="23" Scale="3" sap:unit="GoodsMovementEntryUnit" sap:label="Quantity in Entry Unit"/>
+                <Property Name="PurchasingDocumentPriceUnit" Type="Edm.String" MaxLength="3" sap:label="Purchasing Document Price Unit" sap:semantics="unit-of-measure"/>
+                <Property Name="PurchaseOrderQty" Type="Edm.Decimal" Precision="23" Scale="3" sap:unit="PurchasingDocumentPriceUnit" sap:label="Purchase Order Quantity"/>
+                <Property Name="MaterialPriceUnitQty" Type="Edm.Decimal" Precision="5" Scale="0" sap:unit="BaseUnit" sap:label="Material Price Unit Quantity"/>
+                <Property Name="NumberOfItems" Type="Edm.Decimal" Precision="12" Scale="0" sap:label="Number of Items"/>
+                <Property Name="EarmarkedFunds" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Earmarked Funds" sap:quickinfo="Document Number for Earmarked Funds"/>
+                <Property Name="EarmarkedFundsItem" Type="Edm.String" MaxLength="3" sap:display-format="NonNegative" sap:label="Document Item" sap:quickinfo="Earmarked Funds: Document Item"/>
+                <Property Name="IN_GSTPartner" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="GST Partner"/>
+                <Property Name="IN_GSTPlaceOfSupply" Type="Edm.String" MaxLength="3" sap:display-format="UpperCase" sap:label="Place of Supply"/>
+                <Property Name="IN_HSNOrSACCode" Type="Edm.String" MaxLength="16" sap:display-format="UpperCase" sap:label="HSN/SAC Code" sap:quickinfo="HSN or SAC Code"/>
+                <Property Name="OriglTaxBaseAmountInCoCodeCrcy" Type="Edm.Decimal" Precision="23" Scale="3" sap:unit="CompanyCodeCurrency" sap:variable-scale="true" sap:label="Original Tax Base Amount in CC Crcy" sap:quickinfo="Base Amount of Original Tax in Company Code Currency"/>
+                <Property Name="OriginalTaxBaseAmtInAddlCrcy1" Type="Edm.Decimal" Precision="23" Scale="3" sap:unit="CompanyCodeCurrency" sap:variable-scale="true" sap:label="Orig. Tax Base Amount in Add. Currency 1" sap:quickinfo="Base Amount of Original Tax in Additional Currency 1"/>
+                <Property Name="OriginalTaxBaseAmtInAddlCrcy2" Type="Edm.Decimal" Precision="23" Scale="3" sap:unit="CompanyCodeCurrency" sap:variable-scale="true" sap:label="Orig. Tax Base Amount in Add. Currency 2" sap:quickinfo="Base Amount of Original Tax in Additional Currency 2"/>
+                <Property Name="GLAccountAuthorizationGroup" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Authorization" sap:quickinfo="Authorization Group"/>
+                <Property Name="SupplierBasicAuthorizationGrp" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Authorization" sap:quickinfo="Authorization Group"/>
+                <Property Name="CustomerBasicAuthorizationGrp" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Authorization" sap:quickinfo="Authorization Group"/>
+                <Property Name="AcctgDocTypeAuthorizationGroup" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Authorization" sap:quickinfo="Authorization Group"/>
+                <Property Name="OrderType" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Order Type"/>
+                <Property Name="SalesOrderType" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Sales Document Type"/>
+                <Property Name="AssetClass" Type="Edm.String" MaxLength="8" sap:display-format="UpperCase" sap:label="Asset Class"/>
+            </EntityType>
+            <EntityType Name="SAP__Currency" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="CurrencyCode"/>
+                </Key>
+                <Property Name="CurrencyCode" Type="Edm.String" Nullable="false" MaxLength="5" sap:label="Currency" sap:semantics="currency-code"/>
+                <Property Name="ISOCode" Type="Edm.String" Nullable="false" MaxLength="3" sap:label="ISO Code"/>
+                <Property Name="Text" Type="Edm.String" Nullable="false" MaxLength="15" sap:label="Short Text"/>
+                <Property Name="DecimalPlaces" Type="Edm.Byte" Nullable="false" sap:label="Decimals"/>
+            </EntityType>
+            <EntityType Name="SAP__UnitOfMeasure" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="UnitCode"/>
+                </Key>
+                <Property Name="UnitCode" Type="Edm.String" Nullable="false" MaxLength="3" sap:label="Internal UoM" sap:semantics="unit-of-measure"/>
+                <Property Name="ISOCode" Type="Edm.String" Nullable="false" MaxLength="3" sap:label="ISO Code"/>
+                <Property Name="ExternalCode" Type="Edm.String" Nullable="false" MaxLength="3" sap:label="Commercial"/>
+                <Property Name="Text" Type="Edm.String" Nullable="false" MaxLength="30" sap:label="Meas. Unit Text"/>
+                <Property Name="DecimalPlaces" Type="Edm.Int16" sap:label="Decimal Places"/>
+            </EntityType>
+            <EntityType Name="SAP__DocumentDescription" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Id"/>
+                </Key>
+                <Property Name="Id" Type="Edm.Guid" Nullable="false" sap:label="UUID"/>
+                <Property Name="CreatedBy" Type="Edm.String" Nullable="false" MaxLength="12"/>
+                <Property Name="CreatedAt" Type="Edm.DateTime" Nullable="false" Precision="0" sap:label="Time Stamp"/>
+                <Property Name="FileName" Type="Edm.String" Nullable="false" MaxLength="256"/>
+                <Property Name="Title" Type="Edm.String" Nullable="false" MaxLength="256"/>
+                <NavigationProperty Name="Format" Relationship="cds_zi_sd_jv_print.to_format" FromRole="FromRole_to_format" ToRole="ToRole_to_format"/>
+                <NavigationProperty Name="TableColumns" Relationship="cds_zi_sd_jv_print.to_tablecolumns" FromRole="FromRole_to_tablecolumns" ToRole="ToRole_to_tablecolumns"/>
+                <NavigationProperty Name="CoverPage" Relationship="cds_zi_sd_jv_print.to_coverpage" FromRole="FromRole_to_coverpage" ToRole="ToRole_to_coverpage"/>
+                <NavigationProperty Name="Signature" Relationship="cds_zi_sd_jv_print.to_signature" FromRole="FromRole_to_signature" ToRole="ToRole_to_signature"/>
+                <NavigationProperty Name="PDFStandard" Relationship="cds_zi_sd_jv_print.to_pdfstandard" FromRole="FromRole_to_pdfstandard" ToRole="ToRole_to_pdfstandard"/>
+                <NavigationProperty Name="Hierarchy" Relationship="cds_zi_sd_jv_print.to_Hierarchy" FromRole="FromRole_to_Hierarchy" ToRole="ToRole_to_Hierarchy"/>
+                <NavigationProperty Name="Header" Relationship="cds_zi_sd_jv_print.to_header" FromRole="FromRole_to_header" ToRole="ToRole_to_header"/>
+                <NavigationProperty Name="Footer" Relationship="cds_zi_sd_jv_print.to_Footer" FromRole="FromRole_to_Footer" ToRole="ToRole_to_Footer"/>
+            </EntityType>
+            <EntityType Name="SAP__Format" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Id"/>
+                </Key>
+                <Property Name="FitToPage" Type="cds_zi_sd_jv_print.SAP__FitToPage" Nullable="false"/>
+                <Property Name="Id" Type="Edm.Guid" Nullable="false" sap:label="UUID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="FontSize" Type="Edm.Int32" Nullable="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Orientation" Type="Edm.String" Nullable="false" MaxLength="10" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="PaperSize" Type="Edm.String" Nullable="false" MaxLength="10" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="BorderSize" Type="Edm.Int32" Nullable="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="MarginSize" Type="Edm.Int32" Nullable="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="FontName" Type="Edm.String" Nullable="false" MaxLength="255" sap:label="Font Name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Padding" Type="Edm.Int32" Nullable="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="SAP__PDFStandard" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Id"/>
+                </Key>
+                <Property Name="Id" Type="Edm.Guid" Nullable="false" sap:label="UUID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="UsePDFAConformance" Type="Edm.Boolean" Nullable="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="DoEnableAccessibility" Type="Edm.Boolean" Nullable="false" sap:label="Indicator" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="SAP__TableColumns" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Id"/>
+                    <PropertyRef Name="Name"/>
+                    <PropertyRef Name="Header"/>
+                </Key>
+                <Property Name="Format" Type="cds_zi_sd_jv_print.SAP__TableColumnFormat" Nullable="false"/>
+                <Property Name="Id" Type="Edm.Guid" Nullable="false" sap:label="UUID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Name" Type="Edm.String" Nullable="false" MaxLength="256" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Header" Type="Edm.String" Nullable="false" MaxLength="256" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="HorizontalAlignment" Type="Edm.String" Nullable="false" MaxLength="10" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="SAP__CoverPage" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Title"/>
+                    <PropertyRef Name="Id"/>
+                    <PropertyRef Name="Name"/>
+                </Key>
+                <Property Name="Title" Type="Edm.String" Nullable="false" MaxLength="256" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Id" Type="Edm.Guid" Nullable="false" sap:label="UUID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Name" Type="Edm.String" Nullable="false" MaxLength="256" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Value" Type="Edm.String" Nullable="false" MaxLength="256" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="SAP__Signature" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Id"/>
+                </Key>
+                <Property Name="Id" Type="Edm.Guid" Nullable="false" sap:label="UUID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="DoSign" Type="Edm.Boolean" Nullable="false" sap:label="Indicator" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Reason" Type="Edm.String" Nullable="false" MaxLength="256" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="SAP__Hierarchy" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Id"/>
+                </Key>
+                <Property Name="Id" Type="Edm.Guid" Nullable="false" sap:label="UUID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="DistanceFromRootElement" Type="Edm.String" Nullable="false" MaxLength="256" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="DrillStateElement" Type="Edm.String" Nullable="false" MaxLength="256" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="SAP__PDFHeader" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Id"/>
+                </Key>
+                <Property Name="Right" Type="cds_zi_sd_jv_print.SAP__HeaderFooterField" Nullable="false"/>
+                <Property Name="Left" Type="cds_zi_sd_jv_print.SAP__HeaderFooterField" Nullable="false"/>
+                <Property Name="Center" Type="cds_zi_sd_jv_print.SAP__HeaderFooterField" Nullable="false"/>
+                <Property Name="Id" Type="Edm.Guid" Nullable="false" sap:label="UUID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="SAP__PDFFooter" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Id"/>
+                </Key>
+                <Property Name="Right" Type="cds_zi_sd_jv_print.SAP__HeaderFooterField" Nullable="false"/>
+                <Property Name="Left" Type="cds_zi_sd_jv_print.SAP__HeaderFooterField" Nullable="false"/>
+                <Property Name="Center" Type="cds_zi_sd_jv_print.SAP__HeaderFooterField" Nullable="false"/>
+                <Property Name="Id" Type="Edm.Guid" Nullable="false" sap:label="UUID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="SAP__ValueHelp" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="VALUEHELP"/>
+                </Key>
+                <Property Name="VALUEHELP" Type="Edm.String" Nullable="false"/>
+                <Property Name="FIELD_VALUE" Type="Edm.String" Nullable="false" MaxLength="10"/>
+                <Property Name="DESCRIPTION" Type="Edm.String"/>
+            </EntityType>
+            <ComplexType Name="SAP__FitToPage">
+                <Property Name="ErrorRecoveryBehavior" Type="Edm.String" Nullable="false" MaxLength="8" sap:label="Error behavior" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="IsEnabled" Type="Edm.Boolean" Nullable="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="MinimumFontSize" Type="Edm.Int32" Nullable="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </ComplexType>
+            <ComplexType Name="SAP__TableColumnFormat">
+                <Property Name="DisplayFormat" Type="Edm.String" Nullable="false" MaxLength="40" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="IANATimezone" Type="Edm.String" Nullable="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="IANATimezoneProperty" Type="Edm.String" Nullable="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </ComplexType>
+            <ComplexType Name="SAP__HeaderFooterField">
+                <Property Name="Type" Type="Edm.String" Nullable="false" MaxLength="256" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </ComplexType>
+            <Association Name="to_format" sap:content-version="1">
+                <End Type="cds_zi_sd_jv_print.SAP__DocumentDescription" Multiplicity="1" Role="FromRole_to_format"/>
+                <End Type="cds_zi_sd_jv_print.SAP__Format" Multiplicity="1" Role="ToRole_to_format"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_to_format">
+                        <PropertyRef Name="Id"/>
+                    </Principal>
+                    <Dependent Role="ToRole_to_format">
+                        <PropertyRef Name="Id"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="to_tablecolumns" sap:content-version="1">
+                <End Type="cds_zi_sd_jv_print.SAP__DocumentDescription" Multiplicity="1" Role="FromRole_to_tablecolumns"/>
+                <End Type="cds_zi_sd_jv_print.SAP__TableColumns" Multiplicity="*" Role="ToRole_to_tablecolumns"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_to_tablecolumns">
+                        <PropertyRef Name="Id"/>
+                    </Principal>
+                    <Dependent Role="ToRole_to_tablecolumns">
+                        <PropertyRef Name="Id"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="to_coverpage" sap:content-version="1">
+                <End Type="cds_zi_sd_jv_print.SAP__DocumentDescription" Multiplicity="1" Role="FromRole_to_coverpage"/>
+                <End Type="cds_zi_sd_jv_print.SAP__CoverPage" Multiplicity="*" Role="ToRole_to_coverpage"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_to_coverpage">
+                        <PropertyRef Name="Id"/>
+                    </Principal>
+                    <Dependent Role="ToRole_to_coverpage">
+                        <PropertyRef Name="Id"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="to_signature" sap:content-version="1">
+                <End Type="cds_zi_sd_jv_print.SAP__DocumentDescription" Multiplicity="1" Role="FromRole_to_signature"/>
+                <End Type="cds_zi_sd_jv_print.SAP__Signature" Multiplicity="1" Role="ToRole_to_signature"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_to_signature">
+                        <PropertyRef Name="Id"/>
+                    </Principal>
+                    <Dependent Role="ToRole_to_signature">
+                        <PropertyRef Name="Id"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="to_pdfstandard" sap:content-version="1">
+                <End Type="cds_zi_sd_jv_print.SAP__DocumentDescription" Multiplicity="1" Role="FromRole_to_pdfstandard"/>
+                <End Type="cds_zi_sd_jv_print.SAP__PDFStandard" Multiplicity="1" Role="ToRole_to_pdfstandard"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_to_pdfstandard">
+                        <PropertyRef Name="Id"/>
+                    </Principal>
+                    <Dependent Role="ToRole_to_pdfstandard">
+                        <PropertyRef Name="Id"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="to_Hierarchy" sap:content-version="1">
+                <End Type="cds_zi_sd_jv_print.SAP__DocumentDescription" Multiplicity="1" Role="FromRole_to_Hierarchy"/>
+                <End Type="cds_zi_sd_jv_print.SAP__Hierarchy" Multiplicity="1" Role="ToRole_to_Hierarchy"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_to_Hierarchy">
+                        <PropertyRef Name="Id"/>
+                    </Principal>
+                    <Dependent Role="ToRole_to_Hierarchy">
+                        <PropertyRef Name="Id"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="to_header" sap:content-version="1">
+                <End Type="cds_zi_sd_jv_print.SAP__DocumentDescription" Multiplicity="1" Role="FromRole_to_header"/>
+                <End Type="cds_zi_sd_jv_print.SAP__PDFHeader" Multiplicity="1" Role="ToRole_to_header"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_to_header">
+                        <PropertyRef Name="Id"/>
+                    </Principal>
+                    <Dependent Role="ToRole_to_header">
+                        <PropertyRef Name="Id"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="to_Footer" sap:content-version="1">
+                <End Type="cds_zi_sd_jv_print.SAP__DocumentDescription" Multiplicity="1" Role="FromRole_to_Footer"/>
+                <End Type="cds_zi_sd_jv_print.SAP__PDFFooter" Multiplicity="1" Role="ToRole_to_Footer"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_to_Footer">
+                        <PropertyRef Name="Id"/>
+                    </Principal>
+                    <Dependent Role="ToRole_to_Footer">
+                        <PropertyRef Name="Id"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <EntityContainer Name="cds_zi_sd_jv_print_Entities" m:IsDefaultEntityContainer="true" sap:message-scope-supported="true" sap:supported-formats="atom json xlsx pdf">
+                <EntitySet Name="I_AcctgServiceDocumentItemVH" EntityType="cds_zi_sd_jv_print.I_AcctgServiceDocumentItemVHType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
+                <EntitySet Name="I_AcctgServiceDocumentTypeVH" EntityType="cds_zi_sd_jv_print.I_AcctgServiceDocumentTypeVHType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
+                <EntitySet Name="I_AcctgServiceDocumentVH" EntityType="cds_zi_sd_jv_print.I_AcctgServiceDocumentVHType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
+                <EntitySet Name="ZCDS_RT_JV_PRINT" EntityType="cds_zi_sd_jv_print.ZCDS_RT_JV_PRINTType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <EntitySet Name="SAP__FormatSet" EntityType="cds_zi_sd_jv_print.SAP__Format" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="SAP__PDFStandardSet" EntityType="cds_zi_sd_jv_print.SAP__PDFStandard" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="SAP__TableColumnsSet" EntityType="cds_zi_sd_jv_print.SAP__TableColumns" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="SAP__CoverPageSet" EntityType="cds_zi_sd_jv_print.SAP__CoverPage" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="SAP__SignatureSet" EntityType="cds_zi_sd_jv_print.SAP__Signature" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="SAP__HierarchySet" EntityType="cds_zi_sd_jv_print.SAP__Hierarchy" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="SAP__PDFHeaderSet" EntityType="cds_zi_sd_jv_print.SAP__PDFHeader" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="SAP__PDFFooterSet" EntityType="cds_zi_sd_jv_print.SAP__PDFFooter" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="SAP__ValueHelpSet" EntityType="cds_zi_sd_jv_print.SAP__ValueHelp" sap:content-version="1"/>
+                <EntitySet Name="SAP__Currencies" EntityType="cds_zi_sd_jv_print.SAP__Currency" sap:content-version="1"/>
+                <EntitySet Name="SAP__UnitsOfMeasure" EntityType="cds_zi_sd_jv_print.SAP__UnitOfMeasure" sap:content-version="1"/>
+                <EntitySet Name="SAP__MyDocumentDescriptions" EntityType="cds_zi_sd_jv_print.SAP__DocumentDescription" sap:content-version="1"/>
+                <AssociationSet Name="to_HierarchySet" Association="cds_zi_sd_jv_print.to_Hierarchy" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="SAP__MyDocumentDescriptions" Role="FromRole_to_Hierarchy"/>
+                    <End EntitySet="SAP__HierarchySet" Role="ToRole_to_Hierarchy"/>
+                </AssociationSet>
+                <AssociationSet Name="to_tablecolumnsSet" Association="cds_zi_sd_jv_print.to_tablecolumns" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="SAP__MyDocumentDescriptions" Role="FromRole_to_tablecolumns"/>
+                    <End EntitySet="SAP__TableColumnsSet" Role="ToRole_to_tablecolumns"/>
+                </AssociationSet>
+                <AssociationSet Name="to_headerSet" Association="cds_zi_sd_jv_print.to_header" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="SAP__MyDocumentDescriptions" Role="FromRole_to_header"/>
+                    <End EntitySet="SAP__PDFHeaderSet" Role="ToRole_to_header"/>
+                </AssociationSet>
+                <AssociationSet Name="to_FooterSet" Association="cds_zi_sd_jv_print.to_Footer" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="SAP__MyDocumentDescriptions" Role="FromRole_to_Footer"/>
+                    <End EntitySet="SAP__PDFFooterSet" Role="ToRole_to_Footer"/>
+                </AssociationSet>
+                <AssociationSet Name="to_formatSet" Association="cds_zi_sd_jv_print.to_format" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="SAP__MyDocumentDescriptions" Role="FromRole_to_format"/>
+                    <End EntitySet="SAP__FormatSet" Role="ToRole_to_format"/>
+                </AssociationSet>
+                <AssociationSet Name="to_pdfstandardSet" Association="cds_zi_sd_jv_print.to_pdfstandard" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="SAP__MyDocumentDescriptions" Role="FromRole_to_pdfstandard"/>
+                    <End EntitySet="SAP__PDFStandardSet" Role="ToRole_to_pdfstandard"/>
+                </AssociationSet>
+                <AssociationSet Name="to_signatureSet" Association="cds_zi_sd_jv_print.to_signature" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="SAP__MyDocumentDescriptions" Role="FromRole_to_signature"/>
+                    <End EntitySet="SAP__SignatureSet" Role="ToRole_to_signature"/>
+                </AssociationSet>
+                <AssociationSet Name="to_coverpageSet" Association="cds_zi_sd_jv_print.to_coverpage" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="SAP__MyDocumentDescriptions" Role="FromRole_to_coverpage"/>
+                    <End EntitySet="SAP__CoverPageSet" Role="ToRole_to_coverpage"/>
+                </AssociationSet>
+                <FunctionImport Name="JV_PRINT" ReturnType="cds_zi_sd_jv_print.ZCDS_RT_JV_PRINTType" EntitySet="ZCDS_RT_JV_PRINT" m:HttpMethod="POST" sap:action-for="cds_zi_sd_jv_print.ZCDS_RT_JV_PRINTType" sap:applicable-path="Jv_print_ac">
+                    <Parameter Name="CompanyCode" Type="Edm.String" Mode="In" MaxLength="4" sap:label="Company Code"/>
+                    <Parameter Name="AccountingDocument" Type="Edm.String" Mode="In" MaxLength="10" sap:label="Journal Entry"/>
+                    <Parameter Name="FiscalYear" Type="Edm.String" Mode="In" MaxLength="4" sap:label="Fiscal Year"/>
+                    <Parameter Name="AccountingDocumentItem" Type="Edm.String" Mode="In" MaxLength="3" sap:label="Posting View Item"/>
+                </FunctionImport>
+            </EntityContainer>
+            <Annotation Term="Core.SchemaVersion" String="1.0.0" xmlns="http://docs.oasis-open.org/odata/ns/edm"/>
+            <Annotations Target="cds_zi_sd_jv_print.ZCDS_RT_JV_PRINTType/ServiceDocumentType" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="Label" String="Service Doc. Type"/>
+                        <PropertyValue Property="CollectionPath" String="I_AcctgServiceDocumentTypeVH"/>
+                        <PropertyValue Property="SearchSupported" Bool="true"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="ServiceDocumentType"/>
+                                    <PropertyValue Property="ValueListProperty" String="ServiceDocumentType"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="ServiceDocumentTypeName"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="cds_zi_sd_jv_print.ZCDS_RT_JV_PRINTType/ServiceDocument" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="Label" String="Service Document"/>
+                        <PropertyValue Property="CollectionPath" String="I_AcctgServiceDocumentVH"/>
+                        <PropertyValue Property="SearchSupported" Bool="true"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="ServiceDocument"/>
+                                    <PropertyValue Property="ValueListProperty" String="ServiceDocument"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="ServiceDocumentType"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="ServiceDocumentDescription"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="ServiceDocumentTypeName"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="CompanyCode"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="ProfitCenter"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="cds_zi_sd_jv_print.ZCDS_RT_JV_PRINTType/ServiceDocumentItem" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="Label" String="Service Doc. Item"/>
+                        <PropertyValue Property="CollectionPath" String="I_AcctgServiceDocumentItemVH"/>
+                        <PropertyValue Property="SearchSupported" Bool="true"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="ServiceDocumentItem"/>
+                                    <PropertyValue Property="ValueListProperty" String="ServiceDocumentItem"/>
+                                    <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="ServiceDocumentType"/>
+                                    <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="ServiceDocument"/>
+                                    <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="CompanyCode"/>
+                                    <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="ProfitCenter"/>
+                                    <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="ServiceDocumentTypeName"/>
+                                    <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="ServiceDocumentDescription"/>
+                                    <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="ServiceDocItemCategory"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="ServiceDocItemCategoryName"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="ServiceDocumentItemDescription"/>
+                                    <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="OriginallyRequestedProduct"/>
+                                    <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="ProductName"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="PostingDate"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="cds_zi_sd_jv_print.cds_zi_sd_jv_print_Entities" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.ApplyMultiUnitBehaviorForSortingAndFiltering" Bool="true"/>
+            </Annotations>
+            <Annotations Target="cds_zi_sd_jv_print.cds_zi_sd_jv_print_Entities/I_AcctgServiceDocumentItemVH" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Capabilities.DeleteRestrictions">
+                    <Record>
+                        <PropertyValue Property="Deletable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.InsertRestrictions">
+                    <Record>
+                        <PropertyValue Property="Insertable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.UpdateRestrictions">
+                    <Record>
+                        <PropertyValue Property="Updatable" Bool="false"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="cds_zi_sd_jv_print.cds_zi_sd_jv_print_Entities/I_AcctgServiceDocumentTypeVH" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Capabilities.DeleteRestrictions">
+                    <Record>
+                        <PropertyValue Property="Deletable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.InsertRestrictions">
+                    <Record>
+                        <PropertyValue Property="Insertable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.UpdateRestrictions">
+                    <Record>
+                        <PropertyValue Property="Updatable" Bool="false"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="cds_zi_sd_jv_print.cds_zi_sd_jv_print_Entities/I_AcctgServiceDocumentVH" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Capabilities.DeleteRestrictions">
+                    <Record>
+                        <PropertyValue Property="Deletable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.InsertRestrictions">
+                    <Record>
+                        <PropertyValue Property="Insertable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.UpdateRestrictions">
+                    <Record>
+                        <PropertyValue Property="Updatable" Bool="false"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="cds_zi_sd_jv_print.cds_zi_sd_jv_print_Entities/ZCDS_RT_JV_PRINT" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Capabilities.DeleteRestrictions">
+                    <Record>
+                        <PropertyValue Property="Deletable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.FilterRestrictions">
+                    <Record>
+                        <PropertyValue Property="NonFilterableProperties">
+                            <Collection>
+                                <PropertyPath>Jv_print_ac</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.InsertRestrictions">
+                    <Record>
+                        <PropertyValue Property="RequiredProperties">
+                            <Collection>
+                                <PropertyPath>AccountingDocument</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="Insertable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__core.OptimisticConcurrency">
+                    <Collection/>
+                </Annotation>
+                <Annotation Term="Capabilities.SortRestrictions">
+                    <Record>
+                        <PropertyValue Property="NonSortableProperties">
+                            <Collection>
+                                <PropertyPath>Jv_print_ac</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.UpdateRestrictions">
+                    <Record>
+                        <PropertyValue Property="Updatable" Bool="false"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="cds_zi_sd_jv_print.ZCDS_RT_JV_PRINTType/AccountingDocument" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__core.Immutable"/>
+            </Annotations>
+            <Annotations Target="cds_zi_sd_jv_print.I_AcctgServiceDocumentItemVHType" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.SemanticKey">
+                    <Collection>
+                        <PropertyPath>ServiceDocumentItem</PropertyPath>
+                        <PropertyPath>ServiceDocument</PropertyPath>
+                        <PropertyPath>ServiceDocumentType</PropertyPath>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="cds_zi_sd_jv_print.I_AcctgServiceDocumentTypeVHType" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.SemanticKey">
+                    <Collection>
+                        <PropertyPath>ServiceDocumentType</PropertyPath>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="cds_zi_sd_jv_print.I_AcctgServiceDocumentVHType" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.SemanticKey">
+                    <Collection>
+                        <PropertyPath>ServiceDocumentType</PropertyPath>
+                        <PropertyPath>ServiceDocument</PropertyPath>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="cds_zi_sd_jv_print.cds_zi_sd_jv_print_Entities" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Org.OData.Capabilities.V1.BatchSupport">
+                    <Record Type="Org.OData.Capabilities.V1.BatchSupportType">
+                        <PropertyValue Property="ReferencesAcrossChangeSetsSupported" Bool="true"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__CodeList.CurrencyCodes">
+                    <Record>
+                        <PropertyValue Property="Url" String="./$metadata"/>
+                        <PropertyValue Property="CollectionPath" String="SAP__Currencies"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__CodeList.UnitsOfMeasure">
+                    <Record>
+                        <PropertyValue Property="Url" String="./$metadata"/>
+                        <PropertyValue Property="CollectionPath" String="SAP__UnitsOfMeasure"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__PDF.Features">
+                    <Record>
+                        <PropertyValue Property="DocumentDescriptionReference" String="./$metadata"/>
+                        <PropertyValue Property="DocumentDescriptionCollection" String="SAP__MyDocumentDescriptions"/>
+                        <PropertyValue Property="ArchiveFormat" Bool="true"/>
+                        <PropertyValue Property="CoverPage" Bool="true"/>
+                        <PropertyValue Property="Signature" Bool="true"/>
+                        <PropertyValue Property="FitToPage" Bool="true"/>
+                        <PropertyValue Property="FontName" Bool="true"/>
+                        <PropertyValue Property="FontSize" Bool="true"/>
+                        <PropertyValue Property="Margin" Bool="true"/>
+                        <PropertyValue Property="Border" Bool="true"/>
+                        <PropertyValue Property="Padding" Bool="true"/>
+                        <PropertyValue Property="HeaderFooter" Bool="true"/>
+                        <PropertyValue Property="IANATimezoneFormat" Bool="true"/>
+                        <PropertyValue Property="ResultSizeDefault" Int="20000"/>
+                        <PropertyValue Property="ResultSizeMaximum" Int="20000"/>
+                        <PropertyValue Property="Treeview" Bool="true"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__CodeList.SAP__DocumentDescription">
+                    <Record>
+                        <PropertyValue Property="Url" String="./$metadata"/>
+                        <PropertyValue Property="CollectionPath" String="SAP__MyDocumentDescriptions"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="cds_zi_sd_jv_print.SAP__Currency/CurrencyCode" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.Text" Path="Text"/>
+                <Annotation Term="SAP__common.UnitSpecificScale" Path="DecimalPlaces"/>
+                <Annotation Term="SAP__CodeList.StandardCode" Path="ISOCode"/>
+            </Annotations>
+            <Annotations Target="cds_zi_sd_jv_print.SAP__UnitOfMeasure/UnitCode" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.Text" Path="Text"/>
+                <Annotation Term="SAP__common.UnitSpecificScale" Path="DecimalPlaces"/>
+                <Annotation Term="SAP__CodeList.StandardCode" Path="ISOCode"/>
+                <Annotation Term="SAP__CodeList.ExternalCode" Path="ExternalCode"/>
+            </Annotations>
+            <Annotations Target="cds_zi_sd_jv_print.SAP__UnitOfMeasure" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__core.AlternateKeys">
+                    <Collection>
+                        <Record>
+                            <PropertyValue Property="Key">
+                                <Collection>
+                                    <Record>
+                                        <PropertyValue Property="Name" Path="ExternalCode"/>
+                                        <PropertyValue Property="Alias" String="ExternalCode"/>
+                                    </Record>
+                                </Collection>
+                            </PropertyValue>
+                        </Record>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="cds_zi_sd_jv_print.SAP__DocumentDescription/CreatedBy" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__core.Computed"/>
+            </Annotations>
+            <Annotations Target="cds_zi_sd_jv_print.SAP__DocumentDescription/CreatedAt" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__core.Computed"/>
+            </Annotations>
+            <Annotations Target="cds_zi_sd_jv_print.SAP__DocumentDescription" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__capabilties.InsertRestrictions">
+                    <Record>
+                        <PropertyValue Property="Insertable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilties.UpdateRestrictions">
+                    <Record>
+                        <PropertyValue Property="Updatable" Bool="false"/>
+                        <PropertyValue Property="QueryOptions">
+                            <Record>
+                                <PropertyValue Property="SelectSupported" Bool="true"/>
+                            </Record>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilties.DeleteRestrictions">
+                    <Record>
+                        <PropertyValue Property="Deletable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilties.FilterRestrictions">
+                    <Record>
+                        <PropertyValue Property="FilterExpressionRestrictions">
+                            <Collection>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="Format/Orientation"/>
+                                    <PropertyValue Property="AllowedExpressions" String="Multivalue"/>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="Format/PaperSize"/>
+                                    <PropertyValue Property="AllowedExpressions" String="Multivalue"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="cds_zi_sd_jv_print.SAP__Format/FitToPage/ErrorRecoveryBehavior" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.ValueListReferences">
+                    <Record>
+                        <PropertyValue Property="Url" String="./$metadata"/>
+                        <PropertyValue Property="CollectionPath" String="../../../../SAP__ValueHelpSet?$filter=VALUEHELP%20eq%20%27ErrorRecoveryBehaviour%27"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__common.ValueListWithFixedValues"/>
+            </Annotations>
+            <Annotations Target="cds_zi_sd_jv_print.SAP__Format/FontName" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.ValueListReferences">
+                    <Record>
+                        <PropertyValue Property="Url" String="./$metadata"/>
+                        <PropertyValue Property="CollectionPath" String="SAP__ValueHelpSet?$filter=VALUEHELP%20eq%20%27FontName%27"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__common.ValueListWithFixedValues"/>
+            </Annotations>
+            <Annotations Target="cds_zi_sd_jv_print.SAP__Format/PaperSize" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.ValueListReferences">
+                    <Record>
+                        <PropertyValue Property="Url" String="./$metadata"/>
+                        <PropertyValue Property="CollectionPath" String="SAP__ValueHelpSet?$filter=VALUEHELP%20eq%20%27PaperSize%27"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__common.ValueListWithFixedValues"/>
+            </Annotations>
+            <Annotations Target="cds_zi_sd_jv_print.SAP__PDFHeader/Left" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.ValueListReferences">
+                    <Record>
+                        <PropertyValue Property="Url" String="./$metadata"/>
+                        <PropertyValue Property="CollectionPath" String="SAP__ValueHelpSet?$filter=VALUEHELP%20eq%20%27HeaderFooter%27"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__common.ValueListWithFixedValues"/>
+            </Annotations>
+            <Annotations Target="cds_zi_sd_jv_print.SAP__PDFHeader/Right" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.ValueListReferences">
+                    <Record>
+                        <PropertyValue Property="Url" String="./$metadata"/>
+                        <PropertyValue Property="CollectionPath" String="SAP__ValueHelpSet?$filter=VALUEHELP%20eq%20%27HeaderFooter%27"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__common.ValueListWithFixedValues"/>
+            </Annotations>
+            <Annotations Target="cds_zi_sd_jv_print.SAP__PDFHeader/Center" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.ValueListReferences">
+                    <Record>
+                        <PropertyValue Property="Url" String="./$metadata"/>
+                        <PropertyValue Property="CollectionPath" String="SAP__ValueHelpSet?$filter=VALUEHELP%20eq%20%27HeaderFooter%27"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__common.ValueListWithFixedValues"/>
+            </Annotations>
+            <Annotations Target="cds_zi_sd_jv_print.SAP__PDFFooter/Left" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.ValueListReferences">
+                    <Record>
+                        <PropertyValue Property="Url" String="./$metadata"/>
+                        <PropertyValue Property="CollectionPath" String="SAP__ValueHelpSet?$filter=VALUEHELP%20eq%20%27HeaderFooter%27"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__common.ValueListWithFixedValues"/>
+            </Annotations>
+            <Annotations Target="cds_zi_sd_jv_print.SAP__PDFFooter/Right" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.ValueListReferences">
+                    <Record>
+                        <PropertyValue Property="Url" String="./$metadata"/>
+                        <PropertyValue Property="CollectionPath" String="SAP__ValueHelpSet?$filter=VALUEHELP%20eq%20%27HeaderFooter%27"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__common.ValueListWithFixedValues"/>
+            </Annotations>
+            <Annotations Target="cds_zi_sd_jv_print.SAP__PDFFooter/Center" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.ValueListReferences">
+                    <Record>
+                        <PropertyValue Property="Url" String="./$metadata"/>
+                        <PropertyValue Property="CollectionPath" String="SAP__ValueHelpSet?$filter=VALUEHELP%20eq%20%27HeaderFooter%27"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__common.ValueListWithFixedValues"/>
+            </Annotations>
+            <Annotations Target="cds_zi_sd_jv_print.SAP__TableColumns/Format/Display_Format" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.ValueListReferences">
+                    <Record>
+                        <PropertyValue Property="Url" String="./$metadata"/>
+                        <PropertyValue Property="CollectionPath" String="SAP__ValueHelpSet?$filter=VALUEHELP%20eq%20%27TableColumnFormat%27"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__common.ValueListWithFixedValues"/>
+            </Annotations>
+            <Annotations Target="cds_zi_sd_jv_print.SAP__Format/Orientation" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.ValueListReferences">
+                    <Record>
+                        <PropertyValue Property="Url" String="./$metadata"/>
+                        <PropertyValue Property="CollectionPath" String="SAP__ValueHelpSet?$filter=VALUEHELP%20eq%20%27FontName%27"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__common.ValueListWithFixedValues"/>
+            </Annotations>
+            <Annotations Target="cds_zi_sd_jv_print.SAP__TableColumns/HorizontalAlignment" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.ValueListReferences">
+                    <Record>
+                        <PropertyValue Property="Url" String="./$metadata"/>
+                        <PropertyValue Property="CollectionPath" String="SAP__ValueHelpSet?$filter=VALUEHELP%20eq%20%27HorizontalAlignment%27"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__common.ValueListWithFixedValues"/>
+            </Annotations>
+            <atom:link rel="self" href="https://my411037-api.s4hana.cloud.sap/sap/opu/odata/sap/ZI_SB_JV_PRINT_NEW/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+            <atom:link rel="latest-version" href="https://my411037-api.s4hana.cloud.sap/sap/opu/odata/sap/ZI_SB_JV_PRINT_NEW/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

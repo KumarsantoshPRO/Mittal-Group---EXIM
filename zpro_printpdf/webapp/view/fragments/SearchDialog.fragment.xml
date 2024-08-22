@@ -1,0 +1,31 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+>
+    <Dialog
+        id="_IDGenDialogSearch"
+        draggable="true"
+        titleAlignment="Center"
+    >
+        <customHeader>
+            <Bar>
+                <contentMiddle>
+                    <core:Icon src="sap-icon://search" />
+                    <Title text="Search" />
+                </contentMiddle>
+
+                <contentRight>
+                    <Button
+                        icon="sap-icon://decline"
+                        press="onSearchClosePress"
+                    />
+                </contentRight>
+            </Bar>
+        </customHeader>
+        <Input
+        id="idInpDialogSearchAny"
+            placeholder="Search any keyword..."
+            submit="onInputSearchAnySubmit"
+        />
+    </Dialog>
+</core:FragmentDefinition>

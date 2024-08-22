@@ -1,0 +1,207 @@
+<mvc:View
+    controllerName="zmc.exim.pro.sk.zproprintpdf.zproprintpdf.controller.Main"
+    height="100%"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:fb="sap.ui.comp.filterbar"
+    xmlns:svm="sap.ui.comp.smartvariants"
+    xmlns:l="sap.ui.layout"
+    xmlns:form="sap.ui.layout.form"
+    xmlns:tcm="sap.m.table.columnmenu"
+>
+    <f:DynamicPage
+        showFooter="false"
+        fitContent="true"
+        headerExpanded="true"
+    >
+        <f:title>
+            <f:DynamicPageTitle stateChange="onDPTStateChange">
+                <f:heading>
+                    <Title
+                        text="Filter Bar"
+                        textAlign="Center"
+                        titleStyle="H3"
+                    />
+                </f:heading>
+                <f:actions>
+                    <Button
+                        id="idBtnDPTFilterGo"
+                        text="Search"
+                        press="onShowDetails"
+                        type="Emphasized"
+                        icon="sap-icon://search"
+                    />
+                    <Button
+                        id="idBtnDPTFilterClear"
+                        text="Clear"
+                        press="onClearFilters"
+                        type="Attention"
+                        icon="sap-icon://clear-filter"
+                    />
+                </f:actions>
+            </f:DynamicPageTitle>
+        </f:title>
+
+        <f:header>
+            <f:DynamicPageHeader>
+                <f:content>
+                    <form:SimpleForm
+                        editable="true"
+                        layout="ColumnLayout"
+                        columnsL="3"
+                        columnsM="3"
+                        columnsXL="3"
+                    >
+                        <form:content>
+                            <Label text="Document Number" />
+                            <Input
+                                id="idInpF4_DocumentNumber"
+                                value=""
+                                valueHelpIconSrc="sap-icon://value-help"
+                                showValueHelp="true"
+                                autocomplete="true"
+                                placeholder="Document Number"
+                            />
+                            <Label text="Company Name" />
+                            <Input
+                                id="idInpF4_CompanyName"
+                                value=""
+                                valueHelpIconSrc="sap-icon://value-help"
+                                showValueHelp="true"
+                                autocomplete="true"
+                                placeholder="Company Name"
+                            />
+                            <Label text="Document Type" />
+                            <Input
+                                id="idInpF4_DocumentType"
+                                value=""
+                                valueHelpIconSrc="sap-icon://value-help"
+                                showValueHelp="true"
+                                autocomplete="true"
+                                placeholder="Document Type"
+                            />
+                            <Label text="Fiscal Year" />
+                            <DatePicker
+                                id="idDP_FiscalYear"
+                                displayFormat="yyyy"
+                                valueFormat="yyyy"
+                                placeholder="Fiscal Year"
+                            />
+                            <Label text="Date" />
+                            <DateRangeSelection
+                                id="idDRS_Date"
+                                value=""
+                                placeholder="Date Range"
+                            />
+                        </form:content>
+                    </form:SimpleForm>
+                </f:content>
+            </f:DynamicPageHeader>
+        </f:header>
+
+        <f:content>
+            <!-- items="{JVPrintModel>/results}" 
+            items="{/ZCDS_RT_JV_PRINT}"-->
+            <Table
+                id="idTableDocumentDetails"
+                items="{/ZCDS_RT_JV_PRINT}"
+                
+                sticky="ColumnHeaders,HeaderToolbar"
+                growing="true"
+               
+            >
+                <headerToolbar>
+                    <OverflowToolbar>
+                        <Title
+                            text="Document List"
+                            level="H2"
+                        />
+                        <Button
+                            tooltip="Search any key word"
+                            icon="sap-icon://search"
+                            press="handleSeacrch"
+                        />
+                        <Button
+                            tooltip="Mutiselect"
+                            icon="sap-icon://multiselect-none"
+                            press="handleMultiSelectButtonPressed"
+                        />
+                        <Button
+                            tooltip="Sort"
+                            icon="sap-icon://sort"
+                            press="handleSortButtonPressed"
+                        />
+                        <Button
+                            tooltip="Filter"
+                            icon="sap-icon://filter"
+                            press="handleFilterButtonPressed"
+                        />
+                        <Button
+                            tooltip="Group"
+                            icon="sap-icon://group-2"
+                            press="handleGroupButtonPressed"
+                        />
+                        <ToolbarSpacer />
+                        <Button
+                            id="idBtnShowDocItems"
+                            visible="false"
+                            text="Show Document items"
+                            press="onShowDocumentItems"
+                            type="Emphasized"
+                            icon="sap-icon://popup-window"
+                        />
+                        <Button
+                            id="idBtnClearSelection"
+                            visible="false"
+                            text="Clear Selections"
+                            press="onClearSelection"
+                            type="Attention"
+                            icon="sap-icon://clear-all"
+                        />
+                    </OverflowToolbar>
+                </headerToolbar>
+                <columns>
+                    <Column>
+                        <Text text="Document No." />
+                    </Column>
+                    <Column demandPopin="true">
+                        <Text text="Company" />
+                    </Column>
+                    <Column demandPopin="true">
+                        <Text text="Year" />
+                    </Column>
+                    <Column demandPopin="true">
+                        <Text text="Amount" />
+                    </Column>
+                </columns>
+                <ColumnListItem
+                    type="Navigation"
+                    press="onShowDocumentItems"
+                >
+                    <cells>
+                        <ObjectStatus
+                            text="{AccountingDocument}"
+                            state="Success"
+                        />
+                        <Text text="{CompanyCode}" />
+                        <Text text="{FiscalYear}" />
+                        <Text text="{AmountInCompanyCodeCurrency}" />
+                    </cells>
+                </ColumnListItem>
+            </Table>
+        </f:content>
+
+        <f:footer>
+            <OverflowToolbar>
+                <ToolbarSpacer />
+                <Button
+                    type="Emphasized"
+                    text="Print"
+                    icon="sap-icon://print"
+                />
+            </OverflowToolbar>
+        </f:footer>
+    </f:DynamicPage>
+</mvc:View>
