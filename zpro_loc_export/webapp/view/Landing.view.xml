@@ -1,0 +1,217 @@
+<mvc:View
+    controllerName="zmc.exim.pro.sk.zprolocexport.controller.Landing"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    height="100%"
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:fb="sap.ui.comp.filterbar"
+    xmlns:svm="sap.ui.comp.smartvariants"
+    xmlns:l="sap.ui.layout"
+    xmlns:form="sap.ui.layout.form"
+    xmlns:tcm="sap.m.table.columnmenu"
+>
+    <f:DynamicPage
+        showFooter="false"
+        fitContent="true"
+        headerExpanded="true"
+    >
+        <f:title>
+            <f:DynamicPageTitle stateChange="onDPTStateChange">
+                <f:heading>
+                    <Title
+                        text="Filter Bar"
+                        textAlign="Center"
+                        titleStyle="H3"
+                    />
+                </f:heading>
+                <f:actions>
+                    <Button
+                        id="idBtnDPTFilterGo"
+                        text="Search"
+                        press="onShowDetails"
+                        visible="true"
+                        type="Emphasized"
+                        icon="sap-icon://search"
+                    />
+                    <Button
+                        id="idBtnDPTFilterClear"
+                        text="Clear"
+                        press="onClearFilters"
+                        visible="true"
+                        type="Attention"
+                        icon="sap-icon://clear-filter"
+                    />
+                </f:actions>
+            </f:DynamicPageTitle>
+        </f:title>
+
+        <f:header>
+            <f:DynamicPageHeader>
+                <f:content>
+                    <form:SimpleForm
+                        editable="true"
+                        layout="ColumnLayout"
+                        columnsL="3"
+                        columnsM="3"
+                        columnsXL="3"
+                    >
+                        <form:content>
+                            <Label text="LC Number" />
+                            <Input
+                                id="idInpF4_LCNumber"
+                                value=""
+                                valueHelpIconSrc="sap-icon://value-help"
+                                showValueHelp="true"
+                                autocomplete="true"
+                                placeholder="Letter of Contract No"
+                            />
+                            <Label text="LC Expiry Date" />
+                            <DatePicker
+                                id="idDP_LCExpiryDate"
+                                value=""
+                                placeholder="LC Expiry Date"
+                            />
+
+                            <Label text="Sales Order" />
+                            <Input
+                                id="idInpF4_SalesOrder"
+                                value=""
+                                valueHelpIconSrc="sap-icon://value-help"
+                                showValueHelp="true"
+                                autocomplete="true"
+                                placeholder="Sales Order"
+                            />
+                            <Label text="LC Issue Date" />
+                            <DatePicker
+                                id="idDP_LCIssueDate"
+                                value=""
+                                placeholder="LC Issue Date"
+                            />
+                            <Label text="SC Number" />
+                            <Input
+                                id="idInpF4_SCNumber"
+                                value=""
+                                valueHelpIconSrc="sap-icon://value-help"
+                                showValueHelp="true"
+                                autocomplete="true"
+                                placeholder="Sales Contract No"
+                            />
+                        </form:content>
+                    </form:SimpleForm>
+                </f:content>
+            </f:DynamicPageHeader>
+        </f:header>
+
+        <f:content>
+            <Table
+                id="idTableLCList"
+                items="{/ZCDS_RT_JV_PRINT}"
+                sticky="ColumnHeaders,HeaderToolbar"
+                growing="true"
+            >
+                <headerToolbar>
+                    <OverflowToolbar>
+                        <Title
+                            text="LC List"
+                            level="H2"
+                        />
+                        <Button
+                            tooltip="Search any key word"
+                            icon="sap-icon://search"
+                            press="handleSeacrch"
+                            visible="false"
+                        />
+                        <Button
+                            tooltip="Mutiselect"
+                            icon="sap-icon://multiselect-none"
+                            press="handleMultiSelectButtonPressed"
+                            visible="false"
+                        />
+                        <Button
+                            tooltip="Sort"
+                            icon="sap-icon://sort"
+                            press="handleSortButtonPressed"
+                            visible="false"
+                        />
+                        <Button
+                            tooltip="Filter"
+                            icon="sap-icon://filter"
+                            press="handleFilterButtonPressed"
+                            visible="false"
+                        />
+                        <Button
+                            tooltip="Group"
+                            icon="sap-icon://group-2"
+                            press="handleGroupButtonPressed"
+                            visible="false"
+                        />
+                        <ToolbarSpacer />
+                        <Button
+                            id="idBtnAddNew"
+                            text="Add new"
+                            press="onAddNew"
+                            type="Emphasized"
+                            tooltip="Add new Letter Of Credit"
+                            icon="sap-icon://add"
+                        />
+                    </OverflowToolbar>
+                </headerToolbar>
+                <columns>
+                    <Column>
+                        <Text text="LC No" />
+                    </Column>
+
+                    <Column demandPopin="true">
+                        <Text text="SC No" />
+                    </Column>
+                    <Column demandPopin="true">
+                        <Text text="SO No" />
+                    </Column>
+                    <Column>
+                        <Text text="LC Type" />
+                    </Column>
+                    <Column>
+                        <Text text="LC Issue Date" />
+                    </Column>
+                    <Column>
+                        <Text text="LC Expiry Date" />
+                    </Column>
+                    <Column>
+                        <Text text="Shipmet Last Date" />
+                    </Column>
+                    <Column>
+                        <Text text="LC value " />
+                    </Column>
+                </columns>
+                <ColumnListItem
+                    type="Navigation"
+                    press="onShowDocumentItems"
+                >
+                    <cells>
+                        <Text text=" " />
+                        <Text text=" " />
+                        <Text text=" " />
+                        <Text text=" " />
+                        <Text text=" " />
+                        <Text text=" " />
+                        <Text text=" " />
+                        <Text text=" " />
+                    </cells>
+                </ColumnListItem>
+            </Table>
+        </f:content>
+
+        <f:footer>
+            <OverflowToolbar>
+                <ToolbarSpacer />
+                <Button
+                    type="Emphasized"
+                    text="Print"
+                    icon="sap-icon://print"
+                />
+            </OverflowToolbar>
+        </f:footer>
+    </f:DynamicPage>
+</mvc:View>
