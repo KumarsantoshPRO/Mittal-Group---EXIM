@@ -1,0 +1,67 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:form="sap.ui.layout.form"
+    xmlns:u="sap.ui.unified"
+>
+    <Table
+        id="idTbl_"
+       
+        sticky="ColumnHeaders,HeaderToolbar"
+        growing="true"
+    >
+     
+
+        <columns>
+            <Column>
+                <Text text="SO Items" />
+            </Column>
+
+            <Column demandPopin="true">
+                <Text text="Export Material " />
+            </Column>
+            <Column demandPopin="true">
+                <Text text="Material Description " />
+            </Column>
+            <Column>
+                <Text text="LC Qty" />
+            </Column>
+            <Column>
+                <Text text="Per unit price" />
+            </Column>
+            <Column>
+                <Text text="UOM" />
+            </Column>
+            <Column>
+                <Text text="Total  Value " />
+            </Column>
+            <Column>
+                <Text text="SO currency " />
+            </Column>
+            <Column>
+                <Text text="Exchange Rate " />
+            </Column>
+            <Column>
+                <Text text="Total INR value " />
+            </Column>
+        </columns>
+
+        <ColumnListItem
+            type="Navigation"
+            press="onShowDocumentItems"
+        >
+            <cells>
+                <Input />
+                <Input />
+                <Input />
+                <Input />
+                <Input />
+                <Input />
+                <Input />
+                <Input />
+                <Input />
+                <Input />
+            </cells>
+        </ColumnListItem>
+    </Table>
+</core:FragmentDefinition>

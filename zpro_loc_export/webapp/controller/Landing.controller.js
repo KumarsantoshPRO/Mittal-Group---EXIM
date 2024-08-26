@@ -26,6 +26,13 @@ sap.ui.define([
                 this.oRouter.navTo("Details", {
                     LCNumber: "null",
                 });
+            },
+            // On Table Item Click
+            onShowLCDetails: function () {
+                this.oRouter = this.getOwnerComponent().getRouter();
+                this.oRouter.navTo("Details", {
+                    LCNumber: "null",
+                });
             }
         });
     });

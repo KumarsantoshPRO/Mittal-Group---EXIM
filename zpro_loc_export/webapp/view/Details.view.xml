@@ -4,181 +4,240 @@
     xmlns:core="sap.ui.core"
     xmlns="sap.m"
     xmlns:f="sap.f"
-        xmlns:form="sap.ui.layout.form"
+    xmlns:form="sap.ui.layout.form"
+    xmlns:uxap="sap.uxap"
 >
-    <f:DynamicPage
+    <uxap:ObjectPageLayout
+        id="ObjectPageLayout"
+        upperCaseAnchorBar="true"
         showFooter="true"
-        fitContent="true"
-       
     >
- 
-
-        <f:header>
-            <f:DynamicPageHeader>
-                <f:content>
-                    <form:SimpleForm
-                        editable="true"
-                        layout="ColumnLayout"
-                        columnsL="3"
-                        columnsM="3"
-                        columnsXL="3"
-                    >
-                        <form:content>
-
-                            <Label text="LC Number" />
-                            <Input
-                                id="idInpF4_LCNumber"
-                                value=""
-                                valueHelpIconSrc="sap-icon://value-help"
-                                showValueHelp="true"
-                                autocomplete="true"
-                                placeholder="Letter of Contract No"
-                            />
-                            <Label text="LC Expiry Date" />
-                            <DatePicker
-                                id="idDP_LCExpiryDate"
-                                value=""
-                                placeholder="LC Expiry Date"
-                            />
-
-                            <Label text="Sales Order" />
-                            <Input
-                                id="idInpF4_SalesOrder"
-                                value=""
-                                valueHelpIconSrc="sap-icon://value-help"
-                                showValueHelp="true"
-                                autocomplete="true"
-                                placeholder="Sales Order"
-                            />
-                            <Label text="LC Issue Date" />
-                            <DatePicker
-                                id="idDP_LCIssueDate"
-                                value=""
-                                placeholder="LC Issue Date"
-                            />
-                            <Label text="SC Number" />
-                            <Input
-                                id="idInpF4_SCNumber"
-                                value=""
-                                valueHelpIconSrc="sap-icon://value-help"
-                                showValueHelp="true"
-                                autocomplete="true"
-                                placeholder="Sales Contract No"
-                            />
-                        </form:content>
-                    </form:SimpleForm>
-                </f:content>
-            </f:DynamicPageHeader>
-        </f:header>
-
-        <f:content>
-            <Table
-                id="idTableLCList"
-                items="{/ZCDS_RT_JV_PRINT}"
-                sticky="ColumnHeaders,HeaderToolbar"
-                growing="true"
+        <uxap:sections>
+            <uxap:ObjectPageSection
+                id="idOPSHeaderDetails"
+                titleUppercase="true"
+                title="Header Details"
             >
-                <headerToolbar>
-                    <OverflowToolbar>
-                        <Title
-                            text="LC List"
-                            level="H2"
-                        />
-                        <Button
-                            tooltip="Search any key word"
-                            icon="sap-icon://search"
-                            press="handleSeacrch"
-                            visible="false"
-                        />
-                        <Button
-                            tooltip="Mutiselect"
-                            icon="sap-icon://multiselect-none"
-                            press="handleMultiSelectButtonPressed"
-                            visible="false"
-                        />
-                        <Button
-                            tooltip="Sort"
-                            icon="sap-icon://sort"
-                            press="handleSortButtonPressed"
-                            visible="false"
-                        />
-                        <Button
-                            tooltip="Filter"
-                            icon="sap-icon://filter"
-                            press="handleFilterButtonPressed"
-                            visible="false"
-                        />
-                        <Button
-                            tooltip="Group"
-                            icon="sap-icon://group-2"
-                            press="handleGroupButtonPressed"
-                            visible="false"
-                        />
-                        <ToolbarSpacer />
-                        <Button
-                            id="idBtnAddNew"
-                            text="Add new"
-                            press="onAddNew"
-                            type="Emphasized"
-                            tooltip="Add new Letter Of Credit"
-                            icon="sap-icon://add"
-                        />
-                    </OverflowToolbar>
-                </headerToolbar>
-                <columns>
-                    <Column>
-                        <Text text="LC No" />
-                    </Column>
+                <uxap:subSections>
+                    <uxap:ObjectPageSubSection
+                        id="idV2OPSubHeaderDetails"
+                        title="Header Details"
+                        titleUppercase="true"
+                    >
+                        <uxap:blocks>
+                            <form:SimpleForm
+                                editable="true"
+                                class="sapUiResponsiveContentPadding"
+                                layout="ResponsiveGridLayout"
+                                columnsL="3"
+                                columnsM="3"
+                                columnsXL="3"
+                            >
+                                <form:content>
+                                    <core:Title text="LC Number: -------" />
+                                    <Label text='Sales Contract' />
+                                    <Input />
+                                    <Label text='Sales order' />
+                                    <Input />
+                                    <Label
+                                        text='Shipmet Last Date  - Original'
+                                    />
+                                    <Input />
+                                    <Label
+                                        text='Latest document date - Original'
+                                    />
+                                    <Input />
+                                    <Label
+                                        text='Shipmet Last Date  - Amendment'
+                                    />
+                                    <Input />
+                                    <Label
+                                        text='Latest document date - Amendment'
+                                    />
+                                    <Input />
+                                    <Label text='LC Issue Date - Amendment' />
+                                    <Input />
+                                    <Label
+                                        text='LC issuance Bank Account number'
+                                    />
+                                    <Input />
+                                    <Label text='LC issuance Bank Name' />
+                                    <Input />
+                                    <Label text='lC issuance Swift code' />
+                                    <Input />
+                                    <Label
+                                        text='Beneficiary Bank details with swift code'
+                                    />
+                                    <Input />
+                                    <Label
+                                        text='Negotiating Bank details with swift code'
+                                    />
+                                    <Input />
+                                    <Label text='Port of Loading ' />
+                                    <Input />
+                                    <Label text='Final Destination ' />
+                                    <Input />
+                                    <Label text='Issue Charges by Seller' />
+                                    <Input />
+                                    <core:Title />
+                                    <Label
+                                        text='Confirmation charges by Seller'
+                                    />
+                                    <Input />
+                                    <Label
+                                        text='Discounting charges by Seller'
+                                    />
+                                    <Input />
+                                    <Label text='Issue Charges by buyer' />
+                                    <Input />
+                                    <Label
+                                        text='Confirmation charges by buyer'
+                                    />
+                                    <Input />
+                                    <Label
+                                        text='Discounting charges by buyer'
+                                    />
+                                    <Input />
+                                    <Label text='Payment Terms ' />
+                                    <Input />
+                                    <Label text='Tolerance Qty % ' />
+                                    <Input />
+                                    <Label text='Shipment Type' />
+                                    <Input />
 
-                    <Column demandPopin="true">
-                        <Text text="SC No" />
-                    </Column>
-                    <Column demandPopin="true">
-                        <Text text="SO No" />
-                    </Column>
-                    <Column>
-                        <Text text="LC Type" />
-                    </Column>
-                    <Column>
-                        <Text text="LC Issue Date" />
-                    </Column>
-                    <Column>
-                        <Text text="LC Expiry Date" />
-                    </Column>
-                    <Column>
-                        <Text text="Shipmet Last Date" />
-                    </Column>
-                    <Column>
-                        <Text text="LC value " />
-                    </Column>
-                </columns>
-                <ColumnListItem
-                    type="Navigation"
-                    press="onShowDocumentItems"
-                >
-                    <cells>
-                        <Text text=" " />
-                        <Text text=" " />
-                        <Text text=" " />
-                        <Text text=" " />
-                        <Text text=" " />
-                        <Text text=" " />
-                        <Text text=" " />
-                        <Text text=" " />
-                    </cells>
-                </ColumnListItem>
-            </Table>
-        </f:content>
+                                    <Label text='LC type ' />
+                                    <Input />
+                                    <Label text='PI' />
+                                    <Input />
+                                    <Label text='LC Expiry Date - Original' />
+                                    <Input />
+                                    <Label text='LC Issue Date - Original' />
+                                    <Input />
+                                    <Label
+                                        text='LC receving  Date  - Original'
+                                    />
+                                    <Input />
+                                    <Label text='LC Expiry Date - Amendment' />
+                                    <Input />
+                                    <Label
+                                        text='LC receving  Date  - Amendment'
+                                    />
+                                    <Input />
+                                    <Label
+                                        text='LC Recieiving Bank Account number '
+                                    />
+                                    <Input />
+                                    <core:Title />
+                                    <Label text='LC Receiving Bank Name' />
+                                    <Input />
+                                    <Label text='lC Receving Swift code' />
+                                    <Input />
+                                    <Label
+                                        text='Confirmation Bank details with swift code'
+                                    />
+                                    <Input />
+                                    <Label text='Port of Discharge ' />
+                                    <Input />
 
-        <f:footer>
-            <OverflowToolbar>
-                <ToolbarSpacer />
-                <Button
-                    type="Emphasized"
-                    text="Print"
-                    icon="sap-icon://print"
-                />
-            </OverflowToolbar>
-        </f:footer>
-    </f:DynamicPage>
+                                    <Label text='LC value ' />
+                                    <Input />
+                                    <Label text='List of documents under LC' />
+                                    <Input />
+                                    <Label
+                                        text='Amendment  charges by Seller'
+                                    />
+                                    <Input />
+                                    <Label
+                                        text='Discrepency charges by Seller'
+                                    />
+                                    <Input />
+                                    <Label text='Total Charges by Seller' />
+                                    <Input />
+                                    <Label
+                                        text='Amendment  charges by Seller'
+                                    />
+                                    <Input />
+                                    <Label
+                                        text='Discrepency charges by buyer'
+                                    />
+                                    <Input />
+                                    <Label text='Total Charges by buyer' />
+                                    <Input />
+                                    <Label text='LC Charges  in India' />
+                                    <Input />
+                                    <Label text='Tolerance Value % ' />
+                                    <Input />
+                                    <Label text='Trans-Shipment ' />
+                                    <Input />
+                                </form:content>
+                            </form:SimpleForm>
+                        </uxap:blocks>
+                    </uxap:ObjectPageSubSection>
+                </uxap:subSections>
+            </uxap:ObjectPageSection>
+
+            <uxap:ObjectPageSection
+                id="idV2OPSItemsDetail"
+                titleUppercase="true"
+                title="Items Details"
+            >
+                <uxap:subSections>
+                    <uxap:ObjectPageSubSection
+                        id="idV2OPSubItemsDetail"
+                        title="Items Details"
+                        titleUppercase="true"
+                    >
+                        <uxap:blocks>
+                            <IconTabBar
+                                id="idIconTabBarNoIcons"
+                                expanded="{device>/isNoPhone}"
+                                class="sapUiNoContentPadding"
+                                headerBackgroundDesign="Solid"
+                            >
+                                <items>
+                                    <IconTabFilter
+                                        text="Original"
+                                        iconColor="Contrast"
+                                    >
+                                        <core:Fragment
+                                            id="idFrg_OriginalDetials"
+                                            fragmentName="zmc.exim.pro.sk.zprolocexport.view.fragments.details.originalDetails"
+                                            type="XML"
+                                        />
+                                    </IconTabFilter>
+                                    <IconTabFilter
+                                        text="Amendment"
+                                        iconColor="Contrast"
+                                    >
+                                        <core:Fragment
+                                            id="idFrg_AmendmentDetials"
+                                            fragmentName="zmc.exim.pro.sk.zprolocexport.view.fragments.details.amendmentDetails"
+                                            type="XML"
+                                        />
+                                    </IconTabFilter>
+                                </items>
+                            </IconTabBar>
+                        </uxap:blocks>
+                    </uxap:ObjectPageSubSection>
+                </uxap:subSections>
+            </uxap:ObjectPageSection>
+        </uxap:sections>
+
+        <uxap:footer>
+            <Bar id="idV2Bar">
+                <contentRight>
+                    <Button
+                        id="idBtn_Cancel"
+                        text="Cancel"
+                        type="Reject"
+                    />
+                    <Button
+                        id="idBtn_SaveLCDetails"
+                        text="Save"
+                        type="Accept"
+                    />
+                </contentRight>
+            </Bar>
+        </uxap:footer>
+    </uxap:ObjectPageLayout>
 </mvc:View>

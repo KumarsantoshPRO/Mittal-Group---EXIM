@@ -107,7 +107,7 @@
         <f:content>
             <Table
                 id="idTableLCList"
-                items="{/ZCDS_RT_JV_PRINT}"
+        
                 sticky="ColumnHeaders,HeaderToolbar"
                 growing="true"
             >
@@ -187,17 +187,17 @@
                 </columns>
                 <ColumnListItem
                     type="Navigation"
-                    press="onShowDocumentItems"
+                    press="onShowLCDetails"
                 >
                     <cells>
-                        <Text text=" " />
-                        <Text text=" " />
-                        <Text text=" " />
-                        <Text text=" " />
-                        <Text text=" " />
-                        <Text text=" " />
-                        <Text text=" " />
-                        <Text text=" " />
+                        <Text text="LC-0001" />
+                        <Text text="SC-001" />
+                        <Text text="SO-001" />
+                        <Text text=" Revokable" />
+                        <Text text="27/08/2024" />
+                        <Text text="10/09/2024" />
+                        <Text text="09/09/2024" />
+                        <Text text="10,000 INR" />
                     </cells>
                 </ColumnListItem>
             </Table>
