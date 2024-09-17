@@ -3,10 +3,11 @@ sap.ui.define([
     "sap/ui/core/Fragment",
     "sap/ui/model/json/JSONModel",
     "sap/ui/model/Filter",
-    "sap/ui/model/FilterOperator"
+    "sap/ui/model/FilterOperator",
+    "sap/m/MessageBox"
 
 ],
-    function (Controller, Fragment, JSONModel, Filter, FilterOperator) {
+    function (Controller, Fragment, JSONModel, Filter, FilterOperator, MessageBox) {
         "use strict";
 
         return Controller.extend("zmg.pro.exim.transactionalshippingbill.exim.controller.shippingBill_Details", {
@@ -277,6 +278,7 @@ sap.ui.define([
                     .getModel("oModelForItems")
                     .setData(JSON.parse(JSON.stringify(JSONData)));
             },
+
             onDelete: function (oEvent) {
                 debugger;
                 var vLen = oEvent
@@ -300,6 +302,42 @@ sap.ui.define([
 
                 this.getView()
                     .getModel("oModelForItems")
+                    .setData(JSON.parse(JSON.stringify(JSONData)));
+            },
+
+            onAddNewEmptyLicense: function () {
+                var JSONData = this.getView()
+                    .getModel("oModelForLicenses")
+                    .getData();
+                JSONData.push({});
+                this.getView()
+                    .getModel("oModelForLicenses")
+                    .setData(JSON.parse(JSON.stringify(JSONData)));
+            },
+
+            onDeleteLicenseItem: function (oEvent) {
+                debugger;
+                var vLen = oEvent
+                    .getSource()
+                    .getParent()
+                    .getBindingContextPath()
+                    .split("/").length;
+
+                var index = Number(
+                    oEvent.getSource().getParent().getBindingContextPath().split("/")[
+                    vLen - 1
+                    ]
+                );
+
+                var JSONData = this.getView().getModel("oModelForLicenses").getData();
+                if (JSONData.length > 1) {
+                    JSONData.splice(index, 1);
+                } else {
+                    MessageBox.error("Atlease one entry is required");
+                }
+
+                this.getView()
+                    .getModel("oModelForLicenses")
                     .setData(JSON.parse(JSON.stringify(JSONData)));
             },
             postCallForHeader: function (oModel, sPath, payload) {

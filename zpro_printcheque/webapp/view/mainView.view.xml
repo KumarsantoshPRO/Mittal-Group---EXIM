@@ -24,12 +24,12 @@
 			singleContainerFullSize="false" >
 			<f:content>
 				<Label text="{i18n>docno}" />
-				<Input >
+				<Input placeholder="Enter Document Number From" >
                 <layoutData>
 						<l:GridData span="XL3 L2 M3 S5" />
 					</layoutData>
 				</Input>
-				<Input >
+				<Input placeholder="Enter Document Number To" >
 					<layoutData>
 						<l:GridData span="XL3 L2 M3 S5" />
 					</layoutData>
@@ -49,12 +49,12 @@
 				
 
 				<Label text="{i18n>compcode}" />
-				<Input >
+				<Input placeholder="Enter Company Code" >
 					<layoutData>
 						<l:GridData span="XL3 L2 M3 S5" />
 					</layoutData>
 				</Input>
-				<Input >
+				<Input placeholder="Enter Company Code" >
 					<layoutData>
 						<l:GridData span="XL3 L2 M3 S5" />
 					</layoutData>
@@ -65,25 +65,63 @@
 						<l:GridData span="XL3 L2 M3 S5" />
 					</layoutData>
 				</DatePicker>
-				<DatePicker >
+				<DatePicker valueFormat="yyyy" displayFormat="yyyy"  >
 					<layoutData>
 						<l:GridData span="XL3 L2 M3 S5" />
 					</layoutData>
 				</DatePicker>
 				<Label text="{i18n>doctype}" />
-				<Input >
+				<Input placeholder="Enter Document Type" >
 					<layoutData>
 						<l:GridData span="XL3 L2 M3 S5" />
 					</layoutData>
 				</Input>
-				<Input >
+				<Input placeholder="Enter Document Type" >
 					<layoutData>
 						<l:GridData span="XL3 L2 M3 S5" />
 					</layoutData>
 				</Input>
+                <Button text="Go" type="Emphasized"></Button>
 			</f:content>
 		</f:SimpleForm>
 	</VBox>
+        <Table mode="SingleSelectLeft">
+            <t
+            <columns>
+                <Column >
+                    <Title text="{i18n>docno}"></Title>
+                </Column>
+                <Column >
+                    <Title text="{i18n>compcode}"></Title>
+                </Column>
+                <Column >
+                    <Title text="{i18n>year}"></Title>
+                </Column>
+                <Column >
+                    <Title text="{i18n>amnt}"></Title>
+                </Column>
+            </columns>
+            <ColumnListItem >
+                <cells>
+                    <Text text="1"></Text>
+                </cells>
+            </ColumnListItem>
+            <ColumnListItem >
+                <cells>
+                    <Text text="0000"></Text>
+                </cells>
+            </ColumnListItem>
+            <ColumnListItem >
+                <cells>
+                    <Text text="2024"></Text>
+                </cells>
+            </ColumnListItem>
+            <ColumnListItem >
+                <cells>
+                    <Text text="1000.00"></Text>
+                </cells>
+            </ColumnListItem>
+        </Table>
         </content>
     </Page>
 </mvc:View>

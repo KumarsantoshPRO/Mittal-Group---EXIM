@@ -43,16 +43,18 @@
                         <Title text="Licenses Details" />
                         <ToolbarSpacer />
                         <Button
-                            text="Save"
-                            type="Accept"
-                        />
-                        <Button
-                            text="Clear"
-                            type="Reject"
+                            icon="sap-icon://add"
+                            press="onAddNewEmptyLicense"
                         />
                     </Toolbar>
                 </headerToolbar>
                 <columns>
+                    <Column
+                        hAlign="Center"
+                        width="10rem"
+                    >
+                        <Text text="Delete" />
+                    </Column>
                     <Column
                         hAlign="Center"
                         width="10rem"
@@ -118,6 +120,10 @@
 
                 <items>
                     <ColumnListItem vAlign="Middle">
+                        <Button
+                            icon="sap-icon://delete"
+                            press="onDeleteLicenseItem"
+                        />
                         <cells>
                             <Input value="{oModelForLicenses>Item}" />
                             <Input value="{oModelForLicenses>Material}" />
