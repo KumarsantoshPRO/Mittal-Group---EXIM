@@ -1,0 +1,243 @@
+<mvc:View
+    controllerName="zmc.exim.pro.sk.zprolocexport.controller.Details"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:form="sap.ui.layout.form"
+    xmlns:uxap="sap.uxap"
+>
+    <Page
+        id="idPage"
+        showFooter="true"
+        titleAlignment="Center"
+        titleLevel="H1"
+        class="sapUiResponsivePadding--header sapUiResponsivePadding--subHeader sapUiResponsivePadding--content sapUiResponsivePadding--footer sapUiResponsivePadding--floatingFooter"
+    >
+        <IconTabBar
+            expanded="{device>/isNoPhone}"
+            class="sapUiNoContentPadding"
+            headerBackgroundDesign="Solid"
+        >
+            <items>
+                <IconTabFilter
+                    text="Section 1"
+                    iconColor="Contrast"
+                >
+                    <form:SimpleForm
+                        editable="true"
+                        class="sapUiResponsiveContentPadding"
+                        layout="ResponsiveGridLayout"
+                        columnsL="2"
+                        columnsM="2"
+                        columnsXL="2"
+                    >
+                        <core:Title text="LC Number: -------" />
+                        <Label text='Sales Contract' />
+                        <Input />
+                        <Label text='Sales order' />
+                        <Input />
+                        <Label text='Shipmet Last Date  - Original' />
+                        <Input />
+                        <Label text='Latest document date - Original' />
+                        <Input />
+                        <Label text='Shipmet Last Date  - Amendment' />
+                        <Input />
+                        <Label text='Latest document date - Amendment' />
+                        <Input />
+                        <core:Title />
+                        <Label text='LC Issue Date - Amendment' />
+                        <Input />
+                        <Label text='LC issuance Bank Account number' />
+                        <Input />
+                        <Label text='LC issuance Bank Name' />
+                        <Input />
+                        <Label text='lC issuance Swift code' />
+                        <Input />
+                        <Label
+                            text='Beneficiary Bank details with swift code'
+                        />
+                        <Input />
+                        <Label
+                            text='Negotiating Bank details with swift code'
+                        />
+                        <Input />
+                    </form:SimpleForm>
+                </IconTabFilter>
+                <IconTabSeparator icon="  sap-icon://step" />
+                <IconTabFilter
+                    text="Section 2"
+                    iconColor="Contrast"
+                >
+                    <form:SimpleForm
+                        editable="true"
+                        class="sapUiResponsiveContentPadding"
+                        layout="ResponsiveGridLayout"
+                        columnsL="2"
+                        columnsM="2"
+                        columnsXL="2"
+                    >
+                        <core:Title />
+                        <Label text='Port of Loading ' />
+                        <Input />
+                        <Label text='Final Destination ' />
+                        <Input />
+                        <Label text='Issue Charges by Seller' />
+                        <Input />
+
+                        <Label text='Confirmation charges by Seller' />
+                        <Input />
+                        <Label text='Discounting charges by Seller' />
+                        <Input />
+                        <Label text='Issue Charges by buyer' />
+                        <Input />
+                        <core:Title />
+                        <Label text='Confirmation charges by buyer' />
+                        <Input />
+                        <Label text='Discounting charges by buyer' />
+                        <Input />
+                        <Label text='Payment Terms ' />
+                        <Input />
+                        <Label text='Tolerance Qty % ' />
+                        <Input />
+                        <Label text='Shipment Type' />
+                        <Input />
+
+                        <Label text='LC type ' />
+                        <Input />
+                    </form:SimpleForm>
+                </IconTabFilter>
+                <IconTabSeparator icon="  sap-icon://step" />
+                <IconTabFilter
+                    text="Section 3"
+                    iconColor="Contrast"
+                >
+                    <form:SimpleForm
+                        editable="true"
+                        class="sapUiResponsiveContentPadding"
+                        layout="ResponsiveGridLayout"
+                        columnsL="2"
+                        columnsM="2"
+                        columnsXL="2"
+                    >
+                        <core:Title />
+                        <Label text='PI' />
+                        <Input />
+                        <Label text='LC Expiry Date - Original' />
+                        <Input />
+                        <Label text='LC Issue Date - Original' />
+                        <Input />
+                        <Label text='LC receving  Date  - Original' />
+                        <Input />
+                        <Label text='LC Expiry Date - Amendment' />
+                        <Input />
+                        <Label text='LC receving  Date  - Amendment' />
+                        <Input />
+                        <core:Title />
+                        <Label text='LC Recieiving Bank Account number ' />
+                        <Input />
+
+                        <Label text='LC Receiving Bank Name' />
+                        <Input />
+                        <Label text='lC Receving Swift code' />
+                        <Input />
+                        <Label
+                            text='Confirmation Bank details with swift code'
+                        />
+                        <Input />
+                        <Label text='Port of Discharge ' />
+                        <Input />
+
+                        <Label text='LC value ' />
+                        <Input />
+                    </form:SimpleForm>
+                </IconTabFilter>
+                <IconTabSeparator icon="  sap-icon://step" />
+                <IconTabFilter
+                    text="Section 4"
+                    iconColor="Contrast"
+                >
+                    <form:SimpleForm
+                        editable="true"
+                        class="sapUiResponsiveContentPadding"
+                        layout="ResponsiveGridLayout"
+                        columnsL="2"
+                        columnsM="2"
+                        columnsXL="2"
+                    >
+                        <core:Title />
+                        <Label text='List of documents under LC' />
+                        <Input />
+                        <Label text='Amendment  charges by Seller' />
+                        <Input />
+                        <Label text='Discrepency charges by Seller' />
+                        <Input />
+                        <Label text='Total Charges by Seller' />
+                        <Input />
+                        <Label text='Amendment  charges by Seller' />
+                        <Input />
+                        <core:Title />
+                        <Label text='Discrepency charges by buyer' />
+                        <Input />
+                        <Label text='Total Charges by buyer' />
+                        <Input />
+
+                        <Label text='LC Charges  in India' />
+                        <Input />
+                        <Label text='Tolerance Value % ' />
+                        <Input />
+                        <Label text='Trans-Shipment ' />
+                        <Input />
+                    </form:SimpleForm>
+                </IconTabFilter>
+            </items>
+        </IconTabBar>
+
+        <IconTabBar
+            id="idIconTabBarNoIcons"
+            expanded="{device>/isNoPhone}"
+            class="sapUiNoContentPadding"
+            headerBackgroundDesign="Solid"
+        >
+            <items>
+                <IconTabFilter
+                    text="Original"
+                    iconColor="Contrast"
+                >
+                    <core:Fragment
+                        id="idFrg_OriginalDetials"
+                        fragmentName="zmc.exim.pro.sk.zprolocexport.view.fragments.details.originalDetails"
+                        type="XML"
+                    />
+                </IconTabFilter>
+                <IconTabFilter
+                    text="Amendment"
+                    iconColor="Contrast"
+                >
+                    <core:Fragment
+                        id="idFrg_AmendmentDetials"
+                        fragmentName="zmc.exim.pro.sk.zprolocexport.view.fragments.details.amendmentDetails"
+                        type="XML"
+                    />
+                </IconTabFilter>
+            </items>
+        </IconTabBar>
+
+        <footer>
+            <Bar id="idV2Bar">
+                <contentRight>
+                    <Button
+                        id="idBtn_Cancel"
+                        text="Cancel"
+                        type="Reject"
+                    />
+                    <Button
+                        id="idBtn_SaveLCDetails"
+                        text="Save"
+                        type="Accept"
+                    />
+                </contentRight>
+            </Bar>
+        </footer>
+    </Page>
+</mvc:View>

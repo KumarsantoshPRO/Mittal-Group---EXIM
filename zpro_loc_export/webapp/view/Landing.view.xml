@@ -150,10 +150,10 @@
                         <ToolbarSpacer />
                         <Button
                             id="idBtnAddNew"
-                            text="Add new"
+                            text="Create new LC"
                             press="onAddNew"
                             type="Emphasized"
-                            tooltip="Add new Letter Of Credit"
+                            tooltip="Create new Letter Of Credit"
                             icon="sap-icon://add"
                         />
                     </OverflowToolbar>

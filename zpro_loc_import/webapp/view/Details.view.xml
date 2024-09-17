@@ -1,0 +1,212 @@
+<mvc:View
+    controllerName="zmg.pro.exim.zprolocimport.controller.View1"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:form="sap.ui.layout.form"
+    xmlns:uxap="sap.uxap"
+>
+    <uxap:ObjectPageLayout
+        id="ObjectPageLayout"
+        upperCaseAnchorBar="true"
+        showFooter="true"
+    >
+        <uxap:sections>
+            <uxap:ObjectPageSection
+                id="idOPSHeaderDetails"
+                titleUppercase="true"
+                title="Header Details"
+            >
+                <uxap:subSections>
+                    <uxap:ObjectPageSubSection
+                        id="idV2OPSubHeaderDetails"
+                        title="Header Details"
+                        titleUppercase="true"
+                    >
+                        <uxap:blocks>
+                            <form:SimpleForm
+                                editable="true"
+                                class="sapUiResponsiveContentPadding"
+                                layout="ColumnLayout"
+                                columnsL="2"
+                                columnsM="2"
+                                columnsXL="2"
+                            >
+                                <form:content>
+                                    <core:Title text="PI Number: -------" />
+                                    <Label text='Contract Number' />
+                                    <Input editable="{oViewModel>/textedit}" />
+                                    <Label text='PI NO' />
+                                    <Input editable="{oViewModel>/textedit}"/>
+                                    <Label
+                                        text='PI Date'
+                                    />
+                                    <Input editable="{oViewModel>/textedit}" />
+                                    <Label
+                                        text='PO'
+                                    />
+                                    <Input editable="{oViewModel>/textedit}" />
+                                    <Label
+                                        text='Shipment Last Date'
+                                    />
+                                    <Input editable="{oViewModel>/textedit}" />
+                                    <Label
+                                        text='Port of Loading'
+                                    />
+                                    <Input editable="{oViewModel>/textedit}" />
+                                    <Label text='Final ICD Location' />
+                                    <Input editable="{oViewModel>/textedit}" />
+                                    <Label
+                                        text='LC Issuing Bank'
+                                    />
+                                    <Input editable="{oViewModel>/textedit}"/>
+                                    <Label text='Shipment Type' />
+                                    <Input editable="{oViewModel>/textedit}"/>
+                                    <Label text='LC Type' />
+                                    <Input editable="{oViewModel>/textedit}"/>
+                                    <Label
+                                        text='LC Issue Date'
+                                    />
+                                    <Input editable="{oViewModel>/textedit}"/>
+                                    <Label
+                                        text='LC Expiry Date'
+                                    />
+                                    <Input editable="{oViewModel>/textedit}"/>
+                                    <!-- 12 -->
+                                    <Label text='Port of Discharge ' />
+                                    <Input editable="{oViewModel>/textedit}"/>
+                                    <Label text='LC Charges Outside India ' />
+                                    <Input editable="{oViewModel>/textedit}"/>
+                                    <Label text='LC Recieving Bank' />
+                                    <Input editable="{oViewModel>/textedit}"/>
+                                 
+                                    <Label
+                                        text='Inco Terms'
+                                    />
+                                    <Input editable="{oViewModel>/textedit}" />
+                                    <Label
+                                        text='Tolerance Value'
+                                    />
+                                    <Input editable="{oViewModel>/textedit}" />
+                                    <Label text='Tolerance Quantity' />
+                                    <Input editable="{oViewModel>/textedit}" />
+                                    <Label
+                                        text='Trans-Shipment'
+                                    />
+                                    <Input editable="{oViewModel>/textedit}" />
+                                    <Label
+                                        text='Discounting charges by buyer'
+                                    />
+                                    <Input editable="{oViewModel>/textedit}" />
+                                    <Label text='Payment Terms ' />
+                                    <Input editable="{oViewModel>/textedit}" />
+                                    <Label text='Tolerance Qty % ' />
+                                    <Input editable="{oViewModel>/textedit}" />
+                                </form:content>
+                            </form:SimpleForm>
+                        </uxap:blocks>
+                    </uxap:ObjectPageSubSection>
+                </uxap:subSections>
+            </uxap:ObjectPageSection>
+            <uxap:ObjectPageSection
+                id="idV2OPSItemsDetail"
+                titleUppercase="true"
+                title="Items Details"
+            >
+                <uxap:subSections>
+                    <uxap:ObjectPageSubSection
+                        id="idV2OPSubItemsDetail"
+                        title="Items Details"
+                        titleUppercase="true"
+                    >
+                        <uxap:blocks>
+                            <Table
+                id="idTableLCList"
+                sticky="ColumnHeaders,HeaderToolbar"
+                growing="true"
+            >
+                <columns>
+                    <Column>
+                        <Text text="PO Item" />
+                    </Column>
+
+                    <Column demandPopin="true">
+                        <Text text="Import Material" />
+                    </Column>
+                    <Column demandPopin="true">
+                        <Text text="Item Description" />
+                    </Column>
+                    <Column>
+                        <Text text="Quantity" />
+                    </Column>
+                    <Column>
+                        <Text text="Per Unit Price" />
+                    </Column>
+                    <Column>
+                        <Text text="PO UOM" />
+                    </Column>
+                    <Column>
+                        <Text text="Total Value" />
+                    </Column>
+                    <Column>
+                        <Text text="PO Currency " />
+                    </Column>
+                    <Column>
+                        <Text text="Exchanging Rate " />
+                    </Column>
+                    <Column>
+                        <Text text="INR Value " />
+                    </Column>
+                    
+
+                </columns>
+                <ColumnListItem
+                    type="Navigation"
+                    press="onShowLCDetails"
+                >
+                    <cells>
+                        <Input editable="{oViewModel>/textedit}" />
+                        <Input editable="{oViewModel>/textedit}"/>
+                        <Input editable="{oViewModel>/textedit}"/>
+                        <Input editable="{oViewModel>/textedit}"/>
+                        <Input editable="{oViewModel>/textedit}"/>
+                        <Input editable="{oViewModel>/textedit}"/>
+                        <Input editable="{oViewModel>/textedit}"/>
+                        <Input editable="{oViewModel>/textedit}"/>
+                        <Input editable="{oViewModel>/textedit}"/>
+                        <Input editable="{oViewModel>/textedit}"/>
+                    </cells>
+                </ColumnListItem>
+            </Table>
+                        </uxap:blocks>
+                    </uxap:ObjectPageSubSection>
+                </uxap:subSections>
+            </uxap:ObjectPageSection>
+        </uxap:sections>
+
+        <uxap:footer>
+            <Bar id="idV2Bar">
+                <contentRight>
+                    <Button visible="{oViewModel>/btnEdit}" text="Edit" type="Accept" press="onEdit"/>
+                    <Button
+                        visible="{oViewModel>/btnvisible}"
+                        id="idBtn_Cancel"
+                        text="Cancel"
+                        type="Reject"
+                        press="onCancel"
+                    />
+                    <Button
+                        visible="{oViewModel>/btnvisible}"
+                        id="idBtn_SaveLCDetails"
+                        text="Save"
+                        type="Accept"
+                    />
+                </contentRight>
+                <contentLeft>
+                <Button text="Back" press="onBack"></Button>
+                </contentLeft>
+            </Bar>
+        </uxap:footer>
+    </uxap:ObjectPageLayout>
+</mvc:View>

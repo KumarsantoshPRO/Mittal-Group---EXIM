@@ -1,185 +1,225 @@
-<mvc:View controllerName="zmg.pro.exim.transactionalshippingbill.exim.controller.View1"
-    xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form"
-    xmlns="sap.m" xmlns:uxap="sap.uxap">
-    
-    <uxap:ObjectPageLayout id="ObjectPageLayout" upperCaseAnchorBar="false" showHeaderContent="true" enableLazyLoading="true">
-        	<!-- <ObjectPageLayout id="ObjectPageLayout" upperCaseAnchorBar="false"> -->
-		<uxap:headerTitle>
-			<uxap:ObjectPageHeader id="_IDGenObjectPageHeader1" objectTitle="SHIPPING BILL SCREEN">
-			</uxap:ObjectPageHeader>
-		</uxap:headerTitle>
-        <!-- <uxap:ObjectPageHeader id="ObjectPageHeader" title="{i18n>title}" /> -->
+<mvc:View
+    controllerName="zmg.pro.exim.transactionalshippingbill.exim.controller.View1"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    height="100%"
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:fb="sap.ui.comp.filterbar"
+    xmlns:svm="sap.ui.comp.smartvariants"
+    xmlns:l="sap.ui.layout"
+    xmlns:form="sap.ui.layout.form"
+    xmlns:tcm="sap.m.table.columnmenu"
+>
+    <f:DynamicPage
+        showFooter="false"
+        fitContent="true"
+        headerExpanded="true"
+    >
+        <f:title>
+            <f:DynamicPageTitle stateChange="onDPTStateChange">
+                <f:heading>
+                    <Title
+                        text="Filter Bar"
+                        textAlign="Center"
+                        titleStyle="H3"
+                    />
+                </f:heading>
+                <f:actions>
+                    <Button
+                        id="idBtnDPTFilterGo"
+                        text="Search"
+                        press="onSearch"
+                        visible="true"
+                        type="Emphasized"
+                        icon="sap-icon://search"
+                    />
+                    <Button
+                        id="idBtnDPTFilterClear"
+                        text="Clear"
+                        press="onClearFilters"
+                        visible="true"
+                        type="Attention"
+                        icon="sap-icon://clear-filter"
+                    />
+                </f:actions>
+            </f:DynamicPageTitle>
+        </f:title>
 
-        <uxap:ObjectPageSection id="HeaderDetailsSection" title="Header Details">
-            <uxap:ObjectPageSubSection id="HeaderDetailsSubSection" title="Header Details">
-                <VBox alignContent="Center" id="vbox1" class="">
-                    <f:SimpleForm id="HeaderDetails" class="" layout="ColumnLayout" columnsM="2" columnsL="2" columnsXL="2">
-                        <f:content>
-                            <Label id="ShippingBillno" text="Shipping Bill no." class="bold-label"/>
-                            <Input id="ShippingBillno_Value" value="" width="60%"/>
-                            <Label id="InvoiceDoc" text="Invoice document" class="bold-label"/>
-                            <Input id="InvoiceDocValue" width="60%" showSuggestion="true" showValueHelp="true" value=""/>
-                            <Label id="cha" text="CHA" class="bold-label"/>
-                            <Select maxWidth="60%" forceSelection="true" id="chaValue">
-                                <core:Item id="itemCHA1" key="1" text="a"/>
-                                <core:Item id="itemCHA2" key="2" text="b"/>
-                            </Select>
-                            <Label id="InternalSystemDate" text="Internal System Date" class="bold-label"/>
-                            <DatePicker id="InternalSystemDateValue" value="" editable="true" width="60%"/>
-                            <Label id="ShippingBillDate" text="Shipping Bill Date" class="bold-label"/>
-                            <DatePicker id="ShippingBillDateValue" value="" width="60%"/>
-                            <Label id="CountryofBL" text="Country of BL" class="bold-label"/>
-                            <Input id="CountryofBLValue" width="60%"/>
-                            <Label id="StateofOrigin" text="State of Origin" class="bold-label"/>
-                            <Input value="" id="StateofOriginValue" width="60%"/>
-                            <Label id="PortOfLoading" text="Port of Loading" class="bold-label"/>
-                            <Input value="" id="PortOfLoadingValue" width="60%"/>
-                            <Label id="DestinationCountry" text="Destination Country" class="bold-label"/>
-                            <Input value="" id="DestinationCountryValue" width="60%"/>
-                            <Label id="ICDPortCode" text="ICD - PORT CODE" class="bold-label"/>
-                            <Input value="" id="ICDPortCodeValue" width="60%"/>
-                            <Label id="ForeignCurrency" text="Foreign Currency" class="bold-label"/>
-                            <Input value="" width="60%" id="ForeignCurrencyValue"/>
-                            <Label id="ShippingBillStatus" text="Shipping Bill Status" class="bold-label"/>
-                            <Select maxWidth="60%" forceSelection="true" id="ShippingBillStatusValue">
-                                <core:Item id="item1" key="final" text="Final"/>
-                                <core:Item id="item2" key="provisional" text="Provisional"/>
-                            </Select>
-                            <Label id="FOBV" text="FOB Value (INR)" class="bold-label"/>
-                            <Input value="" width="60%" id="FOBVValue"/>
-                            <Label id="Customer" text="Customer" class="bold-label"/>
-                            <Input value="" id="CustomerValue" width="60%"/>
-                            <Label id="FOBV_FC" text="FOB Value (FC)" class="bold-label"/>
-                            <Input value="" width="60%" id="FOBV_FCValue"/>
-                            <Label id="LetExportDate" text="Let Export Date" class="bold-label"/>
-                            <DatePicker value="" id="LetExportDateValue" width="60%"/>
-                            <Label id="ExchangeRate" text="Exchange Rate" class="bold-label"/>
-                            <Input value="" id="ExchangeRateValue" width="60%"/>
-                            <Label id="Schemes" text="Schemes" class="bold-label"/>
-                            <Select maxWidth="60%" forceSelection="true" id="SchemesValue">
-                                <core:Item id="itemSchemes1" key="adl" text="ADL"/>
-                                <core:Item id="itemSchemes2" key="dbr" text="DBR"/>
-                                <core:Item id="itemSchemes3" key="air" text="AIR"/>
-                                <core:Item id="itemSchemes4" key="no" text="No schemes"/>
-                            </Select>
-                            <Label id="RODTEP" text="RODTEP" class="bold-label"/>
-                            <Select id="RODTEPValue" maxWidth="60%" forceSelection="true">
-                                <core:Item id="itemRODTEP1" key="yes" text="Yes"/>
-                                <core:Item id="itemRODTEP2" key="no" text="No"/>
-                            </Select>
-                            <Label id="EPCG" text="EPCG" class="bold-label"/>
-                            <Select id="EPCGValue" maxWidth="60%" forceSelection="true">
-                                <core:Item id="itemEPCG1" key="yes" text="Yes"/>
-                                <core:Item id="itemEPCG2" key="no" text="No"/>
-                            </Select>
-                            <Label id="ContainerNo" text="Container no." class="bold-label"/>
-                            <Input value="" id="ContainerNoValue" width="60%"/>
-                            <Label id="LetterofCredit" text="Letter of Credit" class="bold-label"/>
-                            <Input value="" showValueHelp="true" id="LetterofCreditValue" width="60%"/>
-                        </f:content>
-                    </f:SimpleForm>
-                </VBox>
-            </uxap:ObjectPageSubSection>
-        </uxap:ObjectPageSection>
+        <f:header>
+            <f:DynamicPageHeader>
+                <f:content>
+                    <form:SimpleForm
+                        editable="true"
+                        layout="ColumnLayout"
+                        columnsL="3"
+                        columnsM="3"
+                        columnsXL="3"
+                    >
+                        <form:content>
+                            <Label text="Shipping Bill Number" />
+                            <Input
+                                id="idInpF4_SBNumber"
+                                value=""
+                                valueHelpIconSrc="sap-icon://value-help"
+                                showValueHelp="true"
+                                valueHelpRequest="onShippingBillHelp"
+                                autocomplete="true"
+                                placeholder="Shipping Bill Number"
+                            />
+                            <Label
+                                text="Invoice Document Number"
+                                visible="false"
+                            />
+                            <Input
+                                id="idInpF4_InvoiceNumber"
+                                value=""
+                                valueHelpIconSrc="sap-icon://value-help"
+                                showValueHelp="true"
+                                autocomplete="true"
+                                placeholder="Invoice Document Number"
+                                visible="false"
+                            />
 
-        <uxap:ObjectPageSection id="AssignmentDetailsSection" title="Item Details ">
-            <uxap:ObjectPageSubSection id="AssignmentDetailsSubSection" title="Item Details ">
-                <ScrollContainer id="_IDGenScrollContainer1" width="100%" height="auto" horizontal="true">
-                    <Table id="t1" items="" class="">
-                        <headerToolbar>
-                            <Toolbar id="_IDGenToolbar1">
-                                <Title id="_IDGenTitle1" text="Assignment Details"/>
-                                <ToolbarSpacer id="_IDGenToolbarSpacer1"/>
-                            </Toolbar>
-                        </headerToolbar>
-                        <columns>
-                            <Column id="TableColumn1" hAlign="Center" width="10rem">
-                                <Text id="TBItem" text="Item"/>
-                            </Column>
-                            <Column id="TableColumn2" hAlign="Center" width="10rem">
-                                <Text id="TBMaterial" text="Material"/>
-                            </Column>
-                            <Column id="TableColumn3" hAlign="Center" width="10rem" minScreenWidth="Tablet" demandPopin="true">
-                                <Text id="TBItemDescription" text="Item Description"/>
-                            </Column>
-                            <Column id="TableColumn4" hAlign="Center" width="10rem" minScreenWidth="Tablet" demandPopin="true">
-                                <Text id="TBInvoiceQTY" text="Invoice Qty"/>
-                            </Column>
-                            <Column id="TableColumn5" hAlign="Center" width="10rem" minScreenWidth="Tablet" demandPopin="true">
-                                <Text id="TBUOM" text="UOM"/>
-                            </Column>
-                            <Column id="TableColumn6" hAlign="Center" width="10rem" minScreenWidth="Tablet" demandPopin="true">
-                                <Text id="TBInvoiceValue" text="Invoice Value"/>
-                            </Column>
-                            <Column id="TableColumn7" hAlign="Center" width="10rem" minScreenWidth="Tablet" demandPopin="true">
-                                <Text id="TBCommission" text="Commission"/>
-                            </Column>
-                            <Column id="TableColumn8" hAlign="Center" width="10rem" minScreenWidth="Tablet" demandPopin="true">
-                                <Text id="TBInsurance" text="Insurance"/>
-                            </Column>
-                            <Column id="TableColumn9" hAlign="Center" width="10rem" minScreenWidth="Tablet" demandPopin="true">
-                                <Text id="TBFreight" text="Freight"/>
-                            </Column>
-                            <Column id="TableColumn10" hAlign="Center" width="10rem" minScreenWidth="Tablet" demandPopin="true">
-                                <Text id="TBFOBValue" text="FOB Value"/>
-                            </Column>
-                            <Column id="TableColumn11" hAlign="Center" width="10rem" minScreenWidth="Tablet" demandPopin="true">
-                                <Text id="TBFOBCurrency" text="FOB Currency"/>
-                            </Column>
-                            <Column id="TableColumn12" hAlign="Center" width="10rem" minScreenWidth="Tablet" demandPopin="true">
-                                <Text id="TBNoofPackages" text="No. of Packages"/>
-                            </Column>
-                            <Column id="TableColumn13" hAlign="Center" width="10rem" minScreenWidth="Tablet" demandPopin="true">
-                                <Text id="TBMarksNo" text="Marks No"/>
-                            </Column>
-                             <Column id="TableColumn14" hAlign="Center"  width="10rem" minScreenWidth="Tablet" demandPopin="true" >
-               <Text id="TBLicences" text="Licences" />
-            </Column>
-            <Column id="TableColumn15" hAlign="Center" width="10rem" minScreenWidth="Tablet" demandPopin="true" >
-               <Text id="TBRoDTep" text="RoDTep %" />
-            </Column>
-             <Column id="TableColumn16" hAlign="Center" width="10rem" minScreenWidth="Tablet" demandPopin="true" >
-               <Text id="TBRoDTepAmount" text="Rodtep Amount" />
-            </Column>
-            <Column id="TableColumn17" hAlign="Center" width="10rem" minScreenWidth="Tablet" demandPopin="true" >
-               <Text id="TBRodtepCurrency" text="Rodtep currency" />
-            </Column>
-                        </columns>
+                            <Label text="Created Date" visible="false"/>
+                            <DatePicker
+                                id="idDP_CreatedDate"
+                                value=""
+                                placeholder="Created Date"
+                                visible="false"
+                            />
+                        </form:content>
+                    </form:SimpleForm>
+                </f:content>
+            </f:DynamicPageHeader>
+        </f:header>
 
-                          <items>
-            <ColumnListItem id="_IDGenColumnListItem1" vAlign="Middle">
-               <cells>
-               <Input id="ItemValue" value=""/>
-               <Input id="MaterialValue" value=""/>
-               <Input id="ItemDescriptionValue" value=""/>
-               <Input id="InvoiceQtyValue" value=""/>
-               <Input id="UOMValue" value=""/>
-               <Input id="InvoiceValue" value=""/>
-               <Input id="CommissionValue" value=""/>
-               <Input id="InsuranceValue" value=""/>
-               <Input id="FreightValue" value=""/>
-               <Input id="FOBValue" value=""/>
-               <Input id="FOBCurrencyValue" value=""/>
-                <Input id="FOBValue1" value=""/>
-                <Input id="FOBValueFC" value=""/>
-                <!-- <Input id="Licenses" showValueHelp="true"/> -->
-                <Link id="Licenses" text="SubScreen" press="onSubScreenForLicense"/>
-                <Input id="RoDTep" value=""/>
-                <Input id="RoDTepAmount" value=""/>
-                <Input id="RoDTepCurrency" value=""/>
+        <f:content>
+            <Table
+                id="idTable"
+                sticky="ColumnHeaders,HeaderToolbar"
+                growing="true"
+                items="{oModelForTable>/}"
+            >
+                <headerToolbar>
+                    <OverflowToolbar>
+                        <Title
+                            text="Shipping Bill List"
+                            level="H2"
+                        />
+                        <!-- <Button
+                            tooltip="Search any key word"
+                            icon="sap-icon://search"
+                            press="handleSeacrch"
+                            visible="false"
+                        />
+                        <Button
+                            tooltip="Mutiselect"
+                            icon="sap-icon://multiselect-none"
+                            press="handleMultiSelectButtonPressed"
+                            visible="false"
+                        />
+                        <Button
+                            tooltip="Sort"
+                            icon="sap-icon://sort"
+                            press="handleSortButtonPressed"
+                            visible="false"
+                        />
+                        <Button
+                            tooltip="Filter"
+                            icon="sap-icon://filter"
+                            press="handleFilterButtonPressed"
+                            visible="false"
+                        />
+                        <Button
+                            tooltip="Group"
+                            icon="sap-icon://group-2"
+                            press="handleGroupButtonPressed"
+                            visible="false"
+                        /> -->
+                        <ToolbarSpacer />
+                        <Button
+                            id="idBtnAddNew"
+                            text="Create new"
+                            press="onAddNew"
+                            type="Emphasized"
+                            tooltip="Create new Letter Of Credit"
+                            icon="sap-icon://add"
+                        />
+                    </OverflowToolbar>
+                </headerToolbar>
+                <ColumnListItem
+                    type="Navigation"
+                    press="onShowDetails"
+                >
+                    <cells>
+                        <Text text="{oModelForTable>ZshippingBillNo}" />
+                        <Text text="{oModelForTable>ZinvoiceDocument}" />
+                        <Text text="{oModelForTable>ZportOfLoading}" />
+                        <Text text="{oModelForTable>Zcha}" />
+                        <Text text="{oModelForTable>Zcustomer}" />
+                        <Text text="{oModelForTable>ZletExportDate}" />
+                        <Text text="{oModelForTable>Zschemes}" />
+                        <Text text="{oModelForTable>Zepcg}" />
+                        <Text text="{oModelForTable>Zloc}" />
+                        <Text text="{oModelForTable>ZshippingBillStatus}" />
+                    </cells>
+                </ColumnListItem>
+                <columns>
+                    <Column hAlign="End">
+                        <Text text="Shipping Bill no" />
+                    </Column>
 
+                    <Column
+                        demandPopin="true"
+                        hAlign="End"
+                    >
+                        <Text text="Invoice document" />
+                    </Column>
+                    <Column hAlign="Center">
+                        <Text text="Port of Loading " />
+                    </Column>
+                    <Column
+                        demandPopin="true"
+                        hAlign="Center"
+                        width="3rem"
+                    >
+                        <Text text="CHA" />
+                    </Column>
+                    <Column hAlign="Center">
+                        <Text text="Customer " />
+                    </Column>
+                    <Column hAlign="Center">
+                        <Text text="Export Date" />
+                    </Column>
 
+                    <Column hAlign="Center">
+                        <Text text="Scheme" />
+                    </Column>
+                    <Column hAlign="Center">
+                        <Text text="EPCG" />
+                    </Column>
+                    <Column hAlign="Center">
+                        <Text text="Location" />
+                    </Column>
+                    <Column hAlign="Center">
+                        <Text text="billing Status" />
+                    </Column>
+                </columns>
+                
+            </Table>
+        </f:content>
 
-
-
-               
-
-               </cells>
-            </ColumnListItem>
-         </items>
-                    </Table>
-                </ScrollContainer>
-            </uxap:ObjectPageSubSection>
-        </uxap:ObjectPageSection>
-    </uxap:ObjectPageLayout>
+        <!-- <f:footer>
+            <OverflowToolbar>
+                <ToolbarSpacer />
+                <Button
+                    type="Emphasized"
+                    text="Print"
+                    icon="sap-icon://print"
+                />
+            </OverflowToolbar>
+        </f:footer> -->
+    </f:DynamicPage>
 </mvc:View>

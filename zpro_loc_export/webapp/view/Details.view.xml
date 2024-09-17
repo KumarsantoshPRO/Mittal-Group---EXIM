@@ -12,163 +12,252 @@
         upperCaseAnchorBar="true"
         showFooter="true"
     >
+    <uxap:headerTitle  >
+            <uxap:ObjectPageHeader objectTitle= "">
+               
+                <Button text="Edit" type="Emphasized" press="onEdit" visible="{oViewModel>/TextVisible}"></Button>
+            <Button
+                    text="Back"
+                    type="Back"
+                    press="onBack"
+                />
+            </uxap:ObjectPageHeader>
+        </uxap:headerTitle>
         <uxap:sections>
             <uxap:ObjectPageSection
                 id="idOPSHeaderDetails"
                 titleUppercase="true"
-                title="Header Details"
+                title="General Details"
             >
                 <uxap:subSections>
                     <uxap:ObjectPageSubSection
                         id="idV2OPSubHeaderDetails"
-                        title="Header Details"
+                        title="General Details"
                         titleUppercase="true"
                     >
                         <uxap:blocks>
                             <form:SimpleForm
                                 editable="true"
                                 class="sapUiResponsiveContentPadding"
-                                layout="ResponsiveGridLayout"
-                                columnsL="3"
-                                columnsM="3"
-                                columnsXL="3"
+                              layout="ColumnLayout"
+                                columnsL="2"
+                                columnsM="2"
+                                columnsXL="2"
                             >
                                 <form:content>
                                     <core:Title text="LC Number: -------" />
-                                    <Label text='Sales Contract' />
-                                    <Input />
-                                    <Label text='Sales order' />
-                                    <Input />
+                                    <Label class="boldLabel" text='Sales Contract' />
+                                    <Input width="80%"  visible="{oViewModel>/EditVisible}"/>
+                                    <Text text="ABC" visible="{oViewModel>/TextVisible}"/>
+                                    <Label text='Sales order' class="boldLabel" />
+                                   <Input width="80%"  visible="{oViewModel>/EditVisible}"/>
+                                    <Text  visible="{oViewModel>/TextVisible}"/>
                                     <Label
-                                        text='Shipmet Last Date  - Original'
+                                        text='Shipmet Last Date  - Original' class="boldLabel"
                                     />
-                                    <Input />
+                                   <Input width="80%"  visible="{oViewModel>/EditVisible}"/>
+                                    <Text  visible="{oViewModel>/TextVisible}"/>
                                     <Label
-                                        text='Latest document date - Original'
+                                        text='Latest document date - Original' class="boldLabel"
                                     />
-                                    <Input />
+                                    <Text  visible="{oViewModel>/TextVisible}"/>
+                                   <Input width="80%"  visible="{oViewModel>/EditVisible}"/>
                                     <Label
-                                        text='Shipmet Last Date  - Amendment'
+                                        text='Shipmet Last Date  - Amendment' class="boldLabel"
                                     />
-                                    <Input />
+                                    <Text  visible="{oViewModel>/TextVisible}"/>
+                                   <Input width="80%"  visible="{oViewModel>/EditVisible}"/>
                                     <Label
-                                        text='Latest document date - Amendment'
+                                        text='Latest document date - Amendment' class="boldLabel"
                                     />
-                                    <Input />
-                                    <Label text='LC Issue Date - Amendment' />
-                                    <Input />
+                                    <Text  visible="{oViewModel>/TextVisible}"/>
+                                   <Input width="80%"  visible="{oViewModel>/EditVisible}"/>
+                                    <Label text='LC Issue Date - Amendment' class="boldLabel"/>
+                                    <Text  visible="{oViewModel>/TextVisible}"/>
+                                   <Input width="80%"  visible="{oViewModel>/EditVisible}"/>
                                     <Label
-                                        text='LC issuance Bank Account number'
+                                        text='LC issuance Bank Account number' class="boldLabel"
                                     />
-                                    <Input />
-                                    <Label text='LC issuance Bank Name' />
-                                    <Input />
-                                    <Label text='lC issuance Swift code' />
-                                    <Input />
+                                    <Text  visible="{oViewModel>/TextVisible}"/>
+                                   <Input width="80%"  visible="{oViewModel>/EditVisible}"/>
+                                    <Label text='LC issuance Bank Name' class="boldLabel"/>
+                                    <Text  visible="{oViewModel>/TextVisible}"/>
+                                   <Input width="80%"  visible="{oViewModel>/EditVisible}"/>
+                                    <Label text='lC issuance Swift code' class="boldLabel"/>
+                                    <Text  visible="{oViewModel>/TextVisible}"/>
+                                   <Input width="80%"  visible="{oViewModel>/EditVisible}"/>
                                     <Label
-                                        text='Beneficiary Bank details with swift code'
+                                        text='Beneficiary Bank details with swift code' class="boldLabel"
                                     />
-                                    <Input />
+                                    <Text  visible="{oViewModel>/TextVisible}"/>
+                                   <Input width="80%"  visible="{oViewModel>/EditVisible}"/>
                                     <Label
-                                        text='Negotiating Bank details with swift code'
+                                        text='Negotiating Bank details with swift code' class="boldLabel"
                                     />
-                                    <Input />
-                                    <Label text='Port of Loading ' />
-                                    <Input />
-                                    <Label text='Final Destination ' />
-                                    <Input />
-                                    <Label text='Issue Charges by Seller' />
-                                    <Input />
+                                    <Text  visible="{oViewModel>/TextVisible}"/>
+                                   <Input width="80%"  visible="{oViewModel>/EditVisible}"/>
+                                    <!-- 12 -->
+                                    <Label text='Port of Loading ' class="boldLabel"/>
+                                    <Text  visible="{oViewModel>/TextVisible}"/>
+                                   <Input width="80%"  visible="{oViewModel>/EditVisible}"/>
+                                    <Label text='Final Destination ' class="boldLabel"/>
+                                    <Text  visible="{oViewModel>/TextVisible}"/>
+                                   <Input width="80%"  visible="{oViewModel>/EditVisible}"/>
+                                    <Label text='Issue Charges by Seller' class="boldLabel"/>
+                                    <Text  visible="{oViewModel>/TextVisible}"/>
+                                   <Input width="80%"  visible="{oViewModel>/EditVisible}"/>
                                     <core:Title />
                                     <Label
-                                        text='Confirmation charges by Seller'
+                                        text='Confirmation charges by Seller' class="boldLabel"
                                     />
-                                    <Input />
+                                    <Text  visible="{oViewModel>/TextVisible}"/>
+                                   <Input width="80%"  visible="{oViewModel>/EditVisible}"/>
                                     <Label
-                                        text='Discounting charges by Seller'
+                                        text='Discounting charges by Seller' class="boldLabel"
                                     />
-                                    <Input />
-                                    <Label text='Issue Charges by buyer' />
-                                    <Input />
+                                    <Text  visible="{oViewModel>/TextVisible}"/>
+                                   <Input width="80%"  visible="{oViewModel>/EditVisible}"/>
+                                    <Label text='Issue Charges by buyer' class="boldLabel"/>
+                                    <Text  visible="{oViewModel>/TextVisible}"/>
+                                   <Input width="80%"  visible="{oViewModel>/EditVisible}"/>
                                     <Label
-                                        text='Confirmation charges by buyer'
+                                        text='Confirmation charges by buyer' class="boldLabel"
                                     />
-                                    <Input />
+                                    <Text  visible="{oViewModel>/TextVisible}"/>
+                                   <Input width="80%"  visible="{oViewModel>/EditVisible}"/>
                                     <Label
-                                        text='Discounting charges by buyer'
+                                        text='Discounting charges by buyer' class="boldLabel"
                                     />
-                                    <Input />
-                                    <Label text='Payment Terms ' />
-                                    <Input />
-                                    <Label text='Tolerance Qty % ' />
-                                    <Input />
-                                    <Label text='Shipment Type' />
-                                    <Input />
+                                    <Text  visible="{oViewModel>/TextVisible}"/>
+                                   <Input width="80%"  visible="{oViewModel>/EditVisible}"/>
+                                    <Label text='Payment Terms ' class="boldLabel"/>
+                                    <Text  visible="{oViewModel>/TextVisible}"/>
+                                   <Input width="80%"  visible="{oViewModel>/EditVisible}"/>
+                                    <Label text='Tolerance Qty % ' class="boldLabel"/>
+                                    <Text  visible="{oViewModel>/TextVisible}"/>
+                                   <Input width="80%"  visible="{oViewModel>/EditVisible}"/>
 
-                                    <Label text='LC type ' />
-                                    <Input />
+                                </form:content>
+                            </form:SimpleForm>
+                        </uxap:blocks>
+                    </uxap:ObjectPageSubSection>
+                </uxap:subSections>
+            </uxap:ObjectPageSection>
+            <uxap:ObjectPageSection
+                id="idOPSHeaderDetails2"
+                titleUppercase="true"
+                title="Other Details"
+            >
+                <uxap:subSections>
+                    <uxap:ObjectPageSubSection
+                        id="idV2OPSubHeaderDetails2"
+                        title="Other Details"
+                        titleUppercase="true"
+                    >
+                        <uxap:blocks>
+                            <form:SimpleForm
+                                editable="true"
+                                class="sapUiResponsiveContentPadding"
+                                layout="ColumnLayout"
+                                columnsL="2"
+                                columnsM="2"
+                                columnsXL="2"
+                            >
+                                <form:content>
+                                    <core:Title text="LC Number: -------" />
+                                    
+                                    <Label text='Shipment Type'  class="boldLabel"/>
+                                   <Input width="80%"  visible="{oViewModel>/EditVisible}"/>
+                                    <Text  visible="{oViewModel>/TextVisible}"/>
+                                    <Label text='LC type ' class="boldLabel"/>
+                                    <Text  visible="{oViewModel>/TextVisible}"/>
+                                   <Input width="80%"  visible="{oViewModel>/EditVisible}"/>
+                                    <!-- 24 -->
                                     <Label text='PI' />
-                                    <Input />
-                                    <Label text='LC Expiry Date - Original' />
-                                    <Input />
-                                    <Label text='LC Issue Date - Original' />
-                                    <Input />
+                                    <Text  visible="{oViewModel>/TextVisible}"/>
+                                   <Input width="80%"  visible="{oViewModel>/EditVisible}"/>
+                                    <Label text='LC Expiry Date - Original' class="boldLabel"/>
+                                    <Text  visible="{oViewModel>/TextVisible}"/>
+                                   <Input width="80%"  visible="{oViewModel>/EditVisible}"/>
+                                    <Label text='LC Issue Date - Original' class="boldLabel"/>
+                                    <Text  visible="{oViewModel>/TextVisible}"/>
+                                   <Input width="80%"  visible="{oViewModel>/EditVisible}"/>
                                     <Label
-                                        text='LC receving  Date  - Original'
+                                        text='LC receving  Date  - Original' class="boldLabel"
                                     />
-                                    <Input />
-                                    <Label text='LC Expiry Date - Amendment' />
-                                    <Input />
+                                    <Text  visible="{oViewModel>/TextVisible}"/>
+                                   <Input width="80%"  visible="{oViewModel>/EditVisible}"/>
+                                    <Label text='LC Expiry Date - Amendment' class="boldLabel"/>
+                                    <Text  visible="{oViewModel>/TextVisible}"/>
+                                   <Input width="80%"  visible="{oViewModel>/EditVisible}"/>
                                     <Label
-                                        text='LC receving  Date  - Amendment'
+                                        text='LC receving  Date  - Amendment' class="boldLabel"
                                     />
-                                    <Input />
+                                    <Text  visible="{oViewModel>/TextVisible}"/>
+                                   <Input width="80%"  visible="{oViewModel>/EditVisible}"/>
                                     <Label
-                                        text='LC Recieiving Bank Account number '
+                                        text='LC Recieiving Bank Account number ' class="boldLabel"
                                     />
-                                    <Input />
+                                    <Text  visible="{oViewModel>/TextVisible}"/>
+                                   <Input width="80%"  visible="{oViewModel>/EditVisible}"/>
                                     <core:Title />
-                                    <Label text='LC Receiving Bank Name' />
-                                    <Input />
-                                    <Label text='lC Receving Swift code' />
-                                    <Input />
+                                    <Label text='LC Receiving Bank Name' class="boldLabel"/>
+                                    <Text  visible="{oViewModel>/TextVisible}"/>
+                                   <Input width="80%"  visible="{oViewModel>/EditVisible}"/>
+                                    <Label text='lC Receving Swift code' class="boldLabel"/>
+                                    <Text  visible="{oViewModel>/TextVisible}"/>
+                                   <Input width="80%"  visible="{oViewModel>/EditVisible}"/>
                                     <Label
-                                        text='Confirmation Bank details with swift code'
+                                        text='Confirmation Bank details with swift code' class="boldLabel"
                                     />
-                                    <Input />
-                                    <Label text='Port of Discharge ' />
-                                    <Input />
+                                    <Text  visible="{oViewModel>/TextVisible}"/>
+                                   <Input width="80%"  visible="{oViewModel>/EditVisible}"/>
+                                    <Label text='Port of Discharge ' class="boldLabel"/>
+                                    <Text  visible="{oViewModel>/TextVisible}"/>
+                                   <Input width="80%"  visible="{oViewModel>/EditVisible}"/>
 
-                                    <Label text='LC value ' />
-                                    <Input />
-                                    <Label text='List of documents under LC' />
-                                    <Input />
+                                    <Label text='LC value ' class="boldLabel"/>
+                                    <Text  visible="{oViewModel>/TextVisible}"/>
+                                   <Input width="80%"  visible="{oViewModel>/EditVisible}"/>
+                                    <!-- 36 -->
+                                    <Label text='List of documents under LC' class="boldLabel"/>
+                                    <Text  visible="{oViewModel>/TextVisible}"/>
+                                   <Input width="80%"  visible="{oViewModel>/EditVisible}"/>
                                     <Label
-                                        text='Amendment  charges by Seller'
+                                        text='Amendment  charges by Seller' class="boldLabel"
                                     />
-                                    <Input />
+                                    <Text  visible="{oViewModel>/TextVisible}"/>
+                                   <Input width="80%"  visible="{oViewModel>/EditVisible}"/>
                                     <Label
-                                        text='Discrepency charges by Seller'
+                                        text='Discrepency charges by Seller' class="boldLabel"
                                     />
-                                    <Input />
-                                    <Label text='Total Charges by Seller' />
-                                    <Input />
+                                    <Text  visible="{oViewModel>/TextVisible}"/>
+                                   <Input width="80%"  visible="{oViewModel>/EditVisible}"/>
+                                    <Label text='Total Charges by Seller' class="boldLabel"/>
+                                    <Text  visible="{oViewModel>/TextVisible}"/>
+                                   <Input width="80%"  visible="{oViewModel>/EditVisible}"/>
                                     <Label
-                                        text='Amendment  charges by Seller'
+                                        text='Amendment  charges by Seller' class="boldLabel"
                                     />
-                                    <Input />
+                                    <Text  visible="{oViewModel>/TextVisible}"/>
+                                   <Input width="80%"  visible="{oViewModel>/EditVisible}"/>
                                     <Label
-                                        text='Discrepency charges by buyer'
+                                        text='Discrepency charges by buyer' class="boldLabel"
                                     />
-                                    <Input />
-                                    <Label text='Total Charges by buyer' />
-                                    <Input />
-                                    <Label text='LC Charges  in India' />
-                                    <Input />
-                                    <Label text='Tolerance Value % ' />
-                                    <Input />
-                                    <Label text='Trans-Shipment ' />
-                                    <Input />
+                                    <Text  visible="{oViewModel>/TextVisible}"/>
+                                   <Input width="80%"  visible="{oViewModel>/EditVisible}"/>
+                                    <Label text='Total Charges by buyer' class="boldLabel"/>
+                                    <Text  visible="{oViewModel>/TextVisible}"/>
+                                   <Input width="80%"  visible="{oViewModel>/EditVisible}"/>
+                                    <Label text='LC Charges  in India' class="boldLabel"/>
+                                    <Text  visible="{oViewModel>/TextVisible}"/>
+                                   <Input width="80%"  visible="{oViewModel>/EditVisible}"/>
+                                    <Label text='Tolerance Value % ' class="boldLabel"/>
+                                    <Text  visible="{oViewModel>/TextVisible}"/>
+                                   <Input width="80%"  visible="{oViewModel>/EditVisible}"/>
+                                    <Label text='Trans-Shipment ' class="boldLabel" />
+                                    <Text  visible="{oViewModel>/TextVisible}"/>
+                                   <Input width="80%"  visible="{oViewModel>/EditVisible}"/>
                                 </form:content>
                             </form:SimpleForm>
                         </uxap:blocks>
@@ -223,12 +312,13 @@
             </uxap:ObjectPageSection>
         </uxap:sections>
 
-        <uxap:footer>
-            <Bar id="idV2Bar">
+        <uxap:footer  >
+            <Bar id="idV2Bar" visible="{oViewModel>/EditVisible}" >
                 <contentRight>
                     <Button
                         id="idBtn_Cancel"
                         text="Cancel"
+                        press="onCancel"
                         type="Reject"
                     />
                     <Button

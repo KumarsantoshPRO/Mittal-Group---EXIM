@@ -23,7 +23,7 @@ sap.ui.define([
             // On Add New button pressed
             onAddNew: function () {
                 this.oRouter = this.getOwnerComponent().getRouter();
-                this.oRouter.navTo("Details", {
+                this.oRouter.navTo("newDetails", {
                     LCNumber: "null",
                 });
             },

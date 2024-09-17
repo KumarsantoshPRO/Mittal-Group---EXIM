@@ -6,7 +6,7 @@
 >
     <Table
         id="idTbl_"
-      
+        mode="Delete"
         sticky="ColumnHeaders,HeaderToolbar"
         growing="true"
     >
@@ -49,9 +49,8 @@
                     text="Add new"
                     press="onAddNew"
                     type="Emphasized"
-                    tooltip="Add new Letter Of Credit"
+                    tooltip="Add new row"
                     icon="sap-icon://add"
-                    visible="false"
                 />
             </OverflowToolbar>
         </headerToolbar>
@@ -90,21 +89,29 @@
             </Column>
         </columns>
 
-        <ColumnListItem
-            type="Navigation"
-            press="onShowDocumentItems"
-        >
+        <ColumnListItem>
             <cells>
-                <Input />
-                <Input />
-                <Input />
-                <Input />
-                <Input />
-                <Input />
-                <Input />
-                <Input />
-                <Input />
-                <Input />
+                 <Input visible="{oViewModel>/EditVisible}" />
+                <Input visible="{oViewModel>/EditVisible}" />
+                <Input visible="{oViewModel>/EditVisible}" />
+                <Input visible="{oViewModel>/EditVisible}" />
+                <Input visible="{oViewModel>/EditVisible}" />
+                <Input visible="{oViewModel>/EditVisible}" />
+                <Input visible="{oViewModel>/EditVisible}" />
+                <Input visible="{oViewModel>/EditVisible}" />
+                <Input visible="{oViewModel>/EditVisible}" />
+                <Input visible="{oViewModel>/EditVisible}" />
+                <Text visible="{oViewModel>/TextVisible}" />
+                <Text visible="{oViewModel>/TextVisible}" />
+                <Text visible="{oViewModel>/TextVisible}" />
+                <Text visible="{oViewModel>/TextVisible}" />
+                <Text visible="{oViewModel>/TextVisible}" />
+                <Text visible="{oViewModel>/TextVisible}" />
+                <Text visible="{oViewModel>/TextVisible}" />
+                <Text visible="{oViewModel>/TextVisible}" />
+                <Text visible="{oViewModel>/TextVisible}" />
+                <Text visible="{oViewModel>/TextVisible}" />
+                <Text visible="{oViewModel>/TextVisible}" />
             </cells>
         </ColumnListItem>
     </Table>

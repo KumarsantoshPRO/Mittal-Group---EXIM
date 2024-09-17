@@ -1,0 +1,89 @@
+<mvc:View xmlns:form="sap.ui.layout.form" controllerName="zmc.exim.pro.zproprintcheque.controller.mainView"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns:l="sap.ui.layout" xmlns:core="sap.ui.core"
+	xmlns:f="sap.ui.layout.form"
+    xmlns="sap.m">
+    <Page id="page" title="{i18n>title}">
+        <content >
+            <VBox class="sapUiSmallMargin">
+		<f:SimpleForm id="SimpleFormChange354wideDual"
+			editable="true"
+			layout="ResponsiveGridLayout"
+			title="Print Cheque"
+			labelSpanXL="4"
+			labelSpanL="3"
+			labelSpanM="4"
+			labelSpanS="12"
+			adjustLabelSpan="false"
+			emptySpanXL="0"
+			emptySpanL="4"
+			emptySpanM="0"
+			emptySpanS="0"
+			columnsXL="2"
+			columnsL="1"
+			columnsM="1"
+			singleContainerFullSize="false" >
+			<f:content>
+				<Label text="{i18n>docno}" />
+				<Input >
+                <layoutData>
+						<l:GridData span="XL3 L2 M3 S5" />
+					</layoutData>
+				</Input>
+				<Input >
+					<layoutData>
+						<l:GridData span="XL3 L2 M3 S5" />
+					</layoutData>
+				</Input>
+
+				<Label text="{i18n>date}" />
+				<DatePicker >
+					<layoutData>
+						<l:GridData span="XL3 L2 M3 S5" />
+					</layoutData>
+				</DatePicker>
+				<DatePicker >
+					<layoutData>
+						<l:GridData span="XL3 L2 M3 S5" />
+					</layoutData>
+				</DatePicker>
+				
+
+				<Label text="{i18n>compcode}" />
+				<Input >
+					<layoutData>
+						<l:GridData span="XL3 L2 M3 S5" />
+					</layoutData>
+				</Input>
+				<Input >
+					<layoutData>
+						<l:GridData span="XL3 L2 M3 S5" />
+					</layoutData>
+				</Input>
+				<Label text="{i18n>fiscyear}" />
+				<DatePicker valueFormat="yyyy" displayFormat="yyyy" >
+					<layoutData>
+						<l:GridData span="XL3 L2 M3 S5" />
+					</layoutData>
+				</DatePicker>
+				<DatePicker >
+					<layoutData>
+						<l:GridData span="XL3 L2 M3 S5" />
+					</layoutData>
+				</DatePicker>
+				<Label text="{i18n>doctype}" />
+				<Input >
+					<layoutData>
+						<l:GridData span="XL3 L2 M3 S5" />
+					</layoutData>
+				</Input>
+				<Input >
+					<layoutData>
+						<l:GridData span="XL3 L2 M3 S5" />
+					</layoutData>
+				</Input>
+			</f:content>
+		</f:SimpleForm>
+	</VBox>
+        </content>
+    </Page>
+</mvc:View>

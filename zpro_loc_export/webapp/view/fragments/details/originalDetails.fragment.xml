@@ -6,21 +6,57 @@
 >
     <Table
         id="idTbl_"
-       
+        mode="Delete"
         sticky="ColumnHeaders,HeaderToolbar"
         growing="true"
     >
-     
-
+        <headerToolbar>
+            <OverflowToolbar>
+               
+                <Button
+                    tooltip="Mutiselect"
+                    icon="sap-icon://multiselect-none"
+                    press="handleMultiSelectButtonPressed"
+                    visible="false"
+                />
+                <Button
+                    tooltip="Sort"
+                    icon="sap-icon://sort"
+                    press="handleSortButtonPressed"
+                    visible="false"
+                />
+                <Button
+                    tooltip="Filter"
+                    icon="sap-icon://filter"
+                    press="handleFilterButtonPressed"
+                    visible="false"
+                />
+                <Button
+                    tooltip="Group"
+                    icon="sap-icon://group-2"
+                    press="handleGroupButtonPressed"
+                    visible="false"
+                />
+                <ToolbarSpacer />
+                <Button
+                    id="idBtnAddNew"
+                    text="Add new"
+                    press="onAddNew"
+                    type="Emphasized"
+                    tooltip="Add new row"
+                    icon="sap-icon://add"
+                />
+            </OverflowToolbar>
+        </headerToolbar>
         <columns>
             <Column>
                 <Text text="SO Items" />
             </Column>
 
-            <Column demandPopin="true">
+            <Column >
                 <Text text="Export Material " />
             </Column>
-            <Column demandPopin="true">
+            <Column >
                 <Text text="Material Description " />
             </Column>
             <Column>
@@ -46,22 +82,31 @@
             </Column>
         </columns>
 
-        <ColumnListItem
-            type="Navigation"
-            press="onShowDocumentItems"
-        >
+        <ColumnListItem>
             <cells>
-                <Input />
-                <Input />
-                <Input />
-                <Input />
-                <Input />
-                <Input />
-                <Input />
-                <Input />
-                <Input />
-                <Input />
-            </cells>
+                <Input visible="{oViewModel>/EditVisible}" />
+                <Input visible="{oViewModel>/EditVisible}" />
+                <Input visible="{oViewModel>/EditVisible}" />
+                <Input visible="{oViewModel>/EditVisible}" />
+                <Input visible="{oViewModel>/EditVisible}" />
+                <Input visible="{oViewModel>/EditVisible}" />
+                <Input visible="{oViewModel>/EditVisible}" />
+                <Input visible="{oViewModel>/EditVisible}" />
+                <Input visible="{oViewModel>/EditVisible}" />
+                <Input visible="{oViewModel>/EditVisible}" />
+                <Text visible="{oViewModel>/TextVisible}" />
+                <Text visible="{oViewModel>/TextVisible}" />
+                <Text visible="{oViewModel>/TextVisible}" />
+                <Text visible="{oViewModel>/TextVisible}" />
+                <Text visible="{oViewModel>/TextVisible}" />
+                <Text visible="{oViewModel>/TextVisible}" />
+                <Text visible="{oViewModel>/TextVisible}" />
+                <Text visible="{oViewModel>/TextVisible}" />
+                <Text visible="{oViewModel>/TextVisible}" />
+                <Text visible="{oViewModel>/TextVisible}" />
+                <Text visible="{oViewModel>/TextVisible}" />
+                
+                          </cells>
         </ColumnListItem>
     </Table>
 </core:FragmentDefinition>
