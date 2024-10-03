@@ -21,7 +21,7 @@
         >
             <items>
                 <IconTabFilter
-                    text="Section 1"
+                    text="{i18n>sec1}"
                     iconColor="Contrast"
                 >
                     <form:SimpleForm
@@ -41,7 +41,7 @@
                         <Input />
                         <Label text='Latest document date - Original' />
                         <Input />
-                        <Label text='Shipmet Last Date  - Amendment' />
+                        <Label text='Shipment Last Date  - Amendment' />
                         <Input />
                         <Label text='Latest document date - Amendment' />
                         <Input />

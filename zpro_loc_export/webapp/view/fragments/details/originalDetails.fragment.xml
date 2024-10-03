@@ -9,6 +9,7 @@
         mode="Delete"
         sticky="ColumnHeaders,HeaderToolbar"
         growing="true"
+        items="{oTableData>/}"
     >
         <headerToolbar>
             <OverflowToolbar>
@@ -40,7 +41,7 @@
                 <ToolbarSpacer />
                 <Button
                     id="idBtnAddNew"
-                    text="Add new"
+                    text="{i18n>addnew}"
                     press="onAddNew"
                     type="Emphasized"
                     tooltip="Add new row"
@@ -50,61 +51,60 @@
         </headerToolbar>
         <columns>
             <Column>
-                <Text text="SO Items" />
+                <Text text="{i18n>soitems}" />
             </Column>
 
             <Column >
-                <Text text="Export Material " />
+                <Text text="{i18n>exportmaterial}" />
             </Column>
             <Column >
-                <Text text="Material Description " />
+                <Text text="{i18n>materialdescrip}" />
             </Column>
             <Column>
-                <Text text="LC Qty" />
+                <Text text="{i18n>lcqty}" />
             </Column>
             <Column>
-                <Text text="Per unit price" />
+                <Text text="{i18n>perunitprice}" />
             </Column>
             <Column>
-                <Text text="UOM" />
+                <Text text="{i18n>uom}" />
             </Column>
             <Column>
-                <Text text="Total  Value " />
+                <Text text="{i18n>totalval}" />
             </Column>
             <Column>
-                <Text text="SO currency " />
+                <Text text="{i18n>socurrency}" />
             </Column>
             <Column>
-                <Text text="Exchange Rate " />
+                <Text text="{i18n>exchangerate}" />
             </Column>
             <Column>
-                <Text text="Total INR value " />
+                <Text text="{i18n>totalinrval}" />
             </Column>
         </columns>
 
         <ColumnListItem>
             <cells>
+                <Text text="{oTableData>Posnr}" visible="{oViewModel>/TextVisible}" />
+                <Text text="{oTableData>Matnr}" visible="{oViewModel>/TextVisible}" />
+                <Text text="{oTableData>MatDesc}" visible="{oViewModel>/TextVisible}" />
+                <Text text="{oTableData>LcQty}" visible="{oViewModel>/TextVisible}" />
+                <Text text="{oTableData>UnitPrice}" visible="{oViewModel>/TextVisible}" />
+                <Text text="{oTableData>Meins}" visible="{oViewModel>/TextVisible}" />
+                <Text text="{oTableData>TotalVal}" visible="{oViewModel>/TextVisible}" />
+                <Text text="{oTableData>LcCurrency}" visible="{oViewModel>/TextVisible}" />
+                <Text text="{oTableData>ExchangeRate}" visible="{oViewModel>/TextVisible}" />
+                <Text text="{oTableData>AmountInr}" visible="{oViewModel>/TextVisible}" />
                 <Input visible="{oViewModel>/EditVisible}" />
                 <Input visible="{oViewModel>/EditVisible}" />
                 <Input visible="{oViewModel>/EditVisible}" />
                 <Input visible="{oViewModel>/EditVisible}" />
                 <Input visible="{oViewModel>/EditVisible}" />
                 <Input visible="{oViewModel>/EditVisible}" />
+                <Input  visible="{oViewModel>/EditVisible}" />
                 <Input visible="{oViewModel>/EditVisible}" />
                 <Input visible="{oViewModel>/EditVisible}" />
                 <Input visible="{oViewModel>/EditVisible}" />
-                <Input visible="{oViewModel>/EditVisible}" />
-                <Text visible="{oViewModel>/TextVisible}" />
-                <Text visible="{oViewModel>/TextVisible}" />
-                <Text visible="{oViewModel>/TextVisible}" />
-                <Text visible="{oViewModel>/TextVisible}" />
-                <Text visible="{oViewModel>/TextVisible}" />
-                <Text visible="{oViewModel>/TextVisible}" />
-                <Text visible="{oViewModel>/TextVisible}" />
-                <Text visible="{oViewModel>/TextVisible}" />
-                <Text visible="{oViewModel>/TextVisible}" />
-                <Text visible="{oViewModel>/TextVisible}" />
-                <Text visible="{oViewModel>/TextVisible}" />
                 
                           </cells>
         </ColumnListItem>

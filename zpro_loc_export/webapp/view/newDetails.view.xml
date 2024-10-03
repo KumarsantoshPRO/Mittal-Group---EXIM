@@ -246,7 +246,7 @@
                                     >
                                         <core:Fragment
                                             id="idFrg_OriginalDetials"
-                                            fragmentName="zmc.exim.pro.sk.zprolocexport.view.fragments.details.originalDetails"
+                                            fragmentName="zmc.exim.pro.sk.zprolocexport.view.fragments.details.originalDetailsEdit"
                                             type="XML"
                                         />
                                     </IconTabFilter>
@@ -256,7 +256,7 @@
                                     >
                                         <core:Fragment
                                             id="idFrg_AmendmentDetials"
-                                            fragmentName="zmc.exim.pro.sk.zprolocexport.view.fragments.details.amendmentDetails"
+                                            fragmentName="zmc.exim.pro.sk.zprolocexport.view.fragments.details.amendmentDetailsEdit"
                                             type="XML"
                                         />
                                     </IconTabFilter>

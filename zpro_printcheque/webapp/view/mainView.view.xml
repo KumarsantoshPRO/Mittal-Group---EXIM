@@ -2,7 +2,7 @@
     xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns:l="sap.ui.layout" xmlns:core="sap.ui.core"
 	xmlns:f="sap.ui.layout.form"
     xmlns="sap.m">
-    <Page id="page" title="{i18n>title}">
+    <Page id="page">
         <content >
             <VBox class="sapUiSmallMargin">
 		<f:SimpleForm id="SimpleFormChange354wideDual"
@@ -23,70 +23,112 @@
 			columnsM="1"
 			singleContainerFullSize="false" >
 			<f:content>
+			<!-- Document Number -->
 				<Label text="{i18n>docno}" />
-				<Input placeholder="Enter Document Number From" >
+				<Input value="{oViewModel>/documentNumberfrm}" placeholder="Enter Document Number From" >
                 <layoutData>
 						<l:GridData span="XL3 L2 M3 S5" />
 					</layoutData>
 				</Input>
-				<Input placeholder="Enter Document Number To" >
+				<Input value="{oViewModel>/documentNumberto}" placeholder="Enter Document Number To" >
 					<layoutData>
 						<l:GridData span="XL3 L2 M3 S5" />
 					</layoutData>
 				</Input>
-
+			<!-- Date -->
 				<Label text="{i18n>date}" />
-				<DatePicker >
+				<DatePicker value="{path:'oViewModel>/datefrm', type:'sap.ui.model.type.Date',
+                                        formatOptions: {
+                                            style: 'medium',
+                                            strictParsing: true,
+                                            type: 'sap.ui.model.type.Date',
+                                        formatOptions: {UTC:true, style: 'medium'}
+                                        }
+                                    }"  >
 					<layoutData>
 						<l:GridData span="XL3 L2 M3 S5" />
 					</layoutData>
 				</DatePicker>
-				<DatePicker >
+				<DatePicker  value="{path:'oViewModel>/dateto', type:'sap.ui.model.type.Date',
+                                        formatOptions: {
+                                            style: 'medium',
+                                            strictParsing: true,
+                                            type: 'sap.ui.model.type.Date',
+                                        formatOptions: {UTC:true, style: 'medium'}
+                                        }
+                                    }" >
 					<layoutData>
 						<l:GridData span="XL3 L2 M3 S5" />
 					</layoutData>
 				</DatePicker>
 				
-
+			<!-- Company Code -->
 				<Label text="{i18n>compcode}" />
-				<Input placeholder="Enter Company Code" >
+				<Input value="{oViewModel>/cmpnycodefrm}" placeholder="Enter Company Code" >
 					<layoutData>
 						<l:GridData span="XL3 L2 M3 S5" />
 					</layoutData>
 				</Input>
-				<Input placeholder="Enter Company Code" >
+				<Input value="{oViewModel>/cmpnycodeto}" placeholder="Enter Company Code" >
 					<layoutData>
 						<l:GridData span="XL3 L2 M3 S5" />
 					</layoutData>
 				</Input>
+			<!-- Fiscal Year -->
 				<Label text="{i18n>fiscyear}" />
-				<DatePicker valueFormat="yyyy" displayFormat="yyyy" >
+				<DatePicker value="{path:'oViewModel>/fisccalyrfrm', type:'sap.ui.model.type.Year',
+                                        formatOptions: {
+                                            style: 'medium',
+                                            strictParsing: true,
+                                            type: 'sap.ui.model.type.Date',
+                                        formatOptions: {UTC:true, style: 'medium'},
+										valueFormat: 'yyyy',
+										displayFormat:'yyyy'
+                                        }
+                                    }" valueFormat="yyyy" displayFormat="yyyy" >
 					<layoutData>
 						<l:GridData span="XL3 L2 M3 S5" />
 					</layoutData>
 				</DatePicker>
-				<DatePicker valueFormat="yyyy" displayFormat="yyyy"  >
+				<DatePicker value="{path:'oViewModel>/fiscalyrto', type:'sap.ui.model.type.Year',
+                                        formatOptions: {
+                                            style: 'medium',
+                                            strictParsing: true,
+                                            type: 'sap.ui.model.type.Date',
+                                        formatOptions: {UTC:true, style: 'medium'}
+                                        }
+                                    }"  valueFormat="yyyy" displayFormat="yyyy"  >
 					<layoutData>
 						<l:GridData span="XL3 L2 M3 S5" />
 					</layoutData>
 				</DatePicker>
-				<Label text="{i18n>doctype}" />
-				<Input placeholder="Enter Document Type" >
+			<!-- Document Type -->
+				<!-- <Label text="{i18n>doctype}" />
+				<Input value="{oViewModel>/documenttypefrm}" placeholder="Enter Document Type" >
 					<layoutData>
 						<l:GridData span="XL3 L2 M3 S5" />
 					</layoutData>
 				</Input>
-				<Input placeholder="Enter Document Type" >
+				<Input value="{oViewModel>/documenttypeto}" placeholder="Enter Document Type" >
 					<layoutData>
 						<l:GridData span="XL3 L2 M3 S5" />
 					</layoutData>
-				</Input>
-                <Button text="Go" type="Emphasized"></Button>
+				</Input> -->
+                <Button text="Clear"  press="onClearDataSearch" icon="sap-icon://clear-filter" type="Attention"></Button>
+                <Button text="Go" icon="sap-icon://search" press="onChequeDataSearch" type="Emphasized"></Button>
 			</f:content>
 		</f:SimpleForm>
 	</VBox>
-        <Table mode="SingleSelectLeft">
-            <t
+	<!-- Table -->
+        <Table items="{oChequeDataModel>/}"   id="idChequeTable" mode="MultiSelect">
+            <headerToolbar>
+				
+                <OverflowToolbar >
+					<!-- <Text text="{= ${oChequeDataModel>/}.length}"></Text> -->
+                    <ToolbarSpacer />
+                    <Button text="Print" press="onPrintCheque" type="Default" icon="sap-icon://print" />
+                </OverflowToolbar>
+            </headerToolbar>
             <columns>
                 <Column >
                     <Title text="{i18n>docno}"></Title>
@@ -100,25 +142,21 @@
                 <Column >
                     <Title text="{i18n>amnt}"></Title>
                 </Column>
+                <Column visible="false" >
+                    <Title text="{i18n>supplierName}"></Title>
+                </Column>
+                <Column visible="false" >
+                    <Title text="{i18n>date}"></Title>
+                </Column>
             </columns>
             <ColumnListItem >
                 <cells>
-                    <Text text="1"></Text>
-                </cells>
-            </ColumnListItem>
-            <ColumnListItem >
-                <cells>
-                    <Text text="0000"></Text>
-                </cells>
-            </ColumnListItem>
-            <ColumnListItem >
-                <cells>
-                    <Text text="2024"></Text>
-                </cells>
-            </ColumnListItem>
-            <ColumnListItem >
-                <cells>
-                    <Text text="1000.00"></Text>
+                    <Text text="{oChequeDataModel>AccountingDocument}"></Text>
+                    <Text text="{oChequeDataModel>CompanyCode}"></Text>
+                    <Text text="{oChequeDataModel>FiscalYear}"></Text>
+                    <Text text="{oChequeDataModel>AmountInFunctionalCurrency}"></Text>
+                    <Text text="{oChequeDataModel>SupplierName}"></Text>
+                    <Text text="{oChequeDataModel>DocumentDate}"></Text>
                 </cells>
             </ColumnListItem>
         </Table>

@@ -1,5 +1,5 @@
 <mvc:View
-    controllerName="zmg.pro.exim.zprolocimport.controller.Details"
+    controllerName="zmg.pro.exim.zprolocimport.controller.Details_D2"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns:core="sap.ui.core"
     xmlns="sap.m"

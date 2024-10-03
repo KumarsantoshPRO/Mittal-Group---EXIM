@@ -1,99 +1,131 @@
 {
-  "_version": "1.65.0",
-  "sap.app": {
-    "id": "zmc.exim.pro.zproprintcheque",
-    "type": "application",
-    "i18n": "i18n/i18n.properties",
-    "applicationVersion": {
-      "version": "0.0.1"
+    "_version": "1.65.0",
+    "sap.app": {
+        "id": "zmc.exim.pro.zproprintcheque",
+        "type": "application",
+        "i18n": "i18n/i18n.properties",
+        "applicationVersion": {
+            "version": "0.0.1"
+        },
+        "title": "{{appTitle}}",
+        "description": "{{appDescription}}",
+        "resources": "resources.json",
+        "sourceTemplate": {
+            "id": "@sap/generator-fiori:basic",
+            "version": "1.15.0",
+            "toolsId": "73fd60de-6973-40dd-a534-7fa4a47f861b"
+        },
+        "dataSources": {
+            "ZPAY_CHEQUE_PRINT_SRV_SB_Annotation": {
+                "uri": "/destinations/S4_SAML/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Annotations(TechnicalName='ZPAY_CHEQUE_PRINT_SRV_SB_VAN',Version='0001')/$value/",
+                "type": "ODataAnnotation",
+                "settings": {
+                    "localUri": "localService/ZPAY_CHEQUE_PRINT_SRV_SB_Annotation.xml"
+                }
+            },
+            "ZPAY_CHEQUE_PRINT_SRV_SB": {
+                "uri": "/sap/opu/odata/sap/ZPAY_CHEQUE_PRINT_SRV_SB/",
+                "type": "OData",
+                "settings": {
+                    "annotations": [
+                        "ZPAY_CHEQUE_PRINT_SRV_SB_Annotation"
+                    ],
+                    "localUri": "localService/metadata.xml",
+                    "odataVersion": "2.0"
+                }
+            }
+        }
     },
-    "title": "{{appTitle}}",
-    "description": "{{appDescription}}",
-    "resources": "resources.json",
-    "sourceTemplate": {
-      "id": "@sap/generator-fiori:basic",
-      "version": "1.15.0",
-      "toolsId": "73fd60de-6973-40dd-a534-7fa4a47f861b"
+    "sap.ui": {
+        "technology": "UI5",
+        "icons": {
+            "icon": "",
+            "favIcon": "",
+            "phone": "",
+            "phone@2": "",
+            "tablet": "",
+            "tablet@2": ""
+        },
+        "deviceTypes": {
+            "desktop": true,
+            "tablet": true,
+            "phone": true
+        }
+    },
+    "sap.ui5": {
+        "flexEnabled": false,
+        "dependencies": {
+            "minUI5Version": "1.128.1",
+            "libs": {
+                "sap.m": {},
+                "sap.ui.core": {}
+            }
+        },
+        "contentDensities": {
+            "compact": true,
+            "cozy": true
+        },
+        "models": {
+            "i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "settings": {
+                    "bundleName": "zmc.exim.pro.zproprintcheque.i18n.i18n"
+                }
+            },
+            "": {
+                "preload": true,
+                "dataSource": "ZPAY_CHEQUE_PRINT_SRV_SB",
+                "settings": {
+                    "defaultBindingMode": "TwoWay",
+                    "defaultCountMode": "Inline",
+                    "refreshAfterChange": false,
+                    "metadataUrlParams": {
+                        "sap-value-list": "none"
+                    }
+                }
+            }
+        },
+        "resources": {
+            "css": [
+                {
+                    "uri": "css/style.css"
+                }
+            ]
+        },
+        "routing": {
+            "config": {
+                "routerClass": "sap.m.routing.Router",
+                "viewType": "XML",
+                "async": true,
+                "viewPath": "zmc.exim.pro.zproprintcheque.view",
+                "controlAggregation": "pages",
+                "controlId": "app",
+                "clearControlAggregation": false
+            },
+            "routes": [
+                {
+                    "name": "RoutemainView",
+                    "pattern": ":?query:",
+                    "target": [
+                        "TargetmainView"
+                    ]
+                }
+            ],
+            "targets": {
+                "TargetmainView": {
+                    "viewType": "XML",
+                    "transition": "slide",
+                    "clearControlAggregation": false,
+                    "viewId": "mainView",
+                    "viewName": "mainView"
+                }
+            }
+        },
+        "rootView": {
+            "viewName": "zmc.exim.pro.zproprintcheque.view.App",
+            "type": "XML",
+            "async": true,
+            "id": "App"
+        }
     }
-  },
-  "sap.ui": {
-    "technology": "UI5",
-    "icons": {
-      "icon": "",
-      "favIcon": "",
-      "phone": "",
-      "phone@2": "",
-      "tablet": "",
-      "tablet@2": ""
-    },
-    "deviceTypes": {
-      "desktop": true,
-      "tablet": true,
-      "phone": true
-    }
-  },
-  "sap.ui5": {
-    "flexEnabled": false,
-    "dependencies": {
-      "minUI5Version": "1.128.1",
-      "libs": {
-        "sap.m": {},
-        "sap.ui.core": {}
-      }
-    },
-    "contentDensities": {
-      "compact": true,
-      "cozy": true
-    },
-    "models": {
-      "i18n": {
-        "type": "sap.ui.model.resource.ResourceModel",
-        "settings": {
-          "bundleName": "zmc.exim.pro.zproprintcheque.i18n.i18n"
-        }
-      }
-    },
-    "resources": {
-      "css": [
-        {
-          "uri": "css/style.css"
-        }
-      ]
-    },
-    "routing": {
-      "config": {
-        "routerClass": "sap.m.routing.Router",
-        "viewType": "XML",
-        "async": true,
-        "viewPath": "zmc.exim.pro.zproprintcheque.view",
-        "controlAggregation": "pages",
-        "controlId": "app",
-        "clearControlAggregation": false
-      },
-      "routes": [
-        {
-          "name": "RoutemainView",
-          "pattern": ":?query:",
-          "target": [
-            "TargetmainView"
-          ]
-        }
-      ],
-      "targets": {
-        "TargetmainView": {
-          "viewType": "XML",
-          "transition": "slide",
-          "clearControlAggregation": false,
-          "viewId": "mainView",
-          "viewName": "mainView"
-        }
-      }
-    },
-    "rootView": {
-      "viewName": "zmc.exim.pro.zproprintcheque.view.App",
-      "type": "XML",
-      "async": true,
-      "id": "App"
-    }
-  }
 }

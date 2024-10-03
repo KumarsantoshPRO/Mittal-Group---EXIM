@@ -10,9 +10,10 @@ sap.ui.define([
                 // debugger;
                this.oModel = this.getOwnerComponent().getModel()
                //model for header Data
-               var oHead = new JSONModel();
-               this.getView().setModel(oHead,"oHeaderModel")
-            //    this.getHeaderData()
+               var oHeaderModel = new JSONModel();
+               this.getView().setModel(oHeaderModel,"oHeaderModel")
+               this.getHeaderData();
+               this.getTableData();
             var oViewModel=new JSONModel({
                 "EditVisible":false,
                 "TextVisible":true
@@ -20,9 +21,42 @@ sap.ui.define([
             this.getView().setModel(oViewModel,"oViewModel")
             },
             getHeaderData:function(){
-                this.oModel().read("/ZRC_LCEXP_HEAD",{
+                var oHeaderdata = new JSONModel();
+                this.getView().setModel(oHeaderdata, "oHeaderData")
+                this.oModel.read("/ZRC_LCEXP_HEAD",{
                     success:function(oData){
-                        this.getView().getModel("oHeaderModel").setData(oData);
+                        this.getView().getModel("oHeaderData").setData(oData.results[0]);
+                        this.getView().byId("idCoreTitle").setText("LC Number: " + oData.results[0].LcNo);
+                        this.getView().byId("idCoreTitle2").setText("LC Number: " + oData.results[0].LcNo);
+                        console.log(oData.results[0]);
+                    }.bind(this),
+                    Error:function(oError){
+                        console.log(oError)
+                    }
+                })
+            },
+            getTableData:function(){
+                var oTabledata = new JSONModel();
+                this.getView().setModel(oTabledata, "oTableData")
+                this.oModel.read("/ZC_LCEXP_ITEM",{
+                    success:function(oData){
+                        this.getView().getModel("oTableData").setData(oData.results);
+                        console.log(oData.results[0]);
+                    }.bind(this),
+                    Error:function(oError){
+                        console.log(oError)
+                    }
+                })
+            },
+            getHeaderData:function(){
+                var oHeaderdata = new JSONModel();
+                this.getView().setModel(oHeaderdata, "oHeaderData")
+                this.oModel.read("/ZRC_LCEXP_HEAD",{
+                    success:function(oData){
+                        this.getView().getModel("oHeaderData").setData(oData.results[0]);
+                        this.getView().byId("idCoreTitle").setText("LC Number: " + oData.results[0].LcNo);
+                        this.getView().byId("idCoreTitle2").setText("LC Number: " + oData.results[0].LcNo);
+                        console.log(oData.results[0]);
                     }.bind(this),
                     Error:function(oError){
                         console.log(oError)

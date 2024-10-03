@@ -21,7 +21,7 @@
             <f:DynamicPageTitle stateChange="onDPTStateChange">
                 <f:heading>
                     <Title
-                        text="Filter Bar"
+                        text="{i18n>filterbar}"
                         textAlign="Center"
                         titleStyle="H3"
                     />
@@ -29,7 +29,7 @@
                 <f:actions>
                     <Button
                         id="idBtnDPTFilterGo"
-                        text="Search"
+                        text="{i18n>search}"
                         press="onShowDetails"
                         visible="true"
                         type="Emphasized"
@@ -37,12 +37,13 @@
                     />
                     <Button
                         id="idBtnDPTFilterClear"
-                        text="Clear"
+                        text="{i18n>clear}"
                         press="onClearFilters"
                         visible="true"
                         type="Attention"
                         icon="sap-icon://clear-filter"
                     />
+                    
                 </f:actions>
             </f:DynamicPageTitle>
         </f:title>
@@ -58,7 +59,7 @@
                         columnsXL="3"
                     >
                         <form:content>
-                            <Label text="LC Number" />
+                            <Label text="{i18n>lcNum}" />
                             <Input
                                 id="idInpF4_LCNumber"
                                 value=""
@@ -67,14 +68,14 @@
                                 autocomplete="true"
                                 placeholder="Letter of Contract No"
                             />
-                            <Label text="LC Expiry Date" />
+                            <Label text="{i18n>lcExpDate}" />
                             <DatePicker
                                 id="idDP_LCExpiryDate"
                                 value=""
                                 placeholder="LC Expiry Date"
                             />
 
-                            <Label text="Sales Order" />
+                            <Label text="{i18n>salord}" />
                             <Input
                                 id="idInpF4_SalesOrder"
                                 value=""
@@ -83,13 +84,13 @@
                                 autocomplete="true"
                                 placeholder="Sales Order"
                             />
-                            <Label text="LC Issue Date" />
+                            <Label text="{i18n>lcdate}" />
                             <DatePicker
                                 id="idDP_LCIssueDate"
                                 value=""
                                 placeholder="LC Issue Date"
                             />
-                            <Label text="SC Number" />
+                            <Label text="{i18n>scnum}" />
                             <Input
                                 id="idInpF4_SCNumber"
                                 value=""
@@ -107,14 +108,14 @@
         <f:content>
             <Table
                 id="idTableLCList"
-        
+                items="{oTableData>/}"
                 sticky="ColumnHeaders,HeaderToolbar"
                 growing="true"
             >
                 <headerToolbar>
                     <OverflowToolbar>
                         <Title
-                            text="LC List"
+                            text="{i18n>lclist}"
                             level="H2"
                         />
                         <Button
@@ -150,7 +151,7 @@
                         <ToolbarSpacer />
                         <Button
                             id="idBtnAddNew"
-                            text="Create new LC"
+                            text="{i18n>newlc}"
                             press="onAddNew"
                             type="Emphasized"
                             tooltip="Create new Letter Of Credit"
@@ -160,29 +161,29 @@
                 </headerToolbar>
                 <columns>
                     <Column>
-                        <Text text="LC No" />
+                        <Text text="{i18n>lcno}" />
                     </Column>
 
                     <Column demandPopin="true">
-                        <Text text="SC No" />
+                        <Text text="{i18n>scno}" />
                     </Column>
                     <Column demandPopin="true">
-                        <Text text="SO No" />
+                        <Text text="{i18n>sono}" />
                     </Column>
                     <Column>
-                        <Text text="LC Type" />
+                        <Text text="{i18n>lctype}" />
                     </Column>
                     <Column>
-                        <Text text="LC Issue Date" />
+                        <Text text="{i18n>lcdate}" />
                     </Column>
                     <Column>
-                        <Text text="LC Expiry Date" />
+                        <Text text="{i18n>lcexpdate}" />
                     </Column>
                     <Column>
-                        <Text text="Shipmet Last Date" />
+                        <Text text="{i18n>shiplastdate}" />
                     </Column>
                     <Column>
-                        <Text text="LC value " />
+                        <Text text="{i18n>lcvalue}" />
                     </Column>
                 </columns>
                 <ColumnListItem
@@ -190,14 +191,14 @@
                     press="onShowLCDetails"
                 >
                     <cells>
-                        <Text text="LC-0001" />
-                        <Text text="SC-001" />
-                        <Text text="SO-001" />
-                        <Text text=" Revokable" />
-                        <Text text="27/08/2024" />
-                        <Text text="10/09/2024" />
-                        <Text text="09/09/2024" />
-                        <Text text="10,000 INR" />
+                        <Text text="{oTableData>LcNo}" />
+                        <Text text="{oTableData>SalesContract}" />
+                        <Text text="{oTableData>SalesOrder}" />
+                        <Text text="{oTableData>LcType}" />
+                        <Text text="{oTableData>LatestDocumentDateOri}" />
+                        <Text text="{oTableData>LcExpiryDateOriginal}" />
+                        <Text text="{oTableData>ShipmetLastDateOri}" />
+                        <Text text="{oTableData>LcValue}" />
                     </cells>
                 </ColumnListItem>
             </Table>
@@ -208,7 +209,7 @@
                 <ToolbarSpacer />
                 <Button
                     type="Emphasized"
-                    text="Print"
+                    text="{i18n>print}"
                     icon="sap-icon://print"
                 />
             </OverflowToolbar>

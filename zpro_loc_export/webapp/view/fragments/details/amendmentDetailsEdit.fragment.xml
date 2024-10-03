@@ -1,0 +1,109 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:form="sap.ui.layout.form"
+    xmlns:u="sap.ui.unified"
+>
+    <Table
+        id="idTbl_"
+        mode="Delete"
+        sticky="ColumnHeaders,HeaderToolbar"
+        growing="true"
+        items=""
+    >
+        <headerToolbar>
+            <OverflowToolbar>
+                <Button text="{i18n>copyfromori}" />
+                <Button
+                    tooltip="Search any key word"
+                    icon="sap-icon://search"
+                    press="handleSeacrch"
+                    visible="false"
+                />
+                <Button
+                    tooltip="Mutiselect"
+                    icon="sap-icon://multiselect-none"
+                    press="handleMultiSelectButtonPressed"
+                    visible="false"
+                />
+                <Button
+                    tooltip="Sort"
+                    icon="sap-icon://sort"
+                    press="handleSortButtonPressed"
+                    visible="false"
+                />
+                <Button
+                    tooltip="Filter"
+                    icon="sap-icon://filter"
+                    press="handleFilterButtonPressed"
+                    visible="false"
+                />
+                <Button
+                    tooltip="Group"
+                    icon="sap-icon://group-2"
+                    press="handleGroupButtonPressed"
+                    visible="false"
+                />
+                <ToolbarSpacer />
+                <Button
+                    id="idBtnAddNew"
+                    text="{i18n>addnew}"
+                    press="onAddNew"
+                    type="Emphasized"
+                    tooltip="Add new row"
+                    icon="sap-icon://add"
+                />
+            </OverflowToolbar>
+        </headerToolbar>
+
+        <columns>
+            <Column>
+                <Text text="{i18n>soitems}" />
+            </Column>
+
+            <Column demandPopin="true">
+                <Text text="{i18n>exportmaterial}" />
+            </Column>
+            <Column demandPopin="true">
+                <Text text="{i18n>materialdescrip}" />
+            </Column>
+            <Column>
+                <Text text="{i18n>lcqty}" />
+            </Column>
+            <Column>
+                <Text text="{i18n>perunitprice}" />
+            </Column>
+            <Column>
+                <Text text="{i18n>uom}" />
+            </Column>
+            <Column>
+                <Text text="{i18n>totalval}" />
+            </Column>
+            <Column>
+                <Text text="{i18n>socurrency}" />
+            </Column>
+            <Column>
+                <Text text="{i18n>exchangerate}" />
+            </Column>
+            <Column>
+                <Text text="{i18n>totalinrval}" />
+            </Column>
+        </columns>
+
+        <ColumnListItem>
+            <cells>
+                <Input />
+                <Input />
+                <Input />
+                <Input />
+                <Input />
+                <Input />
+                <Input />
+                <Input />
+                <Input />
+                <Input />
+                
+            </cells>
+        </ColumnListItem>
+    </Table>
+</core:FragmentDefinition>
