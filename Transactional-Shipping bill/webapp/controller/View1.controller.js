@@ -3,16 +3,267 @@ sap.ui.define([
     "sap/ui/core/Fragment",
     "sap/ui/model/json/JSONModel",
     "sap/ui/model/Filter",
-    "sap/ui/model/FilterOperator"
+    "sap/ui/model/FilterOperator",
+    "sap/m/Menu",
+    "sap/m/MenuItem",
+    "sap/m/table/columnmenu/Menu",
+    "sap/m/table/columnmenu/ActionItem",
+    "sap/m/ToolbarSpacer",
+    "sap/ui/thirdparty/jquery",
+    "sap/ui/Device",
+    "sap/ui/core/date/UI5Date",
+    'sap/m/p13n/Engine',
+    'sap/m/p13n/SelectionController',
+    'sap/m/p13n/SortController',
+    'sap/m/p13n/GroupController',
+    'sap/m/p13n/MetadataHelper',
+    'sap/ui/model/Sorter',
+    'sap/ui/core/library',
+    'sap/m/table/ColumnWidthController',
+    'sap/m/p13n/FilterController',
+    'sap/ui/export/Spreadsheet',
+    "sap/ui/export/library",
 
 ],
-    function (Controller, Fragment, JSONModel, Filter, FilterOperator) {
+    function (Controller, Fragment, JSONModel, Filter, FilterOperator, MenuM, MenuItemM, ColumnMenu, ActionItem, ToolbarSpacer, jQuery, Device, UI5Dat, Engine, SelectionController, SortController, GroupController, MetadataHelper, Sorter, CoreLibrary, ColumnWidthController, FilterController, Spreadsheet, exportLibrary) {
         "use strict";
-
+        var EdmType = exportLibrary.EdmType;
         return Controller.extend("zmg.pro.exim.transactionalshippingbill.exim.controller.View1", {
             onInit: function () {
                 this.getCallForTable([]);
+
+                // this.associateHeaderMenus();
+
+                this._registerForP13n();
             },
+
+            _registerForP13n: function () {
+                const oTable = this.byId("table");
+
+                this.oMetadataHelper = new MetadataHelper([{
+                    key: "idClmShipBill",
+                    label: "Shipping Bill No",
+                    path: "ZshippingBillNo"
+                },
+                {
+                    key: "idClmDocNo",
+                    label: "Invoice Document",
+                    path: "ZinvoiceDocument"
+                },
+                {
+                    key: "idClmPortOfLoading",
+                    label: "Port Of Loading",
+                    path: "ZportOfLoading"
+                }
+
+
+
+
+                ]);
+                this._mIntialWidth = {
+                    "idClmShipBill": "11rem",
+                    "idClmDocNo": "11rem",
+                    "idClmPortOfLoading": "11rem"
+                };
+                Engine.getInstance().register(oTable, {
+                    helper: this.oMetadataHelper,
+                    controller: {
+                        Columns: new SelectionController({
+                            targetAggregation: "columns",
+                            control: oTable
+                        }),
+                        Sorter: new SortController({
+                            control: oTable
+                        }),
+                        Groups: new GroupController({
+                            control: oTable
+                        }),
+                        ColumnWidth: new ColumnWidthController({
+                            control: oTable
+                        }),
+                        Filter: new FilterController({
+                            control: oTable
+                        })
+                    }
+                });
+
+                Engine.getInstance().attachStateChange(this.handleStateChange.bind(this));
+            },
+
+            openPersoDialog: function (oEvt) {
+                this._openPersoDialog(["Columns", "Sorter", "Groups", "Filter"], oEvt.getSource());
+            },
+
+            _openPersoDialog: function (aPanels, oSource) {
+                var oTable = this.byId("table");
+
+                Engine.getInstance().show(oTable, aPanels, {
+                    contentHeight: aPanels.length > 1 ? "50rem" : "35rem",
+                    contentWidth: aPanels.length > 1 ? "45rem" : "32rem",
+                    source: oSource || oTable
+                });
+            },
+            openPersoDialog: function (oEvt) {
+                const oTable = this.byId("table");
+
+                Engine.getInstance().show(oTable, ["Columns", "Sorter"], {
+                    contentHeight: "35rem",
+                    contentWidth: "32rem",
+                    source: oEvt.getSource()
+                });
+            },
+
+            onColumnHeaderItemPress: function (oEvt) {
+                const oTable = this.byId("table");
+                const sPanel = oEvt.getSource().getIcon().indexOf("sort") >= 0 ? "Sorter" : "Columns";
+
+                Engine.getInstance().show(oTable, [sPanel], {
+                    contentHeight: "35rem",
+                    contentWidth: "32rem",
+                    source: oTable
+                });
+            },
+
+            onSort: function (oEvt) {
+                const oTable = this.byId("table");
+                const sAffectedProperty = this._getKey(oEvt.getParameter("column"));
+                const sSortOrder = oEvt.getParameter("sortOrder");
+
+                //Apply the state programatically on sorting through the column menu
+                //1) Retrieve the current personalization state
+                Engine.getInstance().retrieveState(oTable).then(function (oState) {
+
+                    //2) Modify the existing personalization state --> clear all sorters before
+                    oState.Sorter.forEach(function (oSorter) {
+                        oSorter.sorted = false;
+                    });
+                    oState.Sorter.push({
+                        key: sAffectedProperty,
+                        descending: sSortOrder === CoreLibrary.SortOrder.Descending
+                    });
+
+                    //3) Apply the modified personalization state to persist it in the VariantManagement
+                    Engine.getInstance().applyState(oTable, oState);
+                });
+            },
+
+            onColumnMove: function (oEvt) {
+                const oTable = this.byId("table");
+                const oAffectedColumn = oEvt.getParameter("column");
+                const iNewPos = oEvt.getParameter("newPos");
+                const sKey = this._getKey(oAffectedColumn);
+                oEvt.preventDefault();
+
+                Engine.getInstance().retrieveState(oTable).then(function (oState) {
+
+                    const oCol = oState.Columns.find(function (oColumn) {
+                        return oColumn.key === sKey;
+                    }) || {
+                        key: sKey
+                    };
+                    oCol.position = iNewPos;
+
+                    Engine.getInstance().applyState(oTable, {
+                        Columns: [oCol]
+                    });
+                });
+            },
+
+            _getKey: function (oControl) {
+                return this.getView().getLocalId(oControl.getId());
+            },
+
+            handleStateChange: function (oEvt) {
+                const oTable = this.byId("table");
+                const oState = oEvt.getParameter("state");
+
+                if (!oState) {
+                    return;
+                }
+
+                oTable.getColumns().forEach(function (oColumn) {
+
+                    const sKey = this._getKey(oColumn);
+                    const sColumnWidth = oState.ColumnWidth[sKey];
+
+                    oColumn.setWidth(sColumnWidth || this._mIntialWidth[sKey]);
+
+                    oColumn.setVisible(false);
+                    oColumn.setSortOrder(CoreLibrary.SortOrder.None);
+                }.bind(this));
+
+                oState.Columns.forEach(function (oProp, iIndex) {
+                    const oCol = this.byId(oProp.key);
+                    oCol.setVisible(true);
+
+                    oTable.removeColumn(oCol);
+                    oTable.insertColumn(oCol, iIndex);
+                }.bind(this));
+
+                const aSorter = [];
+                oState.Sorter.forEach(function (oSorter) {
+                    const oColumn = this.byId(oSorter.key);
+                    /** @deprecated As of version 1.120 */
+                    oColumn.setSorted(true);
+                    oColumn.setSortOrder(oSorter.descending ? CoreLibrary.SortOrder.Descending : CoreLibrary.SortOrder.Ascending);
+                    aSorter.push(new Sorter(this.oMetadataHelper.getProperty(oSorter.key).path, oSorter.descending));
+                }.bind(this));
+                oTable.getBinding("rows").sort(aSorter);
+            },
+
+            onColumnResize: function (oEvt) {
+                const oColumn = oEvt.getParameter("column");
+                const sWidth = oEvt.getParameter("width");
+                const oTable = this.byId("table");
+
+                const oColumnState = {};
+                oColumnState[this._getKey(oColumn)] = sWidth;
+
+                Engine.getInstance().applyState(oTable, {
+                    ColumnWidth: oColumnState
+                });
+            },
+
+
+
+
+            associateHeaderMenus: function () {
+                this.oMenu = new ColumnMenu();
+                // this.byId("idClmShipBill").setHeaderMenu(this.oMenu.getId());
+                // this.byId("idClmShipBill").setHeaderMenu(this.oMenu.getId());
+
+                this.oCustomMenu = new ColumnMenu({
+                    items: [
+                        new ActionItem({
+                            label: "Sort",
+                            icon: "sap-icon://sort",
+                            press: [function (oEvent) {
+                                this.onQuantitySort(oEvent);
+                            }, this]
+                        }), new ActionItem({
+                            label: "Filter",
+                            icon: "sap-icon://filter",
+                            press: [function (oEvent) {
+                                this.onQuantityCustomItemSelect(oEvent);
+                            }, this]
+                        }), new ActionItem({
+                            label: "Group",
+                            icon: "sap-icon://group-2",
+                            press: [function (oEvent) {
+                                this.onQuantityCustomItemSelect(oEvent);
+                            }, this]
+                        }), new ActionItem({
+                            label: "Columns",
+                            icon: "sap-icon://table-column",
+                            press: [function (oEvent) {
+                                this.onQuantityCustomItemSelect(oEvent);
+                            }, this]
+                        })
+                    ]
+                });
+                this.byId("idClmShipBill").setHeaderMenu(this.oCustomMenu.getId());
+            },
+
             // On Click of search
             onSearch: function () {
 
@@ -119,7 +370,7 @@ sap.ui.define([
             // Get call for Table entries
             getCallForTable: function (aFilters) {
 
-                this.sDate = this.getView().byId("idDP_CreatedDate").getValue();
+                // this.sDate = this.getView().byId("idDP_CreatedDate").getValue();
 
                 var sPath = "/ZRC_SHIP_BILL_HEAD"
                 var sService = "/sap/opu/odata/sap/ZRC_SHIP_BILL_HEAD_SRV_B";
@@ -163,6 +414,16 @@ sap.ui.define([
                             }
                         }
                         this.getView().getModel("oModelForTable").setData(Data.results);
+                        var heading = "Transactional-Shipping Bill";
+                        if (Number(Data.results.length) > 0) {
+                            heading = "Transactional-Shipping Bill(" + Data.results.length + ")"
+                            this.getView().byId("title").setText(heading);
+                        } else {
+
+                            this.getView().byId("title").setText(heading);
+                        }
+
+
                         this.getView().setBusy(false);
                     }.bind(this),
                     error: function (sError) {
@@ -178,15 +439,67 @@ sap.ui.define([
                 });
             },
             // On click of table row
+            onRowsDataChange: function () {
+                debugger;
+            },
             onShowDetails: function (oEvent) {
-
-
+                debugger;
+                var rowIndex = oEvent.getParameter("rowIndex")
+                if (rowIndex) {
+                    this.getView().byId("idDeleteRow").setEnabled(true);
+                } else {
+                    this.getView().byId("idDeleteRow").setEnabled(false);
+                }
                 // var selectedRowBillNo = oEvent.getSource().getBindingContext().getProperty("oModelForTable>ZshippingBillNo");
-                var selectedRowBillNo =oEvent.getSource().getAggregation("cells")[0].getText()
+                var selectedRowBillNo = oEvent.getSource().getAggregation("rows")[1].getCells()[0].getText()
+                // var selectedRowBillNo = oEvent.getSource().getAggregation("cells")[0].getText()
                 this.oRouter = this.getOwnerComponent().getRouter();
                 this.oRouter.navTo("shippingBill_Details", {
                     billNo: selectedRowBillNo
                 });
+            },
+
+            // Excel Export
+
+
+
+            onExport: function () {
+                var aCols, oSettings;
+                aCols = this.createColumnConfig();
+
+
+
+                var aData = this.getView().getModel("oModelForTable").getData();
+                oSettings = {
+                    workbook: {
+                        columns: aCols, wrap: true,
+                        context: {
+                            sheetName: "Shipping Bill Details",
+                        },
+                    },
+                    dataSource: aData
+                };
+                var oSpreadsheet = new Spreadsheet(oSettings);
+                oSpreadsheet.build().finally(function () {
+                    oSheet.destroy();
+                });
+            },
+
+            createColumnConfig: function () {
+                return [
+                    {
+                        label: 'Shipping Bill No',
+                        property: 'ZshippingBillNo'
+                    },
+                    {
+                        label: 'Invoice Document',
+                        property: 'ZinvoiceDocument'
+                    },
+                    {
+                        label: 'Port Of Loading',
+                        property: 'ZportOfLoading'
+                    }
+                ];
             }
 
         });

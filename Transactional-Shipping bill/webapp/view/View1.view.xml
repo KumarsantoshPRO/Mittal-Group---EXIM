@@ -11,6 +11,11 @@
     xmlns:l="sap.ui.layout"
     xmlns:form="sap.ui.layout.form"
     xmlns:tcm="sap.m.table.columnmenu"
+    xmlns:table="sap.ui.table"
+    xmlns:columnmenu="sap.m.table.columnmenu"
+    xmlns:sap.ui.fl="sap.ui.fl"
+    xmlns:sap.ui.dt="sap.ui.dt"
+    xmlns:vm="sap.ui.fl.variants"
 >
     <f:DynamicPage
         showFooter="false"
@@ -26,7 +31,7 @@
                         titleStyle="H3"
                     />
                 </f:heading>
-                <f:actions>
+                <!-- <f:actions>
                     <Button
                         id="idBtnDPTFilterGo"
                         text="Search"
@@ -43,14 +48,44 @@
                         type="Attention"
                         icon="sap-icon://clear-filter"
                     />
-                </f:actions>
+                </f:actions> -->
             </f:DynamicPageTitle>
         </f:title>
 
         <f:header>
             <f:DynamicPageHeader>
                 <f:content>
-                    <form:SimpleForm
+                    <fb:FilterBar
+                        id="filterbar"
+                        persistencyKey="myPersKey"
+                        useToolbar="false"
+                        search=".onSearch"
+                        filterChange=".onFilterChange"
+                        afterVariantLoad=".onAfterVariantLoad"
+                    >
+                        <fb:filterGroupItems>
+                            <fb:FilterGroupItem
+                                name="Name"
+                                label="Shipping Bill Number"
+                                groupName="Group1"
+                                visibleInFilterBar="true"
+                            >
+                                <fb:control>
+                                    <Input
+                                        id="idInpF4_SBNumber"
+                                        value=""
+                                        valueHelpIconSrc="sap-icon://value-help"
+                                        showValueHelp="true"
+                                        valueHelpRequest="onShippingBillHelp"
+                                        autocomplete="true"
+                                        placeholder="Shipping Bill Number"
+                                    />
+                                </fb:control>
+                            </fb:FilterGroupItem>
+                        </fb:filterGroupItems>
+                    </fb:FilterBar>
+
+                    <!-- <form:SimpleForm
                         editable="true"
                         layout="ColumnLayout"
                         columnsL="3"
@@ -90,7 +125,7 @@
                                 visible="false"
                             />
                         </form:content>
-                    </form:SimpleForm>
+                    </form:SimpleForm> -->
                 </f:content>
             </f:DynamicPageHeader>
         </f:header>
@@ -143,7 +178,7 @@
                             id="idBtnAddNew"
                             text="Create new"
                             press="onAddNew"
-                            type="Emphasized"
+                            type="Transparent"
                             tooltip="Create new Letter Of Credit"
                             icon="sap-icon://add"
                         />
@@ -207,8 +242,163 @@
                         <Text text="billing Status" />
                     </Column>
                 </columns>
-                
             </Table>
+
+            <table:Table
+                id="table"
+                sort="onSort"
+                columnResize="onColumnResize"
+                columnMove="onColumnMove"
+                rowMode="Auto"
+                ariaLabelledBy="title"
+                sap.ui.fl:flexibility="sap/m/flexibility/EngineFlex"
+                
+                selectionMode="MultiToggle"
+                selectionBehavior="Row"
+                rows="{oModelForTable>/}"
+                showColumnVisibilityMenu="true"
+                enableColumnFreeze="false"
+                enableCellFilter="true"
+                columnSelect="onColumnSelect"
+                cellContextmenu="onProductIdCellContextMenu"
+                enableGrouping="true"
+                rowSelectionChange="onShowDetails"
+            >
+                <table:extension>
+                    <OverflowToolbar style="Clear">
+                        <Title id="title" />
+                        <ToolbarSpacer />
+                        <Button
+                            text="Create"
+                            press="onAddNew"
+                            type="Transparent"
+                            tooltip="Create new Letter Of Credit"
+                        />
+                        <Button
+                            id="idDeleteRow"
+                            text="Delete"
+                            press="onDeleteRow"
+                            type="Transparent"
+                            enabled="false"
+                        />
+                        <Button
+                            icon="sap-icon://action-settings"
+                            press="openPersoDialog"
+                        />
+                        <VBox visible="false">
+                            <SegmentedButton selectedKey="less">
+                                <items>
+                                    <SegmentedButtonItem
+                                        icon="sap-icon://detail-less"
+                                        key="less"
+                                    />
+                                    <SegmentedButtonItem
+                                        icon="sap-icon://detail-more"
+                                    />
+                                </items>
+                            </SegmentedButton>
+                        </VBox>
+                        <Button
+                            icon="sap-icon://excel-attachment"
+                            press="onExport"
+                        />
+                    </OverflowToolbar>
+                </table:extension>
+
+                <table:dependents>
+                    <columnmenu:Menu id="menu">
+                        <columnmenu:items>
+                            <columnmenu:ActionItem
+                                icon="sap-icon://sort"
+                                label="Sort"
+                                press="onColumnHeaderItemPress"
+                            />
+                            <columnmenu:ActionItem
+                                icon="sap-icon://filter"
+                                label="Filter"
+                                press="onColumnHeaderItemPress"
+                            />
+                            <columnmenu:ActionItem
+                                icon="sap-icon://group-2"
+                                label="Groups"
+                                press="onColumnHeaderItemPress"
+                            />
+
+                            <columnmenu:ActionItem
+                                icon="sap-icon://table-column"
+                                label="Columns"
+                                press="onColumnHeaderItemPress"
+                            />
+                        </columnmenu:items>
+                    </columnmenu:Menu>
+                </table:dependents>
+                <table:noData>
+                    <IllustratedMessage enableVerticalResponsiveness="true" />
+                </table:noData>
+                <table:columns>
+                    <table:Column
+                        id="idClmShipBill"
+                        width="8rem"
+                        hAlign="End"
+                        sortProperty="ZshippingBillNo"
+                        headerMenu="menu"
+                        resizable="true"
+                        autoResizable="true"
+                    >
+                        <Label text="Shipping Bill No" />
+                        <table:template>
+                            <Label text="{oModelForTable>ZshippingBillNo}" />
+                        </table:template>
+                    </table:Column>
+                    <table:Column
+                        id="idClmDocNo"
+                        width="8rem"
+                        hAlign="End"
+                        sortProperty="ZinvoiceDocument"
+                        headerMenu="menu"
+                        resizable="true"
+                        autoResizable="true"
+                    >
+                        <Label text="Invoice Document" />
+                        <table:template>
+                            <Label text="{oModelForTable>ZinvoiceDocument}" />
+                        </table:template>
+                    </table:Column>
+
+                    <table:Column
+                        id="idClmPortOfLoading"
+                        width="8rem"
+                        hAlign="End"
+                        sortProperty="ZportOfLoading"
+                        headerMenu="menu"
+                        resizable="true"
+                        autoResizable="true"
+                    >
+                        <Label text="Port Of Loading" />
+                        <table:template>
+                            <Label text="{oModelForTable>ZportOfLoading}" />
+                        </table:template>
+                    </table:Column>
+                    <!-- 
+                    <table:Column >
+                        <table:template>
+                            <DisplayListItem
+                                label="Shipping Date"
+                                value="{oModelForTable>ZshippingBillDate}"
+                            />
+                        </table:template>
+                    </table:Column> -->
+                    <!-- <Label text="Shipping Bill Date" />
+                        <Label text="{oModelForTable>ZshippingBillDate}" /> -->
+                    <!-- <Text text="{oModelForTable>Zcha}" />
+                    <Text text="{oModelForTable>Zcustomer}" />
+                    <Text text="{oModelForTable>ZletExportDate}" />
+                    <Text text="{oModelForTable>Zschemes}" />
+                    <Text text="{oModelForTable>Zepcg}" />
+                    <Text text="{oModelForTable>Zloc}" />
+                    <Text text="{oModelForTable>ZshippingBillStatus}" /> -->
+                </table:columns>
+            </table:Table>
         </f:content>
 
         <!-- <f:footer>
