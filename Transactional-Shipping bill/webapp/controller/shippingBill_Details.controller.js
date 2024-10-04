@@ -89,7 +89,8 @@ sap.ui.define([
 
 
             },
-
+            //Start:All F4 Logic
+            // Start: Invoice Number
             // on Value Help(F4)
             onInvoiceNumberValueHelp: function () {
                 if (!this.InvoiceNumFrag) {
@@ -193,8 +194,273 @@ sap.ui.define([
                     }.bind(this)
                 });
             },
+            // End: Invoice Number
+
+            // Start: Country of BL
+            // on Value Help(F4)
+            onCountryOfBLValueHelp: function () {
+                if (!this.CountryOfBLFrag) {
+                    this.CountryOfBLFrag = sap.ui.xmlfragment(
+                        "zmg.pro.exim.transactionalshippingbill.exim.view.fragments.valueHelp_CountryOfBL",
+                        this
+                    );
+                    this.getView().addDependent(this.CountryOfBLFrag);
+                    var sService = "/sap/opu/odata/sap/ZV_BILLING_INV_DET_SERV_B";
+                    var oModelCountryOfBL = new sap.ui.model.odata.ODataModel(
+                        sService,
+                        true
+                    );
+                    this.CountryOfBLFrag.setModel(oModelCountryOfBL);
+                    this._CountryOfBLTemp = sap.ui
+                        .getCore()
+                        .byId("idSLCountryOfBLValueHelp")
+                        .clone();
+                    this._oTempCountryOfBL = sap.ui
+                        .getCore()
+                        .byId("idSLCountryOfBLValueHelp")
+                        .clone();
+                }
+
+                this.CountryOfBLFrag.open();
+                var aFilter = [];
+                // var oFilter = new Filter(
+                //     [new Filter("BillingDocument", FilterOperator.EQ, "90000000")],
+                //     false
+                // );
+
+                // aFilter.push(oFilter);
+
+                sap.ui.getCore().byId("idSDInvoiceNumberF4").bindAggregation("items", {
+                    path: "/ZV_BILLING_INV_DETAILS",
+                    filters: aFilter,
+                    template: this._InvoiceNumberTemp,
+                });
 
 
+            },
+
+            // on Value Help - Search/liveChange
+            onValueHelpSearch_CountryOfBL: function (oEvent) {
+                var aFilter = [];
+                var sValue = oEvent.getParameter("value");
+                var sPath = "/ZV_BILLING_INV_DETAILS";
+                var oSelectDialog = sap.ui.getCore().byId(oEvent.getParameter("id"));
+                var aFilter = [];
+                var oFilter = new Filter(
+                    [new Filter("BillingDocument", FilterOperator.Contains, sValue)],
+                    false
+                );
+
+                aFilter.push(oFilter);
+                oSelectDialog.bindAggregation("items", {
+                    path: sPath,
+                    filters: aFilter,
+                    template: this._oTempInvoiceNumber,
+                });
+            },
+
+            // on Value Help - Confirm
+            onValueHelpConfirm_CountryOfBL: function (oEvent) {
+                // this.JSONModelPayload = this.getView().getModel("oModelForHeader");
+
+                var oSelectedItem = oEvent.getParameter("selectedItem"),
+                    sSelectedValue = oSelectedItem.getProperty("title");
+                var sPath = "/ZV_BILLING_INV_DETAILS";
+                var sService = "/sap/opu/odata/sap/ZV_BILLING_INV_DET_SERV_B";
+                var oModelForItems = new sap.ui.model.odata.ODataModel(
+                    sService,
+                    true
+                );
+
+                this.getView().getModel("oModelForHeader").setProperty("/ZinvoiceDocument", sSelectedValue.toString());
+
+                // To get Items details
+                var aFilters = [];
+                var oFilter = new Filter(
+                    [new Filter("BillingDocument", FilterOperator.EQ, sSelectedValue)],
+                    false
+                );
+
+                aFilters.push(oFilter);
+
+
+
+
+
+                this.getView().setBusy(true);
+                oModelForItems.read(sPath, {
+                    filters: aFilters,
+                    success: function (Data) {
+
+                        this.getView().getModel("oModelForItems").setData(Data);
+                        this.getView().setBusy(false);
+                    }.bind(this),
+                    error: function (sError) {
+                        this.getView().setBusy(false);
+                    }.bind(this)
+                });
+            },
+            // End: Country of BL
+
+            // Start: Port Of Loading
+            onPortOfLoadingValueHelp: function () {
+                if (!this.PortOfLoadingFrag) {
+                    this.PortOfLoadingFrag = sap.ui.xmlfragment(
+                        "zmg.pro.exim.transactionalshippingbill.exim.view.fragments.valueHelp_PortOfLoading",
+                        this
+                    );
+                    this.getView().addDependent(this.PortOfLoadingFrag);
+                    var sService = "/sap/opu/odata/sap/ZV_BILLING_INV_DET_SERV_B";
+                    var oModelPortOfLoading = new sap.ui.model.odata.ODataModel(
+                        sService,
+                        true
+                    );
+                    this.PortOfLoadingFrag.setModel(oModelPortOfLoading);
+                    this._PortOfLoadingTemp = sap.ui
+                        .getCore()
+                        .byId("idSLPortOfLoadingValueHelp")
+                        .clone();
+                    this._oTempPortOfLoading = sap.ui
+                        .getCore()
+                        .byId("idSLPortOfLoadingValueHelp")
+                        .clone();
+                }
+
+                this.PortOfLoadingFrag.open();
+                var aFilter = [];
+                // var oFilter = new Filter(
+                //     [new Filter("BillingDocument", FilterOperator.EQ, "90000000")],
+                //     false
+                // );
+
+                // aFilter.push(oFilter);
+
+                sap.ui.getCore().byId("idSDPortOfLoadingF4").bindAggregation("items", {
+                    path: "/ZV_BILLING_INV_DETAILS",
+                    filters: aFilter,
+                    template: this._PortOfLoadingTemp,
+                });
+
+
+            },
+
+            // on Value Help - Search/liveChange
+            onValueHelpSearch_PortOfLoading: function (oEvent) {
+                var aFilter = [];
+                var sValue = oEvent.getParameter("value");
+                var sPath = "/ZV_BILLING_INV_DETAILS";
+                var oSelectDialog = sap.ui.getCore().byId(oEvent.getParameter("id"));
+                var aFilter = [];
+                var oFilter = new Filter(
+                    [new Filter("BillingDocument", FilterOperator.Contains, sValue)],
+                    false
+                );
+
+                aFilter.push(oFilter);
+                oSelectDialog.bindAggregation("items", {
+                    path: sPath,
+                    filters: aFilter,
+                    template: this._oTempInvoiceNumber,
+                });
+            },
+
+            // on Value Help - Confirm
+            onValueHelpConfirm_PortOfLoading: function (oEvent) {
+                // this.JSONModelPayload = this.getView().getModel("oModelForHeader");
+
+                var oSelectedItem = oEvent.getParameter("selectedItem"),
+                    sSelectedValue = oSelectedItem.getProperty("title");
+                var sPath = "/ZV_BILLING_INV_DETAILS";
+                var sService = "/sap/opu/odata/sap/ZV_BILLING_INV_DET_SERV_B";
+                var oModelForItems = new sap.ui.model.odata.ODataModel(
+                    sService,
+                    true
+                );
+
+                this.getView().getModel("oModelForHeader").setProperty("/ZinvoiceDocument", sSelectedValue.toString());
+
+                // To get Items details
+                var aFilters = [];
+                var oFilter = new Filter(
+                    [new Filter("BillingDocument", FilterOperator.EQ, sSelectedValue)],
+                    false
+                );
+
+                aFilters.push(oFilter);
+
+
+
+
+
+                this.getView().setBusy(true);
+                oModelForItems.read(sPath, {
+                    filters: aFilters,
+                    success: function (Data) {
+
+                        this.getView().getModel("oModelForItems").setData(Data);
+                        this.getView().setBusy(false);
+                    }.bind(this),
+                    error: function (sError) {
+                        this.getView().setBusy(false);
+                    }.bind(this)
+                });
+            },
+            // End: Port Of Loading
+
+            // Start: Country
+            onDestinationCountryValueHelp: function () {
+                if (!this.DestinationCountryFrag) {
+                    this.DestinationCountryFrag = sap.ui.xmlfragment(
+                        "zmg.pro.exim.transactionalshippingbill.exim.view.fragments.valueHelp_DestinationCountry",
+                        this
+                    );
+                    this.getView().addDependent(this.DestinationCountryFrag);
+                    var sService = "/sap/opu/odata/sap/ZRC_SHIP_BILL_HEAD_SRV_B";
+                    var oModelDestinationCountry = new sap.ui.model.odata.ODataModel(
+                        sService,
+                        true
+                    );
+                    this.DestinationCountryFrag.setModel(oModelDestinationCountry);
+                    this._DestinationCountryTemp = sap.ui
+                        .getCore()
+                        .byId("idSLDestinationCountryValueHelp")
+                        .clone();
+
+                }
+
+                this.DestinationCountryFrag.open();
+                var aFilter = [];
+                var sPath = "/I_CountryText";
+                sap.ui.getCore().byId("idSDDestinationCountryF4").bindAggregation("items", {
+                    path: sPath,
+                    filters: aFilter,
+                    template: this._DestinationCountryTemp,
+                });
+
+
+            },
+            // on Value Help - Search/liveChange
+            onValueHelpSearch_DestinationCountry: function (oEvent) {
+                var aFilter = [];
+                var sValue = oEvent.getParameter("value");
+                var oFilter = new Filter(
+                    [new Filter("Country", FilterOperator.Contains, sValue)],
+                    false
+                );
+                aFilter.push(oFilter);
+                oEvent.getSource().getBinding("items").filter(aFilter);
+            },
+            // on Value Help - Confirm
+            onValueHelpConfirm_DestinationCountry: function (oEvent) {
+                var oSelectedItem = oEvent.getParameter("selectedItem"),
+                    sSelectedValue = oSelectedItem.getProperty("title");
+                this.getView().getModel("oModelForHeader").setProperty("/ZdestinationCountry", sSelectedValue.toString());
+
+            },
+            // End: Country
+
+
+            //End:All F4 Logic
             onLicenseDetails: function () {
 
                 var oView = this.getView();

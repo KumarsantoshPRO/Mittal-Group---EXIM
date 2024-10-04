@@ -26,7 +26,7 @@
             <f:DynamicPageTitle stateChange="onDPTStateChange">
                 <f:heading>
                     <Title
-                        text="Filter Bar"
+                        text="Shipping Bill Application"
                         textAlign="Center"
                         titleStyle="H3"
                     />
@@ -59,9 +59,7 @@
                         id="filterbar"
                         persistencyKey="myPersKey"
                         useToolbar="false"
-                        search=".onSearch"
-                        filterChange=".onFilterChange"
-                        afterVariantLoad=".onAfterVariantLoad"
+                        search="onSearch"
                     >
                         <fb:filterGroupItems>
                             <fb:FilterGroupItem
@@ -74,11 +72,11 @@
                                     <Input
                                         id="idInpF4_SBNumber"
                                         value=""
+                                        placeholder="Shipping Bill Number"
                                         valueHelpIconSrc="sap-icon://value-help"
                                         showValueHelp="true"
                                         valueHelpRequest="onShippingBillHelp"
                                         autocomplete="true"
-                                        placeholder="Shipping Bill Number"
                                     />
                                 </fb:control>
                             </fb:FilterGroupItem>
@@ -131,119 +129,6 @@
         </f:header>
 
         <f:content>
-            <Table
-                id="idTable"
-                sticky="ColumnHeaders,HeaderToolbar"
-                growing="true"
-                items="{oModelForTable>/}"
-            >
-                <headerToolbar>
-                    <OverflowToolbar>
-                        <Title
-                            text="Shipping Bill List"
-                            level="H2"
-                        />
-                        <!-- <Button
-                            tooltip="Search any key word"
-                            icon="sap-icon://search"
-                            press="handleSeacrch"
-                            visible="false"
-                        />
-                        <Button
-                            tooltip="Mutiselect"
-                            icon="sap-icon://multiselect-none"
-                            press="handleMultiSelectButtonPressed"
-                            visible="false"
-                        />
-                        <Button
-                            tooltip="Sort"
-                            icon="sap-icon://sort"
-                            press="handleSortButtonPressed"
-                            visible="false"
-                        />
-                        <Button
-                            tooltip="Filter"
-                            icon="sap-icon://filter"
-                            press="handleFilterButtonPressed"
-                            visible="false"
-                        />
-                        <Button
-                            tooltip="Group"
-                            icon="sap-icon://group-2"
-                            press="handleGroupButtonPressed"
-                            visible="false"
-                        /> -->
-                        <ToolbarSpacer />
-                        <Button
-                            id="idBtnAddNew"
-                            text="Create new"
-                            press="onAddNew"
-                            type="Transparent"
-                            tooltip="Create new Letter Of Credit"
-                            icon="sap-icon://add"
-                        />
-                    </OverflowToolbar>
-                </headerToolbar>
-                <ColumnListItem
-                    type="Navigation"
-                    press="onShowDetails"
-                >
-                    <cells>
-                        <Text text="{oModelForTable>ZshippingBillNo}" />
-                        <Text text="{oModelForTable>ZinvoiceDocument}" />
-                        <Text text="{oModelForTable>ZportOfLoading}" />
-                        <Text text="{oModelForTable>Zcha}" />
-                        <Text text="{oModelForTable>Zcustomer}" />
-                        <Text text="{oModelForTable>ZletExportDate}" />
-                        <Text text="{oModelForTable>Zschemes}" />
-                        <Text text="{oModelForTable>Zepcg}" />
-                        <Text text="{oModelForTable>Zloc}" />
-                        <Text text="{oModelForTable>ZshippingBillStatus}" />
-                    </cells>
-                </ColumnListItem>
-                <columns>
-                    <Column hAlign="End">
-                        <Text text="Shipping Bill no" />
-                    </Column>
-
-                    <Column
-                        demandPopin="true"
-                        hAlign="End"
-                    >
-                        <Text text="Invoice document" />
-                    </Column>
-                    <Column hAlign="Center">
-                        <Text text="Port of Loading " />
-                    </Column>
-                    <Column
-                        demandPopin="true"
-                        hAlign="Center"
-                        width="3rem"
-                    >
-                        <Text text="CHA" />
-                    </Column>
-                    <Column hAlign="Center">
-                        <Text text="Customer " />
-                    </Column>
-                    <Column hAlign="Center">
-                        <Text text="Export Date" />
-                    </Column>
-
-                    <Column hAlign="Center">
-                        <Text text="Scheme" />
-                    </Column>
-                    <Column hAlign="Center">
-                        <Text text="EPCG" />
-                    </Column>
-                    <Column hAlign="Center">
-                        <Text text="Location" />
-                    </Column>
-                    <Column hAlign="Center">
-                        <Text text="billing Status" />
-                    </Column>
-                </columns>
-            </Table>
-
             <table:Table
                 id="table"
                 sort="onSort"
@@ -252,9 +137,8 @@
                 rowMode="Auto"
                 ariaLabelledBy="title"
                 sap.ui.fl:flexibility="sap/m/flexibility/EngineFlex"
-                
-                selectionMode="MultiToggle"
-                selectionBehavior="Row"
+                selectionMode="Single"
+                selectionBehavior="RowOnly"
                 rows="{oModelForTable>/}"
                 showColumnVisibilityMenu="true"
                 enableColumnFreeze="false"
@@ -263,6 +147,7 @@
                 cellContextmenu="onProductIdCellContextMenu"
                 enableGrouping="true"
                 rowSelectionChange="onShowDetails"
+                rowActionCount="1"
             >
                 <table:extension>
                     <OverflowToolbar style="Clear">
@@ -280,6 +165,7 @@
                             press="onDeleteRow"
                             type="Transparent"
                             enabled="false"
+                            visible="false"
                         />
                         <Button
                             icon="sap-icon://action-settings"
@@ -339,7 +225,7 @@
                     <table:Column
                         id="idClmShipBill"
                         width="8rem"
-                        hAlign="End"
+                        hAlign="Begin"
                         sortProperty="ZshippingBillNo"
                         headerMenu="menu"
                         resizable="true"
@@ -368,7 +254,7 @@
                     <table:Column
                         id="idClmPortOfLoading"
                         width="8rem"
-                        hAlign="End"
+                        hAlign="Begin"
                         sortProperty="ZportOfLoading"
                         headerMenu="menu"
                         resizable="true"
@@ -379,25 +265,119 @@
                             <Label text="{oModelForTable>ZportOfLoading}" />
                         </table:template>
                     </table:Column>
-                    <!-- 
-                    <table:Column >
+                    <table:Column
+                        id="idClmCHA"
+                        width="6rem"
+                        hAlign="Center"
+                        sortProperty="Zcha"
+                        headerMenu="menu"
+                        resizable="true"
+                        autoResizable="true"
+                    >
+                        <Label text="CHA" />
                         <table:template>
-                            <DisplayListItem
-                                label="Shipping Date"
-                                value="{oModelForTable>ZshippingBillDate}"
+                            <Label text="{oModelForTable>Zcha}" />
+                        </table:template>
+                    </table:Column>
+                    <table:Column
+                        id="idClmCustomer"
+                        width="8rem"
+                        hAlign="End"
+                        sortProperty="Zcustomer"
+                        headerMenu="menu"
+                        resizable="true"
+                        autoResizable="true"
+                    >
+                        <Label text="Customer" />
+                        <table:template>
+                            <Label text="{oModelForTable>Zcustomer}" />
+                        </table:template>
+                    </table:Column>
+
+                    <table:Column
+                        id="idClmLETDate"
+                        width="8rem"
+                        hAlign="Center"
+                        sortProperty="ZletExportDate"
+                        headerMenu="menu"
+                        resizable="true"
+                        autoResizable="true"
+                    >
+                        <Label text="LET Export Date" />
+                        <table:template>
+                            <Label text="{oModelForTable>ZletExportDate}" />
+                        </table:template>
+                    </table:Column>
+                    <table:Column
+                        id="idClmSchemes"
+                        width="6rem"
+                        hAlign="Center"
+                        sortProperty="Zschemes"
+                        headerMenu="menu"
+                        resizable="true"
+                        autoResizable="true"
+                    >
+                        <Label text="Schemes" />
+                        <table:template>
+                            <Label text="{oModelForTable>Zschemes}" />
+                        </table:template>
+                    </table:Column>
+                    <table:Column
+                        id="idClmEPCG"
+                        width="4rem"
+                        hAlign="Center"
+                        sortProperty="Zepcg"
+                        headerMenu="menu"
+                        resizable="true"
+                        autoResizable="true"
+                    >
+                        <Label text="EPCG" />
+                        <table:template>
+                            <Label text="{oModelForTable>Zepcg}" />
+                        </table:template>
+                    </table:Column>
+                    <table:Column
+                        id="idClmLOC"
+                        width="8rem"
+                        hAlign="Begin"
+                        sortProperty="Zloc"
+                        headerMenu="menu"
+                        resizable="true"
+                        autoResizable="true"
+                    >
+                        <Label text="Location" />
+                        <table:template>
+                            <Label text="{oModelForTable>Zloc}" />
+                        </table:template>
+                    </table:Column>
+                    <table:Column
+                        id="idClmShipBillStatus"
+                        width="10rem"
+                        hAlign="Center"
+                        sortProperty="ZshippingBillStatus"
+                        headerMenu="menu"
+                        resizable="true"
+                        autoResizable="true"
+                    >
+                        <Label text="Shipping Bill Status" />
+                        <table:template>
+                            <Label
+                                text="{oModelForTable>ZshippingBillStatus}"
                             />
                         </table:template>
-                    </table:Column> -->
-                    <!-- <Label text="Shipping Bill Date" />
-                        <Label text="{oModelForTable>ZshippingBillDate}" /> -->
-                    <!-- <Text text="{oModelForTable>Zcha}" />
-                    <Text text="{oModelForTable>Zcustomer}" />
-                    <Text text="{oModelForTable>ZletExportDate}" />
-                    <Text text="{oModelForTable>Zschemes}" />
-                    <Text text="{oModelForTable>Zepcg}" />
-                    <Text text="{oModelForTable>Zloc}" />
-                    <Text text="{oModelForTable>ZshippingBillStatus}" /> -->
+                    </table:Column>
                 </table:columns>
+                <table:rowActionTemplate>
+                    <table:RowAction>
+                        <table:items>
+                            <table:RowActionItem
+                                type="Delete"
+                                press="onDeletePress"
+                                icon="sap-icon://delete"
+                            />
+                        </table:items>
+                    </table:RowAction>
+                </table:rowActionTemplate>
             </table:Table>
         </f:content>
 

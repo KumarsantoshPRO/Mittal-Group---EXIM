@@ -18,7 +18,7 @@
             <Label
                 id="IdLblCust"
                 text="Customer"
-                class="bold-label"
+               
             />
             <Input
                 id="_IDGenInput5"
@@ -28,14 +28,14 @@
             <Label
                 id="IdLblLETExpoDate"
                 text="LET Export Date"
-                class="bold-label"
+               
             />
             <DatePicker value="{oModelForHeader>/ZletExportDate}" />
 
             <Label
                 id="IdLblScheme"
                 text="Scheme"
-                class="bold-label"
+               
             />
             <Select
                 forceSelection="true"
@@ -67,27 +67,27 @@
             <Label
                 id="IdLblEPCG"
                 text="EPCG"
-                class="bold-label"
+               
             />
             <Input value="{oModelForHeader>/Zepcg}" />
 
             <Label
                 id="IdLblLOC"
                 text="Letter of Credit"
-                class="bold-label"
+               
             />
             <Input value="{oModelForHeader>/Zloc}" />
 
             <Label
                 id="IdLblReasonForAmendment"
                 text="Reason for Amendment"
-                class="bold-label"
+               
             />
             <TextArea value="" />
             <Label
                 id="IdLblReabate"
                 text="Reabate"
-                class="bold-label"
+               
             />
 
             <Select
@@ -106,7 +106,7 @@
             <Label
                 id="IdLblLUTNo"
                 text="LUT No."
-                class="bold-label"
+               
             />
             <TextArea value="" />
 
@@ -115,20 +115,20 @@
             <Label
                 id="IDLblFOBValue"
                 text="FOB Value(INR)"
-                class="bold-label"
+               
             />
             <Input />
             <Label
                 id="IDLblFOBValueFC"
                 text="FOB Value(FC)"
-                class="bold-label"
+               
             />
             <Input value="{oModelForHeader>/FobValueFc}" />
 
             <Label
                 id="IdLblExchangeRate"
                 text="Exchange Rate"
-                class="bold-label"
+               
             />
             <Input
                 id="IdInpExchangeRateValue"
@@ -137,7 +137,7 @@
             <Label
                 id="IdLblRODTEP"
                 text="RODTEP"
-                class="bold-label"
+               
             />
 
             <Select
@@ -157,7 +157,7 @@
             <Label
                 id="IdLblContainerNo"
                 text="Container No"
-                class="bold-label"
+               
             />
             <Input
                 id="IdInpContainerNo"
@@ -167,14 +167,14 @@
             <Label
                 id="IdLblRebateAmt"
                 text="Rebate Amt"
-                class="bold-label"
+               
             />
             <Input />
 
             <Label
                 id="IdLblRLUTDate"
                 text="LUT Date"
-                class="bold-label"
+               
             />
 
             <DatePicker />
@@ -182,7 +182,7 @@
             <Label
                 id="IdLblSecCreatedBy"
                 text="Created By"
-                class="bold-label"
+               
             />
             <Input
                 id="IdInpCreatedBy"

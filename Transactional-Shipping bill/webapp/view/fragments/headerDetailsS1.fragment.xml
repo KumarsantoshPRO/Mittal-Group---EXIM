@@ -18,7 +18,6 @@
             <Label
                 id="IdLblShippingBillno"
                 text="Shipping Bill No"
-                class="bold-label"
             />
             <Input
                 id="ShippingBillno_Value"
@@ -27,7 +26,6 @@
             <Label
                 id="IdLblInvoiceDoc"
                 text="Invoice Document"
-                class="bold-label"
             />
             <Input
                 id="InvoiceDocValue"
@@ -39,7 +37,6 @@
             <Label
                 id="IdLblSecCreateDate"
                 text="Create Date and Time"
-                class="bold-label"
             />
             <DatePicker
                 id="IdDPCreateDate"
@@ -58,7 +55,6 @@
             <Label
                 id="IdLblCountryOfBL"
                 text="Country of BL"
-                class="bold-label"
             />
             <Input
                 showValueHelp="true"
@@ -67,7 +63,6 @@
             <Label
                 id="IdLblPortOfLoad"
                 text="Port Of Loading"
-                class="bold-label"
             />
             <Input
                 showValueHelp="true"
@@ -78,14 +73,12 @@
             <Label
                 id="IdLblICDPortCode"
                 text="ICD - PORT CODE "
-                class="bold-label"
             />
             <Input value="" />
 
             <Label
                 id="IdLblCha"
                 text="CHA"
-                class="bold-label"
             />
 
             <Input
@@ -98,7 +91,6 @@
             <Label
                 id="IdLblShippingBillStatus"
                 text="Shipping Bill Status"
-                class="bold-label"
             />
             <Select
                 forceSelection="true"
@@ -124,44 +116,41 @@
             <Label
                 id="IdLblRCMCNo"
                 text="RCMC No"
-                class="bold-label"
             />
             <Input value="" />
 
             <Label
                 id="IdLblShippingBillDate"
                 text=" Shipping Bill Date"
-                class="bold-label"
             />
             <DatePicker value="" />
 
             <Label
                 id="IdLblStateOfOrigin"
                 text="State of Origin"
-                class="bold-label"
             />
             <Input value="{oModelForHeader>/ZstateOfOrigin}" />
 
             <Label
                 id="IdLblPortOfDischarge"
                 text="Port of discharge"
-                class="bold-label"
             />
             <Input value="" />
 
             <Label
                 id="IdLblDestinationCountry"
                 text="Destination Country"
-                class="bold-label"
             />
             <Input
+                id="idInpDestinationCountry"
                 value="{oModelForHeader>/ZdestinationCountry}"
-                id="StateofOriginValue"
+                showSuggestion="true"
+                showValueHelp="true"
+                valueHelpRequest="onDestinationCountryValueHelp"
             />
             <Label
                 id="IdLblFCValueCurr"
                 text="FC Value Foreign Currency"
-                class="bold-label"
             />
             <Input value="{oModelForHeader>/ZforeignCurrency}" />
         </f:content>

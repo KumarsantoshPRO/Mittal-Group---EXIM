@@ -54,6 +54,40 @@ sap.ui.define([
                     key: "idClmPortOfLoading",
                     label: "Port Of Loading",
                     path: "ZportOfLoading"
+                },
+                {
+                    key: "idClmCHA",
+                    label: "CHA",
+                    path: "Zcha"
+                },
+                {
+                    key: "idClmCustomer",
+                    label: "Customer",
+                    path: "Zcustomer"
+                }, {
+                    key: "idClmLETDate",
+                    label: "LET Export Date",
+                    path: "ZletExportDate"
+                }, {
+
+                    key: "idClmSchemes",
+                    label: "Schemes",
+                    path: "Zschemes"
+                }, {
+
+                    key: "idClmEPCG",
+                    label: "EPCG",
+                    path: "Zepcg"
+                }, {
+
+                    key: "idClmLOC",
+                    label: "Location",
+                    path: "Zloc"
+                }, {
+
+                    key: "idClmShipBillStatus",
+                    label: "Shipping Bill Status",
+                    path: "ZshippingBillStatus"
                 }
 
 
@@ -61,9 +95,16 @@ sap.ui.define([
 
                 ]);
                 this._mIntialWidth = {
-                    "idClmShipBill": "11rem",
-                    "idClmDocNo": "11rem",
-                    "idClmPortOfLoading": "11rem"
+                    "idClmShipBill": "8rem",
+                    "idClmDocNo": "8rem",
+                    "idClmPortOfLoading": "8rem",
+                    "idClmCHA": "06rem",
+                    "idClmCustomer": "8rem",
+                    "idClmLETDate": "8rem",
+                    "idClmSchemes": "6rem",
+                    "idClmEPCG": "4rem",
+                    "idClmLOC": "8rem",
+                    "idClmShipBillStatus": "10rem"
                 };
                 Engine.getInstance().register(oTable, {
                     helper: this.oMetadataHelper,
@@ -275,8 +316,12 @@ sap.ui.define([
                 );
 
                 aFilters.push(oFilter);
+                if (nShipping_Number) {
+                    this.getCallForTable(aFilters);
+                } else {
+                    this.getCallForTable([]);
+                }
 
-                this.getCallForTable(aFilters);
             },
 
             // On Click of clear
@@ -438,25 +483,68 @@ sap.ui.define([
                     billNo: "null"
                 });
             },
+
+            // On Delete row
+            onDeletePress: function (oEvent) {
+
+                var shippingBillNo = oEvent.getParameter('row').getAggregation('cells')[0].getText();
+                // ZRC_SHIP_BILL_HEAD('000000001')
+
+
+                var sPath = "/ZRC_SHIP_BILL_HEAD('" + shippingBillNo + "')";
+                var sService = "/sap/opu/odata/sap/ZRC_SHIP_BILL_HEAD_SRV_B";
+                var oModelForHeader = new sap.ui.model.odata.ODataModel(
+                    sService,
+                    true
+                );
+
+                if (shippingBillNo) {
+
+                    sap.m.MessageBox.error("Delete object  " + shippingBillNo + "?", {
+                        actions: ["Delete", sap.m.MessageBox.Action.CLOSE],
+                        emphasizedAction: "Delete",
+                        onClose: function (sAction) {
+                            if (sAction === "Delete") {
+                                this.getView().setBusy(true);
+                                oModelForHeader.remove(sPath, {
+                                    success: function (smessage) {
+                                        sap.m.MessageToast.show("Object Deleted");
+                                        this.getCallForTable([]);
+                                        this.getView().setBusy(false);
+                                    }.bind(this),
+                                    error: function (sError) {
+                                        this.getView().setBusy(false);
+                                    }.bind(this)
+                                });
+                            }
+                        }.bind(this)
+                    });
+                }
+
+
+
+            },
             // On click of table row
             onRowsDataChange: function () {
                 debugger;
             },
             onShowDetails: function (oEvent) {
-                debugger;
+
                 var rowIndex = oEvent.getParameter("rowIndex")
-                if (rowIndex) {
-                    this.getView().byId("idDeleteRow").setEnabled(true);
-                } else {
-                    this.getView().byId("idDeleteRow").setEnabled(false);
-                }
+                // if (rowIndex) {
+                //     this.getView().byId("idDeleteRow").setEnabled(true);
+                // } else {
+                //     this.getView().byId("idDeleteRow").setEnabled(false);
+                // }
                 // var selectedRowBillNo = oEvent.getSource().getBindingContext().getProperty("oModelForTable>ZshippingBillNo");
-                var selectedRowBillNo = oEvent.getSource().getAggregation("rows")[1].getCells()[0].getText()
-                // var selectedRowBillNo = oEvent.getSource().getAggregation("cells")[0].getText()
-                this.oRouter = this.getOwnerComponent().getRouter();
-                this.oRouter.navTo("shippingBill_Details", {
-                    billNo: selectedRowBillNo
-                });
+                if (rowIndex >= 0) {
+                    var selectedRowBillNo = oEvent.getSource().getAggregation("rows")[rowIndex].getCells()[0].getText()
+                    // var selectedRowBillNo = oEvent.getSource().getAggregation("cells")[0].getText()
+                    this.oRouter = this.getOwnerComponent().getRouter();
+                    this.oRouter.navTo("shippingBill_Details", {
+                        billNo: selectedRowBillNo
+                    });
+                }
             },
 
             // Excel Export

@@ -14,14 +14,12 @@
         enableLazyLoading="true"
         showFooter="true"
     >
-     
         <uxap:headerTitle>
             <uxap:ObjectPageHeader
                 id="_IDGenObjectPageHeader1"
                 objectTitle="Create Shipping Bill"
             />
         </uxap:headerTitle>
-       
 
         <uxap:ObjectPageSection
             id="IdObjSecHeaderDetailsSection1"
@@ -33,8 +31,13 @@
                 title="General Details"
                 titleUppercase="false"
             >
-               <core:Fragment
-                    id="idFrg_headerDetialsS1"
+                <!-- <core:Fragment
+                    id="idFrg_headerDetialsS1View"
+                    fragmentName="zmg.pro.exim.transactionalshippingbill.exim.view.fragments.headerDetailsS1View"
+                    type="XML"
+                /> -->
+                <core:Fragment
+                    id="idFrg_headerDetialsS1Edit"
                     fragmentName="zmg.pro.exim.transactionalshippingbill.exim.view.fragments.headerDetailsS1"
                     type="XML"
                 />
@@ -50,7 +53,7 @@
                 id="IdOPSHeaderDetailsSubSection2"
                 title="Other Details"
             >
-                 <core:Fragment
+                <core:Fragment
                     id="idFrg_headerDetialsS2"
                     fragmentName="zmg.pro.exim.transactionalshippingbill.exim.view.fragments.headerDetailsS2"
                     type="XML"
@@ -77,10 +80,7 @@
         </uxap:ObjectPageSection>
 
         <uxap:footer>
-            <Bar
-                id="idV2Bar"
-               
-            >
+            <Bar id="idV2Bar">
                 <contentRight>
                     <Button
                         id="idBtn_SaveLCDetails"
