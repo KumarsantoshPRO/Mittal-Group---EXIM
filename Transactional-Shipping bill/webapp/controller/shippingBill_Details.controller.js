@@ -31,13 +31,27 @@ sap.ui.define([
                     var oModel = this.getOwnerComponent().getModel();
                     var sPath = "/ZRC_SHIP_BILL_HEAD('" + billNo + "')";
                     this.getCall(oModel, sPath);
-
-
                 }
+            },
+            onEditPress: function () {
+                this.getView().byId("idBtnEdit").setVisible(false);
+                this.getView().byId("IdOPSHeaderDetailsSubSection1").setVisible(false);
+                this.getView().byId("IdOPSHeaderDetailsSubSection1Edit").setVisible(true);
+                this.getView().byId("IdOPSHeaderDetailsSubSection2View").setVisible(false);
+                this.getView().byId("IdOPSHeaderDetailsSubSection2Edit").setVisible(true);
+                this.getView().byId("idBtnCreateItem").setVisible(true);
 
 
             },
+            onCancel: function () {
 
+                this.getView().byId("idBtnEdit").setVisible(true);
+                this.getView().byId("IdOPSHeaderDetailsSubSection1").setVisible(true);
+                this.getView().byId("IdOPSHeaderDetailsSubSection1Edit").setVisible(false);
+                this.getView().byId("IdOPSHeaderDetailsSubSection2View").setVisible(true);
+                this.getView().byId("IdOPSHeaderDetailsSubSection2Edit").setVisible(false);
+                this.getView().byId("idBtnCreateItem").setVisible(false);
+            },
             createLocalJSONModels: function () {
 
                 // for Header details
@@ -185,8 +199,30 @@ sap.ui.define([
                 oModelForItems.read(sPath, {
                     filters: aFilters,
                     success: function (Data) {
+                        debugger;
+                        // oModelForItems
+                        var aHeadLen = Data.results.length;
+                        // var aItemLen = this.getView().getModel("oModelForItems").getData().length;
+                        // for (let index = 0; index < aHeadLen; index++) {
+                        //     for (var j = 0; j < aItemLen; j++) {
+                        //         // this.getView().getModel("oModelForItems").getData()[index].BillingDocumentItem = Data.results[index].
+                        //         //     this.getView().getModel("oModelForItems").getData()[index].Material = Data.results[index].
+                        //         //         this.getView().getModel("oModelForItems").getData()[index].ProductDescription = Data.results[index].
+                        //         //             this.getView().getModel("oModelForItems").getData()[index].BaseUnit = Data.results[index].
+                        //         //                 this.getView().getModel("oModelForItems").getData()[index].BillingQuantity = Data.results[index].
+                        //         //                     this.getView().getModel("oModelForItems").getData()[index].NetAmount = Data.results[index].
+                        //     }
 
-                        this.getView().getModel("oModelForItems").setData(Data);
+
+                        // }
+                        this.getView().getModel("oModelForItems").refresh();
+                        // oModelForHeader
+                        this.getView().getModel("oModelForHeader").getData().Zcustomer = Data.results[0].SoldToParty;
+                        this.getView().getModel("oModelForHeader").getData().ZfobValue = Data.results[0].TotalNetAmount
+                        this.getView().getModel("oModelForHeader").getData().FobValueFc = Data.results[0].TransactionCurrency
+                        this.getView().getModel("oModelForHeader").refresh();
+
+                        this.getView().getModel("oModelForItems").setData(Data.results);
                         this.getView().setBusy(false);
                     }.bind(this),
                     error: function (sError) {
@@ -502,10 +538,10 @@ sap.ui.define([
 
             },
 
-            onCancel: function () {
-                this.oRouter = this.getOwnerComponent().getRouter();
-                this.oRouter.navTo("TargetView1");
-            },
+            // onCancel: function () {
+            //     this.oRouter = this.getOwnerComponent().getRouter();
+            //     this.oRouter.navTo("TargetView1");
+            // },
 
             getCall: function (oModel, sPath) {
 
@@ -619,9 +655,11 @@ sap.ui.define([
                         );
 
                         this.getView().getModel("oModelForItems").setProperty('oModelForItems>ZshippingBillNo', oData.ZshippingBillNo)
-                        var sPathForItem = "/ZV_BILLING_INV_DETAILS";
-                        var payloadOfItem = this.getView().getModel("oModelForItems").getData();
+                        // var sPathForItem = "/ZC_SHIP_BILL_ITEM";
 
+                        var payloadOfItem = this.getView().getModel("oModelForItems").getData();
+                        var Item = "10";
+                        var sPathForItem = "ZC_SHIP_BILL_ITEM(ZshippingBillNo='" + oData.ZshippingBillNo + "',Item='" + Item.toString() + "')/to_SubItem"
                         this.postCallForItem(oModelForItems, sPathForItem, payloadOfItem)
                         this.getView().setBusy(false);
                     }.bind(this),
@@ -630,10 +668,30 @@ sap.ui.define([
                     }.bind(this)
                 });
             },
+            onAddNewItem: function () {
+                var JSONData = this.getView()
+                    .getModel("oModelForItems")
+                    .getData();
+                if (JSONData.length > 0) {
+                    MessageBox.error("Only 1 item is allowed for now")
+                } else {
+                    JSONData.push({ "BillingDocumentItem": "10" });
+                    this.getView()
+                        .getModel("oModelForItems")
+                        .setData(JSON.parse(JSON.stringify(JSONData)));
+                }
+
+            },
+
             postCallForItem: function (oModel, sPath, payload) {
                 //Create Call
+
                 this.getView().setBusy(true);
                 oModel.create(sPath, payload.results, {
+                    //mParameters    
+                    // urlParameters: {                
+                    // "$expand": "to_SubItem"
+                    // },
                     success: function (oData, response) {
                         this.getView().setBusy(false);
                     }.bind(this),

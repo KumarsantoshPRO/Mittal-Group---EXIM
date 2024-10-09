@@ -18,7 +18,17 @@
             <uxap:ObjectPageHeader
                 id="_IDGenObjectPageHeader1"
                 objectTitle="Create Shipping Bill"
-            />
+            >
+                <uxap:actions>
+                    <Button
+                        id="idBtnEdit"
+                        icon="sap-icon://edit"
+                        text="Edit"
+                        press="onEditPress"
+                        tooltip="Edit"
+                    />
+                </uxap:actions>
+            </uxap:ObjectPageHeader>
         </uxap:headerTitle>
 
         <uxap:ObjectPageSection
@@ -30,12 +40,20 @@
                 id="IdOPSHeaderDetailsSubSection1"
                 title="General Details"
                 titleUppercase="false"
+                visible="true"
             >
-                <!-- <core:Fragment
+                <core:Fragment
                     id="idFrg_headerDetialsS1View"
                     fragmentName="zmg.pro.exim.transactionalshippingbill.exim.view.fragments.headerDetailsS1View"
                     type="XML"
-                /> -->
+                />
+            </uxap:ObjectPageSubSection>
+            <uxap:ObjectPageSubSection
+                id="IdOPSHeaderDetailsSubSection1Edit"
+                title="General Details"
+                titleUppercase="false"
+                visible="false"
+            >
                 <core:Fragment
                     id="idFrg_headerDetialsS1Edit"
                     fragmentName="zmg.pro.exim.transactionalshippingbill.exim.view.fragments.headerDetailsS1"
@@ -50,11 +68,23 @@
             titleUppercase="false"
         >
             <uxap:ObjectPageSubSection
-                id="IdOPSHeaderDetailsSubSection2"
+                id="IdOPSHeaderDetailsSubSection2View"
                 title="Other Details"
+                visible="true"
             >
                 <core:Fragment
-                    id="idFrg_headerDetialsS2"
+                    id="idFrg_headerDetialsS2View"
+                    fragmentName="zmg.pro.exim.transactionalshippingbill.exim.view.fragments.headerDetailsS2View"
+                    type="XML"
+                />
+            </uxap:ObjectPageSubSection>
+            <uxap:ObjectPageSubSection
+                id="IdOPSHeaderDetailsSubSection2Edit"
+                title="Other Details"
+                visible="false"
+            >
+                <core:Fragment
+                    id="idFrg_headerDetialsS2Edit"
                     fragmentName="zmg.pro.exim.transactionalshippingbill.exim.view.fragments.headerDetailsS2"
                     type="XML"
                 />

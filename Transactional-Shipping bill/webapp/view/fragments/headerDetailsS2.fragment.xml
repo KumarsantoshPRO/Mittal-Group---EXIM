@@ -117,7 +117,7 @@
                 text="FOB Value(INR)"
                
             />
-            <Input />
+            <Input value="{oModelForHeader>/ZfobValue}"/>
             <Label
                 id="IDLblFOBValueFC"
                 text="FOB Value(FC)"

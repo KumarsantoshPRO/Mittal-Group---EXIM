@@ -147,7 +147,7 @@ sap.ui.define([
             openPersoDialog: function (oEvt) {
                 const oTable = this.byId("table");
 
-                Engine.getInstance().show(oTable, ["Columns", "Sorter"], {
+                Engine.getInstance().show(oTable, ["Columns", "Sorter", "Groups", "Filter"], {
                     contentHeight: "35rem",
                     contentWidth: "32rem",
                     source: oEvt.getSource()
@@ -156,7 +156,20 @@ sap.ui.define([
 
             onColumnHeaderItemPress: function (oEvt) {
                 const oTable = this.byId("table");
-                const sPanel = oEvt.getSource().getIcon().indexOf("sort") >= 0 ? "Sorter" : "Columns";
+
+                // const sPanel = oEvt.getSource().getIcon().indexOf("sort") >= 0 ? "Sorter" : "Columns";
+                var sPanel;
+                // "Columns", "Sorter", "Groups", "Filter"
+
+                if (oEvt.getSource().getIcon().indexOf("sort") >= 0) {
+                    sPanel = "Sorter"
+                } else if (oEvt.getSource().getIcon().indexOf("columns") >= 0) {
+                    sPanel = "Columns"
+                } else if (oEvt.getSource().getIcon().indexOf("groups") >= 0) {
+                    sPanel = "Groups"
+                } else if (oEvt.getSource().getIcon().indexOf("filter") >= 0) {
+                    sPanel = "Filter"
+                }
 
                 Engine.getInstance().show(oTable, [sPanel], {
                     contentHeight: "35rem",

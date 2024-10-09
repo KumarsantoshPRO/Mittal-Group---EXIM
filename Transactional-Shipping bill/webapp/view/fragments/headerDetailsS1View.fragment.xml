@@ -1,0 +1,130 @@
+<core:FragmentDefinition
+    height="100%"
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:f="sap.ui.layout.form"
+>
+    <f:SimpleForm
+        id="_IdSFHeaderDetailsSection1"
+        class="sapUiNoContentPadding"
+        layout="ColumnLayout"
+        columnsM="3"
+        columnsL="3"
+        columnsXL="3"
+        adjustLabelSpan="true"
+        editable="true"
+    >
+        <f:content>
+            <Label
+                id="_IdLblShippingBillno"
+                text="Shipping Bill No"
+            />
+            <Text
+                id="_ShippingBillno_Value"
+                text="{oModelForHeader>/ZshippingBillNo}"
+            />
+            <Label
+                id="_IdLblInvoiceDoc"
+                text="Invoice Document"
+            />
+            <Text
+                id="_InvoiceDocValue"
+                text="{oModelForHeader>/ZinvoiceDocument}"
+            />
+            <Label
+                id="_IdLblSecCreateDate"
+                text="Create Date and Time"
+            />
+            <Text
+                id="_IdDPCreateDate"
+                text="{path:'oModelForHeader>/ZcreateDate', type: 'sap.ui.model.type.Date', formatOptions: {pattern: 'dd/MM/yyyy'}}"
+            />
+
+            <Text
+                id="_IdTPCreateTime"
+                text="{path:'oModelForHeader>/ZcreateTime', type: 'sap.ui.model.type.Time', formatOptions: {pattern: 'HH:mm:ss'}}"
+            />
+
+            <Label
+                id="_IdLblCountryOfBL"
+                text="Country of BL"
+            />
+            <Text
+                showValueHelp="true"
+                text=" "
+            />
+            <Label
+                id="_IdLblPortOfLoad"
+                text="Port Of Loading"
+            />
+            <Text
+                text="{oModelForHeader>/ZportOfLoading}"
+                id="__IDGenText4"
+            />
+
+            <Label
+                id="_IdLblICDPortCode"
+                text="ICD - PORT CODE "
+            />
+            <Text text="" />
+
+            <Label
+                id="_IdLblCha"
+                text="CHA"
+            />
+
+            <Text
+                id="_CountryofBLValue"
+                text="{oModelForHeader>/Zcha}"
+            />
+
+            <!--  -->
+
+            <Label
+                id="_IdLblShippingBillStatus"
+                text="Shipping Bill Status"
+            />
+            <Text
+                id="_ShippingBillStatusValue"
+                text="{oModelForHeader>/ZshippingBillStatus}"
+            />
+            <Label
+                id="_IdLblRCMCNo"
+                text="RCMC No"
+            />
+            <Text text="" />
+
+            <Label
+                id="_IdLblShippingBillDate"
+                text=" Shipping Bill Date"
+            />
+            <Text text="" />
+
+            <Label
+                id="_IdLblStateOfOrigin"
+                text="State of Origin"
+            />
+            <Text text="{oModelForHeader>/ZstateOfOrigin}" />
+
+            <Label
+                id="_IdLblPortOfDischarge"
+                text="Port of discharge"
+            />
+            <Text text="" />
+
+            <Label
+                id="_IdLblDestinationCountry"
+                text="Destination Country"
+            />
+            <Text
+                id="_idInpDestinationCountry"
+                text="{oModelForHeader>/ZdestinationCountry}"
+            />
+            <Label
+                id="_IdLblFCValueCurr"
+                text="FC Value Foreign Currency"
+            />
+            <Text text="{oModelForHeader>/ZforeignCurrency}" />
+        </f:content>
+    </f:SimpleForm>
+</core:FragmentDefinition>
