@@ -111,7 +111,7 @@
 
         <uxap:footer>
             <Bar id="idV2Bar">
-                <contentRight>
+                <contentRight> 
                     <Button
                         id="idBtn_SaveLCDetails"
                         text="Create"

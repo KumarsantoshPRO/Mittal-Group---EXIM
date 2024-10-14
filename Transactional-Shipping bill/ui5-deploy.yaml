@@ -18,6 +18,7 @@ builder:
           url: https://my411037-api.s4hana.cloud.sap
         app:
           name: yy1_zship
+          # name: yy1_zexim
           description: Shipping Bill app
           package: TEST_YY1_DEFAULT
           transport: ''

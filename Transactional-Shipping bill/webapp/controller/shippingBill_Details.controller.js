@@ -4,10 +4,19 @@ sap.ui.define([
     "sap/ui/model/json/JSONModel",
     "sap/ui/model/Filter",
     "sap/ui/model/FilterOperator",
-    "sap/m/MessageBox"
+    "sap/m/MessageBox",
+    "sap/ui/core/format/DateFormat",
+    "sap/ui/core/Item"
 
 ],
-    function (Controller, Fragment, JSONModel, Filter, FilterOperator, MessageBox) {
+    function (Controller,
+        Fragment,
+        JSONModel,
+        Filter,
+        FilterOperator,
+        MessageBox,
+        DateFormat,
+        Item) {
         "use strict";
 
         return Controller.extend("zmg.pro.exim.transactionalshippingbill.exim.controller.shippingBill_Details", {
@@ -15,8 +24,6 @@ sap.ui.define([
             onInit: function () {
 
                 this.createLocalJSONModels();
-                this.setCurrentDateTime();
-
                 this.getOwnerComponent()
                     .getRouter()
                     .attachRoutePatternMatched(this.onRouteMatched, this);
@@ -24,13 +31,16 @@ sap.ui.define([
             },
             onRouteMatched: function (oEvent) {
                 var billNo = oEvent.getParameter("arguments").billNo;
-
+                this.page = billNo;
                 if (billNo === "null") {
-                    this.getView().getModel("oModelForHeader").setData({});
+
+                    this.setCurrentDateTime();
+                    this.onEditPress();
                 } else {
                     var oModel = this.getOwnerComponent().getModel();
                     var sPath = "/ZRC_SHIP_BILL_HEAD('" + billNo + "')";
                     this.getCall(oModel, sPath);
+                    this.onCancel();
                 }
             },
             onEditPress: function () {
@@ -39,18 +49,28 @@ sap.ui.define([
                 this.getView().byId("IdOPSHeaderDetailsSubSection1Edit").setVisible(true);
                 this.getView().byId("IdOPSHeaderDetailsSubSection2View").setVisible(false);
                 this.getView().byId("IdOPSHeaderDetailsSubSection2Edit").setVisible(true);
-                this.getView().byId("idBtnCreateItem").setVisible(true);
+                // this.getView().byId("idBtnCreateItem").setVisible(true);
+                this.getView().byId("idV2Bar").setVisible(true);
 
 
             },
             onCancel: function () {
+                if (this.page === "null") {
+                    this.oRouter = this.getOwnerComponent().getRouter();
+                    this.oRouter.navTo("Home");
+                } else {
+                    this.getView().byId("idBtnEdit").setVisible(true);
+                    this.getView().byId("IdOPSHeaderDetailsSubSection1").setVisible(true);
+                    this.getView().byId("IdOPSHeaderDetailsSubSection1Edit").setVisible(false);
+                    this.getView().byId("IdOPSHeaderDetailsSubSection2View").setVisible(true);
+                    this.getView().byId("IdOPSHeaderDetailsSubSection2Edit").setVisible(false);
+                    // this.getView().byId("idBtnCreateItem").setVisible(false);
+                    this.getView().byId("idV2Bar").setVisible(false);
+                }
 
-                this.getView().byId("idBtnEdit").setVisible(true);
-                this.getView().byId("IdOPSHeaderDetailsSubSection1").setVisible(true);
-                this.getView().byId("IdOPSHeaderDetailsSubSection1Edit").setVisible(false);
-                this.getView().byId("IdOPSHeaderDetailsSubSection2View").setVisible(true);
-                this.getView().byId("IdOPSHeaderDetailsSubSection2Edit").setVisible(false);
-                this.getView().byId("idBtnCreateItem").setVisible(false);
+
+
+
             },
             createLocalJSONModels: function () {
 
@@ -85,9 +105,38 @@ sap.ui.define([
                 }
                 var oModelForHeader = new JSONModel(payloadForHeader);
                 this.getView().setModel(oModelForHeader, "oModelForHeader");
+                // for Items and Licenses details
 
-                var oModelForItems = new JSONModel();
+                // for Licenses details
+                var aEachItemsLic = {
+                    "results": [{
+                        "Item": "",
+                        "Material": "",
+                        "Licences": "",
+                        "Quantity": "",
+                        "Value": ""
+                    }]
+                };
+                var payloadForItem = {
+                    "results": [
+                        {
+                            "Item": "",
+                            "Material": "",
+                            "ItemDescription": "",
+                            "Uom": "",
+                            "InvoiceQty": "",
+                            "InvoiceValue": "",
+                            "Commission": "",
+                            "Insurance": "",
+                            "Freight": "",
+                            "Licenses": aEachItemsLic
+                        }
+                    ]
+                };
+                var oModelForItems = new JSONModel(payloadForItem);
                 this.getView().setModel(oModelForItems, "oModelForItems");
+
+
 
                 var oModelForLicenses = new JSONModel();
                 this.getView().setModel(oModelForLicenses, "oModelForLicenses");
@@ -199,30 +248,34 @@ sap.ui.define([
                 oModelForItems.read(sPath, {
                     filters: aFilters,
                     success: function (Data) {
-                        debugger;
+
                         // oModelForItems
+
                         var aHeadLen = Data.results.length;
-                        // var aItemLen = this.getView().getModel("oModelForItems").getData().length;
-                        // for (let index = 0; index < aHeadLen; index++) {
-                        //     for (var j = 0; j < aItemLen; j++) {
-                        //         // this.getView().getModel("oModelForItems").getData()[index].BillingDocumentItem = Data.results[index].
-                        //         //     this.getView().getModel("oModelForItems").getData()[index].Material = Data.results[index].
-                        //         //         this.getView().getModel("oModelForItems").getData()[index].ProductDescription = Data.results[index].
-                        //         //             this.getView().getModel("oModelForItems").getData()[index].BaseUnit = Data.results[index].
-                        //         //                 this.getView().getModel("oModelForItems").getData()[index].BillingQuantity = Data.results[index].
-                        //         //                     this.getView().getModel("oModelForItems").getData()[index].NetAmount = Data.results[index].
-                        //     }
+
+                        for (let index = 0; index < aHeadLen; index++) {
+
+                            var aItemsPayload = this.getView().getModel("oModelForItems").getData().results;
+                            aItemsPayload[index].Item = Data.results[index].BillingDocumentItem;
+                            aItemsPayload[index].Material = Data.results[index].Material;
+                            aItemsPayload[index].ItemDescription = Data.results[index].ProductDescription;
+                            aItemsPayload[index].Uom = Data.results[index].BaseUnit;
+                            aItemsPayload[index].InvoiceQty = Data.results[index].BillingQuantity;
+                            aItemsPayload[index].InvoiceValue = Data.results[index].GrossAmount;
 
 
-                        // }
+
+                        }
                         this.getView().getModel("oModelForItems").refresh();
+
+
                         // oModelForHeader
                         this.getView().getModel("oModelForHeader").getData().Zcustomer = Data.results[0].SoldToParty;
                         this.getView().getModel("oModelForHeader").getData().ZfobValue = Data.results[0].TotalNetAmount
                         this.getView().getModel("oModelForHeader").getData().FobValueFc = Data.results[0].TransactionCurrency
                         this.getView().getModel("oModelForHeader").refresh();
 
-                        this.getView().getModel("oModelForItems").setData(Data.results);
+
                         this.getView().setBusy(false);
                     }.bind(this),
                     error: function (sError) {
@@ -497,7 +550,32 @@ sap.ui.define([
 
 
             //End:All F4 Logic
-            onLicenseDetails: function () {
+
+            diff: function (obj1, obj2) {
+                const result = {};
+                if (Object.is(obj1, obj2)) {
+                    return undefined;
+                }
+                if (!obj2 || typeof obj2 !== 'object') {
+                    return obj2;
+                }
+
+                Object.keys(obj1 || {}).concat(Object.keys(obj2 || {})).forEach(key => {
+                    if (obj2[key] !== obj1[key] && !Object.is(obj1[key], obj2[key])) {
+                        debugger;
+                        result[key] = obj2[key];
+                    }
+                    if (typeof obj2[key] === 'object' && typeof obj1[key] === 'object') {
+                        const value = this.diff(obj1[key], obj2[key]);
+                        if (value !== undefined) {
+                            debugger;
+                            result[key] = value;
+                        }
+                    }
+                });
+                return result;
+            },
+            onLicenseDetails: function (oEvent) {
 
                 var oView = this.getView();
                 if (!this._oFragmentavail) {
@@ -505,27 +583,127 @@ sap.ui.define([
                     oView.addDependent(this._oFragmentavail);
                 }
                 this._oFragmentavail.open();
-                var ZshippingBillNo = '000000001';
-                var Item = '000010';
-                var sPath = "/ZC_SHIP_BILL_ITEM(ZshippingBillNo='" + ZshippingBillNo + "',Item='" + Item + "')/to_SubItem";
-                this.getView().setBusy(true);
-                this.getView().getModel().read(sPath, {
-                    success: function (Data) {
-                        debugger;
-                        this.getView().getModel("oModelForLicenses").setData(Data.results);
+                var oHeaderPaylod = this.getView().getModel("oModelForHeader").getData();
+                var ZshippingBillNo = oHeaderPaylod.ZshippingBillNo;
+                var Item = oEvent.getSource().getParent().getCells()[0].getValue();
 
-                        this.getView().setBusy(false);
-                    }.bind(this),
-                    error: function (oError) {
-                        this.getView().setBusy(false);
 
-                    }.bind(this)
-                });
+                if (this.page === "null") {
+
+                    var nLicItemLen = 0;
+                    if (this.getView().getModel("oModelForLicenses").getData().results) {
+
+                        var aLicTemp = this.getView().getModel("oModelForLicenses").getData();
+                        var nLicTempLen = aLicTemp.length;
+                        var nLicFinalPayloadLen = this.oLicFinalPayload;
+                        // if (_.isEqual(aLicTemp, this.oLicFinalPayload)) {
+
+                        // } else {
+                        //     var diff = this.diff(aLicTemp, this.oLicFinalPayload);
+                        // }
+                        // debugger;
+                        this.getView().getModel("oModelForLicenses").setData(this.oLicFinalPayload);
+                        nLicItemLen = this.getView().getModel("oModelForLicenses").getData().results.length;
+                    } else {
+
+                        // for Licenses details
+                        var aEachItemsLic = {
+                            "results": [{
+                                "Item": Item,
+                                "Material": "",
+                                "Licences": "",
+                                "Quantity": "",
+                                "Value": ""
+                            }]
+                        };
+
+                        this.oLicFinalPayload = aEachItemsLic;
+                        this.getView().getModel("oModelForLicenses").setData(aEachItemsLic);
+                    }
+                    // come back here
+                    if (nLicItemLen > 0) {
+                        var aLicItems = this.getView().getModel("oModelForLicenses").getData();
+                        this.oLicFinalPayload = aLicItems;
+                        var oClickedLicItem = {
+                            "results": []
+                        }
+                        for (let index = 0; index < nLicItemLen; index++) {
+                            const element = aLicItems.results[index];
+                            if (element.Item === Item) {
+                                // this.oLicFinalPayload.results.push(element);
+                                oClickedLicItem.results.push(element);
+                            }
+                        }
+                        if (oClickedLicItem.results.length > 0) {
+
+                            this.getView().getModel("oModelForLicenses").setData(oClickedLicItem);
+                        } else {
+                            var oLicItem = {
+                                "Item": Item,
+                                "Material": "",
+                                "Licences": "",
+                                "Quantity": "",
+                                "Value": ""
+                            }
+                            oClickedLicItem.results.push(oLicItem);
+                            this.oLicFinalPayload.results.push(oLicItem);
+                            this.getView().getModel("oModelForLicenses").setData(oClickedLicItem);
+
+                        }
+
+                        this.getView().getModel("oModelForLicenses").refresh();
+                    }
+
+
+                } else {
+                    var sPath = "/ZC_SHIP_BILL_ITEM(ZshippingBillNo='" + ZshippingBillNo + "',Item='" + Item + "')/to_SubItem";
+                    this.getView().setBusy(true);
+                    this.getView().getModel().read(sPath, {
+                        success: function (Data) {
+                            this.getView().getModel("oModelForLicenses").setData(Data);
+                            this.getView().setBusy(false);
+                        }.bind(this),
+                        error: function (oError) {
+                            this.getView().setBusy(false);
+                        }.bind(this)
+                    });
+                }
+
             },
 
             onLicenseDialogClose: function () {
+                //Start: For multiple licenses 
+                var oLicItems = this.getView().getModel("oModelForLicenses").getData()
+                for (var i = 0; i < oLicItems.results.length; i++) {
+                    this.oLicFinalPayload.results.push(oLicItems.results[i])
+                }
 
+                for (var j = 0; j < this.oLicFinalPayload.results.length; j++) {
+                    for (var k = 0; k < this.oLicFinalPayload.results.length; k++) {
+                        if (j != k) {
+                            if (JSON.stringify(this.oLicFinalPayload.results[j]) === JSON.stringify(this.oLicFinalPayload.results[k])) {
+                                this.oLicFinalPayload.results.splice(j, 1);
+                            }
+                        }
+                    }
+                }
+                const filteredArray = this.removeObjectWithEmptyString(this.oLicFinalPayload.results)
+                this.oLicFinalPayload.results = filteredArray;
+                //End: For multiple licenses 
+                
                 this._oFragmentavail.close();
+
+            },
+
+            removeObjectWithEmptyString: function (array) {
+                return array.filter(obj => {
+                    for (const value of Object.values(obj)) {
+                        if (value === '') {
+                            return false;
+                        }
+                    }
+                    return true;
+                })
             },
             // On Save button action
             onSave: function () {
@@ -538,10 +716,6 @@ sap.ui.define([
 
             },
 
-            // onCancel: function () {
-            //     this.oRouter = this.getOwnerComponent().getRouter();
-            //     this.oRouter.navTo("TargetView1");
-            // },
 
             getCall: function (oModel, sPath) {
 
@@ -554,12 +728,11 @@ sap.ui.define([
 
                         this.getView().getModel().read(sPath, {
                             success: function (Data) {
-                                this.getView().getModel("oModelForItems").setData(Data.results);
+                                this.getView().getModel("oModelForItems").setData(Data);
                                 this.getView().setBusy(false);
                             }.bind(this),
                             error: function (oError) {
                                 this.getView().setBusy(false);
-
                             }.bind(this)
                         });
 
@@ -575,14 +748,14 @@ sap.ui.define([
                 var JSONData = this.getView()
                     .getModel("oModelForItems")
                     .getData();
-                JSONData.push({});
+                JSONData.results.push({});
                 this.getView()
                     .getModel("oModelForItems")
                     .setData(JSON.parse(JSON.stringify(JSONData)));
             },
 
             onDelete: function (oEvent) {
-                debugger;
+
                 var vLen = oEvent
                     .getSource()
                     .getParent()
@@ -611,14 +784,29 @@ sap.ui.define([
                 var JSONData = this.getView()
                     .getModel("oModelForLicenses")
                     .getData();
-                JSONData.push({});
+
+
+                var Item = this.getView().getModel("oModelForLicenses").getData().results[0].Item;
+
+                var oEachItemsLic = {
+                    "Item": Item,
+                    "Material": "",
+                    "Licences": "",
+                    "Quantity": "",
+                    "Value": ""
+
+                };
+                JSONData.results.push(oEachItemsLic);
+
                 this.getView()
                     .getModel("oModelForLicenses")
                     .setData(JSON.parse(JSON.stringify(JSONData)));
+
+                // this.oLicFinalPayload.results.push(oEachItemsLic);
             },
 
             onDeleteLicenseItem: function (oEvent) {
-                debugger;
+
                 var vLen = oEvent
                     .getSource()
                     .getParent()
@@ -642,13 +830,42 @@ sap.ui.define([
                     .getModel("oModelForLicenses")
                     .setData(JSON.parse(JSON.stringify(JSONData)));
             },
+
+            onAddNewItem: function () {
+                var JSONData = this.getView()
+                    .getModel("oModelForItems")
+                    .getData();
+                if (JSONData.length > 0) {
+                    MessageBox.error("Only 1 item is allowed for now")
+                } else {
+                    JSONData.push({ "Item": "10" });
+                    this.getView()
+                        .getModel("oModelForItems")
+                        .setData(JSON.parse(JSON.stringify(JSONData)));
+                }
+
+            },
+            // All post calls
+
+
             postCallForHeader: function (oModel, sPath, payload) {
+
+
+                const dt = DateFormat.getDateTimeInstance({ pattern: "PThh'H'mm'M'ss'S'" });
+                if (payload.ZcreateTime === "") {
+                    payload.ZcreateTime = dt.format(new Date());
+                } else {
+                    payload.ZcreateTime = dt.format(payload.ZcreateTime);
+                }
+
+
                 //Create Call
                 this.getView().setBusy(true);
                 oModel.create(sPath, payload, {
                     success: function (oData, response) {
 
-                        var sService = "/sap/opu/odata/sap/ZV_BILLING_INV_DET_SERV_B";
+                        //var sService = "/sap/opu/odata/sap/ZV_BILLING_INV_DET_SERV_B";
+                        var sService = "/sap/opu/odata/sap/ZRC_SHIP_BILL_HEAD_SRV_B";
                         var oModelForItems = new sap.ui.model.odata.ODataModel(
                             sService,
                             true
@@ -657,10 +874,39 @@ sap.ui.define([
                         this.getView().getModel("oModelForItems").setProperty('oModelForItems>ZshippingBillNo', oData.ZshippingBillNo)
                         // var sPathForItem = "/ZC_SHIP_BILL_ITEM";
 
-                        var payloadOfItem = this.getView().getModel("oModelForItems").getData();
-                        var Item = "10";
-                        var sPathForItem = "ZC_SHIP_BILL_ITEM(ZshippingBillNo='" + oData.ZshippingBillNo + "',Item='" + Item.toString() + "')/to_SubItem"
-                        this.postCallForItem(oModelForItems, sPathForItem, payloadOfItem)
+                        var payloadOfItems = this.getView().getModel("oModelForItems").getData().results;
+                        var Item = 10;
+                        var aPayload = [];
+                        for (let index = 0; index < payloadOfItems.length; index++) {
+                            Item = Item * (index + 1);
+                            const element = payloadOfItems[index];
+                            var payloadOfItem = {
+                                "Item": Item.toString(),
+                                "Material": element.Material,
+                                "ItemDescription": element.ItemDescription,
+                                "Uom": element.Uom,
+                                "InvoiceQty": element.InvoiceQty,
+                                "InvoiceValue": element.InvoiceValue,
+                                // "FobCurrency": "INR",
+                                "Commission": element.Commission,
+                                "Insurance": element.Insurance,
+                                "Freight": element.Freight,
+                                // "FobValue": "106",
+                                // "FobValueFc": "107",
+                                // "FobCurrecnyFc": "INR",
+                                // "RodtepPer": "108",
+                                // "RodtepAmount": "109",
+                                // "ZcreateDate": "\/Date(1728604800000)\/",
+                                // "ZcreateTime": "P00DT13H11M55S",
+                                // "ZcreateBy": "Santosh",
+                                // "RodtepCurrency": "INR"
+                            }
+                            aPayload.push(payloadOfItem);
+                        }
+
+                        var sPathForItem = "ZRC_SHIP_BILL_HEAD('" + oData.ZshippingBillNo + "')/to_item";
+
+                        this.postCallForItem(oModelForItems, sPathForItem, aPayload)
                         this.getView().setBusy(false);
                     }.bind(this),
                     error: function (oError) {
@@ -668,30 +914,82 @@ sap.ui.define([
                     }.bind(this)
                 });
             },
-            onAddNewItem: function () {
-                var JSONData = this.getView()
-                    .getModel("oModelForItems")
-                    .getData();
-                if (JSONData.length > 0) {
-                    MessageBox.error("Only 1 item is allowed for now")
-                } else {
-                    JSONData.push({ "BillingDocumentItem": "10" });
-                    this.getView()
-                        .getModel("oModelForItems")
-                        .setData(JSON.parse(JSON.stringify(JSONData)));
+            postCallForItem: function (oModel, sPath, aPayload) {
+
+                for (let i = 0; i < aPayload.length; i++) {
+                    if (i === aPayload.length - 1) {
+                        this.getView().setBusy(false);
+                    }
+                    setTimeout(function demo() {
+
+                        this.createCallForEachItem(i, oModel, sPath, aPayload);
+                    }.bind(this), 3000);
                 }
 
             },
-
-            postCallForItem: function (oModel, sPath, payload) {
-                //Create Call
+            createCallForEachItem: function (index, oModel, sPath, aPayload) {
 
                 this.getView().setBusy(true);
-                oModel.create(sPath, payload.results, {
-                    //mParameters    
-                    // urlParameters: {                
-                    // "$expand": "to_SubItem"
-                    // },
+                oModel.create(sPath, aPayload[index], {
+                    success: function (oData, response) {
+
+                        //this.callLicenseSave(oModel, sShippingBillingNo, sItemNo);
+                        this.onLicenseSave();
+
+                    }.bind(this),
+                    error: function (oError) {
+
+                        this.getView().setBusy(false);
+                    }.bind(this)
+                });
+            },
+
+            onLicenseSave: function () {
+                var oHeaderPaylod = this.getView().getModel("oModelForHeader").getData();
+                var aItemPaylod = this.getView().getModel("oModelForItems").getData();
+                var aLicensePaylod = this.getView().getModel("oModelForLicenses").getData();
+
+
+                var aLicPayload = [];
+                var aPath = []
+                for (let index = 0; index < aItemPaylod.length; index++) {
+                    const oItemPaylod = aItemPaylod[index];
+                    for (let j = 0; j < aLicensePaylod.length; j++) {
+                        const oLicensePaylod = aLicensePaylod[j];
+                        var sPath = "ZC_SHIP_BILL_ITEM(ZshippingBillNo='" + oHeaderPaylod.ZshippingBillNo + "',Item='" + oItemPaylod.Item + "')/to_SubItem";
+                        var oLicPayload = {
+                            "Item": oItemPaylod.Item,
+                            "ZshippingBillNo": oHeaderPaylod.ZshippingBillNo,
+                            "Licences": oLicensePaylod.Item
+                        };
+                        aLicPayload.push(oLicPayload);
+                        aPath.push(sPath);
+                    }
+
+                }
+                this.getView().setBusy(true);
+                var sService = "/sap/opu/odata/sap/ZRC_SHIP_BILL_HEAD_SRV_B";
+                var oModelForLicense = new sap.ui.model.odata.ODataModel(
+                    sService,
+                    true
+                );
+
+
+
+                for (let i = 0; i < aLicPayload.length; i++) {
+                    if (i === aLicPayload.length - 1) {
+                        this.getView().setBusy(false);
+                    }
+                    setTimeout(function demo() {
+
+                        this.createCallForEachItemLic(oModelForLicense, aPath[i], aLicPayload[i]);
+                    }.bind(this), 1500);
+                }
+
+            },
+            createCallForEachItemLic: function (oModelForLicense, sPath, ItemLicPayload) {
+
+                oModelForLicense.create(sPath, ItemLicPayload, {
                     success: function (oData, response) {
                         this.getView().setBusy(false);
                     }.bind(this),

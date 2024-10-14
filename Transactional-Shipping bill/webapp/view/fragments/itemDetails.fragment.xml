@@ -9,7 +9,6 @@
     xmlns:svm="sap.ui.comp.smartvariants"
     xmlns:l="sap.ui.layout"
     xmlns:form="sap.ui.layout.form"
-    xmlns:tcm="sap.m.table.columnmenu"
     xmlns:table="sap.ui.table"
     xmlns:columnmenu="sap.m.table.columnmenu"
     xmlns:sap.ui.fl="sap.ui.fl"
@@ -32,7 +31,7 @@
             sap.ui.fl:flexibility="sap/m/flexibility/EngineFlex"
             selectionMode="Single"
             selectionBehavior="RowOnly"
-            rows="{oModelForItems>/}"
+            rows="{oModelForItems>/results}"
             showColumnVisibilityMenu="true"
             enableColumnFreeze="false"
             enableCellFilter="true"
@@ -48,11 +47,10 @@
                     <ToolbarSpacer />
                     <Button
                         id="idBtnCreateItem"
-                        text="Create"
-                        press="onAddNewItem"
+                        icon="sap-icon://add"
+                        press="onAddNewEmptyItem"
                         type="Transparent"
                         tooltip="Create new Letter Of Credit"
-                         
                     />
                     <Button
                         id="_idDeleteRow"
@@ -123,15 +121,15 @@
                     id="_idClmBillDocNo"
                     width="8rem"
                     hAlign="Begin"
-                    sortProperty="BillingDocumentItem"
-                    headerMenu="menu"
+                    sortProperty="Item"
+                    headerMenu="_menu"
                     resizable="true"
                     autoResizable="true"
                 >
                     <Label text="Item" />
                     <table:template>
                         <Input
-                            value="{path:'oModelForItems>BillingDocumentItem'}"
+                            value="{path:'oModelForItems>Item'}"
                         />
                     </table:template>
                 </table:Column>
@@ -140,7 +138,7 @@
                     width="8rem"
                     hAlign="End"
                     sortProperty="Material"
-                    headerMenu="menu"
+                    headerMenu="_menu"
                     resizable="true"
                     autoResizable="true"
                 >
@@ -154,42 +152,42 @@
                     id="_idClmPortOfLoading"
                     width="8rem"
                     hAlign="Begin"
-                    sortProperty="ZportOfLoading"
-                    headerMenu="menu"
+                    sortProperty="ItemDescription"
+                    headerMenu="_menu"
                     resizable="true"
                     autoResizable="true"
                 >
                     <Label text="Material Description" />
                     <table:template>
-                        <Input value="{oModelForItems>ProductDescription}" />
+                        <Input value="{oModelForItems>ItemDescription}" />
                     </table:template>
                 </table:Column>
                 <table:Column
                     id="_idClmCHA"
                     width="6rem"
                     hAlign="Center"
-                    sortProperty="Zcha"
-                    headerMenu="menu"
+                    sortProperty="Uom"
+                    headerMenu="_menu"
                     resizable="true"
                     autoResizable="true"
                 >
                     <Label text="UOM" />
                     <table:template>
-                        <Input value="{oModelForItems>BaseUnit}" />
+                        <Input value="{oModelForItems>Uom}" />
                     </table:template>
                 </table:Column>
                 <table:Column
                     id="_idClmCustomer"
                     width="8rem"
                     hAlign="End"
-                    sortProperty="Zcustomer"
-                    headerMenu="menu"
+                    sortProperty="InvoiceQty"
+                    headerMenu="_menu"
                     resizable="true"
                     autoResizable="true"
                 >
                     <Label text="Invoice Quantity" />
                     <table:template>
-                        <Input value="{oModelForItems>BillingQuantity}" />
+                        <Input value="{oModelForItems>InvoiceQty}" />
                     </table:template>
                 </table:Column>
 
@@ -197,22 +195,36 @@
                     id="_idClmLETDate"
                     width="8rem"
                     hAlign="Center"
-                    sortProperty="ZletExportDate"
-                    headerMenu="menu"
+                    sortProperty="InvoiceValue"
+                    headerMenu="_menu"
                     resizable="true"
                     autoResizable="true"
                 >
                     <Label text="Invoice Value" />
                     <table:template>
-                        <Input value="{oModelForItems>NetAmount}" />
+                        <Input value="{oModelForItems>InvoiceValue}" />
+                    </table:template>
+                </table:Column>
+                <table:Column
+                    id="_idClmCommision"
+                    width="6rem"
+                    hAlign="Center"
+                    sortProperty="Commission"
+                    headerMenu="_menu"
+                    resizable="true"
+                    autoResizable="true"
+                >
+                    <Label text="Commission" />
+                    <table:template>
+                        <Input value="{oModelForItems>Commission}" />
                     </table:template>
                 </table:Column>
                 <table:Column
                     id="_idClmSchemes"
                     width="6rem"
                     hAlign="Center"
-                    sortProperty="Zschemes"
-                    headerMenu="menu"
+                    sortProperty="Insurance"
+                    headerMenu="_menu"
                     resizable="true"
                     autoResizable="true"
                 >
@@ -225,8 +237,8 @@
                     id="_idClmEPCG"
                     width="4rem"
                     hAlign="Center"
-                    sortProperty="Zepcg"
-                    headerMenu="menu"
+                    sortProperty="Freight"
+                    headerMenu="_menu"
                     resizable="true"
                     autoResizable="true"
                 >

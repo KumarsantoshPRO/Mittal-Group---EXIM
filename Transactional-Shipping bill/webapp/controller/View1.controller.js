@@ -551,7 +551,8 @@ sap.ui.define([
                 // }
                 // var selectedRowBillNo = oEvent.getSource().getBindingContext().getProperty("oModelForTable>ZshippingBillNo");
                 if (rowIndex >= 0) {
-                    var selectedRowBillNo = oEvent.getSource().getAggregation("rows")[rowIndex].getCells()[0].getText()
+                    // var selectedRowBillNo = oEvent.getSource().getAggregation("rows")[rowIndex].getCells()[0].getText()
+                    var selectedRowBillNo = oEvent.getSource().getBindingInfo("rows").binding.oList[rowIndex].ZshippingBillNo;
                     // var selectedRowBillNo = oEvent.getSource().getAggregation("cells")[0].getText()
                     this.oRouter = this.getOwnerComponent().getRouter();
                     this.oRouter.navTo("shippingBill_Details", {

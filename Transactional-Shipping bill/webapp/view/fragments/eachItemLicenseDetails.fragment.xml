@@ -35,7 +35,7 @@
         >
             <Table
                 id="idTblForItemsLicensesDetail"
-                items="{oModelForLicenses>/}"
+                items="{oModelForLicenses>/results}"
                 class=""
             >
                 <headerToolbar>
@@ -49,12 +49,7 @@
                     </Toolbar>
                 </headerToolbar>
                 <columns>
-                    <Column
-                        hAlign="Center"
-                        width="10rem"
-                    >
-                        <Text text="Delete" />
-                    </Column>
+         
                     <Column
                         hAlign="Center"
                         width="10rem"
@@ -120,10 +115,7 @@
 
                 <items>
                     <ColumnListItem vAlign="Middle">
-                        <Button
-                            icon="sap-icon://delete"
-                            press="onDeleteLicenseItem"
-                        />
+ 
                         <cells>
                             <Input value="{oModelForLicenses>Item}" />
                             <Input value="{oModelForLicenses>Material}" />
@@ -139,12 +131,12 @@
             </Table>
         </ScrollContainer>
 
-        <!-- <endButton>
+        <endButton>
             <Button
                 id="_IDLicGenButton2"
-                text="Close"
-                press="onLicenseDialogClose"
+                text="Save"
+                press="onLicenseSave"
             />
-        </endButton> -->
+        </endButton>
     </Dialog>
 </core:FragmentDefinition>

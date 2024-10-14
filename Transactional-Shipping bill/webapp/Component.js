@@ -37,6 +37,11 @@ sap.ui.define([
                 var jQueryScript = document.createElement('script');
                 jQueryScript.setAttribute('src', 'https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.10.0/xlsx.js');
                 document.head.appendChild(jQueryScript);
+
+                var jQueryScriptDash = document.createElement('script');
+                jQueryScriptDash.setAttribute('src', 'https://cdn.jsdelivr.net/npm/lodash@4.17.10/lodash.min.js');
+                document.head.appendChild(jQueryScriptDash);
+                
             }
         });
     }
