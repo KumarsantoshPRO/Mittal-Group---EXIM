@@ -15,10 +15,7 @@
         showFooter="true"
     >
         <uxap:headerTitle>
-            <uxap:ObjectPageHeader
-                id="_IDGenObjectPageHeader1"
-                objectTitle="Create Shipping Bill"
-            >
+            <uxap:ObjectPageHeader id="_IDGenObjectPageHeader1">
                 <uxap:actions>
                     <Button
                         id="idBtnEdit"
@@ -107,16 +104,35 @@
                     type="XML"
                 />
             </uxap:ObjectPageSubSection>
+            <uxap:ObjectPageSubSection
+                id="AssignmentDetailsSubSectionView"
+                title="Item Details "
+                titleUppercase="false"
+            >
+                <core:Fragment
+                    id="idFrg_itemDetialsView"
+                    fragmentName="zmg.pro.exim.transactionalshippingbill.exim.view.fragments.itemDetailsView"
+                    type="XML"
+                />
+            </uxap:ObjectPageSubSection>
         </uxap:ObjectPageSection>
 
         <uxap:footer>
             <Bar id="idV2Bar">
-                <contentRight> 
+                <contentRight>
                     <Button
                         id="idBtn_SaveLCDetails"
                         text="Create"
                         type="Accept"
                         press="onSave"
+                        visible="{oEditableModel>/save}"
+                    />
+                    <Button
+                        id="idBtn_UpdateLCDetails"
+                        text="Update"
+                        type="Accept"
+                        press="onUpdate"
+                        visible="{oEditableModel>/update}"
                     />
                     <Button
                         id="idBtn_Cancel"

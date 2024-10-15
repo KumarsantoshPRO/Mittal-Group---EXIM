@@ -138,7 +138,7 @@
                 ariaLabelledBy="title"
                 sap.ui.fl:flexibility="sap/m/flexibility/EngineFlex"
                 selectionMode="Single"
-                selectionBehavior="RowOnly"
+                selectionBehavior="Row"
                 rows="{oModelForTable>/}"
                 showColumnVisibilityMenu="true"
                 enableColumnFreeze="false"
@@ -147,7 +147,7 @@
                 cellContextmenu="onProductIdCellContextMenu"
                 enableGrouping="true"
                 rowSelectionChange="onShowDetails"
-                rowActionCount="1"
+                rowActionCount="2"
             >
                 <table:extension>
                     <OverflowToolbar style="Clear">
@@ -367,9 +367,14 @@
                         </table:template>
                     </table:Column>
                 </table:columns>
-                <table:rowActionTemplate>
+                <table:rowActionTemplate >
                     <table:RowAction>
-                        <table:items>
+                        <table:items >
+                         <table:RowActionItem
+                                type="Navigation"
+                                press="onShowDetails"
+                                 
+                            />
                             <table:RowActionItem
                                 type="Delete"
                                 press="onDeletePress"

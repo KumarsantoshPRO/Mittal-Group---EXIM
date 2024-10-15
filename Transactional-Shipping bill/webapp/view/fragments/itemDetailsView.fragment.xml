@@ -50,7 +50,7 @@
                         press="onAddNewEmptyItem"
                         type="Transparent"
                         tooltip="Add new Item"
-                        visible="{path:'oEditableModel>/sEditable'}"
+                        visible="false"
                     />
                     <Button
                         id="_idDeleteRow"
@@ -129,9 +129,7 @@
                 >
                     <Label text="Item" />
                     <table:template>
-                        <Input enabled="{path:'oEditableModel>/sEditable'}"
-                            value="{path:'oModelForItems>Item'}"
-                        />
+                        <Text text="{path:'oModelForItems>Item'}" />
                     </table:template>
                 </table:Column>
                 <table:Column
@@ -145,7 +143,7 @@
                 >
                     <Label text="Material Number" />
                     <table:template>
-                        <Input enabled="{path:'oEditableModel>/sEditable'}" value="{path:'oModelForItems>Material'}" />
+                        <Text text="{path:'oModelForItems>Material'}" />
                     </table:template>
                 </table:Column>
 
@@ -160,7 +158,7 @@
                 >
                     <Label text="Material Description" />
                     <table:template>
-                        <Input enabled="{path:'oEditableModel>/sEditable'}" value="{oModelForItems>ItemDescription}" />
+                        <Text text="{oModelForItems>ItemDescription}" />
                     </table:template>
                 </table:Column>
                 <table:Column
@@ -174,7 +172,7 @@
                 >
                     <Label text="UOM" />
                     <table:template>
-                        <Input enabled="{path:'oEditableModel>/sEditable'}" value="{oModelForItems>Uom}" />
+                        <Text text="{oModelForItems>Uom}" />
                     </table:template>
                 </table:Column>
                 <table:Column
@@ -188,7 +186,7 @@
                 >
                     <Label text="Invoice Quantity" />
                     <table:template>
-                        <Input enabled="{path:'oEditableModel>/sEditable'}" value="{oModelForItems>InvoiceQty}" />
+                        <Text text="{oModelForItems>InvoiceQty}" />
                     </table:template>
                 </table:Column>
 
@@ -203,7 +201,7 @@
                 >
                     <Label text="Invoice Value" />
                     <table:template>
-                        <Input enabled="{path:'oEditableModel>/sEditable'}" value="{oModelForItems>InvoiceValue}" />
+                        <Text text="{oModelForItems>InvoiceValue}" />
                     </table:template>
                 </table:Column>
                 <table:Column
@@ -217,7 +215,7 @@
                 >
                     <Label text="Commission" />
                     <table:template>
-                        <Input enabled="{path:'oEditableModel>/sEditable'}" value="{oModelForItems>Commission}" />
+                        <Text text="{oModelForItems>Commission}" />
                     </table:template>
                 </table:Column>
                 <table:Column
@@ -231,7 +229,7 @@
                 >
                     <Label text="Insurance" />
                     <table:template>
-                        <Input enabled="{path:'oEditableModel>/sEditable'}" value="{oModelForItems>Insurance}" />
+                        <Text text="{oModelForItems>Insurance}" />
                     </table:template>
                 </table:Column>
                 <table:Column
@@ -245,7 +243,7 @@
                 >
                     <Label text="Freight" />
                     <table:template>
-                        <Input enabled="{path:'oEditableModel>/sEditable'}" value="{oModelForItems>Freight}" />
+                        <Text text="{oModelForItems>Freight}" />
                     </table:template>
                 </table:Column>
                 <table:Column
@@ -269,8 +267,9 @@
                     <table:items>
                         <table:RowActionItem
                             type="Delete"
-                            press="onDelete"
+                            press="onDeletePress"
                             icon="sap-icon://delete"
+                            visible="false"
                         />
                     </table:items>
                 </table:RowAction>

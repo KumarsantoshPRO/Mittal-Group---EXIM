@@ -8,9 +8,9 @@
         id="_IdSFHeaderDetailsSection2"
         class="sapUiNoContentPadding"
         layout="ColumnLayout"
-        columnsM="2"
-        columnsL="2"
-        columnsXL="2"
+        columnsM="3"
+        columnsL="3"
+        columnsXL="3"
         adjustLabelSpan="true"
         editable="true"
     >

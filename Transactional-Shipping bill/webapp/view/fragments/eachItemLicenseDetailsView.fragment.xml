@@ -5,7 +5,7 @@
     xmlns:f="sap.ui.layout.form"
 >
     <Dialog
-        id="_IDLicenses"
+        id="__IDLicenses"
         title="Licenses Details"
         resizable="true"
         draggable="true"
@@ -23,120 +23,17 @@
                     <Button
                         icon="sap-icon://decline"
                         press="onLicenseDialogClose"
-                        visible="{oEditableModel>/view}"
+                         
                     />
                 </contentRight>
             </Bar>
         </customHeader>
 
         <ScrollContainer
-            id="_IDGenScrollContainerLicensesDetails"
-            width="100%"
-            height="auto"
-            horizontal="true"
-            visible="{oEditableModel>/edit}"
-        >
-            <Table
-                id="idTblForItemsLicensesDetail"
-                items="{oModelForLicenses>/results}"
-                class=""
-            >
-                <headerToolbar>
-                    <Toolbar>
-                        <Title text="Licenses Details" />
-                        <ToolbarSpacer />
-                        <Button
-                            icon="sap-icon://add"
-                            press="onAddNewEmptyLicense"
-                        />
-                    </Toolbar>
-                </headerToolbar>
-                <columns>
-                    <!-- <Column
-                        hAlign="Center"
-                        width="10rem"
-                    >
-                        <Text text="Item Number" />
-                    </Column> -->
-                    <Column
-                        hAlign="Center"
-                        width="10rem"
-                    >
-                        <Text text="Material Number" />
-                    </Column>
-                    <Column
-                        hAlign="Center"
-                        width="10rem"
-                        minScreenWidth="Tablet"
-                        demandPopin="true"
-                    >
-                        <Text text="Licences" />
-                    </Column>
-
-                    <Column
-                        hAlign="Center"
-                        width="10rem"
-                        minScreenWidth="Tablet"
-                        demandPopin="true"
-                    >
-                        <Text text="Licence type" />
-                    </Column>
-                    <Column
-                        hAlign="Center"
-                        width="10rem"
-                        minScreenWidth="Tablet"
-                        demandPopin="true"
-                    >
-                        <Text text="Quantity" />
-                    </Column>
-                    <Column
-                        hAlign="Center"
-                        width="10rem"
-                        minScreenWidth="Tablet"
-                        demandPopin="true"
-                    >
-                        <Text text="Value" />
-                    </Column>
-                    <Column
-                        hAlign="Center"
-                        width="10rem"
-                        minScreenWidth="Tablet"
-                        demandPopin="true"
-                    >
-                        <Text text="Import Item Name" />
-                    </Column>
-                    <Column
-                        hAlign="Center"
-                        width="10rem"
-                        minScreenWidth="Tablet"
-                        demandPopin="true"
-                    >
-                        <Text text="Import Qty as per Licence" />
-                    </Column>
-                </columns>
-
-                <items>
-                    <ColumnListItem vAlign="Middle">
-                        <cells>
-                            <!-- <Input value="{oModelForLicenses>Item}" /> -->
-                            <Input value="{oModelForLicenses>Material}" />
-                            <Input value="{oModelForLicenses>Licences}" />
-                            <Input />
-                            <Input value="{oModelForLicenses>Quantity}" />
-                            <Input value="{oModelForLicenses>Value}" />
-                            <Input />
-                            <Input />
-                        </cells>
-                    </ColumnListItem>
-                </items>
-            </Table>
-        </ScrollContainer>
-        <ScrollContainer
             id="__IDGenScrollContainerLicensesDetails"
             width="100%"
             height="auto"
             horizontal="true"
-            visible="{oEditableModel>/view}"
         >
             <Table
                 id="_idTblForItemsLicensesDetail"
@@ -237,10 +134,10 @@
 
         <endButton>
             <Button
-                id="_IDLicGenButton2"
+                id="__IDLicGenButton2"
                 text="Save"
                 press="onLicenseDialogClose"
-                visible="{oEditableModel>/edit}"
+                visible="false"
             />
         </endButton>
     </Dialog>

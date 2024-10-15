@@ -8,9 +8,9 @@
         id="IdSFHeaderDetailsSection2"
         class="sapUiNoContentPadding"
         layout="ColumnLayout"
-        columnsM="2"
-        columnsL="2"
-        columnsXL="2"
+        columnsM="3"
+        columnsL="3"
+        columnsXL="3"
         adjustLabelSpan="true"
         editable="true"
     >
@@ -132,8 +132,9 @@
             />
             <Input
                 id="IdInpExchangeRateValue"
-                value="{oModelForHeader>/ZexchangeRate}"
+             
             />
+               <!-- value="{oModelForHeader>/ZexchangeRate}" -->
             <Label
                 id="IdLblRODTEP"
                 text="RODTEP"
@@ -149,7 +150,7 @@
                     text="Yes"
                 />
                 <core:Item
-                    key="2"
+                    key="3"
                     text="No"
                 />
             </Select>

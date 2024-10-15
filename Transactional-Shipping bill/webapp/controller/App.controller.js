@@ -11,7 +11,7 @@ sap.ui.define(
 
     return BaseController.extend("warehousemanagement.controller.App", {
       onInit: function () {
-        this.getRouter().navTo("Home");
+        // this.getRouter().navTo("Home");
       },
       onItemSelect: function (oEvent) {
         var sKey = oEvent.getParameter('item').getKey();

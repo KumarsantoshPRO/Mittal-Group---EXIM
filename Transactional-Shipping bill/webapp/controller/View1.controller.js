@@ -513,7 +513,7 @@ sap.ui.define([
 
                 if (shippingBillNo) {
 
-                    sap.m.MessageBox.error("Delete object  " + shippingBillNo + "?", {
+                    sap.m.MessageBox.error("Delete shipping bill  " + shippingBillNo + "?", {
                         actions: ["Delete", sap.m.MessageBox.Action.CLOSE],
                         emphasizedAction: "Delete",
                         onClose: function (sAction) {
@@ -542,8 +542,16 @@ sap.ui.define([
                 debugger;
             },
             onShowDetails: function (oEvent) {
+                var selectedRowBillNo;
+                var rowIndex;
+                if (oEvent.getParameter("rowIndex")) {
+                    rowIndex = oEvent.getParameter("rowIndex")
+                    selectedRowBillNo = oEvent.getSource().getBindingInfo("rows").binding.oList[rowIndex].ZshippingBillNo;
+                } else {
+                    rowIndex = 1;
+                    selectedRowBillNo = oEvent.getParameter('row').getAggregation('cells')[0].getText()
+                }
 
-                var rowIndex = oEvent.getParameter("rowIndex")
                 // if (rowIndex) {
                 //     this.getView().byId("idDeleteRow").setEnabled(true);
                 // } else {
@@ -552,7 +560,7 @@ sap.ui.define([
                 // var selectedRowBillNo = oEvent.getSource().getBindingContext().getProperty("oModelForTable>ZshippingBillNo");
                 if (rowIndex >= 0) {
                     // var selectedRowBillNo = oEvent.getSource().getAggregation("rows")[rowIndex].getCells()[0].getText()
-                    var selectedRowBillNo = oEvent.getSource().getBindingInfo("rows").binding.oList[rowIndex].ZshippingBillNo;
+                    // var selectedRowBillNo = oEvent.getSource().getBindingInfo("rows").binding.oList[rowIndex].ZshippingBillNo;
                     // var selectedRowBillNo = oEvent.getSource().getAggregation("cells")[0].getText()
                     this.oRouter = this.getOwnerComponent().getRouter();
                     this.oRouter.navTo("shippingBill_Details", {
