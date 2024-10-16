@@ -39,6 +39,9 @@ sap.ui.define([
                     this.getView().byId("_IDGenObjectPageHeader1").setObjectTitle("Creat new shipping bill");
                     this.getView().getModel("oEditableModel").setProperty("/update", false);
                     this.getView().getModel("oEditableModel").setProperty("/save", true);
+                    this.getView().getModel("oEditableModel").setProperty("/new", true);
+                    this.getView().getModel("oEditableModel").setProperty("/itemTableVisiblity", false);
+
                 } else {
                     this.getView().byId("_IDGenObjectPageHeader1").setObjectTitle(billNo);
                     var oModel = this.getOwnerComponent().getModel();
@@ -47,6 +50,8 @@ sap.ui.define([
                     this.onCancel();
                     this.getView().getModel("oEditableModel").setProperty("/update", true);
                     this.getView().getModel("oEditableModel").setProperty("/save", false);
+                    this.getView().getModel("oEditableModel").setProperty("/new", false);
+                    this.getView().getModel("oEditableModel").setProperty("/itemTableVisiblity", true);
                 }
             },
             createLocalJSONModels: function () {
@@ -123,7 +128,8 @@ sap.ui.define([
                     "edit": false,
                     "view": false,
                     "save": false,
-                    "update": false
+                    "update": false,
+                    "new": false
                 });
                 this.getView().setModel(oEditableModel, "oEditableModel");
 
@@ -298,7 +304,7 @@ sap.ui.define([
 
                         }
                         this.getView().getModel("oModelForItems").refresh();
-
+                        this.getView().getModel("oEditableModel").setProperty("/itemTableVisiblity", true);
 
                         // oModelForHeader
                         this.getView().getModel("oModelForHeader").getData().Zcustomer = Data.results[0].SoldToParty;
@@ -325,7 +331,7 @@ sap.ui.define([
                         this
                     );
                     this.getView().addDependent(this.CountryOfBLFrag);
-                    var sService = "/sap/opu/odata/sap/ZV_BILLING_INV_DET_SERV_B";
+                    var sService = "/sap/opu/odata/sap/ZRC_SHIP_BILL_HEAD_SRV_B";
                     var oModelCountryOfBL = new sap.ui.model.odata.ODataModel(
                         sService,
                         true
@@ -335,27 +341,17 @@ sap.ui.define([
                         .getCore()
                         .byId("idSLCountryOfBLValueHelp")
                         .clone();
-                    this._oTempCountryOfBL = sap.ui
-                        .getCore()
-                        .byId("idSLCountryOfBLValueHelp")
-                        .clone();
+
                 }
 
                 this.CountryOfBLFrag.open();
                 var aFilter = [];
-                // var oFilter = new Filter(
-                //     [new Filter("BillingDocument", FilterOperator.EQ, "90000000")],
-                //     false
-                // );
-
-                // aFilter.push(oFilter);
-
-                sap.ui.getCore().byId("idSDInvoiceNumberF4").bindAggregation("items", {
-                    path: "/ZV_BILLING_INV_DETAILS",
+                var sPath = "/I_CountryText";
+                sap.ui.getCore().byId("idSDCountryOfBLF4").bindAggregation("items", {
+                    path: sPath,
                     filters: aFilter,
-                    template: this._InvoiceNumberTemp,
+                    template: this._CountryOfBLTemp,
                 });
-
 
             },
 
@@ -363,62 +359,21 @@ sap.ui.define([
             onValueHelpSearch_CountryOfBL: function (oEvent) {
                 var aFilter = [];
                 var sValue = oEvent.getParameter("value");
-                var sPath = "/ZV_BILLING_INV_DETAILS";
-                var oSelectDialog = sap.ui.getCore().byId(oEvent.getParameter("id"));
-                var aFilter = [];
                 var oFilter = new Filter(
-                    [new Filter("BillingDocument", FilterOperator.Contains, sValue)],
+                    [new Filter("CountryName", FilterOperator.Contains, sValue)],
                     false
                 );
-
                 aFilter.push(oFilter);
-                oSelectDialog.bindAggregation("items", {
-                    path: sPath,
-                    filters: aFilter,
-                    template: this._oTempInvoiceNumber,
-                });
+                oEvent.getSource().getBinding("items").filter(aFilter);
             },
 
             // on Value Help - Confirm
             onValueHelpConfirm_CountryOfBL: function (oEvent) {
-                // this.JSONModelPayload = this.getView().getModel("oModelForHeader");
-
                 var oSelectedItem = oEvent.getParameter("selectedItem"),
-                    sSelectedValue = oSelectedItem.getProperty("title");
-                var sPath = "/ZV_BILLING_INV_DETAILS";
-                var sService = "/sap/opu/odata/sap/ZV_BILLING_INV_DET_SERV_B";
-                var oModelForItems = new sap.ui.model.odata.ODataModel(
-                    sService,
-                    true
-                );
+                    // sSelectedValue = oSelectedItem.getProperty("title"),
+                    sSelectedValue = oSelectedItem.getBindingContext().getProperty("Country");
+                // this.getView().getModel("oModelForHeader").setProperty("/ZdestinationCountry", sSelectedValue.toString());
 
-                this.getView().getModel("oModelForHeader").setProperty("/ZinvoiceDocument", sSelectedValue.toString());
-
-                // To get Items details
-                var aFilters = [];
-                var oFilter = new Filter(
-                    [new Filter("BillingDocument", FilterOperator.EQ, sSelectedValue)],
-                    false
-                );
-
-                aFilters.push(oFilter);
-
-
-
-
-
-                this.getView().setBusy(true);
-                oModelForItems.read(sPath, {
-                    filters: aFilters,
-                    success: function (Data) {
-
-                        this.getView().getModel("oModelForItems").setData(Data);
-                        this.getView().setBusy(false);
-                    }.bind(this),
-                    error: function (sError) {
-                        this.getView().setBusy(false);
-                    }.bind(this)
-                });
             },
             // End: Country of BL
 
@@ -564,7 +519,7 @@ sap.ui.define([
                 var aFilter = [];
                 var sValue = oEvent.getParameter("value");
                 var oFilter = new Filter(
-                    [new Filter("Country", FilterOperator.Contains, sValue)],
+                    [new Filter("CountryName", FilterOperator.Contains, sValue)],
                     false
                 );
                 aFilter.push(oFilter);
@@ -572,8 +527,10 @@ sap.ui.define([
             },
             // on Value Help - Confirm
             onValueHelpConfirm_DestinationCountry: function (oEvent) {
+
                 var oSelectedItem = oEvent.getParameter("selectedItem"),
-                    sSelectedValue = oSelectedItem.getProperty("title");
+                    // sSelectedValue = oSelectedItem.getProperty("title"),
+                    sSelectedValue = oSelectedItem.getBindingContext().getProperty("Country");
                 this.getView().getModel("oModelForHeader").setProperty("/ZdestinationCountry", sSelectedValue.toString());
 
             },
@@ -593,13 +550,13 @@ sap.ui.define([
 
                 Object.keys(obj1 || {}).concat(Object.keys(obj2 || {})).forEach(key => {
                     if (obj2[key] !== obj1[key] && !Object.is(obj1[key], obj2[key])) {
-                        debugger;
+                        
                         result[key] = obj2[key];
                     }
                     if (typeof obj2[key] === 'object' && typeof obj1[key] === 'object') {
                         const value = this.diff(obj1[key], obj2[key]);
                         if (value !== undefined) {
-                            debugger;
+                            
                             result[key] = value;
                         }
                     }
@@ -610,7 +567,7 @@ sap.ui.define([
 
                 var oView = this.getView();
                 if (!this._oFragmentavail) {
-                    this._oFragmentavail = sap.ui.xmlfragment("zmg.pro.exim.transactionalshippingbill.exim.view.fragments.eachItemLicenseDetails", this);
+                    this._oFragmentavail = sap.ui.xmlfragment("idFragmentLicenses", "zmg.pro.exim.transactionalshippingbill.exim.view.fragments.eachItemLicenseDetails", this);
                     oView.addDependent(this._oFragmentavail);
                 }
 
@@ -618,11 +575,22 @@ sap.ui.define([
                 var oHeaderPaylod = this.getView().getModel("oModelForHeader").getData();
                 var ZshippingBillNo = oHeaderPaylod.ZshippingBillNo;
                 var Item;
-                if (this.screenType === "edit") {
-                    Item = oEvent.getSource().getParent().getCells()[0].getValue();
-                } else {
-                    Item = oEvent.getSource().getParent().getCells()[0].getText();
-                }
+                var Quantity;
+                var sItemSPath = oEvent.getSource().getParent().oBindingContexts.oModelForItems.sPath;
+                Item = this.getView().getModel("oModelForItems").getContext(sItemSPath).getProperty('Item');
+                Quantity = this.getView().getModel("oModelForItems").getContext(sItemSPath).getProperty('InvoiceQty')
+                var Material = this.getView().getModel("oModelForItems").getContext(sItemSPath).getProperty('Material')
+                this.Quantity = Quantity;
+                // if (this.screenType === "edit") {
+                //     debugger
+                //     Item = oEvent.getSource().getParent().getCells()[0].getValue();
+                //     Quantity = oEvent.getSource().getParent().getCells()[4].getValue();
+                //     // Material
+                // } else {
+                //     Item = oEvent.getSource().getParent().getCells()[0].getText();
+                //     Quantity = oEvent.getSource().getParent().getCells()[4].getText();
+                //     // Material
+                // }
 
 
 
@@ -636,6 +604,8 @@ sap.ui.define([
                             var aItemLicPayload = element.Licenses.results;
                             for (var i = 0; i < aItemLicPayload.length; i++) {
                                 aItemLicPayload[i].Item = Item;
+                                aItemLicPayload[i].Quantity = Quantity;
+                                aItemLicPayload[i].Material = Material
                             }
                             this.getView().getModel("oModelForLicenses").setData(element.Licenses);
                         }
@@ -655,7 +625,7 @@ sap.ui.define([
                     //     // } else {
                     //     //     var diff = this.diff(aLicTemp, this.oLicFinalPayload);
                     //     // }
-                    //     // debugger;
+                    //     // 
                     //     this.getView().getModel("oModelForLicenses").setData(this.oLicFinalPayload);
                     //     nLicItemLen = this.getView().getModel("oModelForLicenses").getData().results.length;
                     // } else {
@@ -710,6 +680,8 @@ sap.ui.define([
 
 
                 } else {
+                    this.getView().getModel("oModelForLicenses").setData({});
+                    this.shippingBillNoForLicDelete = ZshippingBillNo;
                     var sPath = "/ZC_SHIP_BILL_ITEM(ZshippingBillNo='" + ZshippingBillNo + "',Item='" + Item + "')/to_SubItem";
                     this.getView().setBusy(true);
                     this.getView().getModel().read(sPath, {
@@ -724,33 +696,28 @@ sap.ui.define([
                 }
 
             },
-
+            onQuantityInputLiveChange: function (oEvent) {
+                this.Quantity;
+                var aLicPayload = this.getView().getModel("oModelForLicenses").getData().results;
+                var sumQuanity = 0;
+                for (var i = 0; i < aLicPayload.length; i++) {
+                    sumQuanity = sumQuanity + Number(aLicPayload[i].Quantity)
+                }
+                if (Number(this.Quantity) < sumQuanity) {
+                    MessageBox.error('Quantity exceeds limit');
+                    oEvent.getSource().setValue('');
+                }
+            },
             onLicenseDialogClose: function () {
-                //Start: For multiple licenses 
-                // var oLicItems = this.getView().getModel("oModelForLicenses").getData()
-                // for (var i = 0; i < oLicItems.results.length; i++) {
-                //     this.oLicFinalPayload.results.push(oLicItems.results[i])
-                // }
 
-                // for (var j = 0; j < this.oLicFinalPayload.results.length; j++) {
-                //     for (var k = 0; k < this.oLicFinalPayload.results.length; k++) {
-                //         if (j != k) {
-                //             if (JSON.stringify(this.oLicFinalPayload.results[j]) === JSON.stringify(this.oLicFinalPayload.results[k])) {
-                //                 this.oLicFinalPayload.results.splice(k, 1);
-                //             }
-                //         }
-                //     }
-                // }
-                // const filteredArray = this.removeObjectWithEmptyString(this.oLicFinalPayload.results)
-                // this.oLicFinalPayload.results = filteredArray;
-                //End: For multiple licenses
-                // come back here
                 if (this.page != "null") {
                     var aItemPaylod = this.getView().getModel("oModelForItems").getData();
                     var aLicePayload = this.getView().getModel("oModelForLicenses").getData();
-                    for (var i = 0; i < aItemPaylod.results.length; i++) {
-                        if (aLicePayload.results[0].Item === aItemPaylod.results[i].Item) {
-                            aItemPaylod.results[i].Licenses = aLicePayload;
+                    if (aLicePayload.results.length > 0) {
+                        for (var i = 0; i < aItemPaylod.results.length; i++) {
+                            if (aLicePayload.results[0].Item === aItemPaylod.results[i].Item) {
+                                aItemPaylod.results[i].Licenses = aLicePayload;
+                            }
                         }
                     }
                 }
@@ -803,7 +770,7 @@ sap.ui.define([
                 var JSONData = this.getView()
                     .getModel("oModelForItems")
                     .getData();
-                    var Item = 10 * (JSONData.results.length + 1);
+                var Item = 10 * (JSONData.results.length + 1);
                 // for Licenses details
                 var aEachItemsLic = {
                     "results": [{
@@ -868,6 +835,7 @@ sap.ui.define([
 
             onAddNewEmptyLicense: function () {
                 var Item = this.getView().getModel("oModelForLicenses").getData().results[0].Item;
+                var Material = this.getView().getModel("oModelForLicenses").getData().results[0].Material;
                 var aItemPayload = this.getView().getModel("oModelForItems").getData();
                 for (let index = 0; index < aItemPayload.results.length; index++) {
                     const element = aItemPayload.results[index];
@@ -886,7 +854,7 @@ sap.ui.define([
 
                 var oEachItemsLic = {
                     "Item": Item,
-                    "Material": "",
+                    "Material": Material,
                     "Licences": "",
                     "Quantity": "",
                     "Value": ""
@@ -899,6 +867,52 @@ sap.ui.define([
                     .setData(JSONData);
 
                 // this.oLicFinalPayload.results.push(oEachItemsLic);
+            },
+            onLicenseDelete: function (oEvent) {
+
+                var sLicSPath = oEvent.getSource().getParent().getParent().oBindingContexts.oModelForLicenses.sPath;
+                if (this.page === 'null') {
+                    var len_aLicModel = this.getView().getModel('oModelForLicenses').getData().results.length;
+                    var index = sLicSPath.split('/')[2];
+                    if (len_aLicModel < 2) {
+                        MessageBox.error("Atleast 1 License detail is mandatory");
+                    } else {
+                        // delete this.getView().getModel('oModelForLicenses').getData()['results'][index];
+                        this.getView().getModel('oModelForLicenses').getData().results.splice(index, 1);
+                    }
+
+                } else {
+                    // ZC_SHIP_BILL_LIC(ZshippingBillNo='001SKT001',Item='10',Licences='101')
+                    var sService = "/sap/opu/odata/sap/ZRC_SHIP_BILL_HEAD_SRV_B";
+                    var oModelForLicenseDel = new sap.ui.model.odata.ODataModel(
+                        sService,
+                        true
+                    );
+                    var ShipNo = this.shippingBillNoForLicDelete,
+                        ItemNo = this.getView().getModel('oModelForLicenses').getContext(sLicSPath).getProperty('Item'),
+                        LicNo = this.getView().getModel('oModelForLicenses').getContext(sLicSPath).getProperty('Licences');
+                    var sPathForLicDelete = "ZC_SHIP_BILL_LIC(ZshippingBillNo='" + ShipNo + "',Item='" + ItemNo + "',Licences='" + LicNo + "')";
+                    sap.m.MessageBox.error("Delete licence no  " + LicNo + "?", {
+                        actions: ["Delete", sap.m.MessageBox.Action.CLOSE],
+                        emphasizedAction: "Delete",
+                        onClose: function (sAction) {
+                            if (sAction === "Delete") {
+                                this.getView().setBusy(true);
+                                oModelForLicenseDel.remove(sPathForLicDelete, {
+                                    success: function (smessage) {
+                                        sap.m.MessageToast.show("Selected licences Deleted");
+                                        this._oFragmentavail.close();
+                                        this.getView().setBusy(false);
+                                    }.bind(this),
+                                    error: function (sError) {
+                                        this.getView().setBusy(false);
+                                    }.bind(this)
+                                });
+                            }
+                        }.bind(this)
+                    });
+                }
+                this.getView().getModel('oModelForLicenses').refresh();
             },
 
             onDeleteLicenseItem: function (oEvent) {
@@ -1279,6 +1293,7 @@ sap.ui.define([
                             var aLicensePaylod = aItemPaylod.results[index].Licenses
                             for (let j = 0; j < aLicensePaylod.results.length; j++) {
                                 const oLicensePaylod = aLicensePaylod.results[j];
+
                                 // ZC_SHIP_BILL_LIC(ZshippingBillNo='SKT006',Item='10',Licences='101')
                                 var licenseNo = this.getView().getModel("oModelForLicenses").getData().results[0].Licences;
                                 var sPath = "ZC_SHIP_BILL_LIC(ZshippingBillNo='" + oHeaderPaylod.ZshippingBillNo + "',Item='" + oItemPaylod.Item + "',Licences='" + licenseNo + "')";

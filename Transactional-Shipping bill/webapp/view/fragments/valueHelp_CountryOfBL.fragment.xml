@@ -14,8 +14,7 @@
         <items>
             <StandardListItem
                 id="idSLCountryOfBLValueHelp"
-                title="{BillingDocument}"
-                description="{BillingDocumentItem}"
+                title="{CountryName}({Country})"
                 wrapping="true"
                 
             />

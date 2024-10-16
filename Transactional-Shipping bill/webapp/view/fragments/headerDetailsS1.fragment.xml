@@ -32,6 +32,7 @@
                 showSuggestion="true"
                 showValueHelp="true"
                 valueHelpRequest="onInvoiceNumberValueHelp"
+                valueHelpOnly="true"
                 value="{oModelForHeader>/ZinvoiceDocument}"
             />
             <Label
@@ -57,8 +58,10 @@
                 text="Country of BL"
             />
             <Input
+                showSuggestion="true"
                 showValueHelp="true"
-                value=" "
+                valueHelpRequest="onCountryOfBLValueHelp"
+                valueHelpOnly="true"
             />
             <Label
                 id="IdLblPortOfLoad"

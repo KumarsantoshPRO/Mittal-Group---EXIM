@@ -125,7 +125,7 @@
                     headerMenu="_menu"
                     resizable="true"
                     autoResizable="true"
-                    visible="false"
+                     
                 >
                     <Label text="Item" />
                     <table:template>

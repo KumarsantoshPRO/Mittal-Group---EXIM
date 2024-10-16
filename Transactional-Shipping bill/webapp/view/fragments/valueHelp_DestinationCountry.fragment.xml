@@ -14,8 +14,8 @@
         <items>
             <StandardListItem
                 id="idSLDestinationCountryValueHelp"
-                title="{Country}"
-                description="{CountryName}"
+                title="{CountryName}({Country})"
+              
                 wrapping="true"
                 
             />
