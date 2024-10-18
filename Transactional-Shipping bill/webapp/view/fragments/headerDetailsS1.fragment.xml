@@ -70,10 +70,8 @@
                 showValueHelp="true"
                 value="{oModelForHeader>/ZportOfLoading}"
                 id="_IDGenInput4"
-                  showValueHelp="true"
+              
                 valueHelpRequest="onportOfLoadingValueHelp"
-             
-
             />
 
             <Label
@@ -85,7 +83,7 @@
                 showValueHelp="true"
                 valueHelpRequest="onICDValueHelp"
             />
-            />
+           
             <Label
                 id="IdLblCha"
                 text="CHA"
@@ -94,25 +92,27 @@
             <Input
                 id="CountryofBLValue"
                 value="{oModelForHeader>/Zcha}"
-                 showValueHelp="true"
+                showValueHelp="true"
                 valueHelpRequest="onCHAValueHelp"
             />
 
-            <!--  -->
+     
 
             <Label
                 id="IdLblShippingBillStatus"
                 text="Shipping Bill Status"
             />
             <Select
-                forceSelection="true"
+                forceSelection="false"
                 id="ShippingBillStatusValue"
                 selectedKey="{oModelForHeader>/ZshippingBillStatus}"
+                 
             >
                 <core:Item
                     id="item1"
                     key="final"
                     text="Final"
+                    
                 />
                 <core:Item
                     id="item2"
@@ -139,9 +139,9 @@
                 value="{path:'oModelForHeader>/ZshippingBillDate', type: 'sap.ui.model.type.Date', formatOptions: {pattern: 'dd/MM/yyyy'}}"
                 displayFormat="dd/MM/yyyy"
                 valueFormat="dd/MM/yyyy"
-                editable="false"
+                
             />
-            />
+           
             <Label
                 id="IdLblStateOfOrigin"
                 text="State of Origin"

@@ -132,12 +132,14 @@
                         id="idBtn_Save"
                         text="Save"
                         type="Emphasized"
+                        press="onSaveButtonPress"
                         visible="{myPropertyValues>/update}"
                     />
                     <Button
                         id="idBtn_Create"
                         text="Create"
                         type="Emphasized"
+                        press="onCreateButtonPress"
                         visible="{myPropertyValues>/new}"
                     />
                     <Button

@@ -20,7 +20,8 @@ sap.ui.define([
     'sap/m/p13n/FilterController',
     'sap/ui/export/Spreadsheet',
     "sap/ui/export/library",
-    "sap/ui/integration/designtime/baseEditor/validator/MaxLength"
+    "sap/ui/integration/designtime/baseEditor/validator/MaxLength",
+    "sap/m/MessageBox"
 ],
     function (Controller,
         JSONModel,
@@ -43,7 +44,8 @@ sap.ui.define([
         FilterController,
         Spreadsheet,
         library,
-        MaxLength) {
+        MaxLength,
+        MessageBox) {
 
         return Controller.extend("zpro.sk.mittalcoin.exim.loc.import.locimport.controller.View2", {
             onInit: function () {
@@ -247,28 +249,23 @@ sap.ui.define([
                 var sPath = oEvent.getParameter('selectedItem').getBindingContextPath()
                 this.getView().setBusy(true);
                 oModelItem.read(sPath, {
-                
+
                     success: function (Data) {
+                        var index = 0;
+                        var aItemsPayload = this.getView().getModel("oModelForItemTable").getData().results;
+                        aItemsPayload[index].LcNo = this.getView().getModel("oModelForHeader").getProperty("/LcNo");
+                        aItemsPayload[index].Ebelp = Data.PurchaseOrderItem;
+                        aItemsPayload[index].Matnr = Data.Material;
+                        aItemsPayload[index].Mtart = Data.PurchaseOrderItemText;
+                        aItemsPayload[index].Meins = Data.PurchaseOrderQuantityUnit;
+                        aItemsPayload[index].Menge = Data.OrderQuantity;
+                        aItemsPayload[index].UnitPrice = Data.NetPriceQuantity;
+                        aItemsPayload[index].PoCurr = Data.DocumentCurrency;
+                        var TotValue = Data.OrderQuantity * Data.NetPriceQuantity
+                        aItemsPayload[index].TotValue = TotValue.toString();
 
-                        // oModelForItems
 
-                        // var aHeadLen = Data.results.length;
-
-                        // for (let index = 0; index < aHeadLen; index++) {
-
-                        //     var aItemsPayload = this.getView().getModel("oModelForItems").getData().results;
-                        //     aItemsPayload[index].LcNo = Data.results[index].BillingDocumentItem;
-                        //     aItemsPayload[index].Ebelp = Data.results[index].Material;
-                        //     aItemsPayload[index].Matnr = Data.results[index].ProductDescription;
-                        //     aItemsPayload[index].Mtart = Data.results[index].BaseUnit;
-                        //     aItemsPayload[index].Meins = Data.results[index].BillingQuantity;
-                        //     aItemsPayload[index].Menge = Data.results[index].GrossAmount;
-                        //     aItemsPayload[index].UnitPrice = Data.results[index].GrossAmount;
-                        //     aItemsPayload[index].PoCurr = Data.results[index].GrossAmount;
-                        //     aItemsPayload[index].TotValue = Data.results[index].GrossAmount;
-
-                        // }
-                        // this.getView().getModel("oModelForItems").refresh();
+                        this.getView().getModel("oModelForItemTable").refresh();
                         this.propertyValues.setProperty("/itemTableVisiblity", true);
                         this.getView().setBusy(false);
                     }.bind(this),
@@ -312,6 +309,109 @@ sap.ui.define([
             },
             // End: Menu
 
+            // All post call
+            // On Create
+            onCreateButtonPress: function () {
+                var oModel = this.getOwnerComponent().getModel();
+                var sPath = '/ZRC_LCIMP_HEAD'
+                var payload = this.getView().getModel("oModelForHeader").getData();
+
+                this.postCallForHeader(oModel, sPath, payload);
+
+
+            },
+
+
+            validation: function (headerPayload) {
+                if (!headerPayload.Po) {
+                    MessageBox.error("Please select PO");
+                    return false;
+                } else if (!headerPayload.PiDate) {
+                    MessageBox.error("Please enter PI Date");
+                    return false;
+                } else if (!headerPayload.ShipmetLastDate) {
+                    MessageBox.error("Please enter Shipment Date");
+                    return false;
+                } else if (!headerPayload.LcIssueDate) {
+                    MessageBox.error("Please enter LC Issue Date ");
+                    return false;
+                } else if (!headerPayload.LcExpiryDate) {
+                    MessageBox.error("Please enter LC Expiry Date");
+                    return false;
+                } else if (!headerPayload.ToleranceValue) {
+                    MessageBox.error("Please enter Tolerance Quantity");
+                    return false;
+                } else if (!headerPayload.ZcreateDate) {
+                    MessageBox.error("Please enter Created Date ");
+                    return false;
+                } else if (!headerPayload.ZcreateTime) {
+                    MessageBox.error("Please enter Created Time ");
+                    return false;
+                } else {
+
+                    return true;
+                }
+
+
+            },
+            // All post calls
+            postCallForHeader: function (oModel, sPath, payload) {
+                var validation = this.validation(payload);
+                if (validation === true) {
+                    //Create Call
+                    this.getView().setBusy(true);
+                    oModel.create(sPath, payload, {
+                        success: function (oData, response) {
+                            var payloadItem = this.getView().getModel("oModelForItemTable").getData().results;
+                            var sPathItems = "/ZRC_LCIMP_HEAD('" + oData.LcNo + "')/to_Item";
+                            this.LcNo = oData.LcNo;
+                            this.postCallForItem(oModel, sPathItems, payloadItem)
+                            this.getView().setBusy(false);
+                        }.bind(this),
+                        error: function (oError) {
+                            this.getView().setBusy(false);
+                        }.bind(this)
+                    });
+                }
+            },
+            postCallForItem: function (oModel, sPath, aPayload) {
+                var that = this;
+                var promise = Promise.resolve();
+                aPayload.forEach(function (Payload, i) { //copy local variables
+                    //Chain the promises
+                    promise = promise.then(function () { return that._promisecreateCallForEachItem(oModel, sPath, Payload) });
+                });
+                promise.then(function () {
+
+                })
+                    .catch(function () {
+
+                    })
+
+            },
+            _promisecreateCallForEachItem: function (oModel, sPath, Payload) {
+
+                // this.getView().setBusy(true);
+                oModel.create(sPath, Payload, {
+                    success: function (oData, response) {
+                        sap.m.MessageBox.success("LC Number  " + that.LcNo + " created", {
+                            actions: [sap.m.MessageBox.Action.OK],
+                            emphasizedAction: "OK",
+                            onClose: function (sAction) {
+                                if (sAction === "OK") {
+                                    window.history.go(-1);
+                                }
+                            }
+                        });
+
+
+                    }.bind(this),
+                    error: function (oError) {
+
+                        this.getView().setBusy(false);
+                    }.bind(this)
+                });
+            },
 
         })
     });

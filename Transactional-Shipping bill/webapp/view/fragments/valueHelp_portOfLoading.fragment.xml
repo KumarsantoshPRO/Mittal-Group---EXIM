@@ -14,7 +14,7 @@
         <items>
             <StandardListItem
                 id="idSLportOfLoadingValueHelp"
-                title="{ZportPortCodeOPortCodefLoading}"
+                title="{PortCode}"
                 wrapping="true"
                 
             />

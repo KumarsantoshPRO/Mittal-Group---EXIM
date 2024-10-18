@@ -6,8 +6,7 @@ sap.ui.define([
     "sap/ui/model/FilterOperator",
     "sap/m/MessageBox",
     "sap/ui/core/format/DateFormat",
-    "sap/ui/core/Item",
-    "sap/ui/commons/MessageBox"
+    "sap/ui/core/Item"
 
 ],
     function (Controller,
@@ -17,14 +16,13 @@ sap.ui.define([
         FilterOperator,
         MessageBox,
         DateFormat,
-        Item,
-        MessageBox) {
+        Item) {
         "use strict";
 
         return Controller.extend("zmg.pro.exim.transactionalshippingbill.exim.controller.shippingBill_Details", {
 
             onInit: function () {
-
+                debugger
                 this.createLocalJSONModels();
                 this.getOwnerComponent()
                     .getRouter()
@@ -32,6 +30,7 @@ sap.ui.define([
 
             },
             onRouteMatched: function (oEvent) {
+                debugger
                 var billNo = oEvent.getParameter("arguments").billNo;
                 this.page = billNo;
                 if (billNo === "null") {
@@ -532,7 +531,7 @@ sap.ui.define([
             onValueHelpConfirm_CHA: function (oEvent) {
                 var oSelectedItem = oEvent.getParameter("selectedItem"),
                     sSelectedValue = oSelectedItem.getBindingContext().getProperty("Supplier");
-                this.getView().getModel("oModelForHeader").setProperty("/ZCHA", sSelectedValue.toString());
+                this.getView().getModel("oModelForHeader").setProperty("/Zcha", sSelectedValue.toString());
 
             },
             // End: CHA
