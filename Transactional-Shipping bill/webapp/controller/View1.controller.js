@@ -539,38 +539,22 @@ sap.ui.define([
             },
             // On click of table row
             onRowsDataChange: function () {
-                 
+
             },
             onShowDetails: function (oEvent) {
+
+                var sPathClickedItem
                 if (oEvent.getParameter('rowContext')) {
-                    var sPathClickedItem = oEvent.getParameter('rowContext').sPath
-                    var selectedRowBillNo = this.getView().getModel('oModelForTable').getContext(sPathClickedItem).getProperty("ZshippingBillNo");
-                    // var rowIndex;
-
-                    // if (oEvent.getParameter("rowIndex")) {
-                    //     rowIndex = oEvent.getParameter("rowIndex")
-                    //     selectedRowBillNo = oEvent.getSource().getBindingInfo("rows").binding.oList[rowIndex].ZshippingBillNo;
-                    // } else {
-                    //     rowIndex = 1;
-                    //     selectedRowBillNo = oEvent.getParameter('row').getAggregation('cells')[0].getText()
-                    // }
-
-                    // if (rowIndex) {
-                    //     this.getView().byId("idDeleteRow").setEnabled(true);
-                    // } else {
-                    //     this.getView().byId("idDeleteRow").setEnabled(false);
-                    // }
-                    // var selectedRowBillNo = oEvent.getSource().getBindingContext().getProperty("oModelForTable>ZshippingBillNo");
-                    // if (rowIndex >= 0) {
-                    // var selectedRowBillNo = oEvent.getSource().getAggregation("rows")[rowIndex].getCells()[0].getText()
-                    // var selectedRowBillNo = oEvent.getSource().getBindingInfo("rows").binding.oList[rowIndex].ZshippingBillNo;
-                    // var selectedRowBillNo = oEvent.getSource().getAggregation("cells")[0].getText()
-
-                    this.oRouter = this.getOwnerComponent().getRouter();
-                    this.oRouter.navTo("shippingBill_Details", {
-                        billNo: selectedRowBillNo
-                    });
+                    sPathClickedItem = oEvent.getParameter('rowContext').sPath
+                } else {
+                    sPathClickedItem = oEvent.getParameter('row').getRowBindingContext().sPath
                 }
+                var selectedRowBillNo = this.getView().getModel('oModelForTable').getContext(sPathClickedItem).getProperty("ZshippingBillNo");
+                this.oRouter = this.getOwnerComponent().getRouter();
+                this.oRouter.navTo("shippingBill_Details", {
+                    billNo: selectedRowBillNo
+                });
+
                 // }
             },
 

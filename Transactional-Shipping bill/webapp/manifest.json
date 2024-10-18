@@ -176,7 +176,7 @@
                         "shippingBill_Details"
                     ]
                 }
-            ],
+            ], 
             "targets": {
                 "Home": {
                     "viewType": "XML",

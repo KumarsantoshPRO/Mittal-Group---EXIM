@@ -1,48 +1,25 @@
 <mvc:View
-    controllerName="zmg.pro.exim.transactionalshippingbill.exim.controller.View1"
+    controllerName="zpro.sk.mittalcoin.exim.loc.import.locimport.controller.View1"
     xmlns:mvc="sap.ui.core.mvc"
     displayBlock="true"
     height="100%"
     xmlns="sap.m"
     xmlns:f="sap.f"
     xmlns:fb="sap.ui.comp.filterbar"
-    xmlns:form="sap.ui.layout.form"
     xmlns:table="sap.ui.table"
     xmlns:columnmenu="sap.m.table.columnmenu"
     xmlns:sap.ui.fl="sap.ui.fl"
-> 
-    <f:DynamicPage
-        showFooter="false"
-        fitContent="true"
-        headerExpanded="true"
-    >
+>
+    <f:DynamicPage fitContent="true">
         <f:title>
             <f:DynamicPageTitle stateChange="onDPTStateChange">
                 <f:heading>
                     <Title
-                        text="Shipping Bill Application"
+                        text="Letter of credit - import"
                         textAlign="Center"
                         titleStyle="H3"
                     />
                 </f:heading>
-                <!-- <f:actions>
-                    <Button
-                        id="idBtnDPTFilterGo"
-                        text="Search"
-                        press="onSearch"
-                        visible="true"
-                        type="Emphasized"
-                        icon="sap-icon://search"
-                    />
-                    <Button
-                        id="idBtnDPTFilterClear"
-                        text="Clear"
-                        press="onClearFilters"
-                        visible="true"
-                        type="Attention"
-                        icon="sap-icon://clear-filter"
-                    />
-                </f:actions> -->
             </f:DynamicPageTitle>
         </f:title>
 
@@ -58,66 +35,53 @@
                         <fb:filterGroupItems>
                             <fb:FilterGroupItem
                                 name="Name"
-                                label="Shipping Bill Number"
+                                label="LC Number"
                                 groupName="Group1"
                                 visibleInFilterBar="true"
                             >
                                 <fb:control>
                                     <Input
-                                        id="idInpF4_SBNumber"
                                         value=""
-                                        placeholder="Shipping Bill Number"
-                                        valueHelpIconSrc="sap-icon://value-help"
+                                        placeholder="LC Number"
                                         showValueHelp="true"
-                                        valueHelpRequest="onShippingBillHelp"
-                                        autocomplete="true"
+                                        valueHelpRequest="onLCNumberValuelHelp"
+                                    />
+                                </fb:control>
+                            </fb:FilterGroupItem>
+
+                            <fb:FilterGroupItem
+                                name="Name1"
+                                label="Contact Number"
+                                groupName="Group1"
+                                visibleInFilterBar="true"
+                            >
+                                <fb:control>
+                                    <Input
+                                        value=""
+                                        placeholder="Contact Number"
+                                        showValueHelp="true"
+                                        valueHelpRequest="onContactNumberValuelHelp"
+                                    />
+                                </fb:control>
+                            </fb:FilterGroupItem>
+
+                            <fb:FilterGroupItem
+                                name="Name2"
+                                label="PI Number"
+                                groupName="Group1"
+                                visibleInFilterBar="true"
+                            >
+                                <fb:control>
+                                    <Input
+                                        value=""
+                                        placeholder="PI Number"
+                                        showValueHelp="true"
+                                        valueHelpRequest="onPINumberValuelHelp"
                                     />
                                 </fb:control>
                             </fb:FilterGroupItem>
                         </fb:filterGroupItems>
                     </fb:FilterBar>
-
-                    <!-- <form:SimpleForm
-                        editable="true"
-                        layout="ColumnLayout"
-                        columnsL="3"
-                        columnsM="3"
-                        columnsXL="3"
-                    >
-                        <form:content>
-                            <Label text="Shipping Bill Number" />
-                            <Input
-                                id="idInpF4_SBNumber"
-                                value=""
-                                valueHelpIconSrc="sap-icon://value-help"
-                                showValueHelp="true"
-                                valueHelpRequest="onShippingBillHelp"
-                                autocomplete="true"
-                                placeholder="Shipping Bill Number"
-                            />
-                            <Label
-                                text="Invoice Document Number"
-                                visible="false"
-                            />
-                            <Input
-                                id="idInpF4_InvoiceNumber"
-                                value=""
-                                valueHelpIconSrc="sap-icon://value-help"
-                                showValueHelp="true"
-                                autocomplete="true"
-                                placeholder="Invoice Document Number"
-                                visible="false"
-                            />
-
-                            <Label text="Created Date" visible="false"/>
-                            <DatePicker
-                                id="idDP_CreatedDate"
-                                value=""
-                                placeholder="Created Date"
-                                visible="false"
-                            />
-                        </form:content>
-                    </form:SimpleForm> -->
                 </f:content>
             </f:DynamicPageHeader>
         </f:header>
@@ -140,7 +104,7 @@
                 columnSelect="onColumnSelect"
                 cellContextmenu="onProductIdCellContextMenu"
                 enableGrouping="true"
-                rowSelectionChange="onShowDetails"
+                rowSelectionChange="onShowLCDetails"
                 rowActionCount="2"
             >
                 <table:extension>
@@ -149,9 +113,9 @@
                         <ToolbarSpacer />
                         <Button
                             text="Create"
-                            press="onAddNew"
+                            press="onAddNewLOC"
                             type="Transparent"
-                            tooltip="Create new Letter Of Credit"
+                            tooltip="Create new"
                         />
                         <Button
                             id="idDeleteRow"
@@ -212,161 +176,112 @@
                         </columnmenu:items>
                     </columnmenu:Menu>
                 </table:dependents>
+                
                 <table:noData>
                     <IllustratedMessage enableVerticalResponsiveness="true" />
                 </table:noData>
+
                 <table:columns>
                     <table:Column
-                        id="idClmShipBill"
-                        width="8rem"
-                        hAlign="Begin"
-                        sortProperty="ZshippingBillNo"
+                        id="LcNo"
+                        sortProperty="LcNo"
                         headerMenu="menu"
-                        resizable="true"
-                        autoResizable="true"
                     >
-                        <Label text="Shipping Bill No" />
+                        <Label text="LC Number" />
                         <table:template>
-                            <Label text="{oModelForTable>ZshippingBillNo}" />
+                            <Label text="{oModelForTable>LcNo}" />
                         </table:template>
                     </table:Column>
                     <table:Column
-                        id="idClmDocNo"
-                        width="8rem"
-                        hAlign="End"
-                        sortProperty="ZinvoiceDocument"
+                        id="ContractNo"
+                        sortProperty="ContractNo"
                         headerMenu="menu"
-                        resizable="true"
-                        autoResizable="true"
                     >
-                        <Label text="Invoice Document" />
+                        <Label text="Contact No." />
                         <table:template>
-                            <Label text="{oModelForTable>ZinvoiceDocument}" />
+                            <Label text="{oModelForTable>ContractNo}" />
                         </table:template>
                     </table:Column>
 
                     <table:Column
-                        id="idClmPortOfLoading"
-                        width="8rem"
-                        hAlign="Begin"
-                        sortProperty="ZportOfLoading"
+                        id="PiNo"
+                        sortProperty="PiNo"
                         headerMenu="menu"
-                        resizable="true"
-                        autoResizable="true"
                     >
-                        <Label text="Port Of Loading" />
+                        <Label text="PI No." />
                         <table:template>
-                            <Label text="{oModelForTable>ZportOfLoading}" />
+                            <Label text="{oModelForTable>PiNo}" />
                         </table:template>
                     </table:Column>
                     <table:Column
-                        id="idClmCHA"
-                        width="6rem"
-                        hAlign="Center"
-                        sortProperty="Zcha"
+                        id="PiDate"
+                        sortProperty="PiDate"
                         headerMenu="menu"
-                        resizable="true"
-                        autoResizable="true"
                     >
-                        <Label text="CHA" />
+                        <Label text="PI Date" />
                         <table:template>
-                            <Label text="{oModelForTable>Zcha}" />
+                            <Label text="{path:'oModelForTable>PiDate', type: 'sap.ui.model.type.Date', formatOptions: {pattern: 'dd/MM/yyyy'}}" />
                         </table:template>
                     </table:Column>
                     <table:Column
-                        id="idClmCustomer"
-                        width="8rem"
-                        hAlign="End"
-                        sortProperty="Zcustomer"
+                        id="Po"
+                        sortProperty="Po"
                         headerMenu="menu"
-                        resizable="true"
-                        autoResizable="true"
                     >
-                        <Label text="Customer" />
+                        <Label text="PO Number" />
                         <table:template>
-                            <Label text="{oModelForTable>Zcustomer}" />
+                            <Label text="{oModelForTable>Po}" />
                         </table:template>
                     </table:Column>
 
                     <table:Column
-                        id="idClmLETDate"
-                        width="8rem"
-                        hAlign="Center"
-                        sortProperty="ZletExportDate"
+                        id="ShipmetLastDate"
+                        sortProperty="ShipmetLastDate"
                         headerMenu="menu"
-                        resizable="true"
-                        autoResizable="true"
                     >
-                        <Label text="LET Export Date" />
+                        <Label text="Shipment Last date" />
                         <table:template>
-                            <Label text="{oModelForTable>ZletExportDate}" />
+                            <Label text="{path:'oModelForTable>ShipmetLastDate', type: 'sap.ui.model.type.Date', formatOptions: {pattern: 'dd/MM/yyyy'}}" />
                         </table:template>
                     </table:Column>
                     <table:Column
-                        id="idClmSchemes"
-                        width="6rem"
-                        hAlign="Center"
-                        sortProperty="Zschemes"
+                        id="PortOfLoading"
+                        sortProperty="PortOfLoading"
                         headerMenu="menu"
-                        resizable="true"
-                        autoResizable="true"
                     >
-                        <Label text="Schemes" />
+                        <Label text="Port of loading" />
                         <table:template>
-                            <Label text="{oModelForTable>Zschemes}" />
+                            <Label text="{oModelForTable>PortOfLoading}" />
                         </table:template>
                     </table:Column>
                     <table:Column
-                        id="idClmEPCG"
-                        width="4rem"
-                        hAlign="Center"
-                        sortProperty="Zepcg"
+                        id="FinalIcdLocation"
+                        sortProperty="FinalIcdLocation"
                         headerMenu="menu"
-                        resizable="true"
-                        autoResizable="true"
                     >
-                        <Label text="EPCG" />
+                        <Label text="Final ICD Location" />
                         <table:template>
-                            <Label text="{oModelForTable>Zepcg}" />
+                            <Label text="{oModelForTable>FinalIcdLocation}" />
                         </table:template>
                     </table:Column>
                     <table:Column
-                        id="idClmLOC"
-                        width="8rem"
-                        hAlign="Begin"
-                        sortProperty="Zloc"
+                        id="LcIssuingBank"
+                        sortProperty="LcIssuingBank"
                         headerMenu="menu"
-                        resizable="true"
-                        autoResizable="true"
                     >
-                        <Label text="Location" />
+                        <Label text="LC Issuing Bank" />
                         <table:template>
-                            <Label text="{oModelForTable>Zloc}" />
-                        </table:template>
-                    </table:Column>
-                    <table:Column
-                        id="idClmShipBillStatus"
-                        width="10rem"
-                        hAlign="Center"
-                        sortProperty="ZshippingBillStatus"
-                        headerMenu="menu"
-                        resizable="true"
-                        autoResizable="true"
-                    >
-                        <Label text="Shipping Bill Status" />
-                        <table:template>
-                            <Label
-                                text="{oModelForTable>ZshippingBillStatus}"
-                            />
+                            <Label text="{oModelForTable>LcIssuingBank}" />
                         </table:template>
                     </table:Column>
                 </table:columns>
+
                 <table:rowActionTemplate>
                     <table:RowAction>
                         <table:items>
                             <table:RowActionItem
                                 type="Navigation"
-                                press="onShowDetails"
+                                press="onShowLCDetails"
                             />
                             <table:RowActionItem
                                 type="Delete"
@@ -378,16 +293,5 @@
                 </table:rowActionTemplate>
             </table:Table>
         </f:content>
-
-        <!-- <f:footer>
-            <OverflowToolbar>
-                <ToolbarSpacer />
-                <Button
-                    type="Emphasized"
-                    text="Print"
-                    icon="sap-icon://print"
-                />
-            </OverflowToolbar>
-        </f:footer> -->
     </f:DynamicPage>
 </mvc:View>

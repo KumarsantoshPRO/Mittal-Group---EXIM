@@ -61,7 +61,6 @@
                 showSuggestion="true"
                 showValueHelp="true"
                 valueHelpRequest="onCountryOfBLValueHelp"
-                valueHelpOnly="true"
             />
             <Label
                 id="IdLblPortOfLoad"
@@ -71,14 +70,22 @@
                 showValueHelp="true"
                 value="{oModelForHeader>/ZportOfLoading}"
                 id="_IDGenInput4"
+                  showValueHelp="true"
+                valueHelpRequest="onportOfLoadingValueHelp"
+             
+
             />
 
             <Label
                 id="IdLblICDPortCode"
                 text="ICD - PORT CODE "
             />
-            <Input value="" />
-
+            <Input
+                value="{oModelForHeader>/PortCode}"
+                showValueHelp="true"
+                valueHelpRequest="onICDValueHelp"
+            />
+            />
             <Label
                 id="IdLblCha"
                 text="CHA"
@@ -87,6 +94,8 @@
             <Input
                 id="CountryofBLValue"
                 value="{oModelForHeader>/Zcha}"
+                 showValueHelp="true"
+                valueHelpRequest="onCHAValueHelp"
             />
 
             <!--  -->
@@ -126,8 +135,13 @@
                 id="IdLblShippingBillDate"
                 text=" Shipping Bill Date"
             />
-            <DatePicker value="" />
-
+            <DatePicker
+                value="{path:'oModelForHeader>/ZshippingBillDate', type: 'sap.ui.model.type.Date', formatOptions: {pattern: 'dd/MM/yyyy'}}"
+                displayFormat="dd/MM/yyyy"
+                valueFormat="dd/MM/yyyy"
+                editable="false"
+            />
+            />
             <Label
                 id="IdLblStateOfOrigin"
                 text="State of Origin"
@@ -138,7 +152,7 @@
                 id="IdLblPortOfDischarge"
                 text="Port of discharge"
             />
-            <Input value="" />
+            <Input value="{oModelForHeader>/PortOfDischarge}" />
 
             <Label
                 id="IdLblDestinationCountry"

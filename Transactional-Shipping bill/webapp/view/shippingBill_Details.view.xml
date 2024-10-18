@@ -61,12 +61,12 @@
 
         <uxap:ObjectPageSection
             id="IdObjSecHeaderDetailsSection2"
-            title="Shipping Bill - Other Details"
+            title="Shipping Bill - License Details"
             titleUppercase="false"
         >
             <uxap:ObjectPageSubSection
                 id="IdOPSHeaderDetailsSubSection2View"
-                title="Other Details"
+                title="License Details"
                 visible="true"
             >
                 <core:Fragment
@@ -77,7 +77,7 @@
             </uxap:ObjectPageSubSection>
             <uxap:ObjectPageSubSection
                 id="IdOPSHeaderDetailsSubSection2Edit"
-                title="Other Details"
+                title="License Details"
                 visible="false"
             >
                 <core:Fragment

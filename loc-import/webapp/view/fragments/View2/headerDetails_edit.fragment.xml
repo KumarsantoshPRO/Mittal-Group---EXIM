@@ -1,0 +1,96 @@
+<core:FragmentDefinition
+    height="100%"
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:form="sap.ui.layout.form"
+>
+    <form:SimpleForm
+        class="sapUiResponsiveContentPadding"
+        layout="ColumnLayout"
+        columnsL="3"
+        columnsM="3"
+        columnsXL="3"
+    >
+        <form:content>
+            <Label text='LC Number' />
+            <Text text="{oModelForHeader>/LcNo}" />
+            <Label text='Contract Number' />
+            <Input value="{oModelForHeader>/ContractNo}" />
+            <Label text='PO' />
+            <Input
+                value="{oModelForHeader>/Po}"
+                showValueHelp="true"
+                valueHelpRequest="onPOValueHelp"
+                valueHelpOnly="true"
+            />
+            <Label text='PI NO' />
+            <Input value="{oModelForHeader>/PiNo}" />
+            <Label text='PI Date' />
+            <DatePicker
+                value="{path:'oModelForHeader>/PiDate', type: 'sap.ui.model.type.Date', formatOptions: {pattern: 'dd/MM/yyyy'}}"
+                displayFormat="dd/MM/yyyy"
+                valueFormat="dd/MM/yyyy"
+            />
+
+            <Label text='Shipment Last Date' />
+
+            <DatePicker
+                value="{path:'oModelForHeader>/ShipmetLastDate', type: 'sap.ui.model.type.Date', formatOptions: {pattern: 'dd/MM/yyyy'}}"
+                displayFormat="dd/MM/yyyy"
+                valueFormat="dd/MM/yyyy"
+            />
+            <Label text='Port of Loading' />
+            <Input value="{oModelForHeader>/PortOfLoading}" />
+            <Label text='Final ICD Location' />
+            <Input value="{oModelForHeader>/FinalIcdLocation}" />
+            <Label text='LC Issuing Bank' />
+            <Input value="{oModelForHeader>/LcIssuingBank}" />
+            <Label text='Shipment Type' />
+            <Input value="{oModelForHeader>/ShipmentType}" />
+            <Label text='LC Type' />
+            <Input value="{oModelForHeader>/LcType}" />
+            <Label text='LC Issue Date' />
+
+            <DatePicker
+                value="{path:'oModelForHeader>/LcIssueDate', type: 'sap.ui.model.type.Date', formatOptions: {pattern: 'dd/MM/yyyy'}}"
+                displayFormat="dd/MM/yyyy"
+                valueFormat="dd/MM/yyyy"
+            />
+            <Label text='LC Expiry Date' />
+
+            <DatePicker
+                value="{path:'oModelForHeader>/LcExpiryDate', type: 'sap.ui.model.type.Date', formatOptions: {pattern: 'dd/MM/yyyy'}}"
+                displayFormat="dd/MM/yyyy"
+                valueFormat="dd/MM/yyyy"
+            />
+            <!-- 12 -->
+            <Label text='Port of Discharge ' />
+            <Input value="{oModelForHeader>/PortOfDischarge}" />
+            <Label text='LC Charges Outside India ' />
+            <Input value="{oModelForHeader>/LcChargesOutsideIndia}" />
+            <Label text='LC Recieving Bank' />
+            <Input value="{oModelForHeader>/LcRecievingBank}" />
+
+            <Label text='Inco Terms' />
+            <Input value="{oModelForHeader>/IncoTerms}" />
+            <Label text='Tolerance Value' />
+            <Input value="{oModelForHeader>/TollCurr}" />
+            <Label text='Tolerance Quantity' />
+            <Input value="{oModelForHeader>/ToleranceValue}" />
+            <Label text='Created Date' />
+
+            <DatePicker
+                value="{path:'oModelForHeader>/ZcreateDate', type: 'sap.ui.model.type.Date', formatOptions: {pattern: 'dd/MM/yyyy'}}"
+                displayFormat="dd/MM/yyyy"
+                valueFormat="dd/MM/yyyy"
+            />
+            <Label text='Created Time' />
+
+            <TimePicker
+                value="{path:'oModelForHeader>/ZcreateTime', type: 'sap.ui.model.odata.type.Time', formatOptions: {pattern: 'HH:mm:ss'}}"
+            />
+            <Label text='Created By' />
+            <Input value="{oModelForHeader>/ZcreateBy}" />
+        </form:content>
+    </form:SimpleForm>
+</core:FragmentDefinition>

@@ -49,11 +49,6 @@
             <Text text="{oModelForHeader>/Zloc}" />
 
             <Label
-                id="_IdLblReasonForAmendment"
-                text="Reason for Amendment"
-            />
-            <Text text="" />
-            <Label
                 id="_IdLblReabate"
                 text="Reabate"
             />
@@ -114,7 +109,11 @@
             />
 
             <Text />
-
+            <Label
+                id="_IdLblReasonForAmendment"
+                text="Reason for Amendment"
+            />
+            <Text text="" />
             <Label
                 id="_IdLblSecCreatedBy"
                 text="Created By"

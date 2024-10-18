@@ -126,12 +126,12 @@
                     headerMenu="_menu"
                     resizable="true"
                     autoResizable="true"
-                    
                 >
                     <Label text="Item" />
                     <table:template>
-                        <Input  enabled="false"
-                            value="{path:'oModelForItems>Item'}"
+                        <Text
+                            text="false"
+                           
                         />
                     </table:template>
                 </table:Column>
@@ -146,7 +146,10 @@
                 >
                     <Label text="Material Number" />
                     <table:template>
-                        <Input enabled="false" value="{path:'oModelForItems>Material'}" />
+                        <Text
+                            
+                            text="{path:'oModelForItems>Material'}"
+                        />
                     </table:template>
                 </table:Column>
 
@@ -161,7 +164,10 @@
                 >
                     <Label text="Material Description" />
                     <table:template>
-                        <Input enabled="false" value="{oModelForItems>ItemDescription}" />
+                        <Text
+                            
+                            text="{oModelForItems>ItemDescription}"
+                        />
                     </table:template>
                 </table:Column>
                 <table:Column
@@ -175,7 +181,10 @@
                 >
                     <Label text="UOM" />
                     <table:template>
-                        <Input enabled="false" value="{oModelForItems>Uom}" />
+                        <Text
+                          
+                            text="{oModelForItems>Uom}"
+                        />
                     </table:template>
                 </table:Column>
                 <table:Column
@@ -189,7 +198,10 @@
                 >
                     <Label text="Invoice Quantity" />
                     <table:template>
-                        <Input enabled="false" value="{oModelForItems>InvoiceQty}" />
+                        <Text
+                            
+                            text="{oModelForItems>InvoiceQty}"
+                        />
                     </table:template>
                 </table:Column>
 
@@ -204,7 +216,10 @@
                 >
                     <Label text="Invoice Value" />
                     <table:template>
-                        <Input enabled="false" value="{oModelForItems>InvoiceValue}" />
+                        <Text
+                            
+                            text="{oModelForItems>InvoiceValue}"
+                        />
                     </table:template>
                 </table:Column>
                 <table:Column
@@ -218,7 +233,10 @@
                 >
                     <Label text="Commission" />
                     <table:template>
-                        <Input enabled="{path:'oEditableModel>/sEditable'}" value="{oModelForItems>Commission}" />
+                        <Input
+                            enabled="{path:'oEditableModel>/sEditable'}"
+                            value="{oModelForItems>Commission}"
+                        />
                     </table:template>
                 </table:Column>
                 <table:Column
@@ -232,7 +250,10 @@
                 >
                     <Label text="Insurance" />
                     <table:template>
-                        <Input enabled="{path:'oEditableModel>/sEditable'}" value="{oModelForItems>Insurance}" />
+                        <Input
+                            enabled="{path:'oEditableModel>/sEditable'}"
+                            value="{oModelForItems>Insurance}"
+                        />
                     </table:template>
                 </table:Column>
                 <table:Column
@@ -246,7 +267,10 @@
                 >
                     <Label text="Freight" />
                     <table:template>
-                        <Input enabled="{path:'oEditableModel>/sEditable'}" value="{oModelForItems>Freight}" />
+                        <Input
+                            enabled="{path:'oEditableModel>/sEditable'}"
+                            value="{oModelForItems>Freight}"
+                        />
                     </table:template>
                 </table:Column>
                 <table:Column

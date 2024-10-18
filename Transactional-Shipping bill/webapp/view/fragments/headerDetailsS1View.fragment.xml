@@ -66,7 +66,7 @@
                 id="_IdLblICDPortCode"
                 text="ICD - PORT CODE "
             />
-            <Text text="" />
+            <Text text="{oModelForHeader>/PortCode}" />
 
             <Label
                 id="_IdLblCha"

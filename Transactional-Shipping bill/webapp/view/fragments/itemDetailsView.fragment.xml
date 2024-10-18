@@ -119,7 +119,7 @@
             <table:columns>
                 <table:Column
                     id="_idClmBillDocNo"
-                    width="8rem"
+                   
                     hAlign="Begin"
                     sortProperty="Item"
                     headerMenu="_menu"
@@ -134,7 +134,7 @@
                 </table:Column>
                 <table:Column
                     id="_idClmDocNo"
-                    width="10rem"
+                   
                     hAlign="End"
                     sortProperty="Material"
                     headerMenu="_menu"
@@ -149,7 +149,7 @@
 
                 <table:Column
                     id="_idClmPortOfLoading"
-                    width="10rem"
+                   
                     hAlign="Begin"
                     sortProperty="ItemDescription"
                     headerMenu="_menu"
@@ -163,7 +163,7 @@
                 </table:Column>
                 <table:Column
                     id="_idClmCHA"
-                    width="6rem"
+                  
                     hAlign="Center"
                     sortProperty="Uom"
                     headerMenu="_menu"
@@ -177,7 +177,7 @@
                 </table:Column>
                 <table:Column
                     id="_idClmCustomer"
-                    width="8rem"
+                   
                     hAlign="End"
                     sortProperty="InvoiceQty"
                     headerMenu="_menu"
@@ -192,7 +192,7 @@
 
                 <table:Column
                     id="_idClmLETDate"
-                    width="8rem"
+                   
                     hAlign="Center"
                     sortProperty="InvoiceValue"
                     headerMenu="_menu"
@@ -206,7 +206,7 @@
                 </table:Column>
                 <table:Column
                     id="_idClmCommision"
-                    width="6rem"
+                  
                     hAlign="Center"
                     sortProperty="Commission"
                     headerMenu="_menu"
@@ -220,7 +220,7 @@
                 </table:Column>
                 <table:Column
                     id="_idClmSchemes"
-                    width="6rem"
+                  
                     hAlign="Center"
                     sortProperty="Insurance"
                     headerMenu="_menu"
@@ -234,7 +234,7 @@
                 </table:Column>
                 <table:Column
                     id="_idClmEPCG"
-                    width="4rem"
+                  
                     hAlign="Center"
                     sortProperty="Freight"
                     headerMenu="_menu"
@@ -248,7 +248,7 @@
                 </table:Column>
                 <table:Column
                     id="_idClmLicDetails"
-                    width="8rem"
+                   
                     hAlign="Begin"
                     resizable="true"
                     autoResizable="true"

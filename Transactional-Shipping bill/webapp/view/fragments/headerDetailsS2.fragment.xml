@@ -18,24 +18,22 @@
             <Label
                 id="IdLblCust"
                 text="Customer"
-               
             />
             <Input
                 id="_IDGenInput5"
                 value="{oModelForHeader>/Zcustomer}"
+                enabled="false"
             />
 
             <Label
                 id="IdLblLETExpoDate"
                 text="LET Export Date"
-               
             />
             <DatePicker value="{oModelForHeader>/ZletExportDate}" />
 
             <Label
                 id="IdLblScheme"
                 text="Scheme"
-               
             />
             <Select
                 forceSelection="true"
@@ -67,27 +65,18 @@
             <Label
                 id="IdLblEPCG"
                 text="EPCG"
-               
             />
             <Input value="{oModelForHeader>/Zepcg}" />
 
             <Label
                 id="IdLblLOC"
                 text="Letter of Credit"
-               
             />
             <Input value="{oModelForHeader>/Zloc}" />
 
             <Label
-                id="IdLblReasonForAmendment"
-                text="Reason for Amendment"
-               
-            />
-            <TextArea value="" />
-            <Label
                 id="IdLblReabate"
                 text="Reabate"
-               
             />
 
             <Select
@@ -106,7 +95,6 @@
             <Label
                 id="IdLblLUTNo"
                 text="LUT No."
-               
             />
             <TextArea value="" />
 
@@ -115,30 +103,23 @@
             <Label
                 id="IDLblFOBValue"
                 text="FOB Value(INR)"
-               
             />
-            <Input value="{oModelForHeader>/ZfobValue}"/>
+            <Input value="{oModelForHeader>/ZfobValue}" />
             <Label
                 id="IDLblFOBValueFC"
                 text="FOB Value(FC)"
-               
             />
             <Input value="{oModelForHeader>/FobValueFc}" />
 
             <Label
                 id="IdLblExchangeRate"
                 text="Exchange Rate"
-               
             />
-            <Input
-                id="IdInpExchangeRateValue"
-             
-            />
-               <!-- value="{oModelForHeader>/ZexchangeRate}" -->
+            <Input id="IdInpExchangeRateValue" />
+            <!-- value="{oModelForHeader>/ZexchangeRate}" -->
             <Label
                 id="IdLblRODTEP"
                 text="RODTEP"
-               
             />
 
             <Select
@@ -158,32 +139,33 @@
             <Label
                 id="IdLblContainerNo"
                 text="Container No"
-               
             />
             <Input
                 id="IdInpContainerNo"
                 value="{oModelForHeader>/ZcontainerNo}"
+                maxLength="11"
             />
 
             <Label
                 id="IdLblRebateAmt"
                 text="Rebate Amt"
-               
             />
             <Input />
 
             <Label
                 id="IdLblRLUTDate"
                 text="LUT Date"
-               
             />
 
             <DatePicker />
-
+            <Label
+                id="IdLblReasonForAmendment"
+                text="Reason for Amendment"
+            />
+            <TextArea value="" />
             <Label
                 id="IdLblSecCreatedBy"
                 text="Created By"
-               
             />
             <Input
                 id="IdInpCreatedBy"

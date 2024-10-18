@@ -6,7 +6,8 @@ sap.ui.define([
     "sap/ui/model/FilterOperator",
     "sap/m/MessageBox",
     "sap/ui/core/format/DateFormat",
-    "sap/ui/core/Item"
+    "sap/ui/core/Item",
+    "sap/ui/commons/MessageBox"
 
 ],
     function (Controller,
@@ -16,7 +17,8 @@ sap.ui.define([
         FilterOperator,
         MessageBox,
         DateFormat,
-        Item) {
+        Item,
+        MessageBox) {
         "use strict";
 
         return Controller.extend("zmg.pro.exim.transactionalshippingbill.exim.controller.shippingBill_Details", {
@@ -376,111 +378,164 @@ sap.ui.define([
 
             },
             // End: Country of BL
-
-            // Start: Port Of Loading
-            onPortOfLoadingValueHelp: function () {
-                if (!this.PortOfLoadingFrag) {
-                    this.PortOfLoadingFrag = sap.ui.xmlfragment(
-                        "zmg.pro.exim.transactionalshippingbill.exim.view.fragments.valueHelp_PortOfLoading",
+            // Start: ICD - Port Code
+            onICDValueHelp: function () {
+                if (!this.ICDFrag) {
+                    this.ICDFrag = sap.ui.xmlfragment(
+                        "zmg.pro.exim.transactionalshippingbill.exim.view.fragments.valueHelp_ICD",
                         this
                     );
-                    this.getView().addDependent(this.PortOfLoadingFrag);
-                    var sService = "/sap/opu/odata/sap/ZV_BILLING_INV_DET_SERV_B";
-                    var oModelPortOfLoading = new sap.ui.model.odata.ODataModel(
+                    this.getView().addDependent(this.ICDFrag);
+                    var sService = "/sap/opu/odata/sap/ZRI_PORT_LIST_SRV_B/";
+                    var oModelICD = new sap.ui.model.odata.ODataModel(
                         sService,
                         true
                     );
-                    this.PortOfLoadingFrag.setModel(oModelPortOfLoading);
-                    this._PortOfLoadingTemp = sap.ui
+                    this.ICDFrag.setModel(oModelICD);
+                    this._ICDTemp = sap.ui
                         .getCore()
-                        .byId("idSLPortOfLoadingValueHelp")
+                        .byId("idSLICDValueHelp")
                         .clone();
-                    this._oTempPortOfLoading = sap.ui
-                        .getCore()
-                        .byId("idSLPortOfLoadingValueHelp")
-                        .clone();
+
                 }
 
-                this.PortOfLoadingFrag.open();
+                this.ICDFrag.open();
                 var aFilter = [];
-                // var oFilter = new Filter(
-                //     [new Filter("BillingDocument", FilterOperator.EQ, "90000000")],
-                //     false
-                // );
-
-                // aFilter.push(oFilter);
-
-                sap.ui.getCore().byId("idSDPortOfLoadingF4").bindAggregation("items", {
-                    path: "/ZV_BILLING_INV_DETAILS",
+                var sPath = "/ZRI_PORT_LIST";
+                sap.ui.getCore().byId("idSDICDF4").bindAggregation("items", {
+                    path: sPath,
                     filters: aFilter,
-                    template: this._PortOfLoadingTemp,
+                    template: this._ICDTemp,
                 });
-
 
             },
 
             // on Value Help - Search/liveChange
-            onValueHelpSearch_PortOfLoading: function (oEvent) {
+            onValueHelpSearch_ICD: function (oEvent) {
                 var aFilter = [];
                 var sValue = oEvent.getParameter("value");
-                var sPath = "/ZV_BILLING_INV_DETAILS";
-                var oSelectDialog = sap.ui.getCore().byId(oEvent.getParameter("id"));
-                var aFilter = [];
                 var oFilter = new Filter(
-                    [new Filter("BillingDocument", FilterOperator.Contains, sValue)],
+                    [new Filter("PortCode", FilterOperator.Contains, sValue)],
                     false
                 );
-
                 aFilter.push(oFilter);
-                oSelectDialog.bindAggregation("items", {
-                    path: sPath,
-                    filters: aFilter,
-                    template: this._oTempInvoiceNumber,
-                });
+                oEvent.getSource().getBinding("items").filter(aFilter);
             },
 
             // on Value Help - Confirm
-            onValueHelpConfirm_PortOfLoading: function (oEvent) {
-                // this.JSONModelPayload = this.getView().getModel("oModelForHeader");
-
+            onValueHelpConfirm_ICD: function (oEvent) {
                 var oSelectedItem = oEvent.getParameter("selectedItem"),
-                    sSelectedValue = oSelectedItem.getProperty("title");
-                var sPath = "/ZV_BILLING_INV_DETAILS";
-                var sService = "/sap/opu/odata/sap/ZV_BILLING_INV_DET_SERV_B";
-                var oModelForItems = new sap.ui.model.odata.ODataModel(
-                    sService,
-                    true
-                );
+                    sSelectedValue = oSelectedItem.getBindingContext().getProperty("PortCode");
+                this.getView().getModel("oModelForHeader").setProperty("/PortCode", sSelectedValue.toString());
 
-                this.getView().getModel("oModelForHeader").setProperty("/ZinvoiceDocument", sSelectedValue.toString());
+            },
+            // End: ICD - Port Code
 
-                // To get Items details
-                var aFilters = [];
+            // Start: Port Of Loading
+            onportOfLoadingValueHelp: function () {
+                if (!this.portOfLoadingFrag) {
+                    this.portOfLoadingFrag = sap.ui.xmlfragment(
+                        "zmg.pro.exim.transactionalshippingbill.exim.view.fragments.valueHelp_portOfLoading",
+                        this
+                    );
+                    this.getView().addDependent(this.portOfLoadingFrag);
+                    var sService = "/sap/opu/odata/sap/ZRI_PORT_LIST_SRV_B/";
+                    var oModelportOfLoading = new sap.ui.model.odata.ODataModel(
+                        sService,
+                        true
+                    );
+                    this.portOfLoadingFrag.setModel(oModelportOfLoading);
+                    this._portOfLoadingTemp = sap.ui
+                        .getCore()
+                        .byId("idSLportOfLoadingValueHelp")
+                        .clone();
+
+                }
+
+                this.portOfLoadingFrag.open();
+                var aFilter = [];
+                var sPath = "/ZRI_PORT_LIST";
+                sap.ui.getCore().byId("idSDportOfLoadingF4").bindAggregation("items", {
+                    path: sPath,
+                    filters: aFilter,
+                    template: this._portOfLoadingTemp,
+                });
+
+            },
+
+            // on Value Help - Search/liveChange
+            onValueHelpSearch_portOfLoading: function (oEvent) {
+                var aFilter = [];
+                var sValue = oEvent.getParameter("value");
                 var oFilter = new Filter(
-                    [new Filter("BillingDocument", FilterOperator.EQ, sSelectedValue)],
+                    [new Filter("ZportOfLoading", FilterOperator.Contains, sValue)],
                     false
                 );
+                aFilter.push(oFilter);
+                oEvent.getSource().getBinding("items").filter(aFilter);
+            },
 
-                aFilters.push(oFilter);
+            // on Value Help - Confirm
+            onValueHelpConfirm_portOfLoading: function (oEvent) {
+                var oSelectedItem = oEvent.getParameter("selectedItem"),
+                    sSelectedValue = oSelectedItem.getBindingContext().getProperty("PortCode");
+                this.getView().getModel("oModelForHeader").setProperty("/ZportOfLoading", sSelectedValue.toString());
 
-
-
-
-
-                this.getView().setBusy(true);
-                oModelForItems.read(sPath, {
-                    filters: aFilters,
-                    success: function (Data) {
-
-                        this.getView().getModel("oModelForItems").setData(Data);
-                        this.getView().setBusy(false);
-                    }.bind(this),
-                    error: function (sError) {
-                        this.getView().setBusy(false);
-                    }.bind(this)
-                });
             },
             // End: Port Of Loading
+
+            // Start: CHA
+            onCHAValueHelp: function () {
+                if (!this.CHAFrag) {
+                    this.CHAFrag = sap.ui.xmlfragment(
+                        "zmg.pro.exim.transactionalshippingbill.exim.view.fragments.valueHelp_CHA",
+                        this
+                    );
+                    this.getView().addDependent(this.CHAFrag);
+                    var sService = "/sap/opu/odata/sap/ZF4_RI_CHA_SRV_B/";
+                    var oModelCHA = new sap.ui.model.odata.ODataModel(
+                        sService,
+                        true
+                    );
+                    this.CHAFrag.setModel(oModelCHA);
+                    this._CHATemp = sap.ui
+                        .getCore()
+                        .byId("idSLCHAValueHelp")
+                        .clone();
+
+                }
+
+                this.CHAFrag.open();
+                var aFilter = [];
+                var sPath = "/ZF4_RI_CHA";
+                sap.ui.getCore().byId("idSDCHAF4").bindAggregation("items", {
+                    path: sPath,
+                    filters: aFilter,
+                    template: this._CHATemp,
+                });
+
+            },
+
+            // on Value Help - Search/liveChange
+            onValueHelpSearch_CHA: function (oEvent) {
+                var aFilter = [];
+                var sValue = oEvent.getParameter("value");
+                var oFilter = new Filter(
+                    [new Filter("ZCHA", FilterOperator.Contains, sValue)],
+                    false
+                );
+                aFilter.push(oFilter);
+                oEvent.getSource().getBinding("items").filter(aFilter);
+            },
+
+            // on Value Help - Confirm
+            onValueHelpConfirm_CHA: function (oEvent) {
+                var oSelectedItem = oEvent.getParameter("selectedItem"),
+                    sSelectedValue = oSelectedItem.getBindingContext().getProperty("Supplier");
+                this.getView().getModel("oModelForHeader").setProperty("/ZCHA", sSelectedValue.toString());
+
+            },
+            // End: CHA
 
             // Start: Country
             onDestinationCountryValueHelp: function () {
@@ -550,13 +605,13 @@ sap.ui.define([
 
                 Object.keys(obj1 || {}).concat(Object.keys(obj2 || {})).forEach(key => {
                     if (obj2[key] !== obj1[key] && !Object.is(obj1[key], obj2[key])) {
-                        
+
                         result[key] = obj2[key];
                     }
                     if (typeof obj2[key] === 'object' && typeof obj1[key] === 'object') {
                         const value = this.diff(obj1[key], obj2[key]);
                         if (value !== undefined) {
-                            
+
                             result[key] = value;
                         }
                     }
@@ -581,6 +636,8 @@ sap.ui.define([
                 Quantity = this.getView().getModel("oModelForItems").getContext(sItemSPath).getProperty('InvoiceQty')
                 var Material = this.getView().getModel("oModelForItems").getContext(sItemSPath).getProperty('Material')
                 this.Quantity = Quantity;
+                this.Material = Material;
+                this.Item = Item;
                 // if (this.screenType === "edit") {
                 //     debugger
                 //     Item = oEvent.getSource().getParent().getCells()[0].getValue();
@@ -687,6 +744,16 @@ sap.ui.define([
                     this.getView().getModel().read(sPath, {
                         success: function (Data) {
                             this.getView().getModel("oModelForLicenses").setData(Data);
+                            var aItemPayload = this.getView().getModel("oModelForItems").getData();
+                            for (let index = 0; index < aItemPayload.results.length; index++) {
+                                const element = aItemPayload.results[index];
+                                if (Data.results.length > 0) {
+                                    if (element.Item === Data.results[0].Item) {
+                                        element.Licenses = Data;
+                                    }
+                                }
+                            }
+
                             this.getView().setBusy(false);
                         }.bind(this),
                         error: function (oError) {
@@ -834,8 +901,10 @@ sap.ui.define([
             },
 
             onAddNewEmptyLicense: function () {
-                var Item = this.getView().getModel("oModelForLicenses").getData().results[0].Item;
-                var Material = this.getView().getModel("oModelForLicenses").getData().results[0].Material;
+                // this.Quantity = Quantity;
+
+                var Item = this.Item;
+                var Material = this.Material;
                 var aItemPayload = this.getView().getModel("oModelForItems").getData();
                 for (let index = 0; index < aItemPayload.results.length; index++) {
                     const element = aItemPayload.results[index];
@@ -857,7 +926,8 @@ sap.ui.define([
                     "Material": Material,
                     "Licences": "",
                     "Quantity": "",
-                    "Value": ""
+                    "Value": "",
+                    "new": "yes"
 
                 };
                 JSONData.results.push(oEachItemsLic);
@@ -871,14 +941,25 @@ sap.ui.define([
             onLicenseDelete: function (oEvent) {
 
                 var sLicSPath = oEvent.getSource().getParent().getParent().oBindingContexts.oModelForLicenses.sPath;
-                if (this.page === 'null') {
+                if (this.page === 'null' || this.getView().getModel('oModelForLicenses').getContext(sLicSPath).getProperty('new') === "yes") {
                     var len_aLicModel = this.getView().getModel('oModelForLicenses').getData().results.length;
                     var index = sLicSPath.split('/')[2];
                     if (len_aLicModel < 2) {
                         MessageBox.error("Atleast 1 License detail is mandatory");
                     } else {
+                        var localLicNo = this.getView().getModel('oModelForLicenses').getData().results[index].Licences;
+                        sap.m.MessageBox.error("Delete licence  " + localLicNo + "?", {
+                            actions: ["Delete", sap.m.MessageBox.Action.CLOSE],
+                            emphasizedAction: "Delete",
+                            onClose: function (sAction) {
+                                if (sAction === "Delete") {
+                                    this.getView().getModel('oModelForLicenses').getData().results.splice(index, 1);
+                                    this.getView().getModel('oModelForLicenses').refresh();
+                                }
+                            }.bind(this)
+                        });
                         // delete this.getView().getModel('oModelForLicenses').getData()['results'][index];
-                        this.getView().getModel('oModelForLicenses').getData().results.splice(index, 1);
+
                     }
 
                 } else {
@@ -892,7 +973,7 @@ sap.ui.define([
                         ItemNo = this.getView().getModel('oModelForLicenses').getContext(sLicSPath).getProperty('Item'),
                         LicNo = this.getView().getModel('oModelForLicenses').getContext(sLicSPath).getProperty('Licences');
                     var sPathForLicDelete = "ZC_SHIP_BILL_LIC(ZshippingBillNo='" + ShipNo + "',Item='" + ItemNo + "',Licences='" + LicNo + "')";
-                    sap.m.MessageBox.error("Delete licence no  " + LicNo + "?", {
+                    sap.m.MessageBox.error("Delete licence   " + LicNo + "?", {
                         actions: ["Delete", sap.m.MessageBox.Action.CLOSE],
                         emphasizedAction: "Delete",
                         onClose: function (sAction) {
@@ -970,72 +1051,92 @@ sap.ui.define([
 
             },
 
+
+            validation: function (headerPayload) {
+                if (!headerPayload.ZshippingBillStatus) {
+                    MessageBox.error("Please enter Shipping Bill Status");
+                    return false;
+                } else if (!headerPayload.ZshippingBillDate) {
+                    MessageBox.error("Please enter Shipping Bill Date");
+                    return false;
+                } else if (!headerPayload.PortOfDischarge) {
+                    MessageBox.error("Please enter port of discharge");
+                    return false;
+                } else if (!headerPayload.PortCode) {
+                    MessageBox.error("Please enter ICD-Port code");
+                    return false;
+                }
+
+                else {
+                    return true;
+                }
+
+            },
             // All post calls
             postCallForHeader: function (oModel, sPath, payload) {
                 delete payload['to_item'];
 
                 const dt = DateFormat.getDateTimeInstance({ pattern: "PThh'H'mm'M'ss'S'" });
-                // if (payload.ZcreateTime === "") {
+
                 payload.ZcreateTime = dt.format(new Date());
-                // } else {
-                //     payload.ZcreateTime = dt.format(payload.ZcreateTime);
-                // }
 
+                var validation = this.validation(payload);
+                if (validation === true) {
+                    //Create Call
+                    this.getView().setBusy(true);
+                    oModel.create(sPath, payload, {
+                        success: function (oData, response) {
 
-                //Create Call
-                this.getView().setBusy(true);
-                oModel.create(sPath, payload, {
-                    success: function (oData, response) {
+                            //var sService = "/sap/opu/odata/sap/ZV_BILLING_INV_DET_SERV_B";
+                            var sService = "/sap/opu/odata/sap/ZRC_SHIP_BILL_HEAD_SRV_B";
+                            var oModelForItems = new sap.ui.model.odata.ODataModel(
+                                sService,
+                                true
+                            );
 
-                        //var sService = "/sap/opu/odata/sap/ZV_BILLING_INV_DET_SERV_B";
-                        var sService = "/sap/opu/odata/sap/ZRC_SHIP_BILL_HEAD_SRV_B";
-                        var oModelForItems = new sap.ui.model.odata.ODataModel(
-                            sService,
-                            true
-                        );
+                            this.getView().getModel("oModelForItems").setProperty('oModelForItems>ZshippingBillNo', oData.ZshippingBillNo)
+                            // var sPathForItem = "/ZC_SHIP_BILL_ITEM";
 
-                        this.getView().getModel("oModelForItems").setProperty('oModelForItems>ZshippingBillNo', oData.ZshippingBillNo)
-                        // var sPathForItem = "/ZC_SHIP_BILL_ITEM";
-
-                        var payloadOfItems = this.getView().getModel("oModelForItems").getData().results;
-                        var _Item = 10;
-                        var aPayload = [];
-                        for (let index = 0; index < payloadOfItems.length; index++) {
-                            Item = _Item * (index + 1);
-                            const element = payloadOfItems[index];
-                            var payloadOfItem = {
-                                "Item": Item.toString(),
-                                "Material": element.Material,
-                                "ItemDescription": element.ItemDescription,
-                                "Uom": element.Uom,
-                                "InvoiceQty": element.InvoiceQty,
-                                "InvoiceValue": element.InvoiceValue,
-                                // "FobCurrency": "INR",
-                                "Commission": element.Commission,
-                                "Insurance": element.Insurance,
-                                "Freight": element.Freight,
-                                // "FobValue": "106",
-                                // "FobValueFc": "107",
-                                // "FobCurrecnyFc": "INR",
-                                // "RodtepPer": "108",
-                                // "RodtepAmount": "109",
-                                // "ZcreateDate": "\/Date(1728604800000)\/",
-                                // "ZcreateTime": "P00DT13H11M55S",
-                                // "ZcreateBy": "Santosh",
-                                // "RodtepCurrency": "INR"
+                            var payloadOfItems = this.getView().getModel("oModelForItems").getData().results;
+                            var _Item = 10;
+                            var aPayload = [];
+                            for (let index = 0; index < payloadOfItems.length; index++) {
+                                Item = _Item * (index + 1);
+                                const element = payloadOfItems[index];
+                                var payloadOfItem = {
+                                    "Item": Item.toString(),
+                                    "Material": element.Material,
+                                    "ItemDescription": element.ItemDescription,
+                                    "Uom": element.Uom,
+                                    "InvoiceQty": element.InvoiceQty,
+                                    "InvoiceValue": element.InvoiceValue,
+                                    // "FobCurrency": "INR",
+                                    "Commission": element.Commission,
+                                    "Insurance": element.Insurance,
+                                    "Freight": element.Freight,
+                                    // "FobValue": "106",
+                                    // "FobValueFc": "107",
+                                    // "FobCurrecnyFc": "INR",
+                                    // "RodtepPer": "108",
+                                    // "RodtepAmount": "109",
+                                    // "ZcreateDate": "\/Date(1728604800000)\/",
+                                    // "ZcreateTime": "P00DT13H11M55S",
+                                    // "ZcreateBy": "Santosh",
+                                    // "RodtepCurrency": "INR"
+                                }
+                                aPayload.push(payloadOfItem);
                             }
-                            aPayload.push(payloadOfItem);
-                        }
 
-                        var sPathForItem = "ZRC_SHIP_BILL_HEAD('" + oData.ZshippingBillNo + "')/to_item";
+                            var sPathForItem = "ZRC_SHIP_BILL_HEAD('" + oData.ZshippingBillNo + "')/to_item";
 
-                        this.postCallForItem(oModelForItems, sPathForItem, aPayload)
-                        // this.getView().setBusy(false);
-                    }.bind(this),
-                    error: function (oError) {
-                        this.getView().setBusy(false);
-                    }.bind(this)
-                });
+                            this.postCallForItem(oModelForItems, sPathForItem, aPayload)
+                            // this.getView().setBusy(false);
+                        }.bind(this),
+                        error: function (oError) {
+                            this.getView().setBusy(false);
+                        }.bind(this)
+                    });
+                }
             },
             postCallForItem: function (oModel, sPath, aPayload) {
 
@@ -1113,7 +1214,10 @@ sap.ui.define([
                             var oLicPayload = {
                                 "Item": oItemPaylod.Item,
                                 "ZshippingBillNo": oHeaderPaylod.ZshippingBillNo,
-                                "Licences": oLicensePaylod.Licences
+                                "Licences": oLicensePaylod.Licences,
+                                "Material": oLicensePaylod.Material,
+                                "Quantity": oLicensePaylod.Quantity,
+                                "Value": oLicensePaylod.Value
                             };
                             aLicPayload.push(oLicPayload);
                             aPath.push(sPath);
@@ -1146,7 +1250,10 @@ sap.ui.define([
                 var promise = Promise.resolve();
                 aLicPayload.forEach(function (Payload, i) { //copy local variables
                     //Chain the promises
-                    promise = promise.then(function () { return that.createCallForEachItemLic(oModelForLicense, aPath[i], Payload) });
+                    promise = promise.then(
+                        function () {
+                            return that.createCallForEachItemLic(oModelForLicense, aPath[i], Payload)
+                        })
 
                 });
                 promise.then(function () {
@@ -1285,7 +1392,9 @@ sap.ui.define([
 
                 this.shippingBillNo = oHeaderPaylod.ZshippingBillNo;
                 var aLicPayload = [];
-                var aPath = []
+                var aPath = [];
+                var aLicNewItemPayload = [];
+                var aPathItemNew = [];
                 for (let index = 0; index < aItemPaylod.results.length; index++) {
                     if (aItemPaylod.results[index].Item === Item) {
                         const oItemPaylod = aItemPaylod.results[index];
@@ -1295,16 +1404,26 @@ sap.ui.define([
                                 const oLicensePaylod = aLicensePaylod.results[j];
 
                                 // ZC_SHIP_BILL_LIC(ZshippingBillNo='SKT006',Item='10',Licences='101')
-                                var licenseNo = this.getView().getModel("oModelForLicenses").getData().results[0].Licences;
+                                var licenseNo = oLicensePaylod.Licences;
                                 var sPath = "ZC_SHIP_BILL_LIC(ZshippingBillNo='" + oHeaderPaylod.ZshippingBillNo + "',Item='" + oItemPaylod.Item + "',Licences='" + licenseNo + "')";
+                                var sPathForNew = "ZC_SHIP_BILL_ITEM(ZshippingBillNo='" + oHeaderPaylod.ZshippingBillNo + "',Item='" + oItemPaylod.Item + "')/to_SubItem"
                                 var oLicPayload = {
                                     "Item": oItemPaylod.Item,
                                     "ZshippingBillNo": oHeaderPaylod.ZshippingBillNo,
                                     "Licences": oLicensePaylod.Licences,
                                     "Quantity": oLicensePaylod.Quantity
                                 };
-                                aLicPayload.push(oLicPayload);
-                                aPath.push(sPath);
+                                if (oLicensePaylod.new === "yes") {
+                                    aLicNewItemPayload.push(oLicPayload);
+                                    aPathItemNew.push(sPathForNew);
+                                } else {
+                                    aLicPayload.push(oLicPayload);
+                                    aPath.push(sPath);
+                                }
+
+
+
+
                             }
                         }
                     }
@@ -1326,7 +1445,28 @@ sap.ui.define([
                 var promise = Promise.resolve();
                 aLicPayload.forEach(function (Payload, i) { //copy local variables
                     //Chain the promises
-                    promise = promise.then(function () { return that.updateCallForEachItemLic(oModelForLicense, aPath[i], Payload) });
+                    promise = promise.then(
+                        function () {
+                            return that.updateCallForEachItemLic(oModelForLicense, aPath[i], Payload)
+                        }).then(
+                            function () {
+                                var promiseLicUpdate = Promise.resolve();
+                                aLicNewItemPayload.forEach(function (Payload, i) { //copy local variables
+                                    //Chain the promises
+                                    promiseLicUpdate = promiseLicUpdate.then(
+                                        function () {
+                                            return that.createCallForEachItemLic(oModelForLicense, aPathItemNew[i], Payload)
+                                        })
+
+                                });
+                                promiseLicUpdate.then(function () {
+
+
+                                })
+                                    .catch(function () {
+
+                                    })
+                            });
 
                 });
                 promise.then(function () {

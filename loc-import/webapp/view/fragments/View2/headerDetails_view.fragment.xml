@@ -1,0 +1,82 @@
+<core:FragmentDefinition
+    height="100%"
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:form="sap.ui.layout.form"
+>
+    <form:SimpleForm
+        value="true"
+        class="sapUiResponsiveContentPadding"
+        layout="ColumnLayout"
+        columnsL="3"
+        columnsM="3"
+        columnsXL="3"
+    >
+        <form:content>
+            <Label text='LC Number' />
+            <Text text="{oModelForHeader>/LcNo}" />
+            <Label text='PO' />
+            <Text text="{oModelForHeader>/Po}" />
+            <Label text='Contract Number' />
+            <Text text="{oModelForHeader>/ContractNo}" />
+            <Label text='PI NO' />
+            <Text text="{oModelForHeader>/PiNo}" />
+            <Label text='PI Date' />
+            <Text
+                text="{path:'oModelForHeader>/PiDate', type: 'sap.ui.model.type.Date', formatOptions: {pattern: 'dd/MM/yyyy'}}"
+            />
+
+            <Label text='Shipment Last Date' />
+
+            <Text
+                text="{path:'oModelForHeader>/ShipmetLastDate', type: 'sap.ui.model.type.Date', formatOptions: {pattern: 'dd/MM/yyyy'}}"
+            />
+            <Label text='Port of Loading' />
+            <Text text="{oModelForHeader>/PortOfLoading}" />
+            <Label text='Final ICD Location' />
+            <Text text="{oModelForHeader>/FinalIcdLocation}" />
+            <Label text='LC Issuing Bank' />
+            <Text text="{oModelForHeader>/LcIssuingBank}" />
+            <Label text='Shipment Type' />
+            <Text text="{oModelForHeader>/ShipmentType}" />
+            <Label text='LC Type' />
+            <Text text="{oModelForHeader>/LcType}" />
+            <Label text='LC Issue Date' />
+
+            <Text
+                text="{path:'oModelForHeader>/LcIssueDate', type: 'sap.ui.model.type.Date', formatOptions: {pattern: 'dd/MM/yyyy'}}"
+            />
+            <Label text='LC Expiry Date' />
+
+            <Text
+                text="{path:'oModelForHeader>/LcExpiryDate', type: 'sap.ui.model.type.Date', formatOptions: {pattern: 'dd/MM/yyyy'}}"
+            />
+            <!-- 12 -->
+            <Label text='Port of Discharge ' />
+            <Text text="{oModelForHeader>/PortOfDischarge}" />
+            <Label text='LC Charges Outside India ' />
+            <Text text="{oModelForHeader>/LcChargesOutsideIndia}" />
+            <Label text='LC Recieving Bank' />
+            <Text text="{oModelForHeader>/LcRecievingBank}" />
+
+            <Label text='Inco Terms' />
+            <Text text="{oModelForHeader>/IncoTerms}" />
+            <Label text='Tolerance Value' />
+            <Text text="{oModelForHeader>/TollCurr}" />
+            <Label text='Tolerance Quantity' />
+            <Text text="{oModelForHeader>/ToleranceValue}" />
+            <Label text='Created Date' />
+
+            <Text
+                text="{path:'oModelForHeader>/ZcreateDate', type: 'sap.ui.model.type.Date', formatOptions: {pattern: 'dd/MM/yyyy'}}"
+            />
+            <Label text='Created Time' />
+
+            <Text
+                text="{path:'oModelForHeader>/ZcreateTime', type: 'sap.ui.model.odata.type.Time', formatOptions: {pattern: 'HH:mm:ss'}}"
+            />
+            <Label text='Created By' />
+            <Text text="{oModelForHeader>/ZcreateBy}" />
+        </form:content>
+    </form:SimpleForm>
+</core:FragmentDefinition>
