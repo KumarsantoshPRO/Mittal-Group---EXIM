@@ -175,8 +175,15 @@
                     "target": [
                         "shippingBill_Details"
                     ]
+                },
+                {
+                    "name": "messageView",
+                    "pattern": "messageView",
+                    "target": [
+                        "messageView"
+                    ]
                 }
-            ], 
+            ],
             "targets": {
                 "Home": {
                     "viewType": "XML",
@@ -194,7 +201,14 @@
                     "viewName": "PageUnderDevelopment",
                     "viewPath": "zmg.pro.exim.transactionalshippingbill.exim.view.PageUnderDevelopment"
                 },
-                
+                "messageView": {
+                    "viewType": "XML",
+                    "transition": "flip",
+                    "clearControlAggregation": false,
+                    "viewId": "messageView",
+                    "viewName": "messageView",
+                    "viewPath": "zmg.pro.exim.transactionalshippingbill.exim.view.messageView"
+                },
                 "TargetView1": {
                     "viewType": "XML",
                     "transition": "slide",

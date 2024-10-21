@@ -15,7 +15,7 @@
         sap.ui.fl:flexibility="sap/m/flexibility/EngineFlex"
         selectionMode="None"
         selectionBehavior="Row"
-        rows="{oModelForItemTable>/}"
+        rows="{oModelForItemTable>/results/}"
         showColumnVisibilityMenu="true"
         enableColumnFreeze="false"
         enableCellFilter="true"

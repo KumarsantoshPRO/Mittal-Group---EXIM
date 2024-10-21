@@ -26,14 +26,16 @@
             <Label
                 id="IdLblInvoiceDoc"
                 text="Invoice Document"
+                required="true"
             />
             <Input
-                id="InvoiceDocValue"
+                id="idZinvoiceDocument.Input"
                 showSuggestion="true"
                 showValueHelp="true"
                 valueHelpRequest="onInvoiceNumberValueHelp"
                 valueHelpOnly="true"
                 value="{oModelForHeader>/ZinvoiceDocument}"
+                
             />
             <Label
                 id="IdLblSecCreateDate"
@@ -58,6 +60,7 @@
                 text="Country of BL"
             />
             <Input
+                value="{oModelForHeader>/CountryOfBl}"
                 showSuggestion="true"
                 showValueHelp="true"
                 valueHelpRequest="onCountryOfBLValueHelp"
@@ -65,25 +68,28 @@
             <Label
                 id="IdLblPortOfLoad"
                 text="Port Of Loading"
+                required="true"
             />
             <Input
+            id="idPortOfLoading_Input"
                 showValueHelp="true"
                 value="{oModelForHeader>/ZportOfLoading}"
-                id="_IDGenInput4"
-              
                 valueHelpRequest="onportOfLoadingValueHelp"
             />
 
             <Label
                 id="IdLblICDPortCode"
                 text="ICD - PORT CODE "
+                required="true"
             />
             <Input
-                value="{oModelForHeader>/PortCode}"
+                id="idIcdPortCode_Input"
+                value="{oModelForHeader>/IcdPortCode}"
                 showValueHelp="true"
                 valueHelpRequest="onICDValueHelp"
+                 
             />
-           
+
             <Label
                 id="IdLblCha"
                 text="CHA"
@@ -96,23 +102,20 @@
                 valueHelpRequest="onCHAValueHelp"
             />
 
-     
-
             <Label
                 id="IdLblShippingBillStatus"
                 text="Shipping Bill Status"
+                required="true"
             />
             <Select
+                id="idShippingBillStatusValue_Select"
                 forceSelection="false"
-                id="ShippingBillStatusValue"
                 selectedKey="{oModelForHeader>/ZshippingBillStatus}"
-                 
             >
                 <core:Item
                     id="item1"
                     key="final"
                     text="Final"
-                    
                 />
                 <core:Item
                     id="item2"
@@ -134,14 +137,16 @@
             <Label
                 id="IdLblShippingBillDate"
                 text=" Shipping Bill Date"
+                required="true"
             />
             <DatePicker
+                id="idShippingBillDate_DatePicker"
                 value="{path:'oModelForHeader>/ZshippingBillDate', type: 'sap.ui.model.type.Date', formatOptions: {pattern: 'dd/MM/yyyy'}}"
                 displayFormat="dd/MM/yyyy"
                 valueFormat="dd/MM/yyyy"
                 
             />
-           
+
             <Label
                 id="IdLblStateOfOrigin"
                 text="State of Origin"
@@ -151,8 +156,12 @@
             <Label
                 id="IdLblPortOfDischarge"
                 text="Port of discharge"
+                required="true"
             />
-            <Input value="{oModelForHeader>/PortOfDischarge}" />
+            <Input
+                id="idPortOfDischarge_Input"
+                value="{oModelForHeader>/PortOfDischarge}"
+            />
 
             <Label
                 id="IdLblDestinationCountry"

@@ -1,5 +1,5 @@
 <mvc:View
-    controllerName="zpro.sk.mittalcoin.exim.loc.import.locimport.controller.View2"
+    controllerName="zpro.sk.mittalcoin.exim.loc.export.locexport.controller.View2"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns:core="sap.ui.core"
     xmlns="sap.m"
@@ -52,33 +52,35 @@
             <uxap:ObjectPageSection
                 id="idOPSHeaderDetails"
                 titleUppercase="true"
-                title="LC Import Headers"
+                title="LC export Headers"
+                selectedSubSection="idV2OPSubHeaderDetailsView"
+                
             >
                 <uxap:subSections>
                     <uxap:ObjectPageSubSection
                         id="idV2OPSubHeaderDetailsView"
-                        title="LC Import Headers"
+                        title="LC export Headers"
                         titleUppercase="true"
                         visible="{myPropertyValues>/view}"
                     >
                         <uxap:blocks>
                             <core:Fragment
                                 id="idFrg_headerDetialsView"
-                                fragmentName="zpro.sk.mittalcoin.exim.loc.import.locimport.view.fragments.View2.headerDetails_view"
+                                fragmentName="zpro.sk.mittalcoin.exim.loc.export.locexport.view.fragments.View2.headerDetails_view"
                                 type="XML"
                             />
                         </uxap:blocks>
                     </uxap:ObjectPageSubSection>
                     <uxap:ObjectPageSubSection
                         id="idV2OPSubHeaderDetailsEdit"
-                        title="LC Import Headers"
+                        title="LC export Headers"
                         titleUppercase="true"
                         visible="{myPropertyValues>/edit}"
                     >
                         <uxap:blocks>
                             <core:Fragment
                                 id="idFrg_headerDetialsEdit"
-                                fragmentName="zpro.sk.mittalcoin.exim.loc.import.locimport.view.fragments.View2.headerDetails_edit"
+                                fragmentName="zpro.sk.mittalcoin.exim.loc.export.locexport.view.fragments.View2.headerDetails_edit"
                                 type="XML"
                             />
                         </uxap:blocks>
@@ -92,21 +94,21 @@
                 <uxap:subSections>
                     <uxap:ObjectPageSubSection
                         id="idV2OPSubItemsDetailView"
-                        title="LC Import Items"
+                        title="LC export Items"
                         titleUppercase="true"
                     >
                         <!-- visible="{myPropertyValues>/view}" -->
                         <uxap:blocks>
                             <core:Fragment
                                 id="idFrg_itemDetailsView"
-                                fragmentName="zpro.sk.mittalcoin.exim.loc.import.locimport.view.fragments.View2.itemDetails_view"
+                                fragmentName="zpro.sk.mittalcoin.exim.loc.export.locexport.view.fragments.View2.itemDetails_view"
                                 type="XML"
                             />
                         </uxap:blocks>
                     </uxap:ObjectPageSubSection>
                     <uxap:ObjectPageSubSection
                         id="idV2OPSubItemsDetailEdit"
-                        title="LC Import Items"
+                        title="LC export Items"
                         titleUppercase="true"
                         visible="false"
                     >
@@ -114,7 +116,7 @@
                         <uxap:blocks>
                             <core:Fragment
                                 id="idFrg_itemDetailsEdit"
-                                fragmentName="zpro.sk.mittalcoin.exim.loc.import.locimport.view.fragments.View2.itemDetails_edit"
+                                fragmentName="zpro.sk.mittalcoin.exim.loc.export.locexport.view.fragments.View2.itemDetails_edit"
                                 type="XML"
                             />
                         </uxap:blocks>

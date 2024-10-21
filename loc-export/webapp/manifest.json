@@ -1,7 +1,7 @@
 {
   "_version": "1.64.0",
   "sap.app": {
-    "id": "zpro.sk.mittalcoin.exim.loc.import.locimport",
+    "id": "zpro.sk.mittalcoin.exim.loc.export.locexport",
     "type": "application",
     "i18n": "i18n/i18n.properties",
     "applicationVersion": {
@@ -13,25 +13,25 @@
     "sourceTemplate": {
       "id": "@sap/generator-fiori:basic",
       "version": "1.15.2",
-      "toolsId": "efb5c999-d145-46e1-836f-1e23853fa7f1"
+      "toolsId": "be289d33-76bb-483f-a68e-da3017682e4e"
     },
     "dataSources": {
       "mainService": {
-        "uri": "/sap/opu/odata/sap/ZRC_LCIMP_HEAD_SRV_B/",
+        "uri": "/sap/opu/odata/sap/ZRC_LCEXP_HEAD_SRV_B/",
         "type": "OData",
         "settings": {
           "annotations": [
-            "ZRC_LCIMP_HEAD_SRV_B_VAN"
+            "ZRC_LCEXP_HEAD_SRV_B_VAN"
           ],
           "localUri": "localService/metadata.xml",
           "odataVersion": "2.0"
         }
       },
-      "ZRC_LCIMP_HEAD_SRV_B_VAN": {
-        "uri": "/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Annotations(TechnicalName='ZRC_LCIMP_HEAD_SRV_B_VAN',Version='0001')/$value/",
+      "ZRC_LCEXP_HEAD_SRV_B_VAN": {
+        "uri": "/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Annotations(TechnicalName='ZRC_LCEXP_HEAD_SRV_B_VAN',Version='0001')/$value/",
         "type": "ODataAnnotation",
         "settings": {
-          "localUri": "localService/ZRC_LCIMP_HEAD_SRV_B_VAN.xml"
+          "localUri": "localService/ZRC_LCEXP_HEAD_SRV_B_VAN.xml"
         }
       }
     }
@@ -55,7 +55,7 @@
   "sap.ui5": {
     "flexEnabled": true,
     "dependencies": {
-      "minUI5Version": "1.124.7",
+      "minUI5Version": "1.124.8",
       "libs": {
         "sap.m": {},
         "sap.ui.core": {}
@@ -69,19 +69,13 @@
       "i18n": {
         "type": "sap.ui.model.resource.ResourceModel",
         "settings": {
-          "bundleName": "zpro.sk.mittalcoin.exim.loc.import.locimport.i18n.i18n"
+          "bundleName": "zpro.sk.mittalcoin.exim.loc.export.locexport.i18n.i18n"
         }
       },
       "": {
-        "type": "sap.ui.model.odata.v2.ODataModel",
-        "settings": {
-          "defaultOperationMode": "Server",
-          "defaultBindingMode": "OneWay",
-          "defaultCountMode": "Request",
-          "useBatch": false
-        },
         "dataSource": "mainService",
-        "preload": true
+        "preload": true,
+        "settings": {}
       }
     },
     "resources": {
@@ -96,7 +90,7 @@
         "routerClass": "sap.m.routing.Router",
         "viewType": "XML",
         "async": true,
-        "viewPath": "zpro.sk.mittalcoin.exim.loc.import.locimport.view",
+        "viewPath": "zpro.sk.mittalcoin.exim.loc.export.locexport.view",
         "controlAggregation": "pages",
         "controlId": "app",
         "clearControlAggregation": false
@@ -109,7 +103,7 @@
             "TargetView1"
           ]
         },
-        { 
+        {
           "name": "View2",
           "pattern": "View2/{LCNo}",
           "target": [
@@ -133,7 +127,7 @@
       }
     },
     "rootView": {
-      "viewName": "zpro.sk.mittalcoin.exim.loc.import.locimport.view.App",
+      "viewName": "zpro.sk.mittalcoin.exim.loc.export.locexport.view.App",
       "type": "XML",
       "async": true,
       "id": "App"

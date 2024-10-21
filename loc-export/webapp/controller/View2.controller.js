@@ -50,9 +50,8 @@ sap.ui.define([
         MaxLength,
         MessageBox, DateFormat, ODataUtils) {
 
-        return Controller.extend("zpro.sk.mittalcoin.exim.loc.import.locimport.controller.View2", {
+        return Controller.extend("zpro.sk.mittalcoin.exim.loc.export.locexport.controller.View2", {
             onInit: function () {
-                debugger
                 this.getOwnerComponent()
                     .getRouter()
                     .attachRoutePatternMatched(this.onRouteMatched, this);
@@ -78,7 +77,7 @@ sap.ui.define([
                     this.getView().getModel("oModelForHeader").setProperty("/ZcreateTime", currentDateTime)
                 } else {
                     this.propertyValues.setProperty("/edit", false);
-                    var sPathOfLCDetails = "/ZRC_LCIMP_HEAD('" + LcNo + "')";
+                    var sPathOfLCDetails = "/ZRC_LCEXP_HEAD('" + LcNo + "')";
                     var sPathOfLCItemsDetails = sPathOfLCDetails + "/to_Item";
                     // var sPathOfLCDetails = "/ZC_LCIMP_ITEM(LcNo='" + LcNo + "',Ebelp='" + Ebelp + "')/to_head";
                     this.getCallForLCDetails(sPathOfLCDetails, sPathOfLCItemsDetails);
@@ -100,28 +99,54 @@ sap.ui.define([
             createLocalJOSNPayload: function () {
                 var headerPayload = {
                     "LcNo": "",
-                    "ContractNo": "",
-                    "PiNo": "",
-                    "PiDate": "",
-                    "Po": "",
-                    "ShipmetLastDate": "",
+                    "SalesContract": "",
+                    "SalesOrder": "",
+                    "ShipmetLastDateOri": "",
+                    "LatestDocumentDateOri": "",
+                    "ShipmetLastDateAmend": "",
+                    "LatestDocumentDateAmend": "",
+                    "LcIssueDateAmend": "",
+                    "LcIssuanceBankAccountNumbe": "",
+                    "LcIssuanceBankName": "",
+                    "LcIssuanceSwiftCode": "",
+                    "BeneficiaryBankDetailsWith_": "",
+                    "NegotiatingBankDetailsWith_": "",
                     "PortOfLoading": "",
-                    "FinalIcdLocation": "",
-                    "LcIssuingBank": "",
+                    "FinalDestination": "",
+                    "IssueChargesBySeller": "",
+                    "ConfirmationChargesBySeller": "",
+                    "DiscountingChargesBySeller": "",
+                    "IssueChargesByBuyer": "",
+                    "ConfirmationChargesByBuyer": "",
+                    "DiscountingChargesByBuyer": "",
+                    "PaymentTerms": "",
+                    "ToleranceQtyP": "",
                     "ShipmentType": "",
                     "LcType": "",
-                    "LcIssueDate": "",
-                    "LcExpiryDate": "",
+                    "Pi": "",
+                    "LcExpiryDateOriginal": "",
+                    "LcIssueDateOriginal": "",
+                    "LcRecevingDateOriginal": "",
+                    "LcExpiryDateAmendment": "",
+                    "LcRecevingDateAmendment": "",
+                    "LcRecieivingBankAccountNum": "",
+                    "LcReceivingBankName": "",
+                    "LcRecevingSwiftCode": "",
+                    "ConfirmationBankDetailsWith": "",
                     "PortOfDischarge": "",
-                    "LcChargesOutsideIndia": "",
-                    "LcRecievingBank": "",
-                    "IncoTerms": "",
-                    "TollCurr": "",
-                    "ToleranceValue": "",
-                    "ZcreateDate": "",
-                    "ZcreateTime": "",
-                    "ZcreateBy": ""
-                }
+                    "LcCurrency": "",
+                    "LcValue": "",
+                    "ListOfDocumentsUnderLc": "",
+                    "AmendmentChargesBySeller": "",
+                    "DiscrepencyChargesBySeller": "",
+                    "TotalChargesBySeller": "",
+                    "Amendment_ChargesBySeller": "",
+                    "DiscrepencyChargesByBuyer": "",
+                    "TotalChargesByBuyer": "",
+                    "LcChargesInIndia": "",
+                    "ToleranceValueP": "",
+                    "TransShipment": ""
+                };
                 this.getView().setModel(new JSONModel(headerPayload), "oModelForHeader");
 
                 var itemPayload = {
@@ -147,7 +172,7 @@ sap.ui.define([
                 this.getView().setModel(new JSONModel(itemPayload), "oModelForItemTable");
 
                 var properties = {
-                    "title": "LC Import Item",
+                    "title": "LC export Item",
                     "view": false,
                     "edit": false,
                     "editButton": false,
@@ -181,7 +206,7 @@ sap.ui.define([
                         this.propertyValues.setProperty("/view", true);
                         this.propertyValues.setProperty("/editButton", true);
                         this.getView().getModel("oModelForItemTable").setData(Data);
-                        this.propertyValues.setProperty("/title", "LC Import Item(" + Data.results.length + ")");
+                        this.propertyValues.setProperty("/title", "LC export Item(" + Data.results.length + ")");
                         this.getView().setBusy(false);
                     }.bind(this),
                     error: function (oError) {
@@ -196,8 +221,8 @@ sap.ui.define([
             onPOValueHelp: function () {
                 if (!this.InvoiceNumFrag) {
                     this.InvoiceNumFrag = sap.ui.xmlfragment(
-                        "zpro.sk.mittalcoin.exim.loc.import.locimport.view.fragments.View2.valueHelps.valueHelp_PO",
-                        this
+                        "zpro.sk.mittalcoin.exim.loc.export.locexport.view.fragments.View2.valueHelps.valueHelp_PO",
+                        this 
                     );
                     this.getView().addDependent(this.InvoiceNumFrag);
                     var sService = "/sap/opu/odata/sap/ZF4_RI_PO_SERV";
@@ -337,7 +362,7 @@ sap.ui.define([
             // On Create
             onCreateButtonPress: function () {
                 var oModel = this.getOwnerComponent().getModel();
-                var sPath = '/ZRC_LCIMP_HEAD'
+                var sPath = '/ZRC_LCEXP_HEAD'
                 var payload = this.getView().getModel("oModelForHeader").getData();
                 const dt = DateFormat.getDateTimeInstance({ pattern: "PThh'H'mm'M'ss'S'" });
                 payload.ZcreateTime = dt.format(new Date());
@@ -388,7 +413,7 @@ sap.ui.define([
                     oModel.create(sPath, payload, {
                         success: function (oData, response) {
                             var payloadItem = this.getView().getModel("oModelForItemTable").getData().results;
-                            var sPathItems = "/ZRC_LCIMP_HEAD('" + oData.LcNo + "')/to_Item";
+                            var sPathItems = "/ZRC_LCEXP_HEAD('" + oData.LcNo + "')/to_Item";
                             this.LcNo = oData.LcNo;
                             this.postCallForItem(oModel, sPathItems, payloadItem)
                             this.getView().setBusy(false);
@@ -445,14 +470,14 @@ sap.ui.define([
                 var oModel = this.getOwnerComponent().getModel();
                 var payload = this.getView().getModel("oModelForHeader").getData();
                 this.LcNo = payload.LcNo;
-                var sPath = "/ZRC_LCIMP_HEAD('" + payload.LcNo + "')"
+                var sPath = "/ZRC_LCEXP_HEAD('" + payload.LcNo + "')"
                 this.updateCallForHeader(oModel, sPath, payload);
             },
             updateCallForHeader: function (oModel, sPath, payload) {
                 var that = this;
                 delete payload['to_item'];
-                const dt = DateFormat.getDateTimeInstance({ pattern: "PThh'H'mm'M'ss'S'" });
-                payload.ZcreateTime = dt.format(new Date());
+                // const dt = DateFormat.getDateTimeInstance({ pattern: "PThh'H'mm'M'ss'S'" });
+                // payload.ZcreateTime = dt.format(new Date());
                 //update Call
                 this.getView().setBusy(true);
                 oModel.update(sPath, payload, {

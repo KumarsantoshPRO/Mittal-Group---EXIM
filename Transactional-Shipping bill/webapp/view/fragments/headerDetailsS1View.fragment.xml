@@ -44,7 +44,7 @@
                 id="_IdTPCreateTime"
                 text="{path:'oModelForHeader>/ZcreateTime', type: 'sap.ui.model.odata.type.Time', formatOptions: {pattern: 'HH:mm:ss'}}"
             />
- 
+
             <Label
                 id="_IdLblCountryOfBL"
                 text="Country of BL"
@@ -61,12 +61,12 @@
                 text="{oModelForHeader>/ZportOfLoading}"
                 id="__IDGenText4"
             />
-
+ 
             <Label
                 id="_IdLblICDPortCode"
                 text="ICD - PORT CODE "
             />
-            <Text text="{oModelForHeader>/PortCode}" />
+            <Text text="{oModelForHeader>/IcdPortCode}" />
 
             <Label
                 id="_IdLblCha"
@@ -98,7 +98,7 @@
                 id="_IdLblShippingBillDate"
                 text=" Shipping Bill Date"
             />
-            <Text text="" />
+            <Text text="{oModelForHeader>/ZshippingBillDate}" />
 
             <Label
                 id="_IdLblStateOfOrigin"

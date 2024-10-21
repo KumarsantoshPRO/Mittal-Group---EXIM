@@ -6,8 +6,16 @@ sap.ui.define([
     "sap/ui/model/FilterOperator",
     "sap/m/MessageBox",
     "sap/ui/core/format/DateFormat",
-    "sap/ui/core/Item"
-
+    "sap/ui/core/Item",
+    'sap/ui/core/IconPool',
+    'sap/ui/core/library',
+    'sap/m/Link',
+    'sap/m/MessageItem',
+    'sap/m/MessageView',
+    'sap/m/Button',
+    'sap/m/Dialog',
+    'sap/m/Bar',
+    'sap/m/Title'
 ],
     function (Controller,
         Fragment,
@@ -16,21 +24,24 @@ sap.ui.define([
         FilterOperator,
         MessageBox,
         DateFormat,
-        Item) {
+        Item,
+        IconPool, coreLibrary, Link, MessageItem, MessageView, Button, Dialog, Bar, Title) {
         "use strict";
-
+        // shortcut for sap.ui.core.TitleLevel
+        var TitleLevel = coreLibrary.TitleLevel;
         return Controller.extend("zmg.pro.exim.transactionalshippingbill.exim.controller.shippingBill_Details", {
 
             onInit: function () {
-                debugger
+
                 this.createLocalJSONModels();
                 this.getOwnerComponent()
                     .getRouter()
                     .attachRoutePatternMatched(this.onRouteMatched, this);
+                this.messagehandler();
 
             },
             onRouteMatched: function (oEvent) {
-                debugger
+
                 var billNo = oEvent.getParameter("arguments").billNo;
                 this.page = billNo;
                 if (billNo === "null") {
@@ -309,8 +320,9 @@ sap.ui.define([
 
                         // oModelForHeader
                         this.getView().getModel("oModelForHeader").getData().Zcustomer = Data.results[0].SoldToParty;
-                        this.getView().getModel("oModelForHeader").getData().ZfobValue = Data.results[0].TotalNetAmount
-                        this.getView().getModel("oModelForHeader").getData().FobValueFc = Data.results[0].TransactionCurrency
+                        this.getView().getModel("oModelForHeader").getData().ZfobValue = Data.results[0].TotalNetAmount;
+                        var FobValueFc = Number(Data.results[0].TotalNetAmount) * Number(Data.results[0].AccountingExchangeRate)
+                        this.getView().getModel("oModelForHeader").getData().FobValueFc = FobValueFc.toFixed(2).toString();
                         this.getView().getModel("oModelForHeader").refresh();
 
 
@@ -373,7 +385,7 @@ sap.ui.define([
                 var oSelectedItem = oEvent.getParameter("selectedItem"),
                     // sSelectedValue = oSelectedItem.getProperty("title"),
                     sSelectedValue = oSelectedItem.getBindingContext().getProperty("Country");
-                // this.getView().getModel("oModelForHeader").setProperty("/ZdestinationCountry", sSelectedValue.toString());
+                this.getView().getModel("oModelForHeader").setProperty("/CountryOfBl", sSelectedValue.toString());
 
             },
             // End: Country of BL
@@ -425,7 +437,7 @@ sap.ui.define([
             onValueHelpConfirm_ICD: function (oEvent) {
                 var oSelectedItem = oEvent.getParameter("selectedItem"),
                     sSelectedValue = oSelectedItem.getBindingContext().getProperty("PortCode");
-                this.getView().getModel("oModelForHeader").setProperty("/PortCode", sSelectedValue.toString());
+                this.getView().getModel("oModelForHeader").setProperty("/IcdPortCode", sSelectedValue.toString());
 
             },
             // End: ICD - Port Code
@@ -638,7 +650,7 @@ sap.ui.define([
                 this.Material = Material;
                 this.Item = Item;
                 // if (this.screenType === "edit") {
-                //     debugger
+                //     
                 //     Item = oEvent.getSource().getParent().getCells()[0].getValue();
                 //     Quantity = oEvent.getSource().getParent().getCells()[4].getValue();
                 //     // Material
@@ -1040,7 +1052,8 @@ sap.ui.define([
 
             },
             // On Save button action
-            onSave: function () {
+            onSave: function (oEvent) {
+
                 var oModel = this.getOwnerComponent().getModel();
                 var sPath = '/ZRC_SHIP_BILL_HEAD'
                 var payload = this.getView().getModel("oModelForHeader").getData();
@@ -1052,24 +1065,89 @@ sap.ui.define([
 
 
             validation: function (headerPayload) {
-                if (!headerPayload.ZshippingBillStatus) {
-                    MessageBox.error("Please enter Shipping Bill Status");
+                if (!headerPayload.ZinvoiceDocument) {
+                    MessageBox.error("Please select invoice document number");
+                    this.byId(sap.ui.core.Fragment.createId("idFrg_headerDetialsS1Edit", " idZinvoiceDocument.Input")).setValueState("Error");
+                    this.byId(sap.ui.core.Fragment.createId("idFrg_headerDetialsS1Edit", " idZinvoiceDocument.Input")).setValueStateText("Please enter invoice document number");
                     return false;
-                } else if (!headerPayload.ZshippingBillDate) {
-                    MessageBox.error("Please enter Shipping Bill Date");
+                }
+                else if (!headerPayload.IcdPortCode) {
+                    MessageBox.error("Please enter ICD - port code");
+                    this.byId(sap.ui.core.Fragment.createId("idFrg_headerDetialsS1Edit", "idZinvoiceDocument.Input")).setValueState("None");
+                    this.byId(sap.ui.core.Fragment.createId("idFrg_headerDetialsS1Edit", "idIcdPortCode_Input")).setValueState("Error");
+                    this.byId(sap.ui.core.Fragment.createId("idFrg_headerDetialsS1Edit", "idIcdPortCode_Input")).setValueStateText("Please enter ICD - port Code");
                     return false;
-                } else if (!headerPayload.PortOfDischarge) {
+                }
+                else if (!headerPayload.ZshippingBillStatus) {
+                    MessageBox.error("Please enter shipping bill status");
+                    this.byId(sap.ui.core.Fragment.createId("idFrg_headerDetialsS1Edit", "idIcdPortCode_Input")).setValueState("None");
+                    this.byId(sap.ui.core.Fragment.createId("idFrg_headerDetialsS1Edit", "idShippingBillStatusValue_Select")).setValueState("Error");
+                    this.byId(sap.ui.core.Fragment.createId("idFrg_headerDetialsS1Edit", "idShippingBillStatusValue_Select")).setValueStateText("Please enter shipping bill status");
+                    return false;
+                }
+                else if (!headerPayload.ZshippingBillDate) {
+                    MessageBox.error("Please enter shipping bill date");
+                    this.byId(sap.ui.core.Fragment.createId("idFrg_headerDetialsS1Edit", "idIcdPortCode_Input")).setValueState("None");
+                    this.byId(sap.ui.core.Fragment.createId("idFrg_headerDetialsS1Edit", "idShippingBillStatusValue_Select")).setValueState("None");
+                    this.byId(sap.ui.core.Fragment.createId("idFrg_headerDetialsS1Edit", "idShippingBillDate_DatePicker")).setValueState("Error");
+                    this.byId(sap.ui.core.Fragment.createId("idFrg_headerDetialsS1Edit", "idShippingBillDate_DatePicker")).setValueStateText("Please enter shipping bill date");
+                    return false;
+                }
+                else if (!headerPayload.PortOfDischarge) {
                     MessageBox.error("Please enter port of discharge");
-                    return false;
-                } else if (!headerPayload.PortCode) {
-                    MessageBox.error("Please enter ICD-Port code");
+                    this.byId(sap.ui.core.Fragment.createId("idFrg_headerDetialsS1Edit", "idShippingBillDate_DatePicker")).setValueState("None");
+                    this.byId(sap.ui.core.Fragment.createId("idFrg_headerDetialsS1Edit", "idPortOfDischarge_Input")).setValueState("Error");
+                    this.byId(sap.ui.core.Fragment.createId("idFrg_headerDetialsS1Edit", "idPortOfDischarge_Input")).setValueStateText("Please enter port of discharge");
+
                     return false;
                 }
-
+                else if (!headerPayload.ZportOfLoading) {
+                    MessageBox.error("Please enter port of loading");
+                    this.byId(sap.ui.core.Fragment.createId("idFrg_headerDetialsS1Edit", "idPortOfDischarge_Input")).setValueState("None");
+                    this.byId(sap.ui.core.Fragment.createId("idFrg_headerDetialsS1Edit", "idPortOfLoading_Input")).setValueState("Error");
+                    this.byId(sap.ui.core.Fragment.createId("idFrg_headerDetialsS1Edit", "idPortOfLoading_Input")).setValueStateText("Please enter port of loading");
+                    return false;
+                }
                 else {
-                    return true;
+                    this.byId(sap.ui.core.Fragment.createId("idFrg_headerDetialsS1Edit", "idZinvoiceDocument.Input")).setValueState("None");
+                    this.byId(sap.ui.core.Fragment.createId("idFrg_headerDetialsS1Edit", "idShippingBillStatusValue_Select")).setValueState("None");
+                    this.byId(sap.ui.core.Fragment.createId("idFrg_headerDetialsS1Edit", "idShippingBillDate_DatePicker")).setValueState("None");
+                    this.byId(sap.ui.core.Fragment.createId("idFrg_headerDetialsS1Edit", "idPortOfDischarge_Input")).setValueState("None");
+                    this.byId(sap.ui.core.Fragment.createId("idFrg_headerDetialsS1Edit", "idPortOfLoading_Input")).setValueState("None");
+                    return this.itemsValidation();
                 }
 
+            },
+
+            itemsValidation: function () {
+                var aPayloadOfItems = this.getView().getModel("oModelForItems").getData().results;
+                for (var i = 0; i < aPayloadOfItems.length; i++) {
+                    var element = aPayloadOfItems[i];
+                    if (element.Commission) {
+                        this.scrollTo(this.byId("IdOPSAssignmentDetailsSection"), this.byId("ObjectPageLayout"));
+                        this.byId("ObjectPageLayout").scrollToSection(this.byId("IdOPSAssignmentDetailsSection").getId());
+                        MessageBox.error("Please enter Commission at Item details, row no:" + i + 1 + "");
+                        return false;
+                    } else if (!element.Insurance) {
+                        MessageBox.error("Please enter Insurance at Item details row no:" + i + 1 + "");
+                        return false;
+                    } else if (!element.Freight) {
+                        MessageBox.error("Please enter Freight at Item row no:" + i + 1 + "");
+                        return false;
+                    } else {
+                        return true;
+                    }
+                }
+
+
+
+            },
+
+            scrollTo: function (section, opl) {
+                const id = section.getId();
+                const ready = !!opl.getScrollingSectionId(); // DOM of opl is fully ready
+                const fn = () => opl.scrollToSection(id);
+                return ready ? fn() : opl.attachEventOnce("onAfterRenderingDOMReady", fn);
             },
             // All post calls
             postCallForHeader: function (oModel, sPath, payload) {
@@ -1262,7 +1340,8 @@ sap.ui.define([
                         emphasizedAction: "OK",
                         onClose: function (sAction) {
                             if (sAction === "OK") {
-                                window.history.go(-1);
+                                that.handleDialogPress();
+
 
                             }
                         }
@@ -1278,6 +1357,7 @@ sap.ui.define([
 
                 oModelForLicense.create(sPath, ItemLicPayload, {
                     success: function (oData, response) {
+
                         // this.getView().setBusy(false);
                     }.bind(this),
                     error: function (oError) {
@@ -1498,6 +1578,114 @@ sap.ui.define([
                     }.bind(this)
                 });
             },
+            // Message pop over handler methods
+            messagehandler: function () {
+                var that = this;
+                var oLink = new Link({
+                    text: "Show more information",
+                    href: "http://sap.com",
+                    target: "_blank"
+                });
+
+                var oMessageTemplate = new MessageItem({
+                    type: '{type}',
+                    title: '{title}',
+                    description: '{description}',
+                    subtitle: '{subtitle}',
+                    counter: '{counter}',
+                    markupDescription: '{markupDescription}',
+                    link: oLink
+                });
+
+                var aMockMessages = [{
+                    type: 'Error',
+                    title: 'Error message',
+                    description: 'First Error message description. \n' +
+                        'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod',
+                    subtitle: 'Example of subtitle',
+                    counter: 1
+                }, {
+                    type: 'Warning',
+                    title: 'Warning without description',
+                    description: ''
+                }, {
+                    type: 'Success',
+                    title: 'Success message',
+                    description: 'First Success message description',
+                    subtitle: 'Example of subtitle',
+                    counter: 1
+                }, {
+                    type: 'Error',
+                    title: 'Error message',
+                    description: 'Second Error message description',
+                    subtitle: 'Example of subtitle',
+                    counter: 2
+                }, {
+                    type: 'Information',
+                    title: 'Information message',
+                    description: 'First Information message description',
+                    subtitle: 'Example of subtitle',
+                    counter: 1
+                }];
+
+                var oModel = new JSONModel();
+
+                oModel.setData(aMockMessages);
+
+                this.oMessageView = new MessageView({
+                    showDetailsPageHeader: false,
+                    itemSelect: function () {
+                        oBackButton.setVisible(true);
+                    },
+                    items: {
+                        path: "/",
+                        template: oMessageTemplate
+                    }
+                });
+
+                var oBackButton = new Button({
+                    icon: IconPool.getIconURI("nav-back"),
+                    visible: false,
+                    press: function () {
+                        that.oMessageView.navigateBack();
+                        this.setVisible(false);
+                    }
+                });
+
+
+
+                this.oMessageView.setModel(oModel);
+
+                this.oDialog = new Dialog({
+                    resizable: true,
+                    content: this.oMessageView,
+                    state: 'Error',
+                    beginButton: new Button({
+                        press: function () {
+                            window.history.go(-1);
+                            // this.getParent().close();
+                        },
+                        text: "Close"
+                    }),
+                    customHeader: new Bar({
+                        contentLeft: [oBackButton],
+                        contentMiddle: [
+                            new Title({
+                                text: "Error",
+                                level: TitleLevel.H1
+                            })
+                        ]
+                    }),
+                    contentHeight: "50%",
+                    contentWidth: "50%",
+                    verticalScrolling: false
+                });
+            },
+
+            handleDialogPress: function () {
+                this.oMessageView.navigateBack();
+                this.oDialog.open();
+            }
 
         });
     });

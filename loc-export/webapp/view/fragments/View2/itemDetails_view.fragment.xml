@@ -6,7 +6,7 @@
     xmlns:sap.ui.fl="sap.ui.fl"
 >
     <table:Table
-        id="ImportTableEdit"
+        id="ImportTableView"
         sort="onSort"
         columnResize="onColumnResize"
         columnMove="onColumnMove"
@@ -23,15 +23,10 @@
         cellContextmenu="onProductIdCellContextMenu"
         enableGrouping="true"
         rowSelectionChange="onShowLCDetails"
-       
     >
-    
         <table:extension>
             <OverflowToolbar style="Clear">
-                <Title
-                    id="title"
-                    text="{myPropertyValues>/title}"
-                />
+                <Title text="{myPropertyValues>/title}" />
                 <ToolbarSpacer />
                 <Button
                     text="Create"
@@ -83,24 +78,33 @@
                 id="LcNo"
                 sortProperty="LcNo"
                 headerMenu="menu"
-                visible="false"
             >
                 <Label text="LC Number" />
                 <table:template>
-                    <Input value="{oModelForItemTable>LcNo}" />
+                    <Label text="{oModelForItemTable>LcNo}" />
                 </table:template>
             </table:Column>
             <table:Column
-                id="Ebelp"
-                sortProperty="Ebelp"
+                id="SalesOrder"
+                sortProperty="SalesOrder"
                 headerMenu="menu"
             >
-                <Label text="PO Number Item" />
+                <Label text="Sales Order" />
                 <table:template>
-                    <Input value="{oModelForItemTable>Ebelp}" />
+                    <Label text="{oModelForItemTable>SalesOrder}" />
                 </table:template>
             </table:Column>
 
+            <table:Column
+                id="Posnr"
+                sortProperty="Posnr"
+                headerMenu="menu"
+            >
+                <Label text="SO Item" />
+                <table:template>
+                    <Label text="{oModelForItemTable>Posnr}" />
+                </table:template>
+            </table:Column>
             <table:Column
                 id="Matnr"
                 sortProperty="Matnr"
@@ -108,17 +112,17 @@
             >
                 <Label text="Material Number" />
                 <table:template>
-                    <Input value="{oModelForItemTable>Matnr}" />
+                    <Label text="{oModelForItemTable>Matnr}" />
                 </table:template>
             </table:Column>
             <table:Column
-                id="Mtart"
-                sortProperty="Mtart"
+                id="MatDesc"
+                sortProperty="MatDesc"
                 headerMenu="menu"
             >
                 <Label text="Material Description" />
                 <table:template>
-                    <Input value="{oModelForItemTable>Mtart}" />
+                    <Label text="{oModelForItemTable>MatDesc}" />
                 </table:template>
             </table:Column>
             <table:Column
@@ -128,28 +132,28 @@
             >
                 <Label text="UoM" />
                 <table:template>
-                    <Input value="{oModelForItemTable>Meins}" />
+                    <Label text="{oModelForItemTable>Meins}" />
                 </table:template>
             </table:Column>
 
             <table:Column
-                id="Menge"
-                sortProperty="Menge"
+                id="LcQty"
+                sortProperty="LcQty"
                 headerMenu="menu"
             >
-                <Label text="Quantity" />
+                <Label text="LC Quantity" />
                 <table:template>
-                    <Input value="{oModelForItemTable>Menge}" />
+                    <Label text="{oModelForItemTable>LcQty}" />
                 </table:template>
             </table:Column>
             <table:Column
-                id="PoCurr"
-                sortProperty="PoCurr"
+                id="LcCurrency"
+                sortProperty="LcCurrency"
                 headerMenu="menu"
             >
-                <Label text="PO Currency" />
+                <Label text="LC Currency" />
                 <table:template>
-                    <Input value="{oModelForItemTable>PoCurr}" />
+                    <Label text="{oModelForItemTable>LcCurrency}" />
                 </table:template>
             </table:Column>
             <table:Column
@@ -159,7 +163,10 @@
             >
                 <Label text="Unit Price" />
                 <table:template>
-                    <Input value="{oModelForItemTable>UnitPrice}" />
+                    <ObjectNumber
+                        number="{oModelForItemTable>UnitPrice}"
+                        unit="{oModelForItemTable>LcCurrency}"
+                    />
                 </table:template>
             </table:Column>
             <table:Column
@@ -169,19 +176,12 @@
             >
                 <Label text="Total Price" />
                 <table:template>
-                    <Input value="{oModelForItemTable>TotValue}" />
+                    <ObjectNumber
+                        number="{oModelForItemTable>TotalVal}"
+                        unit="{oModelForItemTable>LcCurrency}"
+                    />
                 </table:template>
             </table:Column>
         </table:columns>
-         <table:Column
-                id="ExcRate"
-                sortProperty="ExcRate"
-                headerMenu="menu"
-            >
-                <Label text="Exchange Rate" />
-                <table:template>
-                    <Input value="{oModelForItemTable>ExcRate}" />
-                </table:template>
-            </table:Column>
     </table:Table>
 </core:FragmentDefinition>

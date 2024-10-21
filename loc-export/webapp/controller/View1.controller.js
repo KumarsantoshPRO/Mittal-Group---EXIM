@@ -29,7 +29,7 @@ sap.ui.define([
         "use strict";
         var EdmType = exportLibrary.EdmType;
 
-        return Controller.extend("zpro.sk.mittalcoin.exim.loc.import.locimport.controller.View1", {
+        return Controller.extend("zpro.sk.mittalcoin.exim.loc.export.locexport.controller.View1", {
             onInit: function () {
                 this.getCallForTable([]);
                 this._registerForP13n();
@@ -44,7 +44,7 @@ sap.ui.define([
 
             // Get call for Table entries
             getCallForTable: function (aFilters) {
-                var sPath = "/ZRC_LCIMP_HEAD";
+                var sPath = "/ZRC_LCEXP_HEAD";
                 this.getView().setBusy(true);
 
                 this.getOwnerComponent().getModel().read(sPath, {
@@ -52,9 +52,9 @@ sap.ui.define([
                     success: function (Data) {
                         this.getView().setModel(new JSONModel(), "oModelForTable")
                         this.getView().getModel("oModelForTable").setData(Data.results);
-                        var heading = "LOC-Import";
+                        var heading = "LOC-export";
                         if (Number(Data.results.length) > 0) {
-                            heading = "LOC-Import items(" + Data.results.length + ")"
+                            heading = "LOC-export items(" + Data.results.length + ")"
                             this.getView().byId("title").setText(heading);
                         } else {
                             this.getView().byId("title").setText(heading);
@@ -66,23 +66,25 @@ sap.ui.define([
                     }.bind(this)
                 });
             },
-            // On Add new LOC-Import
+            // On Add new LOC-export
             onAddNewLOC: function () {
                 this.oRouter = this.getOwnerComponent().getRouter();
                 this.oRouter.navTo("View2", {
                     LCNo: "null"
                 });
             },
-            // On click of LOC-Import item
+            // On click of LOC-export item
             onShowLCDetails: function (oEvent) {
-                var sPathClickedItem
+                var sPathClickedItem, selectedRowLCNo;
                 if (oEvent.getParameter('rowContext')) {
-                    sPathClickedItem = oEvent.getParameter('rowContext').sPath
-                } else {
-                    sPathClickedItem = oEvent.getParameter('row').getRowBindingContext().sPath
+                    sPathClickedItem = oEvent.getParameter('rowContext').sPath;
+                    selectedRowLCNo = this.getView().getModel('oModelForTable').getContext(sPathClickedItem).getProperty("LcNo");
+                } else if (oEvent.getParameter('row')) {
+                    sPathClickedItem = oEvent.getParameter('row').getRowBindingContext().sPath;
+                    selectedRowLCNo = this.getView().getModel('oModelForTable').getContext(sPathClickedItem).getProperty("LcNo");
                 }
 
-                var selectedRowLCNo = this.getView().getModel('oModelForTable').getContext(sPathClickedItem).getProperty("LcNo");
+
 
                 this.oRouter = this.getOwnerComponent().getRouter();
                 this.oRouter.navTo("View2", {
@@ -101,43 +103,43 @@ sap.ui.define([
                     path: "LcNo"
                 },
                 {
-                    key: "ContractNo",
-                    label: "Contact Number",
-                    path: "ContractNo"
+                    key: "SalesContract",
+                    label: "Sales Contract",
+                    path: "SalesContract"
                 },
                 {
-                    key: "PiNo",
-                    label: "PI Number",
-                    path: "PiNo"
+                    key: "SalesOrder",
+                    label: "Sales Order",
+                    path: "SalesOrder   "
                 },
                 {
-                    key: "PiDate",
-                    label: "PI Date",
-                    path: "PiDate"
+                    key: "ShipmetLastDateOri",
+                    label: "Shipping Last Date - original",
+                    path: "ShipmetLastDateOri"
                 },
                 {
-                    key: "Po",
-                    label: "PO Number",
-                    path: "Po"
+                    key: "LatestDocumentDateOri",
+                    label: "Latest document date - Original",
+                    path: "LatestDocumentDateOri"
                 }, {
                     key: "ShipmetLastDate",
                     label: "Shipment Last date",
                     path: "ShipmetLastDate"
                 }, {
 
-                    key: "PortOfLoading",
-                    label: "Port Of Loading",
-                    path: "PortOfLoading"
+                    key: "ShipmetLastDateAmend",
+                    label: "Shipment Last Date - Amendment",
+                    path: "ShipmetLastDateAmend"
                 }, {
 
-                    key: "FinalIcdLocation",
-                    label: "Final ICD Location",
-                    path: "FinalIcdLocation"
+                    key: "LatestDocumentDateAmend",
+                    label: "FLatest document date - Amendment",
+                    path: "LatestDocumentDateAmend"
                 }, {
 
-                    key: "LcIssuingBank",
-                    label: "LC Issuing Bank",
-                    path: "LcIssuingBank"
+                    key: "LcIssueDateAmend",
+                    label: "LC Issue Date - Amendment",
+                    path: "LcIssueDateAmend"
                 }
 
 

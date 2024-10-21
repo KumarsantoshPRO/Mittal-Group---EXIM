@@ -512,31 +512,43 @@ sap.ui.define([
                 );
 
                 if (shippingBillNo) {
+                    this.getView().setBusy(true);
+                    oModelForHeader.read(sPath, {
+                        success: function (Data) {
+                            Data.Loezk = 'X';
+                            sap.m.MessageBox.error("Delete shipping bill  " + shippingBillNo + "?", {
+                                actions: ["Delete", sap.m.MessageBox.Action.CLOSE],
+                                emphasizedAction: "Delete",
+                                onClose: function (sAction) {
+                                    if (sAction === "Delete") {
 
-                    sap.m.MessageBox.error("Delete shipping bill  " + shippingBillNo + "?", {
-                        actions: ["Delete", sap.m.MessageBox.Action.CLOSE],
-                        emphasizedAction: "Delete",
-                        onClose: function (sAction) {
-                            if (sAction === "Delete") {
-                                this.getView().setBusy(true);
-                                oModelForHeader.remove(sPath, {
-                                    success: function (smessage) {
-                                        sap.m.MessageToast.show("Object Deleted");
-                                        this.getCallForTable([]);
-                                        this.getView().setBusy(false);
-                                    }.bind(this),
-                                    error: function (sError) {
-                                        this.getView().setBusy(false);
-                                    }.bind(this)
-                                });
-                            }
+                                        oModelForHeader.update(sPath, Data, {
+                                            success: function (smessage) {
+                                                sap.m.MessageToast.show("Object Deleted");
+                                                this.getCallForTable([]);
+                                                this.getView().setBusy(false);
+                                            }.bind(this),
+                                            error: function (sError) {
+                                                this.getView().setBusy(false);
+                                            }.bind(this)
+                                        });
+                                    }
+                                }.bind(this)
+                            });
+
+                        }.bind(this),
+                        error: function (oError) {
+                            this.getView().setBusy(false);
+
                         }.bind(this)
                     });
+
                 }
 
 
 
             },
+
             // On click of table row
             onRowsDataChange: function () {
 
