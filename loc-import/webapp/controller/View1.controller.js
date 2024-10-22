@@ -75,19 +75,23 @@ sap.ui.define([
             },
             // On click of LOC-Import item
             onShowLCDetails: function (oEvent) {
-                var sPathClickedItem
+                var sPathClickedItem, selectedRowLCNo;
                 if (oEvent.getParameter('rowContext')) {
-                    sPathClickedItem = oEvent.getParameter('rowContext').sPath
-                } else {
-                    sPathClickedItem = oEvent.getParameter('row').getRowBindingContext().sPath
+                    sPathClickedItem = oEvent.getParameter('rowContext').sPath;
+                    selectedRowLCNo = this.getView().getModel('oModelForTable').getContext(sPathClickedItem).getProperty("LcNo");
+                } else if (oEvent.getParameter('row')) {
+                    sPathClickedItem = oEvent.getParameter('row').getRowBindingContext().sPath;
+                    selectedRowLCNo = this.getView().getModel('oModelForTable').getContext(sPathClickedItem).getProperty("LcNo");
                 }
 
-                var selectedRowLCNo = this.getView().getModel('oModelForTable').getContext(sPathClickedItem).getProperty("LcNo");
+
 
                 this.oRouter = this.getOwnerComponent().getRouter();
-                this.oRouter.navTo("View2", {
-                    LCNo: selectedRowLCNo
-                });
+                if (selectedRowLCNo) {
+                    this.oRouter.navTo("View2", {
+                        LCNo: selectedRowLCNo
+                    });
+                }
             },
 
 

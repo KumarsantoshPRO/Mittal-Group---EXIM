@@ -54,7 +54,6 @@
                 titleUppercase="true"
                 title="LC export Headers"
                 selectedSubSection="idV2OPSubHeaderDetailsView"
-                
             >
                 <uxap:subSections>
                     <uxap:ObjectPageSubSection
@@ -96,29 +95,77 @@
                         id="idV2OPSubItemsDetailView"
                         title="LC export Items"
                         titleUppercase="true"
+                        visible="{myPropertyValues>/view}"
                     >
-                        <!-- visible="{myPropertyValues>/view}" -->
                         <uxap:blocks>
-                            <core:Fragment
-                                id="idFrg_itemDetailsView"
-                                fragmentName="zpro.sk.mittalcoin.exim.loc.export.locexport.view.fragments.View2.itemDetails_view"
-                                type="XML"
-                            />
+                            <IconTabBar
+                                id="idIconTabBarNoIcons"
+                                expanded="{device>/isNoPhone}"
+                                class="sapUiNoContentPadding"
+                                headerBackgroundDesign="Solid"
+                            >
+                                <items>
+                                    <IconTabFilter
+                                        text="Original"
+                                        iconColor="Contrast"
+                                    >
+                                        <core:Fragment
+                                            id="idFrg_itemDetailsView"
+                                            fragmentName="zpro.sk.mittalcoin.exim.loc.export.locexport.view.fragments.View2.itemDetails_view"
+                                            type="XML"
+                                        />
+                                    </IconTabFilter>
+                                    <IconTabFilter
+                                        text="Ammend"
+                                        iconColor="Contrast"
+                                    >
+                                        <core:Fragment
+                                            id="idFrg_itemDetailsAmmendView"
+                                            fragmentName="zpro.sk.mittalcoin.exim.loc.export.locexport.view.fragments.View2.itemDetails_ammend_view"
+                                            type="XML"
+                                        />
+                                    </IconTabFilter>
+                                </items>
+                            </IconTabBar>
                         </uxap:blocks>
                     </uxap:ObjectPageSubSection>
                     <uxap:ObjectPageSubSection
                         id="idV2OPSubItemsDetailEdit"
                         title="LC export Items"
                         titleUppercase="true"
-                        visible="false"
+                        visible="{myPropertyValues>/edit}"
                     >
-                        <!-- visible="{myPropertyValues>/edit}" -->
                         <uxap:blocks>
-                            <core:Fragment
-                                id="idFrg_itemDetailsEdit"
-                                fragmentName="zpro.sk.mittalcoin.exim.loc.export.locexport.view.fragments.View2.itemDetails_edit"
-                                type="XML"
-                            />
+                            <IconTabBar
+                                id="idIconTabBarNoIcons_ammend"
+                                expanded="{device>/isNoPhone}"
+                                class="sapUiNoContentPadding"
+                                headerBackgroundDesign="Solid"
+                            >
+                                <items>
+                                    <IconTabFilter
+                                        text="Original"
+                                        iconColor="Contrast"
+                                    >
+                                        <core:Fragment
+                                            id="idFrg_itemDetailsEdit"
+                                            fragmentName="zpro.sk.mittalcoin.exim.loc.export.locexport.view.fragments.View2.itemDetails_edit"
+                                            type="XML"
+                                        />
+                                    </IconTabFilter>
+                                    <IconTabFilter
+                                        text="Ammend"
+                                        iconColor="Contrast"
+                                        visible="{myPropertyValues>/ammend}"
+                                    >
+                                        <core:Fragment
+                                            id="idFrg_itemDetailsAmmendEdit"
+                                            fragmentName="zpro.sk.mittalcoin.exim.loc.export.locexport.view.fragments.View2.itemDetails_ammend_edit"
+                                            type="XML"
+                                        />
+                                    </IconTabFilter>
+                                </items>
+                            </IconTabBar>
                         </uxap:blocks>
                     </uxap:ObjectPageSubSection>
                 </uxap:subSections>

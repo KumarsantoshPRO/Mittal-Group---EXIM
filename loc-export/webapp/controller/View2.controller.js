@@ -68,6 +68,7 @@ sap.ui.define([
                     this.propertyValues.setProperty("/update", false);
                     this.propertyValues.setProperty("/new", true);
                     this.propertyValues.setProperty("/po", true);
+                    this.propertyValues.setProperty("/ammend", false);
                     var currentDateTime = new Date();
                     // const dt = DateFormat.getDateTimeInstance({ pattern: "PThh'H'mm'M'ss'S'" });
 
@@ -77,23 +78,13 @@ sap.ui.define([
                     this.getView().getModel("oModelForHeader").setProperty("/ZcreateTime", currentDateTime)
                 } else {
                     this.propertyValues.setProperty("/edit", false);
+                    this.propertyValues.setProperty("/ammend", true);
+                    
                     var sPathOfLCDetails = "/ZRC_LCEXP_HEAD('" + LcNo + "')";
                     var sPathOfLCItemsDetails = sPathOfLCDetails + "/to_Item";
                     // var sPathOfLCDetails = "/ZC_LCIMP_ITEM(LcNo='" + LcNo + "',Ebelp='" + Ebelp + "')/to_head";
                     this.getCallForLCDetails(sPathOfLCDetails, sPathOfLCItemsDetails);
                 }
-            },
-
-            // On edit button action
-            onEditPress: function () {
-                this.propertyValues.setProperty("/edit", true);
-                this.propertyValues.setProperty("/view", false);
-                this.propertyValues.setProperty("/editButton", false);
-                this.propertyValues.setProperty("/footer", true);
-                this.propertyValues.setProperty("/update", true);
-                this.propertyValues.setProperty("/new", false);
-                this.propertyValues.setProperty("/po", false);
-
             },
             // Local payloads
             createLocalJOSNPayload: function () {
@@ -152,20 +143,15 @@ sap.ui.define([
                 var itemPayload = {
                     "results": [{
                         "LcNo": "",
-                        "Ebelp": "",
+                        "SalesOrder": "",
+                        "Posnr": "",
                         "Matnr": "",
-                        "Mtart": "",
+                        "MatDesc": "",
                         "Meins": "",
-                        "Menge": "",
-                        "PoCurr": "",
+                        "LcQty": "",
+                        "LcCurrency": "",
                         "UnitPrice": "",
-                        "TotValue": "",
-                        "ExcRate": "",
-                        "InrValue": "",
-                        "ZcreateDate": "",
-                        "ZcreateTime": "",
-                        "ZcreateBy": ""
-
+                        "TotalVal": ""
                     }
                     ]
                 };
@@ -180,11 +166,28 @@ sap.ui.define([
                     "new": false,
                     "update": false,
                     "itemTableVisiblity": false,
-                    "po": false
+                    "po": false,
+                    "ammend": false
                 };
                 this.getView().setModel(new JSONModel(properties), "myPropertyValues");
                 this.propertyValues = this.getView().getModel("myPropertyValues");
             },
+            onCopyFromOriginalLinkPress: function () {
+                var originalItemPaylod = this.getView().getModel("oModelForItemTable").getData();
+                this.getView().setModel(new JSONModel(originalItemPaylod), "oModelForAmmendItemTable");
+            },
+            // On edit button action
+            onEditPress: function () {
+                this.propertyValues.setProperty("/edit", true);
+                this.propertyValues.setProperty("/view", false);
+                this.propertyValues.setProperty("/editButton", false);
+                this.propertyValues.setProperty("/footer", true);
+                this.propertyValues.setProperty("/update", true);
+                this.propertyValues.setProperty("/new", false);
+                this.propertyValues.setProperty("/po", false);
+
+            },
+
 
             // All get calls
             getCallForLCDetails: function (sPathOfLCDetails, sPathOfLCItemsDetails) {
@@ -222,7 +225,7 @@ sap.ui.define([
                 if (!this.InvoiceNumFrag) {
                     this.InvoiceNumFrag = sap.ui.xmlfragment(
                         "zpro.sk.mittalcoin.exim.loc.export.locexport.view.fragments.View2.valueHelps.valueHelp_PO",
-                        this 
+                        this
                     );
                     this.getView().addDependent(this.InvoiceNumFrag);
                     var sService = "/sap/opu/odata/sap/ZF4_RI_PO_SERV";

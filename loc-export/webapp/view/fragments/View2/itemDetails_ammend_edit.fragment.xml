@@ -6,7 +6,7 @@
     xmlns:sap.ui.fl="sap.ui.fl"
 >
     <table:Table
-        id="ImportTableEdit"
+        id="ImportTableAmmendEdit"
         sort="onSort"
         columnResize="onColumnResize"
         columnMove="onColumnMove"
@@ -15,7 +15,7 @@
         sap.ui.fl:flexibility="sap/m/flexibility/EngineFlex"
         selectionMode="None"
         selectionBehavior="Row"
-        rows="{oModelForItemTable>/results/}"
+        rows="{oModelForAmmendItemTable>/results/}"
         showColumnVisibilityMenu="true"
         enableColumnFreeze="false"
         enableCellFilter="true"
@@ -30,6 +30,7 @@
                     id="title"
                     text="{myPropertyValues>/title}"
                 />
+                <Link text="Copy from original" press="onCopyFromOriginalLinkPress"/>
                 <ToolbarSpacer />
                 <Button
                     text="Create"
@@ -85,7 +86,7 @@
             >
                 <Label text="LC Number" />
                 <table:template>
-                    <Input value="{oModelForItemTable>LcNo}" />
+                    <Input value="{oModelForAmmendItemTable>LcNo}" />
                 </table:template>
             </table:Column>
             <table:Column
@@ -95,7 +96,7 @@
             >
                 <Label text="Sales Order" />
                 <table:template>
-                    <Input value="{oModelForItemTable>SalesOrder}" />
+                    <Input value="{oModelForAmmendItemTable>SalesOrder}" />
                 </table:template>
             </table:Column>
 
@@ -106,7 +107,7 @@
             >
                 <Label text="SO Item" />
                 <table:template>
-                    <Input value="{oModelForItemTable>Posnr}" />
+                    <Input value="{oModelForAmmendItemTable>Posnr}" />
                 </table:template>
             </table:Column>
             <table:Column
@@ -116,7 +117,7 @@
             >
                 <Label text="Material Number" />
                 <table:template>
-                    <Input value="{oModelForItemTable>Matnr}" />
+                    <Input value="{oModelForAmmendItemTable>Matnr}" />
                 </table:template>
             </table:Column>
             <table:Column
@@ -126,7 +127,7 @@
             >
                 <Label text="Material Description" />
                 <table:template>
-                    <Input value="{oModelForItemTable>MatDesc}" />
+                    <Input value="{oModelForAmmendItemTable>MatDesc}" />
                 </table:template>
             </table:Column>
             <table:Column
@@ -136,7 +137,7 @@
             >
                 <Label text="UoM" />
                 <table:template>
-                    <Input value="{oModelForItemTable>Meins}" />
+                    <Input value="{oModelForAmmendItemTable>Meins}" />
                 </table:template>
             </table:Column>
 
@@ -147,7 +148,7 @@
             >
                 <Label text="LC Quantity" />
                 <table:template>
-                    <Input value="{oModelForItemTable>LcQty}" />
+                    <Input value="{oModelForAmmendItemTable>LcQty}" />
                 </table:template>
             </table:Column>
             <table:Column
@@ -157,7 +158,7 @@
             >
                 <Label text="LC Currency" />
                 <table:template>
-                    <Input value="{oModelForItemTable>LcCurrency}" />
+                    <Input value="{oModelForAmmendItemTable>LcCurrency}" />
                 </table:template>
             </table:Column>
             <table:Column
@@ -167,7 +168,7 @@
             >
                 <Label text="Unit Price" />
                 <table:template>
-                    <Input value="{oModelForItemTable>UnitPrice}" />
+                    <Input value="{oModelForAmmendItemTable>UnitPrice}" />
                 </table:template>
             </table:Column>
             <table:Column
@@ -177,7 +178,7 @@
             >
                 <Label text="Total Price" />
                 <table:template>
-                    <Input value="{oModelForItemTable>TotalVal}" />
+                    <Input value="{oModelForAmmendItemTable>TotalVal}" />
                 </table:template>
             </table:Column>
         </table:columns>

@@ -36,7 +36,6 @@
                     visible="false"
                 />
                 <Button
-                    id="idDeleteRow"
                     text="Delete"
                     press="onDeleteRow"
                     type="Transparent"
@@ -81,7 +80,7 @@
             >
                 <Label text="LC Number" />
                 <table:template>
-                    <Label text="{oModelForItemTable>LcNo}" />
+                    <Label text="{oModelForItemTable>LcNo}" /> 
                 </table:template>
             </table:Column>
             <table:Column
@@ -170,8 +169,8 @@
                 </table:template>
             </table:Column>
             <table:Column
-                id="TotValue"
-                sortProperty="TotValue"
+                id="TotalVal"
+                sortProperty="TotalVal"
                 headerMenu="menu"
             >
                 <Label text="Total Price" />

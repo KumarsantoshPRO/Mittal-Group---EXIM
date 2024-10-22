@@ -87,9 +87,12 @@ sap.ui.define([
 
 
                 this.oRouter = this.getOwnerComponent().getRouter();
-                this.oRouter.navTo("View2", {
-                    LCNo: selectedRowLCNo
-                });
+                if (selectedRowLCNo) {
+                    this.oRouter.navTo("View2", {
+                        LCNo: selectedRowLCNo
+                    });
+                }
+
             },
 
 
