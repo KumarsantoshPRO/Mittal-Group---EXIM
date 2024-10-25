@@ -187,9 +187,9 @@
                         sortProperty="LcNo"
                         headerMenu="menu"
                     >
-                        <Label text="LC Number" />
+                        <Label wrapping="true" text="LC Number" />
                         <table:template>
-                            <Label text="{oModelForTable>LcNo}" />
+                            <Label wrapping="true" text="{oModelForTable>LcNo}" />
                         </table:template>
                     </table:Column>
                     <table:Column
@@ -197,9 +197,9 @@
                         sortProperty="SalesContract"
                         headerMenu="menu"
                     >
-                        <Label text="Sales Contract" />
+                        <Label wrapping="true" text="Sales Contract" />
                         <table:template>
-                            <Label text="{oModelForTable>SalesContract}" />
+                            <Label wrapping="true" text="{oModelForTable>SalesContract}" />
                         </table:template>
                     </table:Column>
 
@@ -208,9 +208,9 @@
                         sortProperty="SalesOrder"
                         headerMenu="menu"
                     >
-                        <Label text="Sales Order" />
+                        <Label wrapping="true" text="Sales Order" />
                         <table:template>
-                            <Label text="{oModelForTable>SalesOrder}" />
+                            <Label wrapping="true" text="{oModelForTable>SalesOrder}" />
                         </table:template>
                     </table:Column>
                     <table:Column
@@ -218,10 +218,10 @@
                         sortProperty="ShipmetLastDateOri"
                         headerMenu="menu"
                     >
-                        <Label text="Shipping Last Date - original" />
+                        <Label wrapping="true" text="Shipping Last Date - original" />
                         <table:template>
-                            <Label
-                                text="{path:'oModelForTable>ShipmetLastDateOri', type: 'sap.ui.model.type.Date', formatOptions: {pattern: 'dd/MM/yyyy'}}"
+                            <Label wrapping="true"
+                                text="{path:'oModelForTable>ShipmetLastDateOri', type: 'sap.ui.model.type.Date', formatOptions: {UTC: true}}"
                             />
                         </table:template>
                     </table:Column>
@@ -230,10 +230,10 @@
                         sortProperty="LatestDocumentDateOri"
                         headerMenu="menu"
                     >
-                        <Label text="Latest document date - Origina" />
+                        <Label wrapping="true" text="Latest document date - Origina" />
                         <table:template>
-                            <Label
-                                text="{path:'oModelForTable>LatestDocumentDateOri', type: 'sap.ui.model.type.Date', formatOptions: {pattern: 'dd/MM/yyyy'}}"
+                            <Label wrapping="true"
+                                text="{path:'oModelForTable>LatestDocumentDateOri', type: 'sap.ui.model.type.Date', formatOptions: {UTC: true}}"
                             />
                         </table:template>
                     </table:Column>
@@ -243,10 +243,10 @@
                         sortProperty="ShipmetLastDateAmend"
                         headerMenu="menu"
                     >
-                        <Label text="Shipment Last Date - Amendment" />
+                        <Label wrapping="true" text="Shipment Last Date - Amendment" />
                         <table:template>
-                            <Label
-                                text="{path:'oModelForTable>ShipmetLastDateAmend', type: 'sap.ui.model.type.Date', formatOptions: {pattern: 'dd/MM/yyyy'}}"
+                            <Label wrapping="true"
+                                text="{path:'oModelForTable>ShipmetLastDateAmend', type: 'sap.ui.model.type.Date', formatOptions: {UTC: true}}"
                             />
                         </table:template>
                     </table:Column>
@@ -255,10 +255,10 @@
                         sortProperty="LatestDocumentDateAmend"
                         headerMenu="menu"
                     >
-                        <Label text="Latest document date - Amendment" />
+                        <Label wrapping="true" text="Latest document date - Amendment" />
                         <table:template>
-                            <Label
-                                text="{path:'oModelForTable>LatestDocumentDateAmend', type: 'sap.ui.model.type.Date', formatOptions: {pattern: 'dd/MM/yyyy'}}"
+                            <Label wrapping="true"
+                                text="{path:'oModelForTable>LatestDocumentDateAmend', type: 'sap.ui.model.type.Date', formatOptions: {UTC: true}}"
                             />
                         </table:template>
                     </table:Column>
@@ -267,10 +267,10 @@
                         sortProperty="LcIssueDateAmend"
                         headerMenu="menu"
                     >
-                        <Label text="LC Issue Date - Amendment" />
+                        <Label wrapping="true" text="LC Issue Date - Amendment" />
                         <table:template>
-                            <Label
-                                text="{path:'oModelForTable>LcIssueDateAmend', type: 'sap.ui.model.type.Date', formatOptions: {pattern: 'dd/MM/yyyy'}}"
+                            <Label wrapping="true"
+                                text="{path:'oModelForTable>LcIssueDateAmend', type: 'sap.ui.model.type.Date', formatOptions: {UTC: true}}"
                             />
                         </table:template>
                     </table:Column>

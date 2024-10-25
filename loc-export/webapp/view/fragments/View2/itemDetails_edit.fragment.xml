@@ -23,12 +23,21 @@
         cellContextmenu="onProductIdCellContextMenu"
         enableGrouping="true"
         rowSelectionChange="onShowLCDetails"
+        
     >
+    <!-- visible="{myPropertyValues>/itemTableVisiblity}" -->
         <table:extension>
             <OverflowToolbar style="Clear">
                 <Title
                     id="title"
                     text="{myPropertyValues>/title}"
+                />
+                <Button
+                    tooltip="Edit the original"
+                    visible="{myPropertyValues>/orginalEditButton}"
+                    icon="sap-icon://edit"
+                    press="onEditTheOriginal"
+                    type="Attention"
                 />
                 <ToolbarSpacer />
                 <Button
@@ -85,7 +94,10 @@
             >
                 <Label text="LC Number" />
                 <table:template>
-                    <Input value="{oModelForItemTable>LcNo}" />
+                    <Input
+                        editable="{myPropertyValues>/orginalEdit}"
+                        value="{oModelForItemTable>LcNo}"
+                    />
                 </table:template>
             </table:Column>
             <table:Column
@@ -95,7 +107,10 @@
             >
                 <Label text="Sales Order" />
                 <table:template>
-                    <Input value="{oModelForItemTable>SalesOrder}" />
+                    <Input
+                        editable="{myPropertyValues>/orginalEdit}"
+                        value="{oModelForItemTable>SalesOrder}"
+                    />
                 </table:template>
             </table:Column>
 
@@ -106,7 +121,10 @@
             >
                 <Label text="SO Item" />
                 <table:template>
-                    <Input value="{oModelForItemTable>Posnr}" />
+                    <Input
+                        editable="{myPropertyValues>/orginalEdit}"
+                        value="{oModelForItemTable>Posnr}"
+                    />
                 </table:template>
             </table:Column>
             <table:Column
@@ -116,7 +134,10 @@
             >
                 <Label text="Material Number" />
                 <table:template>
-                    <Input value="{oModelForItemTable>Matnr}" />
+                    <Input
+                        editable="{myPropertyValues>/orginalEdit}"
+                        value="{oModelForItemTable>Matnr}"
+                    />
                 </table:template>
             </table:Column>
             <table:Column
@@ -126,7 +147,10 @@
             >
                 <Label text="Material Description" />
                 <table:template>
-                    <Input value="{oModelForItemTable>MatDesc}" />
+                    <Input
+                        editable="{myPropertyValues>/orginalEdit}"
+                        value="{oModelForItemTable>MatDesc}"
+                    />
                 </table:template>
             </table:Column>
             <table:Column
@@ -136,7 +160,10 @@
             >
                 <Label text="UoM" />
                 <table:template>
-                    <Input value="{oModelForItemTable>Meins}" />
+                    <Input
+                        editable="{myPropertyValues>/orginalEdit}"
+                        value="{oModelForItemTable>Meins}"
+                    />
                 </table:template>
             </table:Column>
 
@@ -147,7 +174,10 @@
             >
                 <Label text="LC Quantity" />
                 <table:template>
-                    <Input value="{oModelForItemTable>LcQty}" />
+                    <Input
+                        editable="{myPropertyValues>/orginalEdit}"
+                        value="{oModelForItemTable>LcQty}"
+                    />
                 </table:template>
             </table:Column>
             <table:Column
@@ -157,7 +187,10 @@
             >
                 <Label text="LC Currency" />
                 <table:template>
-                    <Input value="{oModelForItemTable>LcCurrency}" />
+                    <Input
+                        editable="{myPropertyValues>/orginalEdit}"
+                        value="{oModelForItemTable>LcCurrency}"
+                    />
                 </table:template>
             </table:Column>
             <table:Column
@@ -167,7 +200,10 @@
             >
                 <Label text="Unit Price" />
                 <table:template>
-                    <Input value="{oModelForItemTable>UnitPrice}" />
+                    <Input
+                        editable="{myPropertyValues>/orginalEdit}"
+                        value="{oModelForItemTable>UnitPrice}"
+                    />
                 </table:template>
             </table:Column>
             <table:Column
@@ -177,8 +213,13 @@
             >
                 <Label text="Total Price" />
                 <table:template>
-                    <Input value="{oModelForItemTable>TotalVal}" />
+                    <Input
+                        editable="{myPropertyValues>/orginalEdit}"
+                        value="{oModelForItemTable>TotalVal}"
+                    />
                 </table:template>
+               
+                 
             </table:Column>
         </table:columns>
     </table:Table>

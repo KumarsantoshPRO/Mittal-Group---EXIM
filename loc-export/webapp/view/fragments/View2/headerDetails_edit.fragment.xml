@@ -12,41 +12,63 @@
         columnsXL="3"
     >
         <form:content>
-            <Label text='LC Number' />
-            <Text text="{oModelForHeader>/LcNo}" />
+            <Label text='LC Number' required="true"/>
+            <Input   id="idInpLcNo" value="{oModelForHeader>/LcNo}" editable="{myPropertyValues>/LCNo}"/>
             <Label text='Sales Contract' />
             <Input value="{oModelForHeader>/SalesContract}" />
-            <Label text='Sales Order' />
-            <Input value="{oModelForHeader>/SalesOrder}" />
-            <Label text='Shipmet Last Date Original' />
+            <Label text='Sales Order' required="true"/>
+            <Input
+            id="idInpSalesOrder"
+                value="{oModelForHeader>/SalesOrder}"
+                showValueHelp="true"
+                valueHelpOnly="true"
+                valueHelpRequest="onSOValueHelp"
+                editable="{myPropertyValues>/SO}"
+            />
+            <Label
+                text='Shipmet Last Date Original'
+                required="true"
+            />
             <DatePicker
-                value="{path:'oModelForHeader>/ShipmetLastDateOri', type: 'sap.ui.model.type.Date', formatOptions: {pattern: 'dd/MM/yyyy'}}"
+                value="{path:'oModelForHeader>/ShipmetLastDateOri', type: 'sap.ui.model.type.Date', formatOptions: {UTC: true}}"
                 displayFormat="dd/MM/yyyy"
                 valueFormat="dd/MM/yyyy"
             />
-            <Label text='Latest Document Date Original' />
+            <Label
+                text='Latest Document Date Original'
+                required="true"
+            />
             <DatePicker
-                value="{path:'oModelForHeader>/LatestDocumentDateOri', type: 'sap.ui.model.type.Date', formatOptions: {pattern: 'dd/MM/yyyy'}}"
+                value="{path:'oModelForHeader>/LatestDocumentDateOri', type: 'sap.ui.model.type.Date', formatOptions: {UTC: true}}"
                 displayFormat="dd/MM/yyyy"
                 valueFormat="dd/MM/yyyy"
             />
 
-            <Label text='Shipmet Last Date Amendment' />
+            <Label
+                text='Shipmet Last Date Amendment'
+                required="true"
+            />
 
             <DatePicker
-                value="{path:'oModelForHeader>/ShipmetLastDateAmend', type: 'sap.ui.model.type.Date', formatOptions: {pattern: 'dd/MM/yyyy'}}"
+                value="{path:'oModelForHeader>/ShipmetLastDateAmend', type: 'sap.ui.model.type.Date', formatOptions: {UTC: true}}"
                 displayFormat="dd/MM/yyyy"
                 valueFormat="dd/MM/yyyy"
             />
-            <Label text='Latest Document Date Amendment' />
+            <Label
+                text='Latest Document Date Amendment'
+                required="true"
+            />
             <DatePicker
-                value="{path:'oModelForHeader>/LatestDocumentDateAmend', type: 'sap.ui.model.type.Date', formatOptions: {pattern: 'dd/MM/yyyy'}}"
+                value="{path:'oModelForHeader>/LatestDocumentDateAmend', type: 'sap.ui.model.type.Date', formatOptions: {UTC: true}}"
                 displayFormat="dd/MM/yyyy"
                 valueFormat="dd/MM/yyyy"
             />
-            <Label text='Lc Issue Date Amendment' />
+            <Label
+                text='Lc Issue Date Amendment'
+                required="true"
+            />
             <DatePicker
-                value="{path:'oModelForHeader>/LcIssueDateAmend', type: 'sap.ui.model.type.Date', formatOptions: {pattern: 'dd/MM/yyyy'}}"
+                value="{path:'oModelForHeader>/LcIssueDateAmend', type: 'sap.ui.model.type.Date', formatOptions: {UTC: true}}"
                 displayFormat="dd/MM/yyyy"
                 valueFormat="dd/MM/yyyy"
             />
@@ -78,7 +100,10 @@
             <Input value="{oModelForHeader>/DiscountingChargesByBuyer}" />
             <Label text='Payment Terms' />
             <Input value="{oModelForHeader>/PaymentTerms}" />
-            <Label text='Tolerance Qty %' />
+            <Label
+                text='Tolerance Qty %'
+                required="true"
+            />
             <Input value="{oModelForHeader>/ToleranceQtyP}" />
 
             <Label text='Shipment Type' />
@@ -87,34 +112,49 @@
             <Input value='{oModelForHeader>/LcType}' />
             <Label text='PI' />
             <Input value='{oModelForHeader>/Pi}' />
-            <Label text='LC Expiry Date Original' />
+            <Label
+                text='LC Expiry Date Original'
+                required="true"
+            />
             <DatePicker
-                value="{path:'oModelForHeader>/LcExpiryDateOriginal', type: 'sap.ui.model.type.Date', formatOptions: {pattern: 'dd/MM/yyyy'}}"
+                value="{path:'oModelForHeader>/LcExpiryDateOriginal', type: 'sap.ui.model.type.Date', formatOptions: {UTC: true}}"
                 displayFormat="dd/MM/yyyy"
                 valueFormat="dd/MM/yyyy"
             />
 
-            <Label text='LC Issue Date Original' />
+            <Label
+                text='LC Issue Date Original'
+                required="true"
+            />
             <DatePicker
-                value="{path:'oModelForHeader>/LcIssueDateOriginal', type: 'sap.ui.model.type.Date', formatOptions: {pattern: 'dd/MM/yyyy'}}"
+                value="{path:'oModelForHeader>/LcIssueDateOriginal', type: 'sap.ui.model.type.Date', formatOptions: {UTC: true}}"
                 displayFormat="dd/MM/yyyy"
                 valueFormat="dd/MM/yyyy"
             />
-            <Label text='LC Receving Date Original' />
+            <Label
+                text='LC Receving Date Original'
+                required="true"
+            />
             <DatePicker
-                value="{path:'oModelForHeader>/LcRecevingDateOriginal', type: 'sap.ui.model.type.Date', formatOptions: {pattern: 'dd/MM/yyyy'}}"
+                value="{path:'oModelForHeader>/LcRecevingDateOriginal', type: 'sap.ui.model.type.Date', formatOptions: {UTC: true}}"
                 displayFormat="dd/MM/yyyy"
                 valueFormat="dd/MM/yyyy"
             />
-            <Label text='LC Expiry Date Amendment' />
+            <Label
+                text='LC Expiry Date Amendment'
+                required="true"
+            />
             <DatePicker
-                value="{path:'oModelForHeader>/LcExpiryDateAmendment', type: 'sap.ui.model.type.Date', formatOptions: {pattern: 'dd/MM/yyyy'}}"
+                value="{path:'oModelForHeader>/LcExpiryDateAmendment', type: 'sap.ui.model.type.Date', formatOptions: {UTC: true}}"
                 displayFormat="dd/MM/yyyy"
                 valueFormat="dd/MM/yyyy"
             />
-            <Label text='LC Receving Date Amendment' />
+            <Label
+                text='LC Receving Date Amendment'
+                required="true"
+            />
             <DatePicker
-                value="{path:'oModelForHeader>/LcRecevingDateAmendment', type: 'sap.ui.model.type.Date', formatOptions: {pattern: 'dd/MM/yyyy'}}"
+                value="{path:'oModelForHeader>/LcRecevingDateAmendment', type: 'sap.ui.model.type.Date', formatOptions: {UTC: true}}"
                 displayFormat="dd/MM/yyyy"
                 valueFormat="dd/MM/yyyy"
             />
@@ -130,7 +170,10 @@
             <Input value='{oModelForHeader>/PortOfDischarge}' />
             <Label text='LC Currency' />
             <Input value='{oModelForHeader>/LcCurrency}' />
-            <Label text='LC Value' />
+            <Label
+                text='LC Value'
+                required="true"
+            />
             <Input value='{oModelForHeader>/LcValue}' />
             <Label text='List Of Documents Under LC' />
             <Input value='{oModelForHeader>/ListOfDocumentsUnderLc}' />
@@ -148,10 +191,25 @@
             <Input value='{oModelForHeader>/TotalChargesByBuyer}' />
             <Label text='LC Charges In India' />
             <Input value='{oModelForHeader>/LcChargesInIndia}' />
-            <Label text='Tolerance value %' />
+            <Label
+                text='Tolerance value %'
+                required="true"
+            />
             <Input value='{oModelForHeader>/ToleranceValueP}' />
             <Label text='Trans Shipment' />
             <Input value='{oModelForHeader>/TransShipment}' />
+            <!-- <Label text='Created Date' />
+            <Input
+                value="{path:'oModelForHeader>/ZcreateDate', type: 'sap.ui.model.type.Date', formatOptions: {UTC: true}}"
+                displayFormat="dd/MM/yyyy"
+                valueFormat="dd/MM/yyyy"
+                editable="false"
+            />
+            <Label text='Created Time' />
+            <Input
+                value="{path:'oModelForHeader>/ZcreateTime', type: 'sap.ui.model.type.Time', formatOptions: {pattern: 'HH:mm:ss'}}"
+                editable="false"
+            /> -->
         </form:content>
     </form:SimpleForm>
 </core:FragmentDefinition>

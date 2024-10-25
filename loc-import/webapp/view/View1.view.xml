@@ -187,9 +187,9 @@
                         sortProperty="LcNo"
                         headerMenu="menu"
                     >
-                        <Label text="LC Number" />
+                        <Label wrapping="true" text="LC Number" />
                         <table:template>
-                            <Label text="{oModelForTable>LcNo}" />
+                            <Label wrapping="true" text="{oModelForTable>LcNo}" />
                         </table:template>
                     </table:Column>
                     <table:Column
@@ -197,9 +197,9 @@
                         sortProperty="ContractNo"
                         headerMenu="menu"
                     >
-                        <Label text="Contact No." />
+                        <Label wrapping="true" text="Contact No." />
                         <table:template>
-                            <Label text="{oModelForTable>ContractNo}" />
+                            <Label wrapping="true" text="{oModelForTable>ContractNo}" />
                         </table:template>
                     </table:Column>
 
@@ -208,9 +208,9 @@
                         sortProperty="PiNo"
                         headerMenu="menu"
                     >
-                        <Label text="PI No." />
+                        <Label wrapping="true" text="PI No." />
                         <table:template>
-                            <Label text="{oModelForTable>PiNo}" />
+                            <Label wrapping="true" text="{oModelForTable>PiNo}" />
                         </table:template>
                     </table:Column>
                     <table:Column
@@ -218,9 +218,9 @@
                         sortProperty="PiDate"
                         headerMenu="menu"
                     >
-                        <Label text="PI Date" />
+                        <Label wrapping="true" text="PI Date" />
                         <table:template>
-                            <Label text="{path:'oModelForTable>PiDate', type: 'sap.ui.model.type.Date', formatOptions: {pattern: 'dd/MM/yyyy'}}" />
+                            <Label wrapping="true" text="{path:'oModelForTable>PiDate', type: 'sap.ui.model.type.Date', formatOptions: {UTC: true}}" />
                         </table:template>
                     </table:Column>
                     <table:Column
@@ -228,9 +228,9 @@
                         sortProperty="Po"
                         headerMenu="menu"
                     >
-                        <Label text="PO Number" />
+                        <Label wrapping="true" text="PO Number" />
                         <table:template>
-                            <Label text="{oModelForTable>Po}" />
+                            <Label wrapping="true" text="{oModelForTable>Po}" />
                         </table:template>
                     </table:Column>
 
@@ -239,9 +239,9 @@
                         sortProperty="ShipmetLastDate"
                         headerMenu="menu"
                     >
-                        <Label text="Shipment Last date" />
+                        <Label wrapping="true" text="Shipment Last date" />
                         <table:template>
-                            <Label text="{path:'oModelForTable>ShipmetLastDate', type: 'sap.ui.model.type.Date', formatOptions: {pattern: 'dd/MM/yyyy'}}" />
+                            <Label wrapping="true" text="{path:'oModelForTable>ShipmetLastDate', type: 'sap.ui.model.type.Date', formatOptions: {UTC: true}}" />
                         </table:template>
                     </table:Column>
                     <table:Column
@@ -249,9 +249,9 @@
                         sortProperty="PortOfLoading"
                         headerMenu="menu"
                     >
-                        <Label text="Port of loading" />
+                        <Label wrapping="true" text="Port of loading" />
                         <table:template>
-                            <Label text="{oModelForTable>PortOfLoading}" />
+                            <Label wrapping="true" text="{oModelForTable>PortOfLoading}" />
                         </table:template>
                     </table:Column>
                     <table:Column
@@ -259,9 +259,9 @@
                         sortProperty="FinalIcdLocation"
                         headerMenu="menu"
                     >
-                        <Label text="Final ICD Location" />
+                        <Label wrapping="true" text="Final ICD Location" />
                         <table:template>
-                            <Label text="{oModelForTable>FinalIcdLocation}" />
+                            <Label wrapping="true" text="{oModelForTable>FinalIcdLocation}" />
                         </table:template>
                     </table:Column>
                     <table:Column
@@ -269,9 +269,9 @@
                         sortProperty="LcIssuingBank"
                         headerMenu="menu"
                     >
-                        <Label text="LC Issuing Bank" />
+                        <Label wrapping="true" text="LC Issuing Bank" />
                         <table:template>
-                            <Label text="{oModelForTable>LcIssuingBank}" />
+                            <Label wrapping="true" text="{oModelForTable>LcIssuingBank}" />
                         </table:template>
                     </table:Column>
                 </table:columns>

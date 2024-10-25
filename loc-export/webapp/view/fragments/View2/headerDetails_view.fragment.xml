@@ -21,23 +21,23 @@
             <Text text='{oModelForHeader>/SalesOrder}' />
             <Label text='Shipmet Last Date Original' />
             <Text
-                text="{path:'oModelForHeader>/ShipmetLastDateOri', type: 'sap.ui.model.type.Date', formatOptions: {pattern: 'dd/MM/yyyy'}}"
+                text="{path:'oModelForHeader>/ShipmetLastDateOri', type: 'sap.ui.model.type.Date', formatOptions: {UTC: true}}"
             />
             <Label text='Latest Document Date Original' />
             <Text
-                text="{path:'oModelForHeader>/LatestDocumentDateOri', type: 'sap.ui.model.type.Date', formatOptions: {pattern: 'dd/MM/yyyy'}}"
+                text="{path:'oModelForHeader>/LatestDocumentDateOri', type: 'sap.ui.model.type.Date', formatOptions: {UTC: true}}"
             />
             <Label text='Shipmet Last Date Amendment' />
             <Text
-                text="{path:'oModelForHeader>/ShipmetLastDateAmend', type: 'sap.ui.model.type.Date', formatOptions: {pattern: 'dd/MM/yyyy'}}"
+                text="{path:'oModelForHeader>/ShipmetLastDateAmend', type: 'sap.ui.model.type.Date', formatOptions: {UTC: true}}"
             />
             <Label text='Latest Document Date Amendment' />
             <Text
-                text="{path:'oModelForHeader>/LatestDocumentDateAmend', type: 'sap.ui.model.type.Date', formatOptions: {pattern: 'dd/MM/yyyy'}}"
+                text="{path:'oModelForHeader>/LatestDocumentDateAmend', type: 'sap.ui.model.type.Date', formatOptions: {UTC: true}}"
             />
             <Label text='LC Issue Date Amendment' />
             <Text
-                text="{path:'oModelForHeader>/LcIssueDateAmend', type: 'sap.ui.model.type.Date', formatOptions: {pattern: 'dd/MM/yyyy'}}"
+                text="{path:'oModelForHeader>/LcIssueDateAmend', type: 'sap.ui.model.type.Date', formatOptions: {UTC: true}}"
             />
             <Label text='LC Issuance Bank Account Number' />
             <Text text='{oModelForHeader>/LcIssuanceBankAccountNumbe}' />
@@ -77,23 +77,23 @@
             <Text text='{oModelForHeader>/Pi}' />
             <Label text='LC Expiry Date Original' />
             <Text
-                text="{path:'oModelForHeader>/LcExpiryDateOriginal', type: 'sap.ui.model.type.Date', formatOptions: {pattern: 'dd/MM/yyyy'}}"
+                text="{path:'oModelForHeader>/LcExpiryDateOriginal', type: 'sap.ui.model.type.Date', formatOptions: {UTC: true}}"
             />
             <Label text='LC Issue Date Original' />
             <Text
-                text="{path:'oModelForHeader>/LcIssueDateOriginal', type: 'sap.ui.model.type.Date', formatOptions: {pattern: 'dd/MM/yyyy'}}"
+                text="{path:'oModelForHeader>/LcIssueDateOriginal', type: 'sap.ui.model.type.Date', formatOptions: {UTC: true}}"
             />
             <Label text='LC Receving Date Original' />
             <Text
-                text="{path:'oModelForHeader>/LcRecevingDateOriginal', type: 'sap.ui.model.type.Date', formatOptions: {pattern: 'dd/MM/yyyy'}}"
+                text="{path:'oModelForHeader>/LcRecevingDateOriginal', type: 'sap.ui.model.type.Date', formatOptions: {UTC: true}}"
             />
             <Label text='LC Expiry Date Amendment' />
             <Text
-                text="{path:'oModelForHeader>/LcExpiryDateAmendment', type: 'sap.ui.model.type.Date', formatOptions: {pattern: 'dd/MM/yyyy'}}"
+                text="{path:'oModelForHeader>/LcExpiryDateAmendment', type: 'sap.ui.model.type.Date', formatOptions: {UTC: true}}"
             />
             <Label text='LC Receving Date Amendment' />
             <Text
-                text="{path:'oModelForHeader>/LcRecevingDateAmendment', type: 'sap.ui.model.type.Date', formatOptions: {pattern: 'dd/MM/yyyy'}}"
+                text="{path:'oModelForHeader>/LcRecevingDateAmendment', type: 'sap.ui.model.type.Date', formatOptions: {UTC: true}}"
             />
             <Label text='LC Recieiving Bank Account Number' />
             <Text text='{oModelForHeader>/LcRecieivingBankAccountNum}' />

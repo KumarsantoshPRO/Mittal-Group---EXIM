@@ -3,18 +3,18 @@
     xmlns:core="sap.ui.core"
 >
     <SelectDialog
-        id="idSDPOF4"
-        title="Invoice Number"
+        id="idSDSOF4"
+        title="SO Number"
         noDataText="No Data"
-        search="onValueHelpSearch_PO"
-        liveChange="onValueHelpSearch_PO"
-        confirm="onValueHelpConfirm_PO"
+        search="onValueHelpSearch_SO"
+        liveChange="onValueHelpSearch_SO"
+        confirm="onValueHelpConfirm_SO"
         contentWidth="250px"
     >
         <items>
             <StandardListItem
-                id="idSLPOValueHelp"
-                title="{PurchaseOrder}"
+                id="idSLSOValueHelp"
+                title="{SalesOrder}"
                 wrapping="true"
             />
         </items>

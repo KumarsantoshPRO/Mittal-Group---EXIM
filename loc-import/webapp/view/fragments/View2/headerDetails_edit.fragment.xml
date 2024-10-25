@@ -16,7 +16,10 @@
             <Text text="{oModelForHeader>/LcNo}" />
             <Label text='Contract Number' />
             <Input value="{oModelForHeader>/ContractNo}" />
-            <Label text='PO' required="true"/>
+            <Label
+                text='PO'
+                required="true"
+            />
             <Input
                 value="{oModelForHeader>/Po}"
                 showValueHelp="true"
@@ -26,17 +29,23 @@
             />
             <Label text='PI NO' />
             <Input value="{oModelForHeader>/PiNo}" />
-            <Label text='PI Date' required="true"/>
+            <Label
+                text='PI Date'
+                required="true"
+            />
             <DatePicker
-                value="{path:'oModelForHeader>/PiDate', type: 'sap.ui.model.type.Date', formatOptions: {pattern: 'dd/MM/yyyy'}}"
+                value="{path:'oModelForHeader>/PiDate', type: 'sap.ui.model.type.Date', formatOptions: {UTC: true}}"
                 displayFormat="dd/MM/yyyy"
                 valueFormat="dd/MM/yyyy"
             />
 
-            <Label text='Shipment Last Date' required="true"/>
+            <Label
+                text='Shipment Last Date'
+                required="true"
+            />
 
             <DatePicker
-                value="{path:'oModelForHeader>/ShipmetLastDate', type: 'sap.ui.model.type.Date', formatOptions: {pattern: 'dd/MM/yyyy'}}"
+                value="{path:'oModelForHeader>/ShipmetLastDate', type: 'sap.ui.model.type.Date', formatOptions: {UTC: true}}"
                 displayFormat="dd/MM/yyyy"
                 valueFormat="dd/MM/yyyy"
             />
@@ -50,17 +59,23 @@
             <Input value="{oModelForHeader>/ShipmentType}" />
             <Label text='LC Type' />
             <Input value="{oModelForHeader>/LcType}" />
-            <Label text='LC Issue Date' required="true"/>
+            <Label
+                text='LC Issue Date'
+                required="true"
+            />
 
             <DatePicker
-                value="{path:'oModelForHeader>/LcIssueDate', type: 'sap.ui.model.type.Date', formatOptions: {pattern: 'dd/MM/yyyy'}}"
+                value="{path:'oModelForHeader>/LcIssueDate', type: 'sap.ui.model.type.Date', formatOptions: {UTC: true}}"
                 displayFormat="dd/MM/yyyy"
                 valueFormat="dd/MM/yyyy"
             />
-            <Label text='LC Expiry Date' required="true"/>
+            <Label
+                text='LC Expiry Date'
+                required="true"
+            />
 
             <DatePicker
-                value="{path:'oModelForHeader>/LcExpiryDate', type: 'sap.ui.model.type.Date', formatOptions: {pattern: 'dd/MM/yyyy'}}"
+                value="{path:'oModelForHeader>/LcExpiryDate', type: 'sap.ui.model.type.Date', formatOptions: {UTC: true}}"
                 displayFormat="dd/MM/yyyy"
                 valueFormat="dd/MM/yyyy"
             />
@@ -76,19 +91,27 @@
             <Input value="{oModelForHeader>/IncoTerms}" />
             <Label text='Tolerance Value' />
             <Input value="{oModelForHeader>/TollCurr}" />
-            <Label text='Tolerance Quantity' required="true"/>
+            <Label
+                text='Tolerance Quantity'
+                required="true"
+            />
             <Input value="{oModelForHeader>/ToleranceValue}" />
-            <Label text='Created Date' required="true"/>
+            <Label
+                text='Created Date'
+                required="true"
+            />
 
             <DatePicker
-                value="{path:'oModelForHeader>/ZcreateDate', type: 'sap.ui.model.type.Date', formatOptions: {pattern: 'dd/MM/yyyy'}}"
+                value="{path:'oModelForHeader>/ZcreateDate', type: 'sap.ui.model.type.Date', formatOptions: {UTC: true}}"
                 displayFormat="dd/MM/yyyy"
                 valueFormat="dd/MM/yyyy"
+                editable="false"
             />
             <Label text='Created Time' />
 
             <TimePicker
                 value="{path:'oModelForHeader>/ZcreateTime', type: 'sap.ui.model.type.Time', formatOptions: {pattern: 'HH:mm:ss'}}"
+                editable="false"
             />
             <!-- sap.ui.model.odata.type.Time -->
             <Label text='Created By' />

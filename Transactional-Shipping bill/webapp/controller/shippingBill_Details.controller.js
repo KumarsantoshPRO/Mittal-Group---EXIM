@@ -1123,7 +1123,7 @@ sap.ui.define([
                 var aPayloadOfItems = this.getView().getModel("oModelForItems").getData().results;
                 for (var i = 0; i < aPayloadOfItems.length; i++) {
                     var element = aPayloadOfItems[i];
-                    if (element.Commission) {
+                    if (!element.Commission) {
                         this.scrollTo(this.byId("IdOPSAssignmentDetailsSection"), this.byId("ObjectPageLayout"));
                         this.byId("ObjectPageLayout").scrollToSection(this.byId("IdOPSAssignmentDetailsSection").getId());
                         MessageBox.error("Please enter Commission at Item details, row no:" + i + 1 + "");
@@ -1428,7 +1428,7 @@ sap.ui.define([
                         this.getView().setBusy(false);
                     }.bind(this)
                 });
-            },
+            }, 
 
             updateCallForItem: function (oModel, shippingBillNo, aPayload) {
 

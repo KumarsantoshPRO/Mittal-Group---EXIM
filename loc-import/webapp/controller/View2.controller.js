@@ -52,7 +52,7 @@ sap.ui.define([
 
         return Controller.extend("zpro.sk.mittalcoin.exim.loc.import.locimport.controller.View2", {
             onInit: function () {
-                debugger
+               
                 this.getOwnerComponent()
                     .getRouter()
                     .attachRoutePatternMatched(this.onRouteMatched, this);

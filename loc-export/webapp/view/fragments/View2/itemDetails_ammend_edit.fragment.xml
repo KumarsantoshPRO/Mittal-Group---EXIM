@@ -28,7 +28,7 @@
             <OverflowToolbar style="Clear">
                 <Title
                     id="title"
-                    text="{myPropertyValues>/title}"
+                    text="{myPropertyValues>/titleAmmend}"
                 />
                 <Link text="Copy from original" press="onCopyFromOriginalLinkPress"/>
                 <ToolbarSpacer />

@@ -23,13 +23,13 @@
             <Text text="{oModelForHeader>/PiNo}" />
             <Label text='PI Date' />
             <Text
-                text="{path:'oModelForHeader>/PiDate', type: 'sap.ui.model.type.Date', formatOptions: {pattern: 'dd/MM/yyyy'}}"
+                text="{path:'oModelForHeader>/PiDate', type: 'sap.ui.model.type.Date', formatOptions: {UTC: true}}"
             />
 
             <Label text='Shipment Last Date' />
 
             <Text
-                text="{path:'oModelForHeader>/ShipmetLastDate', type: 'sap.ui.model.type.Date', formatOptions: {pattern: 'dd/MM/yyyy'}}"
+                text="{path:'oModelForHeader>/ShipmetLastDate', type: 'sap.ui.model.type.Date', formatOptions: {UTC: true}}"
             />
             <Label text='Port of Loading' />
             <Text text="{oModelForHeader>/PortOfLoading}" />
@@ -44,12 +44,12 @@
             <Label text='LC Issue Date' />
 
             <Text
-                text="{path:'oModelForHeader>/LcIssueDate', type: 'sap.ui.model.type.Date', formatOptions: {pattern: 'dd/MM/yyyy'}}"
+                text="{path:'oModelForHeader>/LcIssueDate', type: 'sap.ui.model.type.Date', formatOptions: {UTC: true}}"
             />
             <Label text='LC Expiry Date' />
 
             <Text
-                text="{path:'oModelForHeader>/LcExpiryDate', type: 'sap.ui.model.type.Date', formatOptions: {pattern: 'dd/MM/yyyy'}}"
+                text="{path:'oModelForHeader>/LcExpiryDate', type: 'sap.ui.model.type.Date', formatOptions: {UTC: true}}"
             />
             <!-- 12 -->
             <Label text='Port of Discharge ' />
@@ -68,7 +68,7 @@
             <Label text='Created Date' />
 
             <Text
-                text="{path:'oModelForHeader>/ZcreateDate', type: 'sap.ui.model.type.Date', formatOptions: {pattern: 'dd/MM/yyyy'}}"
+                text="{path:'oModelForHeader>/ZcreateDate', type: 'sap.ui.model.type.Date', formatOptions: {UTC: true}}"
             />
             <Label text='Created Time' />
 

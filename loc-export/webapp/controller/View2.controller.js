@@ -23,7 +23,9 @@ sap.ui.define([
     "sap/ui/integration/designtime/baseEditor/validator/MaxLength",
     "sap/m/MessageBox",
     "sap/ui/core/format/DateFormat",
-    "sap/ui/model/odata/ODataUtils"
+    "sap/ui/model/odata/ODataUtils",
+    "sap/ui/model/Filter",
+    "sap/ui/model/FilterOperator"
 
 ],
     function (Controller,
@@ -48,7 +50,7 @@ sap.ui.define([
         Spreadsheet,
         library,
         MaxLength,
-        MessageBox, DateFormat, ODataUtils) {
+        MessageBox, DateFormat, ODataUtils, Filter, FilterOperator) {
 
         return Controller.extend("zpro.sk.mittalcoin.exim.loc.export.locexport.controller.View2", {
             onInit: function () {
@@ -69,20 +71,24 @@ sap.ui.define([
                     this.propertyValues.setProperty("/new", true);
                     this.propertyValues.setProperty("/po", true);
                     this.propertyValues.setProperty("/ammend", false);
-                    var currentDateTime = new Date();
-                    // const dt = DateFormat.getDateTimeInstance({ pattern: "PThh'H'mm'M'ss'S'" });
+                    this.propertyValues.setProperty("/orginalEdit", true);
+                    this.propertyValues.setProperty("/orginalEditButton", false);
+                    this.propertyValues.setProperty("/SO", true);
+                    this.propertyValues.setProperty("/LCNo", true);
+                    this.propertyValues.setProperty("/itemTableVisiblity", false);
 
-                    // var currentTime = dt.format(new Date());
-                    // var currentTime = ODataUtils.formatValue(new Date(), "Edm.Time")
-                    this.getView().getModel("oModelForHeader").setProperty("/ZcreateDate", currentDateTime)
-                    this.getView().getModel("oModelForHeader").setProperty("/ZcreateTime", currentDateTime)
+
+
                 } else {
                     this.propertyValues.setProperty("/edit", false);
                     this.propertyValues.setProperty("/ammend", true);
-                    
+                    this.propertyValues.setProperty("/SO", false);
+                    this.propertyValues.setProperty("/LCNo", false);
+                    this.propertyValues.setProperty("/itemTableVisiblity", true);
+                    this.originalChanged = false;
+                    this.freshAmmend;
                     var sPathOfLCDetails = "/ZRC_LCEXP_HEAD('" + LcNo + "')";
                     var sPathOfLCItemsDetails = sPathOfLCDetails + "/to_Item";
-                    // var sPathOfLCDetails = "/ZC_LCIMP_ITEM(LcNo='" + LcNo + "',Ebelp='" + Ebelp + "')/to_head";
                     this.getCallForLCDetails(sPathOfLCDetails, sPathOfLCItemsDetails);
                 }
             },
@@ -140,7 +146,7 @@ sap.ui.define([
                 };
                 this.getView().setModel(new JSONModel(headerPayload), "oModelForHeader");
 
-                var itemPayload = {
+                this.itemPayload = {
                     "results": [{
                         "LcNo": "",
                         "SalesOrder": "",
@@ -151,14 +157,16 @@ sap.ui.define([
                         "LcQty": "",
                         "LcCurrency": "",
                         "UnitPrice": "",
-                        "TotalVal": ""
+                        "TotalVal": "",
+                        "LineType": ""
                     }
                     ]
                 };
-                this.getView().setModel(new JSONModel(itemPayload), "oModelForItemTable");
-
+                this.getView().setModel(new JSONModel({}), "oModelForItemTable");
+                this.getView().setModel(new JSONModel({}), "oModelForAmmendItemTable");
                 var properties = {
-                    "title": "LC export Item",
+                    "title": "LC export original - Items",
+                    "titleAmmend": "LC export ammend - Items",
                     "view": false,
                     "edit": false,
                     "editButton": false,
@@ -167,14 +175,28 @@ sap.ui.define([
                     "update": false,
                     "itemTableVisiblity": false,
                     "po": false,
-                    "ammend": false
+                    "ammend": false,
+                    "orginalEdit": false,
+                    "orginalEditButton": false,
+                    "SO": false,
+                    "LCNo": false
                 };
                 this.getView().setModel(new JSONModel(properties), "myPropertyValues");
                 this.propertyValues = this.getView().getModel("myPropertyValues");
             },
             onCopyFromOriginalLinkPress: function () {
                 var originalItemPaylod = this.getView().getModel("oModelForItemTable").getData();
+                for (var i = 0; i < originalItemPaylod.results.length; i++) {
+                    originalItemPaylod.results[i].LineType = 'A';
+                }
+
                 this.getView().setModel(new JSONModel(originalItemPaylod), "oModelForAmmendItemTable");
+            },
+            onEditTheOriginal: function () {
+                this.originalChanged = true;
+                this.propertyValues.setProperty("/ammend", false);
+                this.propertyValues.setProperty("/orginalEditButton", true);
+                this.propertyValues.setProperty("/orginalEdit", true);
             },
             // On edit button action
             onEditPress: function () {
@@ -185,6 +207,10 @@ sap.ui.define([
                 this.propertyValues.setProperty("/update", true);
                 this.propertyValues.setProperty("/new", false);
                 this.propertyValues.setProperty("/po", false);
+                this.propertyValues.setProperty("/orginalEdit", false);
+                this.propertyValues.setProperty("/orginalEditButton", true);
+                this.propertyValues.setProperty("/ammend", true);
+
 
             },
 
@@ -194,7 +220,6 @@ sap.ui.define([
                 this.getView().setBusy(true);
                 this.getOwnerComponent().getModel().read(sPathOfLCDetails, {
                     success: function (Data) {
-
                         this.getView().getModel("oModelForHeader").setData(Data);
                         this.getCallForLCItemsDetails(sPathOfLCItemsDetails);
                     }.bind(this),
@@ -208,8 +233,33 @@ sap.ui.define([
                     success: function (Data) {
                         this.propertyValues.setProperty("/view", true);
                         this.propertyValues.setProperty("/editButton", true);
-                        this.getView().getModel("oModelForItemTable").setData(Data);
-                        this.propertyValues.setProperty("/title", "LC export Item(" + Data.results.length + ")");
+                        var oDataOriginal = {
+                            results: []
+                        };
+                        var oDataAmmend = {
+                            results: []
+                        };
+                        for (let index = 0; index < Data.results.length; index++) {
+                            const element = Data.results[index];
+                            if (element.LineType === 'O') {
+                                oDataOriginal.results.push(element);
+                            } else if (element.LineType === 'A') {
+                                oDataAmmend.results.push(element)
+                            }
+
+                        }
+                        this.getView().getModel("oModelForItemTable").setData(oDataOriginal);
+                        this.propertyValues.setProperty("/title", "LC export original - Items(" + oDataOriginal.results.length + ")");
+
+                        if (oDataAmmend.results.length < 1) {
+                            this.freshAmmend = true;
+                        } else {
+                            this.freshAmmend = false;
+                        }
+
+                        this.getView().getModel("oModelForAmmendItemTable").setData(oDataAmmend);
+                        this.propertyValues.setProperty("/titleAmmend", "LC export ammend - Items(" + oDataAmmend.results.length + ")");
+
                         this.getView().setBusy(false);
                     }.bind(this),
                     error: function (oError) {
@@ -221,47 +271,47 @@ sap.ui.define([
             //Start:All F4 Logic
             // Start: PO
             // on Value Help(F4)
-            onPOValueHelp: function () {
-                if (!this.InvoiceNumFrag) {
-                    this.InvoiceNumFrag = sap.ui.xmlfragment(
-                        "zpro.sk.mittalcoin.exim.loc.export.locexport.view.fragments.View2.valueHelps.valueHelp_PO",
+            onSOValueHelp: function () {
+                if (!this.SOFrag) {
+                    this.SOFrag = sap.ui.xmlfragment(
+                        "zpro.sk.mittalcoin.exim.loc.export.locexport.view.fragments.View2.valueHelps.valueHelp_SO",
                         this
                     );
-                    this.getView().addDependent(this.InvoiceNumFrag);
-                    var sService = "/sap/opu/odata/sap/ZF4_RI_PO_SERV";
-                    var oModelPO = new sap.ui.model.odata.ODataModel(
+                    this.getView().addDependent(this.SOFrag);
+                    var sService = "/sap/opu/odata/sap/ZF4_RI_SO_DETAILS_SRV_B";
+                    var oModelSO = new sap.ui.model.odata.ODataModel(
                         sService,
                         true
                     );
-                    this.InvoiceNumFrag.setModel(oModelPO);
-                    this._POTemp = sap.ui
+                    this.SOFrag.setModel(oModelSO);
+                    this._SOTemp = sap.ui
                         .getCore()
-                        .byId("idSLPOValueHelp")
+                        .byId("idSLSOValueHelp")
                         .clone();
 
                 }
 
-                this.InvoiceNumFrag.open();
+                this.SOFrag.open();
                 var aFilter = [];
-                var sPath = "/ZF4_RI_PURCHASEORDERITEMS";
-                sap.ui.getCore().byId("idSDPOF4").bindAggregation("items", {
+                var sPath = "/ZF4_RI_SO_DETAILS";
+                sap.ui.getCore().byId("idSDSOF4").bindAggregation("items", {
                     path: sPath,
                     filters: aFilter,
-                    template: this._POTemp,
+                    template: this._SOTemp,
                 });
 
 
             },
 
             // on Value Help - Search/liveChange
-            onValueHelpSearch_PO: function (oEvent) {
+            onValueHelpSearch_SO: function (oEvent) {
                 var aFilter = [];
                 var sValue = oEvent.getParameter("value");
-                var sPath = "/ZF4_RI_PURCHASEORDERITEMS";
+                var sPath = "/ZF4_RI_SO_DETAILS";
                 var oSelectDialog = sap.ui.getCore().byId(oEvent.getParameter("id"));
                 var aFilter = [];
                 var oFilter = new Filter(
-                    [new Filter("PurchaseOrder", FilterOperator.Contains, sValue)],
+                    [new Filter("SalesOrder", FilterOperator.Contains, sValue)],
                     false
                 );
 
@@ -269,21 +319,20 @@ sap.ui.define([
                 oSelectDialog.bindAggregation("items", {
                     path: sPath,
                     filters: aFilter,
-                    template: this._POTemp,
+                    template: this._SOTemp,
                 });
             },
 
             // on Value Help - Confirm
-            onValueHelpConfirm_PO: function (oEvent) {
-                // this.JSONModelPayload = this.getView().getModel("oModelForHeader");
+            onValueHelpConfirm_SO: function (oEvent) {
+
 
                 var oSelectedItem = oEvent.getParameter("selectedItem"),
                     sSelectedValue = oSelectedItem.getProperty("title");
-                this.getView().getModel("oModelForHeader").setProperty("/Po", sSelectedValue.toString());
+                this.getView().getModel("oModelForHeader").setProperty("/SalesOrder", sSelectedValue.toString());
 
 
-                this.getView().addDependent(this.InvoiceNumFrag);
-                var sService = "/sap/opu/odata/sap/ZF4_RI_PO_SERV";
+                var sService = "/sap/opu/odata/sap/ZF4_RI_SO_DETAILS_SRV_B";
                 var oModelItem = new sap.ui.model.odata.ODataModel(
                     sService,
                     true
@@ -295,28 +344,19 @@ sap.ui.define([
 
                     success: function (Data) {
                         var index = 0;
+                        this.getView().setModel(new JSONModel(this.itemPayload), "oModelForItemTable");
                         var aItemsPayload = this.getView().getModel("oModelForItemTable").getData().results;
                         aItemsPayload[index].LcNo = this.getView().getModel("oModelForHeader").getProperty("/LcNo");
-                        aItemsPayload[index].Ebelp = Data.PurchaseOrderItem;
+                        aItemsPayload[index].SalesOrder = this.getView().getModel("oModelForHeader").getProperty("/SalesOrder");
+                        aItemsPayload[index].Posnr = Data.SalesOrderItem;
                         aItemsPayload[index].Matnr = Data.Material;
-                        aItemsPayload[index].Mtart = Data.PurchaseOrderItemText;
-                        aItemsPayload[index].Meins = Data.PurchaseOrderQuantityUnit;
-                        aItemsPayload[index].Menge = Data.OrderQuantity;
+                        aItemsPayload[index].MatDesc = Data.MaterialText;
+                        aItemsPayload[index].Meins = Data.OrderQuantityUnit;
+                        aItemsPayload[index].LcQty = Data.OrderQuantity;
+                        aItemsPayload[index].LcCurrency = Data.TransactionCurrency;
                         aItemsPayload[index].UnitPrice = Data.NetPriceQuantity;
-                        aItemsPayload[index].PoCurr = Data.DocumentCurrency;
                         var TotValue = (Data.OrderQuantity * Data.NetPriceQuantity).toFixed(2);
-                        aItemsPayload[index].TotValue = TotValue.toString();
-                        aItemsPayload[index].ExcRate = Data.ExchangeRate;
-                        aItemsPayload[index].ZcreateBy = Data.CreatedByUser
-                        var InrValue = (Number(TotValue) * Data.ExchangeRate).toFixed(2).toString();
-                        aItemsPayload[index].InrValue = InrValue;
-
-                        const dt = DateFormat.getDateTimeInstance({ pattern: "PThh'H'mm'M'ss'S'" });
-                        var createdTime = dt.format(new Date());
-                        var createdDate = new Date();
-                        aItemsPayload[index].ZcreateDate = createdDate
-                        aItemsPayload[index].ZcreateTime = createdTime
-
+                        aItemsPayload[index].TotalVal = TotValue.toString();
                         this.getView().getModel("oModelForItemTable").refresh();
                         this.propertyValues.setProperty("/itemTableVisiblity", true);
                         this.getView().setBusy(false);
@@ -341,6 +381,7 @@ sap.ui.define([
                         }
                     });
                 } else {
+                    this.originalChanged = false;
                     this.propertyValues.setProperty("/edit", false);
                     this.propertyValues.setProperty("/view", true);
                     this.propertyValues.setProperty("/editButton", true);
@@ -367,59 +408,99 @@ sap.ui.define([
                 var oModel = this.getOwnerComponent().getModel();
                 var sPath = '/ZRC_LCEXP_HEAD'
                 var payload = this.getView().getModel("oModelForHeader").getData();
-                const dt = DateFormat.getDateTimeInstance({ pattern: "PThh'H'mm'M'ss'S'" });
-                payload.ZcreateTime = dt.format(new Date());
                 this.postCallForHeader(oModel, sPath, payload);
-
-
             },
-
-
             validation: function (headerPayload) {
-                if (!headerPayload.Po) {
-                    MessageBox.error("Please select PO");
-                    return false;
-                } else if (!headerPayload.PiDate) {
-                    MessageBox.error("Please enter PI Date");
-                    return false;
-                } else if (!headerPayload.ShipmetLastDate) {
-                    MessageBox.error("Please enter Shipment Date");
-                    return false;
-                } else if (!headerPayload.LcIssueDate) {
-                    MessageBox.error("Please enter LC Issue Date ");
-                    return false;
-                } else if (!headerPayload.LcExpiryDate) {
-                    MessageBox.error("Please enter LC Expiry Date");
-                    return false;
-                } else if (!headerPayload.ToleranceValue) {
-                    MessageBox.error("Please enter Tolerance Quantity");
-                    return false;
-                } else if (!headerPayload.ZcreateDate) {
-                    MessageBox.error("Please enter Created Date ");
-                    return false;
-                } else if (!headerPayload.ZcreateTime) {
-                    MessageBox.error("Please enter Created Time ");
-                    return false;
-                } else {
 
-                    return true;
+                if (!headerPayload.LcNo) {
+                    MessageBox.error("Please enter LC Number");
+                    this.byId(sap.ui.core.Fragment.createId("idFrg_headerDetialsEdit", "idInpLcNo")).setValueState("Error");
+                    return false;
+                } else if (!headerPayload.SalesOrder) {
+                    MessageBox.error("Please select Sales Order");
+                    this.byId(sap.ui.core.Fragment.createId("idFrg_headerDetialsEdit", "idInpLcNo")).setValueState("None");
+                    this.byId(sap.ui.core.Fragment.createId("idFrg_headerDetialsEdit", "idInpSalesOrder")).setValueState("Error");
+
+                    return false;
                 }
+                else if (!headerPayload.ShipmetLastDateOri) {
+                    MessageBox.error("Please enter Shipment Last Date Original");
+                    this.byId(sap.ui.core.Fragment.createId("idFrg_headerDetialsEdit", "idInpSalesOrder")).setValueState("None");
+                    return false;
+                }
+                else if (!headerPayload.LatestDocumentDateOri) {
+                    MessageBox.error("Please enter Latest Document Date Original");
+                    return false;
+                }
+                else if (!headerPayload.ShipmetLastDateAmend) {
+                    MessageBox.error("Please enter Shipment Last Date Amendment ");
+                    return false;
+                }
+                else if (!headerPayload.LatestDocumentDateAmend) {
+                    MessageBox.error("Please enter Latest Document Date Amendment");
+                    return false;
+                }
+                else if (!headerPayload.LcIssueDateAmend) {
+                    MessageBox.error("Please enter LC Issue Date Amendment");
+                    return false;
+                }
+                else if (!headerPayload.ToleranceQtyP) {
+                    MessageBox.error("Please enter Tolerance Qty %");
+                    return false;
+                }
+                else if (!headerPayload.LcExpiryDateOriginal) {
+                    MessageBox.error("Please enter LC Expiry Date Original ");
+                    return false;
+                }
+                else if (!headerPayload.LcIssueDateOriginal) {
+                    MessageBox.error("Please enter LC issue Date Original ");
+                    return false;
+                }
+                else if (!headerPayload.LcRecevingDateOriginal) {
+                    MessageBox.error("Please enter LC Receving Date Original ");
+                    return false;
+                }
+                else if (!headerPayload.LcExpiryDateAmendment) {
+                    MessageBox.error("Please enter LC Expiry Date Amendment ");
+                    return false;
+                }
+                else if (!headerPayload.LcRecevingDateAmendment) {
+                    MessageBox.error("Please enter LC Receving Date Amendment ");
+                    return false;
+                }
+                else if (!headerPayload.LcValue) {
+                    MessageBox.error("Please enter LC Value ");
+                    return false;
+                }
+                else if (!headerPayload.ToleranceValueP) {
+                    MessageBox.error("Please enter Tolerance Value % ");
+                    return false;
+                }
+                else {
+                    this.byId(sap.ui.core.Fragment.createId("idFrg_headerDetialsEdit", "idInpLcNo")).setValueState("None");
+                    this.byId(sap.ui.core.Fragment.createId("idFrg_headerDetialsEdit", "idInpSalesOrder")).setValueState("None");
+                    return true;
 
-
+                }
             },
+
             // All post calls
             postCallForHeader: function (oModel, sPath, payload) {
                 var validation = this.validation(payload);
                 if (validation === true) {
                     //Create Call
                     this.getView().setBusy(true);
+
                     oModel.create(sPath, payload, {
                         success: function (oData, response) {
                             var payloadItem = this.getView().getModel("oModelForItemTable").getData().results;
                             var sPathItems = "/ZRC_LCEXP_HEAD('" + oData.LcNo + "')/to_Item";
                             this.LcNo = oData.LcNo;
-                            this.postCallForItem(oModel, sPathItems, payloadItem)
-                            this.getView().setBusy(false);
+                            for (var i = 0; i < payloadItem.length; i++) {
+                                payloadItem[i].LineType = 'O';
+                            }
+                            this.postCallForItem(oModel, sPathItems, payloadItem, "created")
+
                         }.bind(this),
                         error: function (oError) {
                             this.getView().setBusy(false);
@@ -427,12 +508,11 @@ sap.ui.define([
                     });
                 }
             },
-            postCallForItem: function (oModel, sPath, aPayload) {
+            postCallForItem: function (oModel, sPath, aPayload, Action) {
                 var that = this;
                 var promise = Promise.resolve();
-                aPayload.forEach(function (Payload, i) { //copy local variables
-                    //Chain the promises
-                    promise = promise.then(function () { return that._promisecreateCallForEachItem(oModel, sPath, Payload) });
+                aPayload.forEach(function (Payload, i) {
+                    promise = promise.then(function () { return that._promisecreateCallForEachItem(oModel, sPath, Payload, Action) });
                 });
                 promise.then(function () {
 
@@ -442,12 +522,13 @@ sap.ui.define([
                     })
 
             },
-            _promisecreateCallForEachItem: function (oModel, sPath, Payload) {
+            _promisecreateCallForEachItem: function (oModel, sPath, Payload, Action) {
                 var that = this;
-                // this.getView().setBusy(true);
+
                 oModel.create(sPath, Payload, {
                     success: function (oData, response) {
-                        sap.m.MessageBox.success("LC Number  " + that.LcNo + " created", {
+                        this.getView().setBusy(false);
+                        sap.m.MessageBox.success("LC Number  " + that.LcNo + " " + Action + "", {
                             actions: [sap.m.MessageBox.Action.OK],
                             emphasizedAction: "OK",
                             onClose: function (sAction) {
@@ -477,26 +558,75 @@ sap.ui.define([
                 this.updateCallForHeader(oModel, sPath, payload);
             },
             updateCallForHeader: function (oModel, sPath, payload) {
+                this.LcNo = payload.LcNo;
                 var that = this;
                 delete payload['to_item'];
-                // const dt = DateFormat.getDateTimeInstance({ pattern: "PThh'H'mm'M'ss'S'" });
-                // payload.ZcreateTime = dt.format(new Date());
+
                 //update Call
                 this.getView().setBusy(true);
                 oModel.update(sPath, payload, {
                     success: function (oData, response) {
-                        sap.m.MessageBox.success("LC Number  " + that.LcNo + " updated", {
-                            actions: [sap.m.MessageBox.Action.OK],
-                            emphasizedAction: "OK",
-                            onClose: function (sAction) {
-                                if (sAction === "OK") {
-                                    window.history.go(-1);
+                        var aPayload = this.getView().getModel("oModelForItemTable").getData().results;
+
+                        var payloadAmmendItems = this.getView().getModel("oModelForAmmendItemTable").getData().results;
+                        var sPathItems = "/ZRC_LCEXP_HEAD('" + this.LcNo + "')/to_Item";
+
+                        if (payloadAmmendItems.length > 0 && this.freshAmmend === true) {
+                            this.postCallForItem(oModel, sPathItems, payloadAmmendItems, "items amended");
+                        } else {
+                            if (payloadAmmendItems.length > 0 && this.originalChanged === false) {
+                                aPayload = [];
+                                for (let index = 0; index < payloadAmmendItems.length; index++) {
+                                    const element = payloadAmmendItems[index];
+                                    aPayload.push(element);
                                 }
                             }
-                        });
-                        this.getView().setBusy(false);
+                            this.updateCallForItem(oModel, aPayload);
+                        }
+
                     }.bind(this),
                     error: function (oError) {
+                        this.getView().setBusy(false);
+                    }.bind(this)
+                });
+            },
+
+            updateCallForItem: function (oModel, aPayload) {
+
+                var that = this;
+                var promise = Promise.resolve();
+                aPayload.forEach(function (Payload, i) {
+                    var sPath = "/ZC_LCEXP_ITEM(LcNo='" + Payload.LcNo + "',SalesOrder='" + Payload.SalesOrder + "',Posnr='" + Payload.Posnr + "',LineType='" + Payload.LineType + "')";
+                    promise = promise.then(function () { return that._promiseUpdateCallForEachItem(oModel, sPath, Payload) });
+                });
+                promise.then(function () {
+                    that.getView().setBusy(false);
+                    sap.m.MessageBox.success("LC Number  " + that.LcNo + " updated", {
+                        actions: [sap.m.MessageBox.Action.OK],
+                        emphasizedAction: "OK",
+                        onClose: function (sAction) {
+                            if (sAction === "OK") {
+                                window.history.go(-1);
+                            }
+                        }
+                    });
+
+                })
+                    .catch(function () {
+                        that.getView().setBusy(false);
+                    })
+
+            },
+            _promiseUpdateCallForEachItem: function (oModel, sPath, Payload) {
+                var that = this;
+                oModel.update(sPath, Payload, {
+                    success: function (oData, response) {
+
+
+
+                    }.bind(this),
+                    error: function (oError) {
+
                         this.getView().setBusy(false);
                     }.bind(this)
                 });

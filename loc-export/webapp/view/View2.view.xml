@@ -52,13 +52,13 @@
             <uxap:ObjectPageSection
                 id="idOPSHeaderDetails"
                 titleUppercase="true"
-                title="LC export Headers"
+                title="LC export Header"
                 selectedSubSection="idV2OPSubHeaderDetailsView"
             >
                 <uxap:subSections>
                     <uxap:ObjectPageSubSection
                         id="idV2OPSubHeaderDetailsView"
-                        title="LC export Headers"
+                        title="LC export Header"
                         titleUppercase="true"
                         visible="{myPropertyValues>/view}"
                     >
@@ -72,7 +72,7 @@
                     </uxap:ObjectPageSubSection>
                     <uxap:ObjectPageSubSection
                         id="idV2OPSubHeaderDetailsEdit"
-                        title="LC export Headers"
+                        title="LC export Header"
                         titleUppercase="true"
                         visible="{myPropertyValues>/edit}"
                     >
@@ -133,8 +133,10 @@
                         id="idV2OPSubItemsDetailEdit"
                         title="LC export Items"
                         titleUppercase="true"
+                    
                         visible="{myPropertyValues>/edit}"
                     >
+                        
                         <uxap:blocks>
                             <IconTabBar
                                 id="idIconTabBarNoIcons_ammend"

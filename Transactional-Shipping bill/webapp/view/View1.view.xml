@@ -10,7 +10,7 @@
     xmlns:table="sap.ui.table"
     xmlns:columnmenu="sap.m.table.columnmenu"
     xmlns:sap.ui.fl="sap.ui.fl"
-> 
+>
     <f:DynamicPage
         showFooter="false"
         fitContent="true"
@@ -85,7 +85,7 @@
                         columnsXL="3"
                     >
                         <form:content>
-                            <Label text="Shipping Bill Number" />
+                            <Label wrapping="true" text="Shipping Bill Number" />
                             <Input
                                 id="idInpF4_SBNumber"
                                 value=""
@@ -95,7 +95,7 @@
                                 autocomplete="true"
                                 placeholder="Shipping Bill Number"
                             />
-                            <Label
+                            <Label wrapping="true"
                                 text="Invoice Document Number"
                                 visible="false"
                             />
@@ -109,7 +109,7 @@
                                 visible="false"
                             />
 
-                            <Label text="Created Date" visible="false"/>
+                            <Label wrapping="true" text="Created Date" visible="false"/>
                             <DatePicker
                                 id="idDP_CreatedDate"
                                 value=""
@@ -218,144 +218,134 @@
                 <table:columns>
                     <table:Column
                         id="idClmShipBill"
-                        width="8rem"
                         hAlign="Begin"
                         sortProperty="ZshippingBillNo"
                         headerMenu="menu"
                         resizable="true"
                         autoResizable="true"
                     >
-                        <Label text="Shipping Bill No" />
+                        <Label wrapping="true" text="Shipping Bill No" />
                         <table:template>
-                            <Label text="{oModelForTable>ZshippingBillNo}" />
+                            <Label wrapping="true" text="{oModelForTable>ZshippingBillNo}" />
                         </table:template>
                     </table:Column>
                     <table:Column
                         id="idClmDocNo"
-                        width="8rem"
                         hAlign="End"
                         sortProperty="ZinvoiceDocument"
                         headerMenu="menu"
                         resizable="true"
                         autoResizable="true"
                     >
-                        <Label text="Invoice Document" />
+                        <Label wrapping="true" text="Invoice Document" />
                         <table:template>
-                            <Label text="{oModelForTable>ZinvoiceDocument}" />
+                            <Label wrapping="true" text="{oModelForTable>ZinvoiceDocument}" />
                         </table:template>
                     </table:Column>
 
                     <table:Column
                         id="idClmPortOfLoading"
-                        width="8rem"
                         hAlign="Begin"
                         sortProperty="ZportOfLoading"
                         headerMenu="menu"
                         resizable="true"
                         autoResizable="true"
                     >
-                        <Label text="Port Of Loading" />
+                        <Label wrapping="true" text="Port Of Loading" />
                         <table:template>
-                            <Label text="{oModelForTable>ZportOfLoading}" />
+                            <Label wrapping="true" text="{oModelForTable>ZportOfLoading}" />
                         </table:template>
                     </table:Column>
                     <table:Column
                         id="idClmCHA"
-                        width="6rem"
                         hAlign="Center"
                         sortProperty="Zcha"
                         headerMenu="menu"
                         resizable="true"
                         autoResizable="true"
                     >
-                        <Label text="CHA" />
+                        <Label wrapping="true" text="CHA" />
                         <table:template>
-                            <Label text="{oModelForTable>Zcha}" />
+                            <Label wrapping="true" text="{oModelForTable>Zcha}" />
                         </table:template>
                     </table:Column>
                     <table:Column
                         id="idClmCustomer"
-                        width="8rem"
                         hAlign="End"
                         sortProperty="Zcustomer"
                         headerMenu="menu"
                         resizable="true"
                         autoResizable="true"
                     >
-                        <Label text="Customer" />
+                        <Label wrapping="true" text="Customer" />
                         <table:template>
-                            <Label text="{oModelForTable>Zcustomer}" />
+                            <Label wrapping="true" text="{oModelForTable>Zcustomer}" />
                         </table:template>
                     </table:Column>
 
                     <table:Column
                         id="idClmLETDate"
-                        width="8rem"
                         hAlign="Center"
                         sortProperty="ZletExportDate"
                         headerMenu="menu"
                         resizable="true"
                         autoResizable="true"
                     >
-                        <Label text="LET Export Date" />
+                        <Label wrapping="true" text="LET Export Date" />
                         <table:template>
-                            <Label text="{oModelForTable>ZletExportDate}" />
+                            <Label wrapping="true" text="{oModelForTable>ZletExportDate}" />
                         </table:template>
                     </table:Column>
                     <table:Column
                         id="idClmSchemes"
-                        width="6rem"
                         hAlign="Center"
                         sortProperty="Zschemes"
                         headerMenu="menu"
                         resizable="true"
                         autoResizable="true"
                     >
-                        <Label text="Schemes" />
+                        <Label wrapping="true" text="Schemes" />
                         <table:template>
-                            <Label text="{oModelForTable>Zschemes}" />
+                            <Label wrapping="true" text="{oModelForTable>Zschemes}" />
                         </table:template>
                     </table:Column>
                     <table:Column
                         id="idClmEPCG"
-                        width="4rem"
                         hAlign="Center"
                         sortProperty="Zepcg"
                         headerMenu="menu"
                         resizable="true"
                         autoResizable="true"
                     >
-                        <Label text="EPCG" />
+                        <Label wrapping="true" text="EPCG" />
                         <table:template>
-                            <Label text="{oModelForTable>Zepcg}" />
+                            <Label wrapping="true" text="{oModelForTable>Zepcg}" />
                         </table:template>
                     </table:Column>
                     <table:Column
                         id="idClmLOC"
-                        width="8rem"
                         hAlign="Begin"
                         sortProperty="Zloc"
                         headerMenu="menu"
                         resizable="true"
                         autoResizable="true"
                     >
-                        <Label text="Location" />
+                        <Label wrapping="true"  text="Location" />
                         <table:template>
-                            <Label text="{oModelForTable>Zloc}" />
+                            <Label wrapping="true" text="{oModelForTable>Zloc}" />
                         </table:template>
                     </table:Column>
                     <table:Column
                         id="idClmShipBillStatus"
-                        width="10rem"
                         hAlign="Center"
                         sortProperty="ZshippingBillStatus"
                         headerMenu="menu"
                         resizable="true"
                         autoResizable="true"
                     >
-                        <Label text="Shipping Bill Status" />
+                        <Label wrapping="true" text="Shipping Bill Status" />
                         <table:template>
-                            <Label
+                            <Label wrapping="true"
                                 text="{oModelForTable>ZshippingBillStatus}"
                             />
                         </table:template>

@@ -37,7 +37,7 @@
             />
             <Text
                 id="_IdDPCreateDate"
-                text="{path:'oModelForHeader>/ZcreateDate', type: 'sap.ui.model.type.Date', formatOptions: {pattern: 'dd/MM/yyyy'}}"
+                text="{path:'oModelForHeader>/ZcreateDate', type: 'sap.ui.model.type.Date', formatOptions: {UTC: true}}"
             />
 
             <Text
@@ -61,7 +61,7 @@
                 text="{oModelForHeader>/ZportOfLoading}"
                 id="__IDGenText4"
             />
- 
+
             <Label
                 id="_IdLblICDPortCode"
                 text="ICD - PORT CODE "
@@ -98,7 +98,9 @@
                 id="_IdLblShippingBillDate"
                 text=" Shipping Bill Date"
             />
-            <Text text="{oModelForHeader>/ZshippingBillDate}" />
+            <Text
+                text="{path:'oModelForHeader>/ZshippingBillDate', type: 'sap.ui.model.type.Date', formatOptions: {UTC: true}}"
+            />
 
             <Label
                 id="_IdLblStateOfOrigin"
