@@ -1,0 +1,103 @@
+<core:FragmentDefinition
+    height="100%"
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:form="sap.ui.layout.form"
+>
+    <form:SimpleForm
+        value="true"
+        class="sapUiResponsiveContentPadding"
+        layout="ColumnLayout"
+        columnsL="3"
+        columnsM="3"
+        columnsXL="3"
+    >
+        <form:content>
+            <Label text='Advance License No.' />
+            <Text text='{oModelForHeader>/Advlicno}' />
+            <Label text='Company Code' />
+            <Text text='{oModelForHeader>/Company}' />
+            <Label text='Plant' />
+            <Text text='{oModelForHeader>/Plant}' />
+            <Label text='Category' />
+            <Text text='{oModelForHeader>/Category}' />
+            <Label text='RCMC No.' />
+            <Text text='{oModelForHeader>/Rcmcno}' />
+            <Label text='Bond No.' />
+            <Text text='{oModelForHeader>/Bondno}' />
+            <Label text='GSTIN No.' />
+            <Text text='{oModelForHeader>/Gstin}' />
+            <Label text='IEC No.' />
+            <Text text='{oModelForHeader>/Iecno}' />
+            <Label text='File No.' />
+            <Text text='{oModelForHeader>/FileNo}' />
+            <Label text='Authorisation No.' />
+            <Text text='{oModelForHeader>/AuthorisationNo}' />
+            <Label text='Status' />
+            <Text text='{oModelForHeader>/Status}' />
+            <Label text='Port of Registration' />
+            <Text text='{oModelForHeader>/PortOfReg}' />
+            <Label text='Bond Validity To' />
+            <Text
+                text="{path:'oModelForHeader>/BondValidTo', type: 'sap.ui.model.type.Date', formatOptions: {UTC: true}}"
+            />
+            <Label text='Registration No.' />
+            <Text text='{oModelForHeader>/RegistrationNo}' />
+            <Label text='Minimum value addtion %Age' />
+            <Text text='{oModelForHeader>/MinValueAdd}' />
+            <Label text='Document Currency' />
+            <Text text='{oModelForHeader>/DocCurrency}' />
+            <Label text='Advance License Free' />
+            <Text text='{oModelForHeader>/AdvLicFee}' />
+            <Label text='Bond Value' />
+            <Text text='{oModelForHeader>/BondValue}' />
+            <Label text='FC Currency' />
+            <Text text='{oModelForHeader>/FcCurrency}' />
+            <Label text='Date Of Issue' />
+            <Text
+                text="{path:'oModelForHeader>/DateOfIssue', type: 'sap.ui.model.type.Date', formatOptions: {UTC: true}}"
+            />
+            <Label text='Import Validity From' />
+            <Text
+                text="{path:'oModelForHeader>/ImpValidFrm', type: 'sap.ui.model.type.Date', formatOptions: {UTC: true}}"
+            />
+            <Label text='Import Validity To' />
+            <Text
+                text="{path:'oModelForHeader>/ImpValidTo', type: 'sap.ui.model.type.Date', formatOptions: {UTC: true}}"
+            />
+            <Label text='Export Valid From' />
+            <Text
+                text="{path:'oModelForHeader>/ExpValidFrm', type: 'sap.ui.model.type.Date', formatOptions: {UTC: true}}"
+            />
+            <Label text='Export Valid TO' />
+            <Text
+                text="{path:'oModelForHeader>/ExpValidTo', type: 'sap.ui.model.type.Date', formatOptions: {UTC: true}}"
+            />
+            <Label text='EOP Extension-Export Valid From Date' />
+            <Text
+                text="{path:'oModelForHeader>/EopExtExpValidFrm', type: 'sap.ui.model.type.Date', formatOptions: {UTC: true}}"
+            />
+            <Label text='EOP Extension-Export Valid TO Date' />
+            <Text
+                text="{path:'oModelForHeader>/EopExtExpValidTo', type: 'sap.ui.model.type.Date', formatOptions: {UTC: true}}"
+            />
+            <Label text='Revalidation-License Import Validity From Date' />
+            <Text
+                text="{path:'oModelForHeader>/RevalidLicImpFrm', type: 'sap.ui.model.type.Date', formatOptions: {UTC: true}}"
+            />
+            <Label text='Revalidation-License Import Validity TO Date' />
+            <Text
+                text="{path:'oModelForHeader>/RevalidLicImpTo', type: 'sap.ui.model.type.Date', formatOptions: {UTC: true}}"
+            />
+            <Label text='Created By' />
+            <Text text='{oModelForHeader>/CreatedBy}' />
+            <Label text='Created Date' />
+            <Text
+                text="{path:'oModelForHeader>/CreatedOn', type: 'sap.ui.model.type.Date', formatOptions: {UTC: true}}"
+            />
+            <Text
+                text="{path:'oModelForHeader>/CreatedAt', type: 'sap.ui.model.type.Time', formatOptions: {pattern: 'HH:mm:ss'}}"
+            />
+        </form:content>
+    </form:SimpleForm>
+</core:FragmentDefinition>

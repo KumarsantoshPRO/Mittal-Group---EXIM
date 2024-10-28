@@ -1,0 +1,189 @@
+<core:FragmentDefinition
+    height="100%"
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:form="sap.ui.layout.form"
+>
+    <form:SimpleForm
+        class="sapUiResponsiveContentPadding"
+        layout="ColumnLayout"
+        columnsL="3"
+        columnsM="3"
+        columnsXL="3"
+    >
+        <form:content>
+            <Label text='Advance License No.' />
+            <Text text='{oModelForHeader>/Advlicno}' />
+            <Label
+                text='Company Code'
+                required="true"
+            />
+            <Input
+                value='{oModelForHeader>/Company}'
+                placeholder="Company Code"
+                showValueHelp="true"
+                valueHelpRequest="onCompanyCodeValuelHelp"
+            />
+
+            <Label
+                text='Plant'
+                required="true"
+            />
+            <Input
+                value='{oModelForHeader>/Plant}'
+                placeholder="Plant"
+                showValueHelp="true"
+                valueHelpRequest="onPlantValuelHelp"
+            />
+            <Label text='Category' />
+            <Input value='{oModelForHeader>/Category}' />
+            <Label text='RCMC No.' />
+            <Input value='{oModelForHeader>/Rcmcno}' />
+            <Label text='Bond No.' />
+            <Input value='{oModelForHeader>/Bondno}' />
+            <Label text='GSTIN No.' />
+            <Input value='{oModelForHeader>/Gstin}' />
+            <Label text='IEC No.' />
+            <Input value='{oModelForHeader>/Iecno}' />
+            <Label text='File No.' />
+            <Input value='{oModelForHeader>/FileNo}' />
+            <Label text='Authorisation No.' />
+            <Input value='{oModelForHeader>/AuthorisationNo}' />
+            <Label text='Status' />
+            <Input value='{oModelForHeader>/Status}' />
+            <Label text='Port of Registration' />
+            <Input value='{oModelForHeader>/PortOfReg}' />
+            <Label
+                text='Bond Validity To'
+                required="true"
+            />
+            <DatePicker
+                value="{path:'oModelForHeader>/BondValidTo', type: 'sap.ui.model.type.Date', formatOptions: {UTC: true}}"
+                displayFormat="dd/MM/yyyy"
+                valueFormat="dd/MM/yyyy"
+            />
+            <Label text='Registration No.' />
+            <Input value='{oModelForHeader>/RegistrationNo}' />
+            <Label
+                text='Minimum value addtion %Age'
+                required="true"
+            />
+            <Input value='{oModelForHeader>/MinValueAdd}' />
+            <Label text='Document Currency' />
+            <Input value='{oModelForHeader>/DocCurrency}' />
+            <Label
+                text='Advance License Free'
+                required="true"
+            />
+            <Input value='{oModelForHeader>/AdvLicFee}' />
+            <Label
+                text='Bond Value'
+                required="true"
+            />
+            <Input value='{oModelForHeader>/BondValue}' />
+            <Label text='FC Currency' />
+            <Input value='{oModelForHeader>/FcCurrency}' />
+            <Label
+                text='Date Of Issue'
+                required="true"
+            />
+            <DatePicker
+                value="{path:'oModelForHeader>/DateOfIssue', type: 'sap.ui.model.type.Date', formatOptions: {UTC: true}}"
+                displayFormat="dd/MM/yyyy"
+                valueFormat="dd/MM/yyyy"
+            />
+            <Label
+                text='Import Validity From'
+                required="true"
+            />
+            <DatePicker
+                value="{path:'oModelForHeader>/ImpValidFrm', type: 'sap.ui.model.type.Date', formatOptions: {UTC: true}}"
+                displayFormat="dd/MM/yyyy"
+                valueFormat="dd/MM/yyyy"
+            />
+            <Label
+                text='Import Validity To'
+                required="true"
+            />
+            <DatePicker
+                value="{path:'oModelForHeader>/ImpValidTo', type: 'sap.ui.model.type.Date', formatOptions: {UTC: true}}"
+                displayFormat="dd/MM/yyyy"
+                valueFormat="dd/MM/yyyy"
+            />
+            <Label
+                text='Export Valid From'
+                required="true"
+            />
+            <DatePicker
+                value="{path:'oModelForHeader>/ExpValidFrm', type: 'sap.ui.model.type.Date', formatOptions: {UTC: true}}"
+                displayFormat="dd/MM/yyyy"
+                valueFormat="dd/MM/yyyy"
+            />
+            <Label
+                text='Export Valid TO'
+                required="true"
+            />
+            <DatePicker
+                value="{path:'oModelForHeader>/ExpValidTo', type: 'sap.ui.model.type.Date', formatOptions: {UTC: true}}"
+                displayFormat="dd/MM/yyyy"
+                valueFormat="dd/MM/yyyy"
+            />
+            <Label
+                text='EOP Extension-Export Valid From Date'
+                required="true"
+            />
+            <DatePicker
+                value="{path:'oModelForHeader>/EopExtExpValidFrm', type: 'sap.ui.model.type.Date', formatOptions: {UTC: true}}"
+                displayFormat="dd/MM/yyyy"
+                valueFormat="dd/MM/yyyy"
+            />
+            <Label
+                text='EOP Extension-Export Valid TO Date'
+                required="true"
+            />
+            <DatePicker
+                value="{path:'oModelForHeader>/EopExtExpValidTo', type: 'sap.ui.model.type.Date', formatOptions: {UTC: true}}"
+                displayFormat="dd/MM/yyyy"
+                valueFormat="dd/MM/yyyy"
+            />
+            <Label
+                text='Revalidation-License Import Validity From Date'
+                required="true"
+            />
+            <DatePicker
+                value="{path:'oModelForHeader>/RevalidLicImpFrm', type: 'sap.ui.model.type.Date', formatOptions: {UTC: true}}"
+                displayFormat="dd/MM/yyyy"
+                valueFormat="dd/MM/yyyy"
+            />
+            <Label
+                text='Revalidation-License Import Validity TO Date'
+                required="true"
+            />
+            <DatePicker
+                value="{path:'oModelForHeader>/RevalidLicImpTo', type: 'sap.ui.model.type.Date', formatOptions: {UTC: true}}"
+                displayFormat="dd/MM/yyyy"
+                valueFormat="dd/MM/yyyy"
+            />
+            <Label text='Created By' />
+            <Input value='{oModelForHeader>/CreatedBy}' />
+            <Label text='Created Date and Time' />
+            <DatePicker
+                value="{path:'oModelForHeader>/CreatedOn', type: 'sap.ui.model.type.Date', formatOptions: {UTC: true}}"
+                displayFormat="dd/MM/yyyy"
+                valueFormat="dd/MM/yyyy"
+                editable="false"
+            />
+            <TimePicker
+                value="{path:'oModelForHeader>/CreatedAt', type: 'sap.ui.model.type.Time', formatOptions: {pattern: 'HH:mm:ss'}}"
+                editable="false"
+            />
+            <Label text='Last Changed' />
+            <DateTimePicker
+                value="{path:'oModelForHeader>/LocalLastChangedAt', type: 'sap.ui.model.type.DateTime', formatOptions: {pattern: 'MMM dd, yyyy, HH:mm:ss'}}"
+                displayFormat="dd/MM/yyyy"
+                valueFormat="dd/MM/yyyy"
+                editable="false"
+            />
+        </form:content>
+    </form:SimpleForm>
+</core:FragmentDefinition>

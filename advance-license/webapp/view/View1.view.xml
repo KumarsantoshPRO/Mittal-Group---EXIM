@@ -1,0 +1,392 @@
+<mvc:View
+    controllerName="zpro.sk.mittalcoin.exim.advance.license.advancelicense.controller.View1"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    height="100%"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:fb="sap.ui.comp.filterbar"
+    xmlns:table="sap.ui.table"
+    xmlns:columnmenu="sap.m.table.columnmenu"
+    xmlns:sap.ui.fl="sap.ui.fl"
+>
+    <f:DynamicPage fitContent="true">
+        <f:header>
+            <f:DynamicPageHeader>
+                <f:content>
+                    <fb:FilterBar
+                        id="filterbar"
+                        persistencyKey="myPersKey"
+                        useToolbar="false"
+                        search="onSearch"
+                    >
+                        <fb:filterGroupItems>
+                            <fb:FilterGroupItem
+                                name="Name"
+                                label="LAdvance License"
+                                groupName="Group1"
+                                visibleInFilterBar="true"
+                            >
+                                <fb:control>
+                                    <Input
+                                        value="{oModelForFilters>/Advlicno}"
+                                        placeholder="Advance License"
+                                        showValueHelp="true"
+                                        valueHelpRequest="onAdvanceLicenseValuelHelp"
+                                    />
+                                </fb:control>
+                            </fb:FilterGroupItem>
+
+                            <fb:FilterGroupItem
+                                name="Name1"
+                                label="Company Code"
+                                groupName="Group1"
+                                visibleInFilterBar="true"
+                            >
+                                <fb:control>
+                                    <Input
+                                        value="{oModelForFilters>/CompanyCode}"
+                                        placeholder="Company Code"
+                                        showValueHelp="true"
+                                        valueHelpRequest="onCompanyCodeValuelHelp"
+                                    />
+                                </fb:control>
+                            </fb:FilterGroupItem>
+
+                            <fb:FilterGroupItem
+                                name="Name2"
+                                label="Plant"
+                                groupName="Group1"
+                                visibleInFilterBar="true"
+                            >
+                                <fb:control>
+                                    <Input
+                                        value="{oModelForFilters>/Plant}"
+                                        placeholder="Plant"
+                                        showValueHelp="true"
+                                        valueHelpRequest="onPlantValuelHelp"
+                                    />
+                                </fb:control>
+                            </fb:FilterGroupItem>
+
+                            <fb:FilterGroupItem
+                                name="Name3"
+                                label="Category"
+                                groupName="Group1"
+                                visibleInFilterBar="true"
+                            >
+                                <fb:control>
+                                    <Input
+                                        value=""
+                                        placeholder="Category"
+                                        showValueHelp="true"
+                                        valueHelpRequest="onCategoryValuelHelp"
+                                    />
+                                </fb:control>
+                            </fb:FilterGroupItem>
+                        </fb:filterGroupItems>
+                    </fb:FilterBar>
+                </f:content>
+            </f:DynamicPageHeader>
+        </f:header>
+
+        <f:content>
+            <table:Table
+                id="table"
+                sort="onSort"
+                columnResize="onColumnResize"
+                columnMove="onColumnMove"
+                rowMode="Auto"
+                ariaLabelledBy="title"
+                sap.ui.fl:flexibility="sap/m/flexibility/EngineFlex"
+                selectionMode="Single"
+                selectionBehavior="Row"
+                rows="{oModelForTable>/}"
+                showColumnVisibilityMenu="true"
+                enableColumnFreeze="false"
+                enableCellFilter="true"
+                columnSelect="onColumnSelect"
+                cellContextmenu="onProductIdCellContextMenu"
+                enableGrouping="true"
+                rowSelectionChange="onShowLCDetails"
+                rowActionCount="2"
+            >
+                <table:extension>
+                    <OverflowToolbar style="Clear">
+                        <Title id="title" />
+                        <ToolbarSpacer />
+                        <Button
+                            text="Create"
+                            press="onAddNewLOC"
+                            type="Transparent"
+                            tooltip="Create new"
+                        />
+                        <Button
+                            id="idDeleteRow"
+                            text="Delete"
+                            press="onDeleteRow"
+                            type="Transparent"
+                            enabled="false"
+                            visible="false"
+                        />
+                        <Button
+                            icon="sap-icon://action-settings"
+                            press="openPersoDialog"
+                        />
+                        <VBox visible="false">
+                            <SegmentedButton selectedKey="less">
+                                <items>
+                                    <SegmentedButtonItem
+                                        icon="sap-icon://detail-less"
+                                        key="less"
+                                    />
+                                    <SegmentedButtonItem
+                                        icon="sap-icon://detail-more"
+                                    />
+                                </items>
+                            </SegmentedButton>
+                        </VBox>
+                        <Button
+                            icon="sap-icon://excel-attachment"
+                            press="onExport"
+                        />
+                    </OverflowToolbar>
+                </table:extension>
+
+                <table:dependents>
+                    <columnmenu:Menu id="menu">
+                        <columnmenu:items>
+                            <columnmenu:ActionItem
+                                icon="sap-icon://sort"
+                                label="Sort"
+                                press="onColumnHeaderItemPress"
+                            />
+                            <columnmenu:ActionItem
+                                icon="sap-icon://filter"
+                                label="Filter"
+                                press="onColumnHeaderItemPress"
+                            />
+                            <columnmenu:ActionItem
+                                icon="sap-icon://group-2"
+                                label="Groups"
+                                press="onColumnHeaderItemPress"
+                            />
+
+                            <columnmenu:ActionItem
+                                icon="sap-icon://table-column"
+                                label="Columns"
+                                press="onColumnHeaderItemPress"
+                            />
+                        </columnmenu:items>
+                    </columnmenu:Menu>
+                </table:dependents>
+
+                <table:noData>
+                    <IllustratedMessage enableVerticalResponsiveness="true" />
+                </table:noData>
+
+                <table:columns>
+                    <table:Column
+                        id="Advlicno"
+                        sortProperty="Advlicno"
+                        headerMenu="menu"
+                    >
+                        <Label
+                            wrapping="true"
+                            text=" Advance License No."
+                        />
+                        <table:template>
+                            <Label text="{oModelForTable>Advlicno}" />
+                        </table:template>
+                    </table:Column>
+
+                    <table:Column
+                        id="Company"
+                        sortProperty="Company"
+                        headerMenu="menu"
+                    >
+                        <Label
+                            wrapping="true"
+                            text="Company Code"
+                        />
+                        <table:template>
+                            <Label
+                                wrapping="true"
+                                text="{oModelForTable>Company}"
+                            />
+                        </table:template>
+                    </table:Column>
+
+                    <table:Column
+                        id="Plant"
+                        sortProperty="Plant"
+                        headerMenu="menu"
+                    >
+                        <Label
+                            wrapping="true"
+                            text="Plant"
+                        />
+                        <table:template>
+                            <Label
+                                wrapping="true"
+                                text="{oModelForTable>Plant}"
+                            />
+                        </table:template>
+                    </table:Column>
+
+                    <table:Column
+                        id="Category"
+                        sortProperty="Category"
+                        headerMenu="menu"
+                    >
+                        <Label
+                            wrapping="true"
+                            text="Category"
+                        />
+                        <table:template>
+                            <Label
+                                wrapping="true"
+                                text="{path:'oModelForTable>Category'}"
+                            />
+                        </table:template>
+                    </table:Column>
+
+                    <table:Column
+                        id="Rcmcno"
+                        sortProperty="Rcmcno"
+                        headerMenu="menu"
+                    >
+                        <Label
+                            wrapping="true"
+                            text="RCMC No."
+                        />
+                        <table:template>
+                            <Label
+                                wrapping="true"
+                                text="{path:'oModelForTable>Rcmcno'}"
+                            />
+                        </table:template>
+                    </table:Column>
+
+                    <table:Column
+                        id="Bondno"
+                        sortProperty="Bondno"
+                        headerMenu="menu"
+                    >
+                        <Label
+                            wrapping="true"
+                            text="Bond No."
+                        />
+                        <table:template>
+                            <Label
+                                wrapping="true"
+                                text="{path:'oModelForTable>Bondno'}"
+                            />
+                        </table:template>
+                    </table:Column>
+
+                    <table:Column
+                        id="Gstin"
+                        sortProperty="Gstin"
+                        headerMenu="menu"
+                    >
+                        <Label
+                            wrapping="true"
+                            text="GSTIN No."
+                        />
+                        <table:template>
+                            <Label
+                                wrapping="true"
+                                text="{path:'oModelForTable>Gstin'}"
+                            />
+                        </table:template>
+                    </table:Column>
+
+                    <table:Column
+                        id="Iecno"
+                        sortProperty="Iecno"
+                        headerMenu="menu"
+                    >
+                        <Label
+                            wrapping="true"
+                            text="IEC No."
+                        />
+                        <table:template>
+                            <Label
+                                wrapping="true"
+                                text="{path:'oModelForTable>Iecno'}"
+                            />
+                        </table:template>
+                    </table:Column>
+
+                    <table:Column
+                        id="FileNo"
+                        sortProperty="FileNo"
+                        headerMenu="menu"
+                    >
+                        <Label
+                            wrapping="true"
+                            text="File No."
+                        />
+                        <table:template>
+                            <Label
+                                wrapping="true"
+                                text="{path:'oModelForTable>FileNo'}"
+                            />
+                        </table:template>
+                    </table:Column>
+
+                    <table:Column
+                        id="AuthorisationNo"
+                        sortProperty="AuthorisationNo"
+                        headerMenu="menu"
+                    >
+                        <Label
+                            wrapping="true"
+                            text="Authorisation No."
+                        />
+                        <table:template>
+                            <Label
+                                wrapping="true"
+                                text="{path:'oModelForTable>AuthorisationNo'}"
+                            />
+                        </table:template>
+                    </table:Column>
+
+                    <table:Column
+                        id="Status"
+                        sortProperty="Status"
+                        headerMenu="menu"
+                    >
+                        <Label
+                            wrapping="true"
+                            text="Status"
+                        />
+                        <table:template>
+                            <Label
+                                wrapping="true"
+                                text="{path:'oModelForTable>Status'}"
+                            />
+                        </table:template>
+                    </table:Column>
+                </table:columns>
+
+                <table:rowActionTemplate>
+                    <table:RowAction>
+                        <table:items>
+                            <table:RowActionItem
+                                type="Navigation"
+                                press="onShowLCDetails"
+                            />
+                            <table:RowActionItem
+                                type="Delete"
+                                press="onDeletePress"
+                                icon="sap-icon://delete"
+                            />
+                        </table:items>
+                    </table:RowAction>
+                </table:rowActionTemplate>
+            </table:Table>
+        </f:content>
+    </f:DynamicPage>
+</mvc:View>

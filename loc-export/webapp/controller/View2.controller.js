@@ -269,7 +269,7 @@ sap.ui.define([
             },
 
             //Start:All F4 Logic
-            // Start: PO
+            // Start: SO
             // on Value Help(F4)
             onSOValueHelp: function () {
                 if (!this.SOFrag) {
@@ -366,7 +366,7 @@ sap.ui.define([
                     }.bind(this)
                 });
             },
-            // End: PO
+            // End: SO
 
             // On Cancel button action
             onCancel: function () {
