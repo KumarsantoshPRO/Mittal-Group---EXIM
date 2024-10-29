@@ -70,12 +70,12 @@ sap.ui.define([
                     this.propertyValues.setProperty("/new", true);
                     this.propertyValues.setProperty("/po", true);
                     var currentDateTime = new Date();
-                    // const dt = DateFormat.getDateTimeInstance({ pattern: "PThh'H'mm'M'ss'S'" });
 
+                    // const dt = DateFormat.getDateTimeInstance({ pattern: "PThh'H'mm'M'ss'S'" });
                     // var currentTime = dt.format(new Date());
-                    // var currentTime = ODataUtils.formatValue(new Date(), "Edm.Time")
-                    this.getView().getModel("oModelForHeader").setProperty("/ZcreateDate", currentDateTime)
-                    this.getView().getModel("oModelForHeader").setProperty("/ZcreateTime", currentDateTime)
+
+
+
 
                 } else {
                     this.propertyValues.setProperty("/edit", false);
@@ -142,7 +142,7 @@ sap.ui.define([
                     "results": [{
                         "Advlicno": "",
                         "Type": "",
-                        "LineNumber": "",
+                        "LineNumber": "10",
                         "LineType": "",
                         "LineStatus": "",
                         "SionNo": "",
@@ -151,26 +151,26 @@ sap.ui.define([
                         "UnitField": "",
                         "ExportExQty": "",
                         "ExportExchangeRate": "",
-                        "ImportItem": "",
-                        "ImportHsn": "",
-                        "ImportWastageQtyMt": "",
-                        "NetContent": "",
-                        "ImportQty": "",
-                        "ImportRateFc": "",
-                        "ImportTotalValFc": "",
-                        "ImportExchangeRate": "",
-                        "ImportTotalValDc": "",
-                        "AssValue": "",
-                        "Bcd": "",
-                        "BcdVal": "",
-                        "Sws": "",
-                        "SwsVal": "",
-                        "Igst": "",
-                        "IgstVal": "",
-                        "AntDempDuty": "",
-                        "OtherDuty": "",
-                        "Va": "",
-                        "TotalDuty": ""
+                        "ImportItem": null,
+                        "ImportHsn": null,
+                        "ImportWastageQtyMt": null,
+                        "NetContent": null,
+                        "ImportQty": null,
+                        "ImportRateFc": null,
+                        "ImportTotalValFc": null,
+                        "ImportExchangeRate": null,
+                        "ImportTotalValDc": null,
+                        "AssValue": null,
+                        "Bcd": null,
+                        "BcdVal": null,
+                        "Sws": null,
+                        "SwsVal": null,
+                        "Igst": null,
+                        "IgstVal": null,
+                        "AntDempDuty": null,
+                        "OtherDuty": null,
+                        "Va": null,
+                        "TotalDuty": null
                     }
                     ]
                 };
@@ -195,6 +195,7 @@ sap.ui.define([
 
 
                 var currentDateTime = new Date();
+
                 this.getView().getModel("oModelForHeader").setProperty("/CreatedOn", currentDateTime);
                 this.getView().getModel("oModelForHeader").setProperty("/CreatedAt", currentDateTime);
                 this.getView().getModel("oModelForHeader").setProperty("/LocalLastChangedAt", currentDateTime);
@@ -393,14 +394,101 @@ sap.ui.define([
             },
             // End: Menu
 
+            onAddNewItem: function () {
+                var JSONData = this.getView()
+                    .getModel("oModelForItemTable")
+                    .getData();
+                var tableLen = this.getView().getModel("oModelForItemTable").getData().results.length;
+                var LineNumber = 10 * (tableLen + 1);
+                var payloadForItem = {
+                    "Advlicno": "",
+                    "Type": "",
+                    "LineNumber": LineNumber.toString(),
+                    "LineType": "",
+                    "LineStatus": "",
+                    "SionNo": "",
+                    "ExportItem": "",
+                    "ExportHsn": "",
+                    "UnitField": "",
+                    "ExportExQty": "",
+                    "ExportExchangeRate": "",
+                    "ImportItem": null,
+                    "ImportHsn": null,
+                    "ImportWastageQtyMt": null,
+                    "NetContent": null,
+                    "ImportQty": null,
+                    "ImportRateFc": null,
+                    "ImportTotalValFc": null,
+                    "ImportExchangeRate": null,
+                    "ImportTotalValDc": null,
+                    "AssValue": null,
+                    "Bcd": null,
+                    "BcdVal": null,
+                    "Sws": null,
+                    "SwsVal": null,
+                    "Igst": null,
+                    "IgstVal": null,
+                    "AntDempDuty": null,
+                    "OtherDuty": null,
+                    "Va": null,
+                    "TotalDuty": null
+                };
+
+                JSONData.results.push(payloadForItem);
+                this.getView()
+                    .getModel("oModelForItemTable")
+                    .setData(JSON.parse(JSON.stringify(JSONData)));
+            },
+            onDelete: function (oEvent) {
+
+                var selectedItem = oEvent.getParameter('row').getAggregation('cells')[0].getText();
+
+                var JSONData = this.getView().getModel("oModelForItemTable").getData();
+                if (JSONData.results.length > 1) {
+                    for (var i = 0; i < JSONData.results.length; i++) {
+                        if (JSONData.results[i].LineNumber === selectedItem) {
+                            var k = i;
+                            sap.m.MessageBox.error("Delete Line Number  " + selectedItem + "?", {
+                                actions: ["Delete", sap.m.MessageBox.Action.CLOSE],
+                                emphasizedAction: "Delete",
+                                onClose: function (sAction) {
+                                    if (sAction === "Delete") {
+                                        JSONData.results.splice(k, 1);
+                                        for (var j = 0; j < JSONData.results.length; j++) {
+                                            JSONData.results[j].LineNumber = (10 * (j + 1)).toString();
+                                        }
+                                        // this.getView()
+                                        //     .getModel("oModelForItemTable")
+                                        //     .setData(JSON.parse(JSON.stringify(JSONData)));
+                                        this.getView()
+                                            .getModel("oModelForItemTable")
+                                            .setData(JSONData);
+                                    }
+                                }.bind(this)
+                            })
+
+                        }
+                    }
+
+                } else {
+                    MessageBox.error("Atlease one entry is required");
+                }
+
+
+            },
+
+
             // All post call
             // On Create
             onCreateButtonPress: function () {
                 var oModel = this.getOwnerComponent().getModel();
                 var sPath = '/ZRC_ADV_LIC_HEAD'
                 var payload = this.getView().getModel("oModelForHeader").getData();
-                const dt = DateFormat.getDateTimeInstance({ pattern: "PThh'H'mm'M'ss'S'" });
-                payload.ZcreateTime = dt.format(new Date());
+                // const dt = DateFormat.getDateTimeInstance({ pattern: "PThh'H'mm'M'ss'S'" });
+                // payload.CreatedAt = dt.format(new Date());
+
+                payload.LocalLastChangedAt = ODataUtils.formatValue(new Date(), "Edm.DateTime");
+
                 this.postCallForHeader(oModel, sPath, payload);
 
 
@@ -489,8 +577,13 @@ sap.ui.define([
                     oModel.create(sPath, payload, {
                         success: function (oData, response) {
                             var payloadItem = this.getView().getModel("oModelForItemTable").getData().results;
-                            var sPathItems = "/ZRC_ADV_LIC_HEAD('" + oData.LcNo + "')/to_Item";
-                            this.LcNo = oData.LcNo;
+                            var sPathItems = "/ZRC_ADV_LIC_HEAD('" + oData.Advlicno + "')/to_Item";
+                            this.LcNo = oData.Advlicno;
+                            for (let index = 0; index < payloadItem.length; index++) {
+                                const element = payloadItem[index];
+                                element.Advlicno = this.LcNo;
+                            }
+
                             this.postCallForItem(oModel, sPathItems, payloadItem)
                             this.getView().setBusy(false);
                         }.bind(this),
@@ -508,7 +601,15 @@ sap.ui.define([
                     promise = promise.then(function () { return that._promisecreateCallForEachItem(oModel, sPath, Payload) });
                 });
                 promise.then(function () {
-
+                    sap.m.MessageBox.success("Advance License " + that.LcNo + " created", {
+                        actions: [sap.m.MessageBox.Action.OK],
+                        emphasizedAction: "OK",
+                        onClose: function (sAction) {
+                            if (sAction === "OK") {
+                                window.history.go(-1);
+                            }
+                        }
+                    });
                 })
                     .catch(function () {
 
@@ -520,17 +621,6 @@ sap.ui.define([
                 // this.getView().setBusy(true);
                 oModel.create(sPath, Payload, {
                     success: function (oData, response) {
-                        sap.m.MessageBox.success("Advance License " + that.LcNo + " created", {
-                            actions: [sap.m.MessageBox.Action.OK],
-                            emphasizedAction: "OK",
-                            onClose: function (sAction) {
-                                if (sAction === "OK") {
-                                    window.history.go(-1);
-                                }
-                            }
-                        });
-
-
                     }.bind(this),
                     error: function (oError) {
 
@@ -545,19 +635,57 @@ sap.ui.define([
             onSaveButtonPress: function () {
                 var oModel = this.getOwnerComponent().getModel();
                 var payload = this.getView().getModel("oModelForHeader").getData();
-                this.LcNo = payload.LcNo;
-                var sPath = "/ZRC_ADV_LIC_HEAD('" + payload.LcNo + "')"
+                this.LcNo = payload.Advlicno;
+                var sPath = "/ZRC_ADV_LIC_HEAD('" + payload.Advlicno + "')"
                 this.updateCallForHeader(oModel, sPath, payload);
             },
             updateCallForHeader: function (oModel, sPath, payload) {
                 var that = this;
                 delete payload['to_item'];
-                const dt = DateFormat.getDateTimeInstance({ pattern: "PThh'H'mm'M'ss'S'" });
-                payload.ZcreateTime = dt.format(new Date());
+
+                // const dt = DateFormat.getDateTimeInstance({ pattern: "PThh'H'mm'M'ss'S'" });
+                // payload.CreatedAt = dt.format(new Date());
+                payload.LocalLastChangedAt = ODataUtils.formatValue(new Date(), "Edm.DateTime");
                 //update Call
                 this.getView().setBusy(true);
                 oModel.update(sPath, payload, {
                     success: function (oData, response) {
+
+                        var aPayload = this.getView().getModel("oModelForItemTable").getData().results;
+                        this.updateCallForItem(oModel, aPayload)
+
+                    }.bind(this),
+                    error: function (oError) {
+                        this.getView().setBusy(false);
+                    }.bind(this)
+                });
+            },
+
+            updateCallForItem: function (oModel, aPayload) {
+
+                var that = this;
+                var promise = Promise.resolve();
+                aPayload.forEach(function (Payload, i) { //copy local variables
+                    //Chain the promises
+                    var Advlicno = that.LcNo, Type = Payload.Type, LineNumber = Payload.LineNumber, LineType = Payload.LineType;
+                    var sPath = "/ZC_ADV_LIC_ITEM(Advlicno='" + Advlicno + "',Type='" + Type + "',LineNumber='" + LineNumber + "',LineType='" + LineType + "')";
+                    promise = promise.then(function () { return that._promiseUpdateCallForEachItem(oModel, sPath, Payload) });
+                });
+                promise.then(function () {
+                    that.getView().setBusy(false);
+                })
+                    .catch(function () {
+                        that.getView().setBusy(false);
+                    })
+
+            },
+            _promiseUpdateCallForEachItem: function (oModel, sPath, Payload) {
+                var Item = Payload.Item;
+                var that = this;
+                // this.getView().setBusy(true);
+                oModel.update(sPath, Payload, {
+                    success: function (oData, response) {
+
                         sap.m.MessageBox.success("Advance License " + that.LcNo + " updated", {
                             actions: [sap.m.MessageBox.Action.OK],
                             emphasizedAction: "OK",
@@ -567,9 +695,11 @@ sap.ui.define([
                                 }
                             }
                         });
-                        this.getView().setBusy(false);
+
+
                     }.bind(this),
                     error: function (oError) {
+
                         this.getView().setBusy(false);
                     }.bind(this)
                 });

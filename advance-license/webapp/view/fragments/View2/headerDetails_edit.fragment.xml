@@ -166,7 +166,7 @@
             />
             <Label text='Created By' />
             <Input value='{oModelForHeader>/CreatedBy}' />
-            <Label text='Created Date and Time' />
+            <!-- <Label text='Created Date and Time' />
             <DatePicker
                 value="{path:'oModelForHeader>/CreatedOn', type: 'sap.ui.model.type.Date', formatOptions: {UTC: true}}"
                 displayFormat="dd/MM/yyyy"
@@ -180,10 +180,8 @@
             <Label text='Last Changed' />
             <DateTimePicker
                 value="{path:'oModelForHeader>/LocalLastChangedAt', type: 'sap.ui.model.type.DateTime', formatOptions: {pattern: 'MMM dd, yyyy, HH:mm:ss'}}"
-                displayFormat="dd/MM/yyyy"
-                valueFormat="dd/MM/yyyy"
                 editable="false"
-            />
+            /> -->
         </form:content>
     </form:SimpleForm>
 </core:FragmentDefinition>

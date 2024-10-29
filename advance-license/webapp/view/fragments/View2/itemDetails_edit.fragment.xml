@@ -23,6 +23,7 @@
         cellContextmenu="onProductIdCellContextMenu"
         enableGrouping="true"
         rowSelectionChange="onShowLCDetails"
+        rowActionCount="1"
     >
         <table:extension>
             <OverflowToolbar style="Clear">
@@ -32,11 +33,11 @@
                 />
                 <ToolbarSpacer />
                 <Button
-                    text="Create"
-                    press="onAddNewLOCItem"
+                    icon="sap-icon://add"
+                    press="onAddNewItem"
                     type="Transparent"
-                    tooltip="Create new"
-                    visible="false"
+                    tooltip="Add new item"
+                    visible="{myPropertyValues>/new}"
                 />
                 <Button
                     id="idDeleteRow"
@@ -78,6 +79,20 @@
 
         <table:columns>
             <table:Column
+                id="LineNumber"
+                sortProperty="LineNumber"
+                headerMenu="menu"
+            >
+                <Label
+                    wrapping="true"
+                    text="Line Number"
+                />
+                <table:template>
+                    <Text text="{oModelForItemTable>LineNumber}" />
+                </table:template>
+            </table:Column>
+
+            <!-- <table:Column
                 id="Advlicno"
                 sortProperty="Advlicno"
                 headerMenu="menu"
@@ -89,7 +104,7 @@
                 <table:template>
                     <Label text="{oModelForItemTable>Advlicno}" />
                 </table:template>
-            </table:Column>
+            </table:Column> -->
 
             <table:Column
                 id="Type"
@@ -101,23 +116,10 @@
                     text="Type"
                 />
                 <table:template>
-                    <Input value="{oModelForItemTable>Type}" />
+                    <Input value="{oModelForItemTable>Type}" editable="{myPropertyValues>/new}"/>
                 </table:template>
             </table:Column>
 
-            <table:Column
-                id="LineNumber"
-                sortProperty="LineNumber"
-                headerMenu="menu"
-            >
-                <Label
-                    wrapping="true"
-                    text="Line Number"
-                />
-                <table:template>
-                    <Input value="{oModelForItemTable>LineNumber}" />
-                </table:template>
-            </table:Column>
             <table:Column
                 id="LineType"
                 sortProperty="LineType"
@@ -128,7 +130,7 @@
                     text="Line Type"
                 />
                 <table:template>
-                    <Input value="{oModelForItemTable>LineType}" />
+                    <Input value="{oModelForItemTable>LineType}" editable="{myPropertyValues>/new}"/>
                 </table:template>
             </table:Column>
             <table:Column
@@ -227,5 +229,16 @@
                 </table:template>
             </table:Column>
         </table:columns>
+        <table:rowActionTemplate>
+            <table:RowAction visible="{myPropertyValues>/new}">
+                <table:items>
+                    <table:RowActionItem
+                        type="Delete"
+                        press="onDelete"
+                        icon="sap-icon://delete"
+                    />
+                </table:items>
+            </table:RowAction>
+        </table:rowActionTemplate>
     </table:Table>
 </core:FragmentDefinition>

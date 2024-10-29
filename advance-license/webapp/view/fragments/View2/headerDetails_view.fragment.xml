@@ -91,12 +91,13 @@
             />
             <Label text='Created By' />
             <Text text='{oModelForHeader>/CreatedBy}' />
-            <Label text='Created Date' />
+            <Label text='Created Date and Time' />
             <Text
-                text="{path:'oModelForHeader>/CreatedOn', type: 'sap.ui.model.type.Date', formatOptions: {UTC: true}}"
+                text="{path:'oModelForHeader>/CreatedOn', type: 'sap.ui.model.type.Date', formatOptions: {UTC: true}}, {path:'oModelForHeader>/CreatedAt', type: 'sap.ui.model.type.Time', formatOptions: {pattern: 'HH:mm:ss'}}"
             />
+            <Label text='Last Changed' />
             <Text
-                text="{path:'oModelForHeader>/CreatedAt', type: 'sap.ui.model.type.Time', formatOptions: {pattern: 'HH:mm:ss'}}"
+                text="{path:'oModelForHeader>/LocalLastChangedAt', type: 'sap.ui.model.type.DateTime', formatOptions: {pattern: 'MMM dd, yyyy, HH:mm:ss'}}"
             />
         </form:content>
     </form:SimpleForm>

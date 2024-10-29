@@ -870,9 +870,7 @@ sap.ui.define([
                     "Insurance": "",
                     "Freight": "",
                     "Licenses": aEachItemsLic
-                }
-
-                    ;
+                };
                 JSONData.results.push(payloadForItem);
                 this.getView()
                     .getModel("oModelForItems")
