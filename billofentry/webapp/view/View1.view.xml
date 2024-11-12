@@ -1,5 +1,5 @@
 <mvc:View
-    controllerName="zpro.sk.mittalcoin.exim.loc.export.locexport.controller.View1"
+    controllerName="zpro.sk.mittalcoin.exim.bill.of.entry.billofentry.controller.View1"
     xmlns:mvc="sap.ui.core.mvc"
     displayBlock="true"
     height="100%"
@@ -11,20 +11,8 @@
     xmlns:sap.ui.fl="sap.ui.fl"
 >
     <f:DynamicPage fitContent="true">
-        <f:title>
-            <f:DynamicPageTitle stateChange="onDPTStateChange">
-                <f:heading>
-                    <Title
-                        text="Letter of credit - export"
-                        textAlign="Center"
-                        titleStyle="H3"
-                    />
-                </f:heading>
-            </f:DynamicPageTitle>
-        </f:title>
-
         <f:header>
-         <f:DynamicPageHeader>
+            <f:DynamicPageHeader>
                 <f:content>
                     <fb:FilterBar
                         id="filterbar"
@@ -35,48 +23,64 @@
                         <fb:filterGroupItems>
                             <fb:FilterGroupItem
                                 name="Name"
-                                label="LC Number"
+                                label="Bill of Entry"
                                 groupName="Group1"
                                 visibleInFilterBar="true"
                             >
                                 <fb:control>
                                     <Input
-                                        value=""
-                                        placeholder="LC Number"
+                                        value="{oModelForFilters>/BillEntry}"
+                                        placeholder="Bill of Entry"
                                         showValueHelp="true"
-                                        valueHelpRequest="onLCNumberValuelHelp"
+                                        valueHelpRequest="onAdvanceLicenseValuelHelp"
                                     />
                                 </fb:control>
                             </fb:FilterGroupItem>
 
                             <fb:FilterGroupItem
                                 name="Name1"
-                                label="Sales Contract"
+                                label="Purchase Order No."
                                 groupName="Group1"
                                 visibleInFilterBar="true"
                             >
                                 <fb:control>
                                     <Input
-                                        value=""
-                                        placeholder="Sales Contract"
+                                        value="{oModelForFilters>/PoNoCode}"
+                                        placeholder="Purchase Order No."
                                         showValueHelp="true"
-                                        valueHelpRequest="onContactNumberValuelHelp"
+                                        valueHelpRequest="onPoNoCodeValuelHelp"
                                     />
                                 </fb:control>
                             </fb:FilterGroupItem>
 
                             <fb:FilterGroupItem
                                 name="Name2"
-                                label="Sales Order"
+                                label="Supplier Invoice No."
+                                groupName="Group1"
+                                visibleInFilterBar="true"
+                            >
+                                <fb:control>
+                                    <Input
+                                        value="{oModelForFilters>/SupplierInvoiceNo}"
+                                        placeholder="Supplier Invoice No."
+                                        showValueHelp="true"
+                                        valueHelpRequest="onSupplierInvoiceNoValuelHelp"
+                                    />
+                                </fb:control>
+                            </fb:FilterGroupItem>
+
+                            <fb:FilterGroupItem
+                                name="Name3"
+                                label="Supplier Code"
                                 groupName="Group1"
                                 visibleInFilterBar="true"
                             >
                                 <fb:control>
                                     <Input
                                         value=""
-                                        placeholder="Sales Order"
+                                        placeholder="Supplier Code"
                                         showValueHelp="true"
-                                        valueHelpRequest="onPINumberValuelHelp"
+                                        valueHelpRequest="onSupplierCodeValuelHelp"
                                     />
                                 </fb:control>
                             </fb:FilterGroupItem>
@@ -183,94 +187,134 @@
 
                 <table:columns>
                     <table:Column
-                        id="LcNo"
-                        sortProperty="LcNo"
+                        id="BillEntry"
+                        sortProperty="BillEntry"
                         headerMenu="menu"
                     >
-                        <Label wrapping="true" text="LC Number" />
+                        <Label
+                            wrapping="true"
+                            text="Bill of Entry"
+                        />
                         <table:template>
-                            <Label wrapping="true" text="{oModelForTable>LcNo}" />
-                        </table:template>
-                    </table:Column>
-                    <table:Column
-                        id="SalesContract"
-                        sortProperty="SalesContract"
-                        headerMenu="menu"
-                    >
-                        <Label wrapping="true" text="Sales Contract" />
-                        <table:template>
-                            <Label wrapping="true" text="{oModelForTable>SalesContract}" />
+                            <Label text="{oModelForTable>BillEntry}" />
                         </table:template>
                     </table:Column>
 
                     <table:Column
-                        id="SalesOrder"
-                        sortProperty="SalesOrder"
+                        id="PoNo"
+                        sortProperty="PoNo"
                         headerMenu="menu"
                     >
-                        <Label wrapping="true" text="Sales Order" />
+                        <Label
+                            wrapping="true"
+                            text="Purchase Order No."
+                        />
                         <table:template>
-                            <Label wrapping="true" text="{oModelForTable>SalesOrder}" />
-                        </table:template>
-                    </table:Column>
-                    <table:Column
-                        id="ShipmetLastDateOri"
-                        sortProperty="ShipmetLastDateOri"
-                        headerMenu="menu"
-                    >
-                        <Label wrapping="true" text="Shipping Last Date - original" />
-                        <table:template>
-                            <Label wrapping="true"
-                                text="{path:'oModelForTable>ShipmetLastDateOri', type: 'sap.ui.model.type.Date', formatOptions: {UTC: true}}"
-                            />
-                        </table:template>
-                    </table:Column>
-                    <table:Column
-                        id="LatestDocumentDateOri"
-                        sortProperty="LatestDocumentDateOri"
-                        headerMenu="menu"
-                    >
-                        <Label wrapping="true" text="Latest document date - Original" />
-                        <table:template>
-                            <Label wrapping="true"
-                                text="{path:'oModelForTable>LatestDocumentDateOri', type: 'sap.ui.model.type.Date', formatOptions: {UTC: true}}"
+                            <Label
+                                wrapping="true"
+                                text="{oModelForTable>PoNo}"
                             />
                         </table:template>
                     </table:Column>
 
                     <table:Column
-                        id="ShipmetLastDateAmend"
-                        sortProperty="ShipmetLastDateAmend"
+                        id="SupplierInvoiceNo"
+                        sortProperty="SupplierInvoiceNo"
                         headerMenu="menu"
                     >
-                        <Label wrapping="true" text="Shipment Last Date - Amendment" />
+                        <Label
+                            wrapping="true"
+                            text="Supplier Invoice No."
+                        />
                         <table:template>
-                            <Label wrapping="true"
-                                text="{path:'oModelForTable>ShipmetLastDateAmend', type: 'sap.ui.model.type.Date', formatOptions: {UTC: true}}"
+                            <Label
+                                wrapping="true"
+                                text="{oModelForTable>SupplierInvoiceNo}"
                             />
                         </table:template>
                     </table:Column>
+
                     <table:Column
-                        id="LatestDocumentDateAmend"
-                        sortProperty="LatestDocumentDateAmend"
+                        id="SupplierCode"
+                        sortProperty="SupplierCode"
                         headerMenu="menu"
                     >
-                        <Label wrapping="true" text="Latest document date - Amendment" />
+                        <Label
+                            wrapping="true"
+                            text="Supplier Code"
+                        />
                         <table:template>
-                            <Label wrapping="true"
-                                text="{path:'oModelForTable>LatestDocumentDateAmend', type: 'sap.ui.model.type.Date', formatOptions: {UTC: true}}"
+                            <Label
+                                wrapping="true"
+                                text="{path:'oModelForTable>SupplierCode'}"
                             />
                         </table:template>
                     </table:Column>
+
                     <table:Column
-                        id="LcIssueDateAmend"
-                        sortProperty="LcIssueDateAmend"
+                        id="SupplierName"
+                        sortProperty="SupplierName"
                         headerMenu="menu"
                     >
-                        <Label wrapping="true" text="LC Issue Date - Amendment" />
+                        <Label
+                            wrapping="true"
+                            text="Supplier Name"
+                        />
                         <table:template>
-                            <Label wrapping="true"
-                                text="{path:'oModelForTable>LcIssueDateAmend', type: 'sap.ui.model.type.Date', formatOptions: {UTC: true}}"
+                            <Label
+                                wrapping="true"
+                                text="{path:'oModelForTable>SupplierName'}"
+                            />
+                        </table:template>
+                    </table:Column>
+
+                    <table:Column
+                        id="BlNo"
+                        sortProperty="BlNo"
+                        headerMenu="menu"
+                    >
+                        <Label
+                            wrapping="true"
+                            text="BL No"
+                        />
+                        <table:template>
+                            <Label
+                                wrapping="true"
+                                text="{path:'oModelForTable>BlNo'}"
+                            />
+                        </table:template>
+                    </table:Column>
+
+                    <table:Column
+                        id="ShippingLine"
+                        sortProperty="ShippingLine"
+                        headerMenu="menu"
+                    >
+                        <Label
+                            wrapping="true"
+                            text="Shipping Line"
+                        />
+                        <table:template>
+                            <Label
+                                wrapping="true"
+                                text="{path:'oModelForTable>ShippingLine'}"
+                            />
+                        </table:template>
+                    </table:Column>
+
+                    <table:Column
+                        id="Icd"
+                        sortProperty="Icd"
+                        headerMenu="menu"
+                    >
+                        <Label
+                            wrapping="true"
+                            text="ICD"
+                        />
+                        <table:template>
+                            <Label
+                                wrapping="true"
+                                text="{path:'oModelForTable>Icd'}"
                             />
                         </table:template>
                     </table:Column>

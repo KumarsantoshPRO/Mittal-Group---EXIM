@@ -23,9 +23,10 @@ sap.ui.define([
     'sap/m/p13n/FilterController',
     'sap/ui/export/Spreadsheet',
     "sap/ui/export/library",
+    "sap/ui/core/format/DateFormat"
 
 ],
-    function (Controller, Fragment, JSONModel, Filter, FilterOperator, MenuM, MenuItemM, ColumnMenu, ActionItem, ToolbarSpacer, jQuery, Device, UI5Dat, Engine, SelectionController, SortController, GroupController, MetadataHelper, Sorter, CoreLibrary, ColumnWidthController, FilterController, Spreadsheet, exportLibrary) {
+    function (Controller, Fragment, JSONModel, Filter, FilterOperator, MenuM, MenuItemM, ColumnMenu, ActionItem, ToolbarSpacer, jQuery, Device, UI5Dat, Engine, SelectionController, SortController, GroupController, MetadataHelper, Sorter, CoreLibrary, ColumnWidthController, FilterController, Spreadsheet, exportLibrary, DateFormat) {
         "use strict";
         var EdmType = exportLibrary.EdmType;
         return Controller.extend("zmg.pro.exim.transactionalshippingbill.exim.controller.View1", {
@@ -578,17 +579,20 @@ sap.ui.define([
                 var aCols, oSettings;
                 aCols = this.createColumnConfig();
 
-
+                var sheetDetails = "Shipping Bill Details(" + DateFormat.getDateTimeInstance({ pattern: "MMM dd, yyyy hh:mm:ss" }).format(new Date()) + ")";
 
                 var aData = this.getView().getModel("oModelForTable").getData();
                 oSettings = {
                     workbook: {
                         columns: aCols, wrap: true,
                         context: {
+                            application: "Shipping Bill Details",
+                            title: sheetDetails,
                             sheetName: "Shipping Bill Details",
                         },
                     },
-                    dataSource: aData
+                    dataSource: aData,
+                    fileName: sheetDetails
                 };
                 var oSpreadsheet = new Spreadsheet(oSettings);
                 oSpreadsheet.build().finally(function () {

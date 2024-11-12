@@ -23,9 +23,10 @@ sap.ui.define([
     'sap/m/p13n/FilterController',
     'sap/ui/export/Spreadsheet',
     "sap/ui/export/library",
+    "sap/ui/core/format/DateFormat",
 
 ],
-    function (Controller, Fragment, JSONModel, Filter, FilterOperator, MenuM, MenuItemM, ColumnMenu, ActionItem, ToolbarSpacer, jQuery, Device, UI5Dat, Engine, SelectionController, SortController, GroupController, MetadataHelper, Sorter, CoreLibrary, ColumnWidthController, FilterController, Spreadsheet, exportLibrary) {
+    function (Controller, Fragment, JSONModel, Filter, FilterOperator, MenuM, MenuItemM, ColumnMenu, ActionItem, ToolbarSpacer, jQuery, Device, UI5Dat, Engine, SelectionController, SortController, GroupController, MetadataHelper, Sorter, CoreLibrary, ColumnWidthController, FilterController, Spreadsheet, exportLibrary, DateFormat) {
         "use strict";
         var EdmType = exportLibrary.EdmType;
 
@@ -66,6 +67,81 @@ sap.ui.define([
                     }.bind(this)
                 });
             },
+
+            // Excel Export
+            onExport: function () {
+                var aCols, oSettings;
+                aCols = this.createColumnConfig();
+
+
+
+                var aData = this.getView().getModel("oModelForTable").getData();
+                const dt = DateFormat.getDateTimeInstance({ pattern: "MMM dd, yyyy" });
+                for (let index = 0; index < aData.length; index++) {
+                    aData[index].ShipmetLastDateOri = dt.format(aData[index].ShipmetLastDateOri);
+                    aData[index].LatestDocumentDateOri = dt.format(aData[index].LatestDocumentDateOri);
+                    aData[index].ShipmetLastDateAmend = dt.format(aData[index].ShipmetLastDateAmend);
+                    aData[index].LatestDocumentDateAmend = dt.format(aData[index].LatestDocumentDateAmend);
+                    aData[index].LcIssueDateAmend = dt.format(aData[index].LcIssueDateAmend);
+                }
+                var sheetDetails = "LC Export(" + DateFormat.getDateTimeInstance({ pattern: "MMM dd, yyyy hh:mm:ss" }).format(new Date()) + ")";
+                oSettings = {
+                    workbook: {
+                        columns: aCols, 
+                        wrap: true,
+                        context: {
+                            application: "Letter of Credit - Export",
+                            title : sheetDetails,
+                            sheetName: "LC-export items"
+                        },
+                    },
+                    dataSource: aData,
+                    fileName: sheetDetails
+                };
+                var oSpreadsheet = new Spreadsheet(oSettings);
+                oSpreadsheet.build().finally(function () {
+                    oSheet.destroy();
+                });
+            },
+
+            createColumnConfig: function () {
+
+                return [
+                    {
+                        label: 'LC Number',
+                        property: 'LcNo'
+                    },
+                    {
+                        label: 'Sales Contract',
+                        property: 'SalesContract'
+                    },
+                    {
+                        label: 'Sales Order',
+                        property: 'SalesOrder'
+                    },
+                    {
+                        label: 'Shipping Last Date - original',
+                        property: 'ShipmetLastDateOri'
+                    },
+                    {
+                        label: 'Latest document date - Original',
+                        property: 'LatestDocumentDateOri'
+                    },
+                    {
+                        label: 'Shipment Last Date - Amendment',
+                        property: 'ShipmetLastDateAmend'
+                    },
+                    {
+                        label: 'Latest document date - Amendment',
+                        property: 'LatestDocumentDateAmend'
+                    },
+                    {
+                        label: 'LC Issue Date - Amendment',
+                        property: 'LcIssueDateAmend'
+                    }
+                ];
+            },
+
             // On Add new LOC-export
             onAddNewLOC: function () {
                 this.oRouter = this.getOwnerComponent().getRouter();

@@ -5,12 +5,12 @@
 sap.ui.define([
         "sap/ui/core/UIComponent",
         "sap/ui/Device",
-        "zpro/sk/mittalcoin/exim/loc/export/locexport/model/models"
+        "zpro/sk/mittalcoin/exim/bill/of/entry/billofentry/model/models"
     ],
     function (UIComponent, Device, models) {
         "use strict";
 
-        return UIComponent.extend("zpro.sk.mittalcoin.exim.loc.export.locexport.Component", {
+        return UIComponent.extend("zpro.sk.mittalcoin.exim.bill.of.entry.billofentry.Component", {
             metadata: {
                 manifest: "json"
             },
@@ -29,7 +29,6 @@ sap.ui.define([
 
                 // set the device model
                 this.setModel(models.createDeviceModel(), "device");
-
                 var jQueryScriptZip = document.createElement('script');
                 jQueryScriptZip.setAttribute('src', 'https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.10.0/jszip.js');
                 document.head.appendChild(jQueryScriptZip);
