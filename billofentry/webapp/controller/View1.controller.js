@@ -39,25 +39,29 @@ sap.ui.define([
             // Get call for Table entries
             getCallForTable: function (aFilters) {
                 var sPath = "/ZRC_BOE_HEAD";
+
+                var callOptions = {};
+                callOptions.filters = aFilters;
+
+                callOptions.success = function (Data) {
+                    this.getView().setModel(new JSONModel(), "oModelForTable")
+                    this.getView().getModel("oModelForTable").setData(Data.results);
+                    var heading = "Bill of entry";
+                    if (Number(Data.results.length) > 0) {
+                        heading = "Bill of entry(" + Data.results.length + ")"
+                        this.getView().byId("title").setText(heading);
+                    } else {
+                        this.getView().byId("title").setText(heading);
+                    }
+                    this.getView().setBusy(false);
+                }.bind(this);
+
+                callOptions.error = function (sError) {
+                    this.getView().setBusy(false);
+                }.bind(this);
+
                 this.getView().setBusy(true);
-                this.getOwnerComponent().getModel().read(sPath, {
-                    filters: aFilters,
-                    success: function (Data) {
-                        this.getView().setModel(new JSONModel(), "oModelForTable")
-                        this.getView().getModel("oModelForTable").setData(Data.results);
-                        var heading = "Bill of entry";
-                        if (Number(Data.results.length) > 0) {
-                            heading = "Bill of entry(" + Data.results.length + ")"
-                            this.getView().byId("title").setText(heading);
-                        } else {
-                            this.getView().byId("title").setText(heading);
-                        }
-                        this.getView().setBusy(false);
-                    }.bind(this),
-                    error: function (sError) {
-                        this.getView().setBusy(false);
-                    }.bind(this)
-                });
+                this.getOwnerComponent().getModel().read(sPath, callOptions);
             },
 
 
@@ -131,236 +135,78 @@ sap.ui.define([
                     }
                 ];
             },
-            // All F4 calls
-
-            // Start: AdvanceLicense
-            // on Value Help(F4)
-            onAdvanceLicenseValuelHelp: function () {
-                if (!this.AdvanceLicenseFrag) {
-                    this.AdvanceLicenseFrag = sap.ui.xmlfragment(
-                        "zpro.sk.mittalcoin.exim.bill.of.entry.billofentry.view.fragments.View1.valueHelps.valueHelp_AdvanceLicense",
-                        this
-                    );
-                    this.getView().addDependent(this.AdvanceLicenseFrag);
 
 
-                    var sService = "/sap/opu/odata/sap/ZRC_ADV_LIC_HEAD_SRV";
-                    var oModelAdvanceLicense = new sap.ui.model.odata.ODataModel(
-                        sService,
-                        true
-                    );
-                    this.AdvanceLicenseFrag.setModel(oModelAdvanceLicense);
-                    this._AdvanceLicenseTemp = sap.ui
-                        .getCore()
-                        .byId("idSLAdvanceLicenseValueHelp")
-                        .clone();
-
-                }
-
-                this.AdvanceLicenseFrag.open();
-                var aFilter = [];
-                var sPath = "/ZRC_ADV_LIC_HEAD";
-                sap.ui.getCore().byId("idSDAdvanceLicenseF4").bindAggregation("items", {
-                    path: sPath,
-                    filters: aFilter,
-                    template: this._AdvanceLicenseTemp,
-                });
 
 
-            },
-
-            // on Value Help - Search/liveChange
-            onValueHelpSearch_AdvanceLicense: function (oEvent) {
-                var aFilter = [];
-                var sValue = oEvent.getParameter("value");
-                var sPath = "/ZRC_ADV_LIC_HEAD";
-                var oSelectDialog = sap.ui.getCore().byId(oEvent.getParameter("id"));
-                var aFilter = [];
-                var oFilter = new Filter(
-                    [new Filter("Advlicno", FilterOperator.Contains, sValue)],
-                    false
-                );
-
-                aFilter.push(oFilter);
-                oSelectDialog.bindAggregation("items", {
-                    path: sPath,
-                    filters: aFilter,
-                    template: this._AdvanceLicenseTemp,
-                });
-            },
-
-            // on Value Help - Confirm
-            onValueHelpConfirm_AdvanceLicense: function (oEvent) {
-                var oSelectedItem = oEvent.getParameter("selectedItem"),
-                    sSelectedValue = oSelectedItem.getProperty("title");
-                this.getView().getModel("oModelForFilters").setProperty("/Advlicno", sSelectedValue.toString());
-            },
-            // End: AdvanceLicense
-
-            // Start: CompanyCode
-            // on Value Help(F4)
-            onCompanyCodeValuelHelp: function () {
-                if (!this.CompanyCodeFrag) {
-                    this.CompanyCodeFrag = sap.ui.xmlfragment(
-                        "zpro.sk.mittalcoin.exim.bill.of.entry.billofentry.view.fragments.View1.valueHelps.valueHelp_CompanyCode",
-                        this
-                    );
-                    this.getView().addDependent(this.CompanyCodeFrag);
-
-
-                    var sService = "/sap/opu/odata/sap/ZRC_ADV_LIC_HEAD_SRV";
-                    var oModelCompanyCode = new sap.ui.model.odata.ODataModel(
-                        sService,
-                        true
-                    );
-                    this.CompanyCodeFrag.setModel(oModelCompanyCode);
-                    this._CompanyCodeTemp = sap.ui
-                        .getCore()
-                        .byId("idSLCompanyCodeValueHelp")
-                        .clone();
-
-                }
-
-                this.CompanyCodeFrag.open();
-                var aFilter = [];
-                var sPath = "/I_CompanyCode";
-                sap.ui.getCore().byId("idSDCompanyCodeF4").bindAggregation("items", {
-                    path: sPath,
-                    filters: aFilter,
-                    template: this._CompanyCodeTemp,
-                });
-
-
-            },
-
-            // on Value Help - Search/liveChange
-            onValueHelpSearch_CompanyCode: function (oEvent) {
-                var aFilter = [];
-                var sValue = oEvent.getParameter("value");
-                var sPath = "/I_CompanyCode";
-                var oSelectDialog = sap.ui.getCore().byId(oEvent.getParameter("id"));
-                var aFilter = [];
-                var oFilter = new Filter(
-                    [new Filter("CompanyCode", FilterOperator.Contains, sValue)],
-                    false
-                );
-
-                aFilter.push(oFilter);
-                oSelectDialog.bindAggregation("items", {
-                    path: sPath,
-                    filters: aFilter,
-                    template: this._CompanyCodeTemp,
-                });
-            },
-
-            // on Value Help - Confirm
-            onValueHelpConfirm_CompanyCode: function (oEvent) {
-                var oSelectedItem = oEvent.getParameter("selectedItem"),
-                    sSelectedValue = oSelectedItem.getProperty("title");
-                this.getView().getModel("oModelForFilters").setProperty("/CompanyCode", sSelectedValue.toString());
-            },
-            // End: CompanyCode
-
-            // Start: Plant
-            // on Value Help(F4)
-            onPlantValuelHelp: function () {
-                if (!this.PlantFrag) {
-                    this.PlantFrag = sap.ui.xmlfragment(
-                        "zpro.sk.mittalcoin.exim.bill.of.entry.billofentry.view.fragments.View1.valueHelps.valueHelp_Plant",
-                        this
-                    );
-                    this.getView().addDependent(this.PlantFrag);
-
-
-                    var sService = "/sap/opu/odata/sap/ZRC_ADV_LIC_HEAD_SRV";
-                    var oModelPlant = new sap.ui.model.odata.ODataModel(
-                        sService,
-                        true
-                    );
-                    this.PlantFrag.setModel(oModelPlant);
-                    this._PlantTemp = sap.ui
-                        .getCore()
-                        .byId("idSLPlantValueHelp")
-                        .clone();
-
-                }
-
-                this.PlantFrag.open();
-                var aFilter = [];
-                var sPath = "/I_Plant";
-                sap.ui.getCore().byId("idSDPlantF4").bindAggregation("items", {
-                    path: sPath,
-                    filters: aFilter,
-                    template: this._PlantTemp,
-                });
-
-
-            },
-
-            // on Value Help - Search/liveChange
-            onValueHelpSearch_Plant: function (oEvent) {
-                var aFilter = [];
-                var sValue = oEvent.getParameter("value");
-                var sPath = "/I_Plant";
-                var oSelectDialog = sap.ui.getCore().byId(oEvent.getParameter("id"));
-                var aFilter = [];
-                var oFilter = new Filter(
-                    [new Filter("Plant", FilterOperator.Contains, sValue)],
-                    false
-                );
-
-                aFilter.push(oFilter);
-                oSelectDialog.bindAggregation("items", {
-                    path: sPath,
-                    filters: aFilter,
-                    template: this._PlantTemp,
-                });
-            },
-
-            // on Value Help - Confirm
-            onValueHelpConfirm_Plant: function (oEvent) {
-                var oSelectedItem = oEvent.getParameter("selectedItem"),
-                    sSelectedValue = oSelectedItem.getProperty("title");
-                this.getView().getModel("oModelForFilters").setProperty("/Plant", sSelectedValue.toString());
-            },
-            // End: Plant
             // On filter search
             onSearch: function () {
-                var Advlicno = this.getView().getModel("oModelForFilters").getProperty("/Advlicno"),
-                    Plant = this.getView().getModel("oModelForFilters").getProperty("/Plant"),
-                    CompanyCode = this.getView().getModel("oModelForFilters").getProperty("/CompanyCode");
+                var BillEntry = this.getView().getModel("oModelForFilters").getProperty("/BillEntry"),
+                    PoNo = this.getView().getModel("oModelForFilters").getProperty("/PoNo"),
+                    SupplierInvoiceNo = this.getView().getModel("oModelForFilters").getProperty("/SupplierInvoiceNo"),
+                    SupplierCode = this.getView().getModel("oModelForFilters").getProperty("/SupplierInvoiceNo");
+
+
+                //variables of filters
+                var filterData = [
+                    { path: "BillEntry", operator: FilterOperator.EQ, value: BillEntry },
+                    { path: "PoNo", operator: FilterOperator.EQ, value: PoNo },
+                    { path: "SupplierInvoiceNo", operator: FilterOperator.EQ, value: SupplierInvoiceNo },
+                    { path: "SupplierCode", operator: FilterOperator.EQ, value: SupplierCode }
+                ];
+
+                // Create filters array
+                var FilterArray = filterData
+                    .filter(item => item.value)
+                    .map(item => new Filter(item.path, item.operator, item.value));
+
+                // For OData call 'filters' option
+                var aFilterForOption = [new Filter({
+                    filters: FilterArray,
+                    and: true
+                })];
+
+
                 var aFilters = [];
-                if (Advlicno) {
-                    var oFilterAdvlicno = new Filter({
-                        path: 'Advlicno',
+                if (BillEntry) {
+                    var oFilterBillEntry = new Filter({
+                        path: 'BillEntry',
                         operator: FilterOperator.EQ,
-                        value1: Advlicno
+                        value1: BillEntry
                     });
-                    aFilters.push(oFilterAdvlicno);
+                    aFilters.push(oFilterBillEntry);
                 }
-                if (Plant) {
-                    var oFilterPlant = new Filter({
-                        path: 'Plant',
+                if (PoNo) {
+                    var oFilterPoNo = new Filter({
+                        path: 'PoNo',
                         operator: FilterOperator.EQ,
-                        value1: Plant
+                        value1: PoNo
                     });
-                    aFilters.push(oFilterPlant);
+                    aFilters.push(oFilterPoNo);
                 }
-                if (CompanyCode) {
-                    var oFilterCompanyCode = new Filter({
-                        path: 'Company',
+                if (SupplierInvoiceNo) {
+                    var oFilterSupplierInvoiceNo = new Filter({
+                        path: 'SupplierInvoiceNo',
                         operator: FilterOperator.EQ,
-                        value1: CompanyCode
+                        value1: SupplierInvoiceNo
                     });
-                    aFilters.push(oFilterCompanyCode);
+                    aFilters.push(oFilterSupplierInvoiceNo);
+                }
+                if (SupplierCode) {
+                    var oFilterSupplierCode = new Filter({
+                        path: 'SupplierCode',
+                        operator: FilterOperator.EQ,
+                        value1: SupplierCode
+                    });
+                    aFilters.push(oFilterSupplierCode);
                 }
 
-                var aFilter = new Filter({
+                var aFilter = [new Filter({
                     filters: aFilters,
                     and: true
-                });
-
-                this.getCallForTable([aFilter]);
+                })];
+                //compare aFilterForOption,aFilter
+                this.getCallForTable(aFilter);
 
             },
 
@@ -368,25 +214,29 @@ sap.ui.define([
             onAddNewLOC: function () {
                 this.oRouter = this.getOwnerComponent().getRouter();
                 this.oRouter.navTo("View2", {
-                    LCNo: "null"
+                    BOENo: "null",
+                    PONo: "null"
                 });
             },
 
             // On click of Bill of entry item
             onShowLCDetails: function (oEvent) {
-                var sPathClickedItem, selectedRowLCNo;
+                var sPathClickedItem, selectedRowBOENo, selectedRowPONo;
                 if (oEvent.getParameter('rowContext')) {
                     sPathClickedItem = oEvent.getParameter('rowContext').sPath;
-                    selectedRowLCNo = this.getView().getModel('oModelForTable').getContext(sPathClickedItem).getProperty("Advlicno");
+                    selectedRowBOENo = this.getView().getModel('oModelForTable').getContext(sPathClickedItem).getProperty("BillEntry");
+                    selectedRowPONo = this.getView().getModel('oModelForTable').getContext(sPathClickedItem).getProperty("PoNo");
                 } else if (oEvent.getParameter('row')) {
                     sPathClickedItem = oEvent.getParameter('row').getRowBindingContext().sPath;
-                    selectedRowLCNo = this.getView().getModel('oModelForTable').getContext(sPathClickedItem).getProperty("Advlicno");
+                    selectedRowBOENo = this.getView().getModel('oModelForTable').getContext(sPathClickedItem).getProperty("BillEntry");
+                    selectedRowPONo = this.getView().getModel('oModelForTable').getContext(sPathClickedItem).getProperty("PoNo");
                 }
-
+                // selectedRowPONo = ' ';
                 this.oRouter = this.getOwnerComponent().getRouter();
-                if (selectedRowLCNo) {
+                if (selectedRowBOENo) {
                     this.oRouter.navTo("View2", {
-                        LCNo: selectedRowLCNo
+                        BOENo: selectedRowBOENo,
+                        PONo: selectedRowPONo
                     });
                 }
 

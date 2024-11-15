@@ -102,6 +102,13 @@
           "target": [
             "TargetView1"
           ]
+        },
+        {
+          "name": "View2",
+          "pattern": "View2/{BOENo}-{PONo}",
+          "target": [
+            "View2"
+          ]
         }
       ],
       "targets": {
@@ -111,6 +118,11 @@
           "clearControlAggregation": false,
           "viewId": "View1",
           "viewName": "View1"
+        },
+        "View2": {
+          "viewType": "XML",
+          "viewId": "View2",
+          "viewName": "View2"
         }
       }
     },
